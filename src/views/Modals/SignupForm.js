@@ -69,7 +69,7 @@ export default function SignupForm() {
           >
             <Close className={modalClasses.modalClose} />
           </IconButton>
-          <h4 className={modalClasses.modalTitle}>Sign Up</h4>
+          <h3 className={modalClasses.modalTitle}>Step 2 of 2</h3>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"

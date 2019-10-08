@@ -64,7 +64,7 @@ export default function SignupSelect() {
           >
             <Close className={modalClasses.modalClose} />
           </IconButton>
-          <h4 className={modalClasses.modalTitle}>Step 1</h4>
+          <h3 className={modalClasses.modalTitle}>Step 1 of 2</h3>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
@@ -79,7 +79,7 @@ export default function SignupSelect() {
                 <div>
                     <GridContainer>
                     <GridItem xs={12} sm={12} md={4}>
-                        <a href={'/Signup/Insurance'} onclick="console.log('The link was clicked.'); return false">
+                        <a href={'/Signup/Patient'} onclick="console.log('The link was clicked.'); return false">
                         <InfoArea
                         title="Patient"
                         icon={People}
@@ -89,7 +89,7 @@ export default function SignupSelect() {
                         </a>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
-                        <a href={'/Signup/Insurance'} onclick="console.log('The link was clicked.'); return false">
+                        <a href={'/Signup/Doctor'} onclick="console.log('The link was clicked.'); return false">
                         <InfoArea
                         title="Doctor"
                         icon={LocalHospital}
@@ -99,7 +99,7 @@ export default function SignupSelect() {
                     </a>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
-                    <a href={'/Signup/Insurance'} onclick="console.log('The link was clicked.'); return false">
+                    <a href={'/Signup/InsuranceProvider'} onclick="console.log('The link was clicked.'); return false">
                         <InfoArea
                         title="Insurance Company"
                         icon={Note}
