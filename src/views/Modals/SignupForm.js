@@ -65,7 +65,7 @@ export default function SignupForm() {
           disableTypography
           className={modalClasses.modalHeader}
         >
-          <Link to="/">
+          <Link to="/login">
           <IconButton
             className={modalClasses.modalCloseButton}
             key="close"
@@ -76,7 +76,7 @@ export default function SignupForm() {
             <Close className={modalClasses.modalClose} />
           </IconButton>
           </Link>
-          <h4 className={modalClasses.modalTitle}>Sign Up</h4>
+          <h3 className={modalClasses.modalTitle}>Step 2 of 2</h3>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
@@ -145,7 +145,7 @@ export default function SignupForm() {
         <DialogActions
           className={modalClasses.modalFooter + " " + modalClasses.modalFooterCenter}
         >
-          <Link to="/">
+          <Link to="/login">
           <Button style={{minWidth: "70%"}} onClick={() => setModal(false)} color="info">
             Sign up
           </Button>
