@@ -45,7 +45,7 @@ export default class SignupButton extends React.Component {
     console.log(user);
 
     try {
-        const response = Axios.post('https://infinity-care.herokuapp.com/Signup', { user });
+        const response = Axios.post('https://infinity-care.herokuapp.com/signup', { user });
         console.log('👉 Returned data:', response);
         console.log('👉 You tried to log:', user);
     } catch (e) {
