@@ -65,7 +65,7 @@ export default function SignupSelect() {
           >
             <Close className={modalClasses.modalClose} />
           </IconButton>
-          <h4 className={modalClasses.modalTitle}>Step 1</h4>
+          <h3 className={modalClasses.modalTitle}>Step 1 of 2</h3>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
@@ -79,7 +79,7 @@ export default function SignupSelect() {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Link to={"signup/doctor"}>
+                  <Link to={"signup/patient"}>
                     <InfoArea
                     title="Patient"
                     icon={People}
@@ -99,7 +99,7 @@ export default function SignupSelect() {
                   </Link>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Link to={"signup/insurance"}>
+                  <Link to={"signup/insuranceprovider"}>
                     <InfoArea
                     title="Insurance Company"
                     icon={Note}
