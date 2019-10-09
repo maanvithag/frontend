@@ -45,7 +45,7 @@ export default class SignupButton extends React.Component {
     console.log(user);
 
     try {
-        const response = Axios.post('https://infinity-care.herokuapp.com/signup', { user });
+        const response = Axios.post('https://infinity-care.herokuapp.com/signup/doctor', { user });
         console.log('👉 Returned data:', response);
         console.log('👉 You tried to log:', user);
     } catch (e) {
@@ -112,7 +112,7 @@ export default class SignupButton extends React.Component {
                         />
                     </CardBody>
                         <Button onClick={this.handleSubmit} style={{minWidth: "70%"}}  color="info">
-                            Sign up
+                            {"Sign up: " + response}
                         </Button>
                     </form>
                 </Card>
