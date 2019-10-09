@@ -112,6 +112,7 @@ export default class SignupButton extends React.Component {
                         />
                     </CardBody>
                         <Button onClick={this.handleSubmit} style={{minWidth: "70%"}}  color="info">
+                            testing update
                             {"Sign up: " + response}
                         </Button>
                     </form>
