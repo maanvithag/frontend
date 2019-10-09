@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -18,45 +18,61 @@ import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import SignupSelect from "views/Modals/SignupSelect.js";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-
+import FacebookLogin from 'react-facebook-login';
 import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
 
-const useLoginStyles = makeStyles(loginStyles);
+class LoginPage extends Component {
+  
+  constructor(props){
+    super(props);
+    this.state={
+      props : props,
+      loginClasses : "", //makeStyles(loginStyles),
+      cardAnimaton : "", //React.useState("cardHidden"),
+      setCardAnimation : "" //React.useState("cardHidden")
+    }
+    // setTimeout(function() {
+    //   this.setCardAnimation("");
+    // }, 700);
+    //const { ...rest } = props;
+  }
 
-export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
-    setCardAnimation("");
-  }, 700);
-  const loginClasses = useLoginStyles();
-  const { ...rest } = props;
-  return (
+  responseFromFacebook(response){
+    console.log(response);
+  };
+
+  render() {
+    //const [a, b] = React.useState("cardHidden");
+    // this.state.cardAnimaton = a;
+    // this.state.setCardAnimation = b;
+    this.state.loginClasses = makeStyles(loginStyles);
+    return(
     <div>
       <Header
         absolute
         color="white"
         brand="InfinityCare"
         rightLinks={<HeaderLinks />}
-        {...rest}
+        // {...rest}
       />
       <div
-        className={loginClasses.pageHeader}
+        className={this.state.loginClasses.pageHeader}
         style={{
           backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
           backgroundPosition: "top center"
         }}
       >
-        <div className={loginClasses.container}>
+        <div className={this.state.loginClasses.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-              <Card className={loginClasses[cardAnimaton]}>
-                <form className={loginClasses.form}>
-                  <CardHeader color="primary" className={loginClasses.cardHeader}>
+              <Card className={this.state.loginClasses[this.state.cardAnimaton]}>
+                <form className={this.state.loginClasses.form}>
+                  <CardHeader color="primary" className={this.state.loginClasses.cardHeader}>
                     <h4>Log in with</h4>
-                    <div className={loginClasses.socialLine}>
+                    <div className={this.state.loginClasses.socialLine}>
                       <Button
                         justIcon
                         href="#pablo"
@@ -73,7 +89,15 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
-                        <i className={loginClasses.socialIcons + " fab fa-facebook"} />
+                        <i className={this.state.loginClasses.socialIcons + " fab fa-facebook"}>
+                          <FacebookLogin
+                            appId="523513645103749"
+                            autoLoad={false}
+                            fields="name,email,picture"
+                            textButton=""
+                            icon = {this.state.loginClasses.socialIcons + " fa-facebook"}
+                            callback={(response)=>this.responseFromFacebook(response)} />
+                          </i>
                       </Button>
                     </div>
                   </CardHeader>
@@ -88,7 +112,7 @@ export default function LoginPage(props) {
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Email className={loginClasses.inputIconsColor} />
+                            <Email className={this.state.loginClasses.inputIconsColor} />
                           </InputAdornment>
                         )
                       }}
@@ -103,7 +127,7 @@ export default function LoginPage(props) {
                         type: "password",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Icon className={loginClasses.inputIconsColor}>
+                            <Icon className={this.state.loginClasses.inputIconsColor}>
                               lock_outline
                             </Icon>
                           </InputAdornment>
@@ -115,7 +139,7 @@ export default function LoginPage(props) {
                       noLiPadding
                       buttonText="Please Select"
                       buttonProps={{
-                        className: loginClasses.navLink,
+                        className: this.state.loginClasses.navLink,
                         color: "transparent"
                       }}
                       dropdownList={[
@@ -126,7 +150,7 @@ export default function LoginPage(props) {
                     />
                     <small style={{display: 'flex', justifyContent: 'center'}}>I agree to the Terms and Conditions &amp; Privacy Policy</small>
                   </CardBody>
-                  <CardFooter className={loginClasses.cardFooter}>
+                  <CardFooter className={this.state.loginClasses.cardFooter}>
                     <Button color="primary" size="lg">
                       Sign In
                     </Button>
@@ -141,5 +165,8 @@ export default function LoginPage(props) {
         </div>
       </div>
     </div>
-  );
+    );
+  };
 }
+
+export default LoginPage;
