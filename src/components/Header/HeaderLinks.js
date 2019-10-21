@@ -27,7 +27,11 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem>
+<<<<<<< HEAD
         <Link to="/signin" className={classes.link}>
+=======
+        <Link to="login" className={classes.link}>
+>>>>>>> 10d1cce808d73c1eb602674db29c72882ea44852
           <Button color="primary">
             Sign In
           </Button>
@@ -35,4 +39,8 @@ export default function HeaderLinks(props) {
       </ListItem>
     </List>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 10d1cce808d73c1eb602674db29c72882ea44852
