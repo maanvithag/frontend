@@ -8,9 +8,13 @@ import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
 import Button from "components/CustomButtons/Button.js";
+import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import CardFooter from "components/Card/CardFooter";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -67,27 +71,7 @@ export default class SignupButton extends React.Component {
     return (
       <form>
         <CardHeader color="primary">
-          <h4>Sign up with</h4>
-          <div>
-            <Button
-              justIcon
-              href="#pablo"
-              target="_blank"
-              color="transparent"
-              onClick={e => e.preventDefault()}
-            >
-              <i className={"fab fa-google"} />
-            </Button>
-              <Button
-                justIcon
-                href="#pablo"
-                target="_blank"
-                color="transparent"
-                onClick={e => e.preventDefault()}
-              >
-                <i className={"fab fa-facebook"} />
-              </Button>
-          </div>
+          <h4>Patient sign up</h4>
         </CardHeader>
         <CardBody>
           <CustomInput
@@ -140,6 +124,7 @@ export default class SignupButton extends React.Component {
             }}
           />
         </CardBody>
+        <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
         <Button
           onClick={this.handleSubmit}
           style={{ minWidth: "70%" }}
@@ -147,6 +132,7 @@ export default class SignupButton extends React.Component {
         >
           Sign up
         </Button>
+        </CardFooter>
       </form>
     );
   }
