@@ -26,6 +26,7 @@ export default class LoginForm extends React.Component {
       username: "",
       password: "",
       userType: "",
+      successful: "false",
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -57,8 +58,9 @@ export default class LoginForm extends React.Component {
     
     Axios.post("https://infinity-care.herokuapp.com/login/patient", { user })
       .then(res=> {
-        console.log(res);
-        console.log(res.data);
+        if(res.isOtpSent==true && isCredentialsAccurate) {
+          this.setState({successful: true})
+        }
       })
   };
 
