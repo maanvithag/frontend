@@ -7,6 +7,7 @@ import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -15,6 +16,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
+import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -62,18 +64,13 @@ export default class SignupButton extends React.Component {
     };
     console.log(user);
 
-    try {
-      const response = Axios.post(
-        "https://infinity-care.herokuapp.com/signup/insurance",
-        { user }
-      );
-      console.log("👉 Returned data:", response);
-      console.log("👉 You tried to log:", user);
-    } catch (e) {
-      console.log(`😱 Axios request failed: ${e}`);
-    }
+    Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
+      .then(res=> {
+        console.log(res);
+        console.log(res.data);
+      })
   };
-
+  
   render() {
     return (
       <form>

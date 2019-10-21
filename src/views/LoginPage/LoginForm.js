@@ -17,6 +17,7 @@ import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
 import TypeSelect from "views/Modals/TypeSelect.js";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default class LoginForm extends React.Component {
   constructor(props) {
@@ -24,10 +25,12 @@ export default class LoginForm extends React.Component {
     this.state = {
       username: "",
       password: "",
+      userType: "",
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleUserTypeChange = this.handleUserTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -39,6 +42,10 @@ export default class LoginForm extends React.Component {
     this.setState({ password: event.target.value });
   };
 
+  handleUserTypeChange = event => {
+    this.setState({ userType: event.target.value });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -48,7 +55,7 @@ export default class LoginForm extends React.Component {
     };
     console.log(user);
     
-    Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
+    Axios.post("https://infinity-care.herokuapp.com/login/patient", { user })
       .then(res=> {
         console.log(res);
         console.log(res.data);
@@ -57,6 +64,10 @@ export default class LoginForm extends React.Component {
 
   responseFacebook(response) {
     console.log(response);
+  }
+
+  onChange(value) {
+    console.log("Captcha value:", value);
   }
 
   render() {
@@ -84,7 +95,7 @@ export default class LoginForm extends React.Component {
           </div>
         </CardHeader>
         <CardBody>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>Don't have an account?</p>
             <TypeSelect />
           </div>
@@ -122,15 +133,34 @@ export default class LoginForm extends React.Component {
               autoComplete: "off"
             }}
           />
-          <div style={{display: 'flex', justifyContent: 'right', alignItems: 'center', marginBottom: 10}}>
+          <CustomInput
+            labelText="userType"
+            id="usertype"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              type: "usertype",
+              onChange: this.handleUserTypeChange,
+              autoComplete: "off"
+            }}
+          />
+          <div style={{display: 'flex', alignSelf: 'right'}}>
             <Button color="primary" simple>
               Forgot password?
             </Button>
           </div>
           <small style={{display: 'flex', justifyContent: 'center'}}>I agree to the Terms and Conditions &amp; Privacy Policy</small>
+          <ReCAPTCHA
+            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            onChange={this.onChange}
+          />
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-          <Button color="primary" size="lg">
+          <Button 
+          onClick={this.handleSubmit}
+          style={{ minWidth: "70%" }}
+          color="info">
             Sign In
           </Button>
         </CardFooter>
