@@ -66,7 +66,13 @@ export default class SignupButton extends React.Component {
     Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
       .then(res=> {
       if(res.isOtpSent==true && isNewUser) {
-          this.setState({successful: true})
+          this.setState({successful: "new user"})
+        }
+      else if(res.isOtpSent==true) {
+          this.setState({successful: "old user"})
+        }
+      else {
+          this.setState({successful: "user not recognized"})
         }
       })
   };
