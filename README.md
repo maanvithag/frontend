@@ -7,11 +7,15 @@ TODO:
 2.transparency of view on home
 3.sign up button larger
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f2405a1bd2e6fb229f95ce8738d03a50a02fd3ca
 4.refactor TypeSelect
 5.scrollup when entering signin
 6.disable signin button while in signin
 
 below is the documentation for material kit react, the react design used
+<<<<<<< HEAD
 =======
 4.refactor signupselect url to be dynamic and not hardcoded
 5.scrollup when entering signin
@@ -277,3 +281,5 @@ Dribbble: <https://dribbble.com/creativetim>
 
 Instagram: <https://www.instagram.com/CreativeTimOfficial>
 >>>>>>> 10d1cce808d73c1eb602674db29c72882ea44852
+=======
+>>>>>>> f2405a1bd2e6fb229f95ce8738d03a50a02fd3ca
