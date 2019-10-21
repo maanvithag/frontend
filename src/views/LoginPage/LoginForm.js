@@ -138,7 +138,7 @@ export default class LoginForm extends React.Component {
           <Button color="primary" size="lg">
             Sign In
           </Button>
-          {"test" + this.res + this.res.data}
+          {"test" + this.res}
         </CardFooter>
       </form>
     );
