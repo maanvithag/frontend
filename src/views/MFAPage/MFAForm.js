@@ -16,10 +16,9 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
 import TypeSelect from "views/Modals/TypeSelect.js";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import {Link} from "react-router-dom";
 
-export default class LoginForm extends React.Component {
+export default class MFAForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -64,7 +63,8 @@ export default class LoginForm extends React.Component {
                 </CardHeader>
                 <CardBody>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
-                        <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>Submit the one time password code sent to your email</p>
+                        <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>
+                            Submit the one time password code sent to your email</p>
                         <TypeSelect />
                     </div>
                     <CustomInput

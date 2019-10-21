@@ -11,14 +11,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import TypeSelect from "views/Modals/TypeSelect.js";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -28,7 +21,7 @@ import MFAForm from "./MFAForm";
 
 const useLoginStyles = makeStyles(loginStyles);
 
-export default function LoginPage(props) {
+export default function MFAPage(props) {
     const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
     setTimeout(function() {
         setCardAnimation("");
