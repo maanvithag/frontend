@@ -18,6 +18,7 @@ import CardFooter from "components/Card/CardFooter";
 import TypeSelect from "views/Modals/TypeSelect.js";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import ReCAPTCHA from "react-google-recaptcha";
+import {Link} from "react-router-dom";
 
 export default class LoginForm extends React.Component {
   constructor(props) {
@@ -55,13 +56,13 @@ export default class LoginForm extends React.Component {
       password: this.state.password,
     };
     console.log(user);
-    
+
     Axios.post("https://infinity-care.herokuapp.com/login/patient", { user })
-      .then(res=> {
-        if(res.isOtpSent===true && res.isCredentialsAccurate) {
-          this.setState({successful: true})
-        }
-      })
+        .then(res=> {
+          if(res.isOtpSent==true && isCredentialsAccurate) {
+            this.setState({successful: true})
+          }
+        })
   };
 
   responseFacebook(response) {
@@ -75,99 +76,102 @@ export default class LoginForm extends React.Component {
   render() {
     return (
         <form>
-        <CardHeader color="primary">
-          <h4>Log in with</h4>
-          <div>
-            <FacebookLogin
-              appId="523513645103749"
-              autoLoad={false}
-              fields="name,email,picture"
-              callback={this.responseFacebook}
-              render={renderProps => ( 
-                <Button
-                  justIcon
-                  target="_blank"
-                  color="transparent"
-                  onClick={renderProps.onClick}
-                >
-                  <i className={"fab fa-facebook"} />
-                </Button>
-              )}
+          <CardHeader color="primary">
+            <h4>Log in with</h4>
+            <div>
+              <FacebookLogin
+                  appId="523513645103749"
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  callback={this.responseFacebook}
+                  render={renderProps => (
+                      <Button
+                          justIcon
+                          target="_blank"
+                          color="transparent"
+                          onClick={renderProps.onClick}
+                      >
+                        <i className={"fab fa-facebook"} />
+                      </Button>
+                  )}
+              />
+            </div>
+          </CardHeader>
+          <CardBody>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>Don't have an account?</p>
+              <TypeSelect />
+            </div>
+            <CustomInput
+                labelText="Username..."
+                id="first"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "text",
+                  onChange: this.handleUsernameChange,
+                  endAdornment: (
+                      <InputAdornment position="end">
+                        <People />
+                      </InputAdornment>
+                  )
+                }}
             />
-          </div>
-        </CardHeader>
-        <CardBody>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>Don't have an account?</p>
-            <TypeSelect />
-          </div>
-          <CustomInput
-            labelText="Username..."
-            id="first"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "text",
-              onChange: this.handleUsernameChange,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <People />
-                </InputAdornment>
-              )
-            }}
-          />
-          <CustomInput
-            labelText="Password"
-            id="password"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "password",
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Icon>
-                    lock_outline
-                  </Icon>
-                </InputAdornment>
-              ),
-              autoComplete: "off"
-            }}
-          />
-          <CustomInput
-            labelText="userType"
-            id="usertype"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "usertype",
-              onChange: this.handleUserTypeChange,
-              autoComplete: "off"
-            }}
-          />
-          <div style={{display: 'flex', alignSelf: 'right'}}>
-            <Button color="primary" simple>
-              Forgot password?
-            </Button>
-          </div>
-          <small style={{display: 'flex', justifyContent: 'center'}}>I agree to the Terms and Conditions &amp; Privacy Policy</small>
-          <ReCAPTCHA
-            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-            onChange={this.onChange}
-          />
-        </CardBody>
-        <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-          <Button 
-          onClick={this.handleSubmit}
-          style={{ minWidth: "70%" }}
-          color="info">
-            Sign In
-          </Button>
-          {this.successful}
-        </CardFooter>
-      </form>
+            <CustomInput
+                labelText="Password"
+                id="password"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "password",
+                  endAdornment: (
+                      <InputAdornment position="end">
+                        <Icon>
+                          lock_outline
+                        </Icon>
+                      </InputAdornment>
+                  ),
+                  autoComplete: "off"
+                }}
+            />
+            <CustomInput
+                labelText="userType"
+                id="usertype"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "usertype",
+                  onChange: this.handleUserTypeChange,
+                  autoComplete: "off"
+                }}
+            />
+            <div style={{display: 'flex', alignSelf: 'right'}}>
+              <Button color="primary" simple>
+                Forgot password?
+              </Button>
+            </div>
+            <small style={{display: 'flex', justifyContent: 'center'}}>I agree to the Terms and Conditions &amp; Privacy Policy</small>
+            <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={this.onChange}
+            />
+          </CardBody>
+          <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
+            <Link to="/authenticateOTP">
+              <Button
+                  onClick={this.handleSubmit}
+                  style={{ minWidth: "70%" }}
+                  color="info">
+                Sign In
+              </Button>
+            </Link>
+            {this.successful}
+          </CardFooter>
+        </form>
     );
   }
 }
+

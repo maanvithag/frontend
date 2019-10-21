@@ -15,6 +15,7 @@ import PatientSignup from "views/SignupPage/PatientSignupPage.js";
 import DoctorDashboard from "views/Dashboards/DoctorDashboard";
 import InsuranceDashboard from "views/Dashboards/InsuranceDashboard";
 import PatientDashboard from "views/Dashboards/PatientDashboard";
+import MFAPage from "./views/MFAPage/MFAPage";
 
 var hist = createBrowserHistory();
 
@@ -30,6 +31,7 @@ ReactDOM.render(
       <Route path="/patient" component={PatientDashboard} />
       <Route path="/signin" component={Login}/>
       <Route path="/" component={LandingPage} />
+      <Route path="/authenticateOTP" component={MFAPage}/>
     </Switch>
   </Router>,
   document.getElementById("root")
