@@ -65,7 +65,6 @@ export default class MFAForm extends React.Component {
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
                         <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>
                             Submit the one time password code sent to your email</p>
-                        <TypeSelect />
                     </div>
                     <CustomInput
                         labelText="One time password"

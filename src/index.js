@@ -30,8 +30,8 @@ ReactDOM.render(
       <Route path="/insurance" component={InsuranceDashboard} />
       <Route path="/patient" component={PatientDashboard} />
       <Route path="/signin" component={Login}/>
-      <Route path="/" component={LandingPage} />
       <Route path="/authenticateOTP" component={MFAPage}/>
+      <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
   document.getElementById("root")
