@@ -47,17 +47,12 @@ export default class LoginForm extends React.Component {
       password: this.state.password,
     };
     console.log(user);
-
-    try {
-      const response = Axios.post(
-        "https://infinity-care.herokuapp.com/signup/insurance",
-        { user }
-      );
-      console.log("👉 Returned data:", response);
-      console.log("👉 You tried to log:", user);
-    } catch (e) {
-      console.log(`😱 Axios request failed: ${e}`);
-    }
+    
+    Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
+      .then(res=> {
+        console.log(res);
+        console.log(res.data);
+      })
   };
 
   responseFacebook(response) {
