@@ -21,12 +21,12 @@ export default function ProfilePage(props) {
   return (
     <div>
       <Header
-        color="transparent"
+        color="white"
         brand="InfinityCare"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 0,
+          height: 50,
           color: "white"
         }}
         {...rest}
@@ -37,6 +37,7 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6}>
+                Doctor dashboard
                 <RenderUser />
               </GridItem>
             </GridContainer>

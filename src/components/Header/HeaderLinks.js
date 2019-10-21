@@ -27,7 +27,7 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem>
-        <Link to="login" className={classes.link}>
+        <Link to="/signin" className={classes.link}>
           <Button color="primary">
             Sign In
           </Button>
