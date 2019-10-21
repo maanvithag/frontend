@@ -26,7 +26,7 @@ export default class LoginForm extends React.Component {
       username: "",
       password: "",
       userType: "",
-      successful: "false",
+      successful: "",
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -165,7 +165,6 @@ export default class LoginForm extends React.Component {
           color="info">
             Sign In
           </Button>
-          {"test" + this.res}
         </CardFooter>
       </form>
     );

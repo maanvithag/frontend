@@ -24,6 +24,7 @@ export default class SignupButton extends React.Component {
       email: "",
       password: "",
       userType: "patient",
+      successful: "",
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -57,8 +58,9 @@ export default class SignupButton extends React.Component {
 
     Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
       .then(res=> {
-        console.log(res);
-        console.log(res.data);
+      if(res.isOtpSent==true && isNewUser) {
+          this.setState({successful: true})
+        }
       })
   };
 
