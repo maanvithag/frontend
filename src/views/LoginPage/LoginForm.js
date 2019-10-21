@@ -58,7 +58,7 @@ export default class LoginForm extends React.Component {
     
     Axios.post("https://infinity-care.herokuapp.com/login/patient", { user })
       .then(res=> {
-        if(res.isOtpSent==true && isCredentialsAccurate) {
+        if(res.isOtpSent==true && res.isCredentialsAccurate) {
           this.setState({successful: true})
         }
       })
