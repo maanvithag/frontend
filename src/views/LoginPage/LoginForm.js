@@ -49,8 +49,6 @@ export default class LoginForm extends React.Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
-
     const user = {
       username: this.state.username,
       email: this.state.email,
@@ -67,7 +65,7 @@ export default class LoginForm extends React.Component {
     
     fetch(targetUrl + queryString, {
             method: 'POST',
-            credentials: "same-origin", //include, same-origin
+            credentials: "same-origin", 
             headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
         })
     .then(res => {
