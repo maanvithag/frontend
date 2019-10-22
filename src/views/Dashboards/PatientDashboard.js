@@ -29,9 +29,8 @@ export default function ProfilePage(props) {
   return (
     <div>
       <Header
-        color="transparent"
+        color="white"
         brand="InfinityCare"
-        rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 0,

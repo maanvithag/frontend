@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 export default function Parallax(props) {
   let windowScrollTop;
   if (window.innerWidth >= 768) {
-    windowScrollTop = window.pageYOffset / 3;
+    windowScrollTop = window.pageYOffset / 4;
   } else {
     windowScrollTop = 0;
   }
