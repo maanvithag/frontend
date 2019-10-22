@@ -57,7 +57,7 @@ export default class SignupButton extends React.Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    //event.preventDefault();
 
     const user = {
       username: this.state.username,
@@ -66,7 +66,7 @@ export default class SignupButton extends React.Component {
       userType: this.state.userType,
       specialization: this.state.specialization
     };
-    //console.log(user);
+    console.log(user);
 
     Axios.post("https://infinity-care.herokuapp.com/signup/doctor", { user })
       .then(res=> {
@@ -147,7 +147,7 @@ export default class SignupButton extends React.Component {
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
           <Link to="/doctor-authenticateOTP">
             <Button
-              //onClick={this.handleSubmit}
+              onClick={this.handleSubmit}
               style={{ minWidth: "70%" }}
               color="info"
             >

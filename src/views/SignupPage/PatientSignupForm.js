@@ -26,6 +26,8 @@ export default class SignupButton extends React.Component {
       password: "",
       userType: "patient",
       successful: "",
+      isOtpSent: "",
+      isNewUser:"",
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -47,22 +49,24 @@ export default class SignupButton extends React.Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    //event.preventDefault();
 
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      userType: this.state.userType
-    };
-    //console.log(user);
+        const user = {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          isOtpSent: "",
+          isNewUser:"",
+          userType: this.state.userType
+        };
+        console.log(user);
 
-    Axios.post("https://infinity-care.herokuapp.com/signup/patient", { user })
-      .then(res=> {
-      if(res.isOtpSent===true && res.isNewUser) {
-          this.setState({successful: true})
-        }
-      })
+        Axios.post("https://infinity-care.herokuapp.com/signup/patient", { user })
+          .then(res=> {
+          if(res.isOtpSent===true && res.isNewUser) {
+              this.setState({successful: true})
+            }
+          })
   };
 
   render() {
@@ -125,7 +129,7 @@ export default class SignupButton extends React.Component {
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
           <Link to="/patient-authenticateOTP">
         <Button
-          //onClick={this.handleSubmit}
+          onClick={this.handleSubmit}
           style={{ minWidth: "70%" }}
           color="info"
         >
