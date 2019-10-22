@@ -60,7 +60,7 @@ export default class LoginForm extends React.Component {
 
     console.log(user);
 
-    var targetUrl = 'http://infinity-care.herokuapp.com/login/patient';
+    var targetUrl = 'https://infinity-care.herokuapp.com/login/' + this.state.userType;
     var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
     
     fetch(targetUrl + queryString, {

@@ -42,7 +42,7 @@ export default class MFAInsuranceForm extends React.Component {
         };
         console.log(user);
 
-        var targetUrl = 'http://infinity-care.herokuapp.com/otp/insurance';
+        var targetUrl = 'https://infinity-care.herokuapp.com/otp/insurance';
         var queryString = "?otp=" + this.state.otp;
     
         fetch(targetUrl + queryString, {
