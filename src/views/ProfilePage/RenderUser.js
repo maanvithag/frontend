@@ -9,16 +9,20 @@ class RenderUser extends React.Component {
 
     this.state = {
       isLoading: true,
+      title: null,
       name: null,
-      email: null
+      cell: null,
+      email: null,
+      location: null,
+      dob: null,
     };
   }
 
   render() {
-    const { isLoading, name,  email } = this.state;
+    const { isLoading, title, name, cell, email, location, dob } = this.state;
 
     return (
-      <User isLoading={isLoading} name={name} email={email} />
+      <User isLoading={isLoading}  title={title} name={name} cell={cell} email={email} location={location} dob={dob}/>
     );
   }
 

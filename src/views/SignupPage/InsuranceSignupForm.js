@@ -16,6 +16,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
 import {Link} from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -152,6 +153,10 @@ export default class SignupButton extends React.Component {
               autoComplete: "off"
             }}
           />
+          <ReCAPTCHA
+                sitekey="6LeqvL4UAAAAAGSZCz_PjOT8nMVh2CDpx_GUGyXj"
+                onChange={this.onChange}
+            />
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
           <Link to="/insurance-authenticateOTP">
