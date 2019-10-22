@@ -1,19 +1,14 @@
 import React from "react";
-import axios from "axios";
 // material-ui components
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
 import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
 import TypeSelect from "views/Modals/TypeSelect.js";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
@@ -58,8 +53,6 @@ export default class LoginForm extends React.Component {
       userType: this.state.userType
     };
 
-    console.log(user);
-
     var targetUrl = 'https://infinity-care.herokuapp.com/login/' + this.state.userType;
     var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
     
@@ -74,14 +67,6 @@ export default class LoginForm extends React.Component {
       }
     })
   };
-
-  responseFacebook(response) {
-    console.log(response);
-  }
-
-  onChange(value) {
-    console.log("Captcha value:", value);
-  }
 
   render() {
     return (
