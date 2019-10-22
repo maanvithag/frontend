@@ -51,46 +51,30 @@ export default class LoginForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    //TODO: Remove this
     const user = {
       username: this.state.username,
+      email: this.state.email,
       password: this.state.password,
+      isOtpSent: "",
+      isCredentialsAccurate: "",
+      userType: this.state.userType
     };
+
     console.log(user);
 
-    const data = {user};
-
-    var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
-        targetUrl = 'http://infinity-care.herokuapp.com/login/patient'
+    var targetUrl = 'http://localhost:8080/login/patient';
+    var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
     
-    // TODO Gets response but password goes in as empty string
-    fetch(proxyUrl + targetUrl, {
+    fetch(targetUrl + queryString, {
             method: 'POST',
-            body: JSON.stringify(data),
             credentials: "same-origin", //include, same-origin
             headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
         })
-    .then((data) => data.json())
-    .then((resp) => console.log(resp))
-    .catch((err) => console.log(err))
-
-    /* axios({
-      method: 'post',
-      url: 'http://infinity-care.herokuapp.com/login/patient',
-      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-      data: {
-        username: this.state.username,
-        password: this.state.password
+    .then(res => {
+      if(user.isOtpSent && user.isCredentialsAccurate) {
+        this.setState({successful: true})
       }
-    }).then(response => {
-      console.log(response);
-    }); */
-    // fetch("http://localhost:8080/login/patient", options)
-    //     .then(res=> {
-    //       //if(res.isOtpSent==true && isCredentialsAccurate) {
-    //         this.setState({successful: true})
-    //       //}
-    //     })
+    })
   };
 
   responseFacebook(response) {
@@ -154,6 +138,7 @@ export default class LoginForm extends React.Component {
                 }}
                 inputProps={{
                   type: "password",
+                  onChange: this.handlePasswordChange,
                   endAdornment: (
                       <InputAdornment position="end">
                         <Icon>
@@ -188,12 +173,14 @@ export default class LoginForm extends React.Component {
             />
           </CardBody>
           <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
+            <Link to="/patient-authenticateOTP">
               <Button
                   onClick={this.handleSubmit}
                   style={{ minWidth: "70%" }}
                   color="info">
                 Sign In
               </Button>
+                </Link>
             {this.successful}
           </CardFooter>
         </form>

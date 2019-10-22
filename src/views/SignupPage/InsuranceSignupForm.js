@@ -53,30 +53,37 @@ export default class SignupButton extends React.Component {
   };
 
   handleSubmit = event => {
-    //event.preventDefault();
-
     const user = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      userType: this.state.userType,
-      company: this.state.company
+      isOtpSent: "",
+      isNewUser:"",
+      userType: this.state.userType
     };
     console.log(user);
 
-    Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
-      .then(res=> {
-      if(res.isOtpSent===true && res.isNewUser) {
-          this.setState({successful: "new user"})
-        }
-      else if(res.isOtpSent===true) {
-          this.setState({successful: "old user"})
-        }
+    var targetUrl = 'http://localhost:8080/signup/insurance';
+    var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
+
+    fetch(targetUrl + queryString, {
+            method: 'POST',
+            credentials: "same-origin", 
+            headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
+        })
+    .then(res => {
+      console.log(user)
+      if(user.isOtpSent && user.isNewUser) {
+        this.setState({successful: "new user"})
+      }
+      else if(res.isOtpSent) {
+        this.setState({successful: "old user"})
+      }
       else {
           this.setState({successful: "user not recognized"})
         }
-      })
-  };
+    })
+};
 
   render() {
     return (

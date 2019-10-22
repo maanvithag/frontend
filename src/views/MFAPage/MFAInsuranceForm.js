@@ -38,20 +38,24 @@ export default class MFAInsuranceForm extends React.Component {
 
         const user = {
             otp: this.state.otp,
+            isOtpAccurate: ""
         };
         console.log(user);
-        /* --> TODO - Not sure if this is necessary for this portion
-        try {
-            const response = Axios.post(
-                "https://infinity-care.herokuapp.com/signup/insurance",
-                { user }
-            );
-            console.log("👉 Returned data:", response);
-            console.log("👉 You tried to log:", user);
-        } catch (e) {
-            console.log(`😱 Axios request failed: ${e}`);
-        }
-        */
+
+        var targetUrl = 'http://localhost:8080/otp/insurance';
+        var queryString = "?otp=" + this.state.otp;
+    
+        fetch(targetUrl + queryString, {
+                method: 'POST',
+                credentials: "same-origin", 
+                headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
+            })
+        .then(res => {
+          console.log(user)
+          if(user.isOtpAccurate) {
+            this.setState({successful: true})
+          }
+        })
     };
 
 

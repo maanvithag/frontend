@@ -49,24 +49,36 @@ export default class SignupButton extends React.Component {
   };
 
   handleSubmit = event => {
-    //event.preventDefault();
+    const user = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      isOtpSent: "",
+      isNewUser:"",
+      userType: this.state.userType
+    };
+    console.log(user);
 
-        const user = {
-          username: this.state.username,
-          email: this.state.email,
-          password: this.state.password,
-          isOtpSent: "",
-          isNewUser:"",
-          userType: this.state.userType
-        };
-        console.log(user);
+    var targetUrl = 'http://localhost:8080/signup/patient';
+    var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
 
-        Axios.post("https://infinity-care.herokuapp.com/signup/patient", { user })
-          .then(res=> {
-          if(res.isOtpSent===true && res.isNewUser) {
-              this.setState({successful: true})
-            }
-          })
+    fetch(targetUrl + queryString, {
+      method: 'POST',
+      credentials: "same-origin", 
+      headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
+    })
+    .then(res => {
+      console.log(res.isNewUser, res.isOtpSent)
+      if(user.isOtpSent && user.isNewUser) {
+        this.setState({successful: "new user"})
+      }
+      else if(res.isOtpSent) {
+        this.setState({successful: "old user"})
+      }
+      else {
+        this.setState({successful: "user not recognized"})
+      }
+    })
   };
 
   render() {
