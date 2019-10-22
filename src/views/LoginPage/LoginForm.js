@@ -58,17 +58,33 @@ export default class LoginForm extends React.Component {
     };
     console.log(user);
 
-    axios({
+    const data = {user};
+
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+        targetUrl = 'http://infinity-care.herokuapp.com/login/patient'
+    
+    // TODO Gets response but password goes in as empty string
+    fetch(proxyUrl + targetUrl, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            credentials: "same-origin", //include, same-origin
+            headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
+        })
+    .then((data) => data.json())
+    .then((resp) => console.log(resp))
+    .catch((err) => console.log(err))
+
+    /* axios({
       method: 'post',
-      url: 'http://localhost:8080/login/patient',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      url: 'http://infinity-care.herokuapp.com/login/patient',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       data: {
         username: this.state.username,
         password: this.state.password
       }
     }).then(response => {
       console.log(response);
-    });
+    }); */
     // fetch("http://localhost:8080/login/patient", options)
     //     .then(res=> {
     //       //if(res.isOtpSent==true && isCredentialsAccurate) {
