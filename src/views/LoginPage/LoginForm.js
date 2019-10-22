@@ -1,5 +1,5 @@
 import React from "react";
-import Axios from "axios";
+import axios from "axios";
 // material-ui components
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
@@ -51,18 +51,30 @@ export default class LoginForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    //TODO: Remove this
     const user = {
       username: this.state.username,
       password: this.state.password,
     };
     console.log(user);
 
-    Axios.post("https://infinity-care.herokuapp.com/login/patient", { user })
-        .then(res=> {
-          //if(res.isOtpSent==true && isCredentialsAccurate) {
-            this.setState({successful: true})
-          //}
-        })
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/login/patient',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      data: {
+        username: this.state.username,
+        password: this.state.password
+      }
+    }).then(response => {
+      console.log(response);
+    });
+    // fetch("http://localhost:8080/login/patient", options)
+    //     .then(res=> {
+    //       //if(res.isOtpSent==true && isCredentialsAccurate) {
+    //         this.setState({successful: true})
+    //       //}
+    //     })
   };
 
   responseFacebook(response) {
