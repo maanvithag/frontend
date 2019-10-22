@@ -17,6 +17,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
 import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
+import {Link} from "react-router-dom";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -28,6 +29,8 @@ export default class SignupButton extends React.Component {
       userType: "doctor",
       specialization: "",
       successful: "",
+      isOtpSent: "",
+      isNewUser: true,
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -63,9 +66,9 @@ export default class SignupButton extends React.Component {
       userType: this.state.userType,
       specialization: this.state.specialization
     };
-    console.log(user);
+    //console.log(user);
 
-    Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
+    Axios.post("https://infinity-care.herokuapp.com/signup/doctor", { user })
       .then(res=> {
       if(res.isOtpSent===true && res.isNewUser) {
           this.setState({successful: true})
@@ -142,13 +145,15 @@ export default class SignupButton extends React.Component {
           />
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-        <Button
-          onClick={this.handleSubmit}
-          style={{ minWidth: "70%" }}
-          color="info"
-        >
-          Sign up
-        </Button>
+          <Link to="/doctor-authenticateOTP">
+            <Button
+              //onClick={this.handleSubmit}
+              style={{ minWidth: "70%" }}
+              color="info"
+            >
+            Sign up
+            </Button>
+          </Link>
         {this.successful}
         </CardFooter>
       </form>

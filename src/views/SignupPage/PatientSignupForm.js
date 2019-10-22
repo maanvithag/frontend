@@ -15,6 +15,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
+import {Link} from "react-router-dom";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -54,9 +55,9 @@ export default class SignupButton extends React.Component {
       password: this.state.password,
       userType: this.state.userType
     };
-    console.log(user);
+    //console.log(user);
 
-    Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
+    Axios.post("https://infinity-care.herokuapp.com/signup/patient", { user })
       .then(res=> {
       if(res.isOtpSent===true && res.isNewUser) {
           this.setState({successful: true})
@@ -122,14 +123,16 @@ export default class SignupButton extends React.Component {
           />
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
+          <Link to="/patient-authenticateOTP">
         <Button
-          onClick={this.handleSubmit}
+          //onClick={this.handleSubmit}
           style={{ minWidth: "70%" }}
           color="info"
         >
           Sign up
           {this.successful}
         </Button>
+            </Link>
         </CardFooter>
       </form>
     );

@@ -18,7 +18,7 @@ import CardFooter from "components/Card/CardFooter";
 import TypeSelect from "views/Modals/TypeSelect.js";
 import {Link} from "react-router-dom";
 
-export default class MFAForm extends React.Component {
+export default class MFAPatientForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -86,7 +86,7 @@ export default class MFAForm extends React.Component {
                     />
                 </CardBody>
                 <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                    <Link to="/">
+                    <Link to="/patient">
                         <Button color="primary" size="lg">
                             Authenticate Account
                         </Button>

@@ -15,6 +15,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
+import {Link} from "react-router-dom";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ export default class SignupButton extends React.Component {
       userType: this.state.userType,
       company: this.state.company
     };
-    console.log(user);
+    //console.log(user);
 
     Axios.post("https://infinity-care.herokuapp.com/signup/insurance", { user })
       .then(res=> {
@@ -146,14 +147,16 @@ export default class SignupButton extends React.Component {
           />
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-        <Button
-          onClick={this.handleSubmit}
-          style={{ minWidth: "70%" }}
-          color="info"
-        >
-          Sign up
-        {this.successful}
-        </Button>
+          <Link to="/insurance-authenticateOTP">
+            <Button
+            // onClick={this.handleSubmit}
+             style={{ minWidth: "70%" }}
+             color="info"
+            >
+            Sign up
+            {this.successful}
+            </Button>
+          </Link>
         </CardFooter>
       </form>
     );
