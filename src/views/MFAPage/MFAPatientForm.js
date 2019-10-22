@@ -42,7 +42,7 @@ export default class MFAPatientForm extends React.Component {
         };
         console.log(user);
 
-        var targetUrl = 'http://localhost:8080/otp/patient';
+        var targetUrl = 'http://infinity-care.herokuapp.com/otp/patient';
         var queryString = "?otp=" + this.state.otp;
     
         fetch(targetUrl + queryString, {

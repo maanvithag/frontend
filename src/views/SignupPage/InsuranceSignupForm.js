@@ -63,7 +63,7 @@ export default class SignupButton extends React.Component {
     };
     console.log(user);
 
-    var targetUrl = 'http://localhost:8080/signup/insurance';
+    var targetUrl = 'http://infinity-care.herokuapp.com/signup/insurance';
     var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
 
     fetch(targetUrl + queryString, {
