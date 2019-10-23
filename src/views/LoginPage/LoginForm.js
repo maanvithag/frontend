@@ -54,9 +54,6 @@ export default class LoginForm extends React.Component {
       userType: this.state.userType
     };
 
-    var targetUrl = 'https://infinity-care.herokuapp.com/login/' + this.state.userType;
-    var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
-
     axios({
       method : 'post',
       url: 'https://infinity-care.herokuapp.com/login/' + this.state.userType,
@@ -72,13 +69,6 @@ export default class LoginForm extends React.Component {
     })
   };
     
-    // fetch(targetUrl + queryString, {
-    //         method: 'POST',
-    //         credentials: "same-origin", 
-    //         headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
-    //     })
-    
-
   render() {
     return (
         <form>
