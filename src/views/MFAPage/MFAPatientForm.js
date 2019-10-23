@@ -1,21 +1,14 @@
 import React from "react";
-import Axios from "axios";
 // material-ui components
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
 // core components
 import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
-import TypeSelect from "views/Modals/TypeSelect.js";
 import {Link} from "react-router-dom";
 
 export default class MFAPatientForm extends React.Component {
@@ -40,7 +33,6 @@ export default class MFAPatientForm extends React.Component {
             otp: this.state.otp,
             isOtpAccurate: ""
         };
-        console.log(user);
 
         var targetUrl = 'https://infinity-care.herokuapp.com/otp/patient';
         var queryString = "?otp=" + this.state.otp;
@@ -51,7 +43,6 @@ export default class MFAPatientForm extends React.Component {
                 headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
             })
         .then(res => {
-          console.log(user)
           if(user.isOtpAccurate) {
             this.setState({successful: true})
           }

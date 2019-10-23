@@ -11,27 +11,22 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import NavPills from "components/NavPills/NavPills.js";
 import RenderUser from "views/ProfilePage/RenderUser.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import pillStyles from "assets/jss/material-kit-react/views/componentsSections/pillsStyle.js";
 
-const usePillStyles = makeStyles(pillStyles);
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
-  const pillClasses = usePillStyles();
   const { ...rest } = props;
   return (
     <div>
       <Header
-        color="transparent"
+        color="white"
         brand="InfinityCare"
-        rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 0,

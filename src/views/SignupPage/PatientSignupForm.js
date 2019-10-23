@@ -1,5 +1,4 @@
 import React from "react";
-import Axios from "axios";
 // material-ui components
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
@@ -8,12 +7,9 @@ import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
 import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import CardFooter from "components/Card/CardFooter";
 import {Link} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -58,7 +54,6 @@ export default class SignupButton extends React.Component {
       isNewUser:"",
       userType: this.state.userType
     };
-    console.log(user);
 
     var targetUrl = 'https://infinity-care.herokuapp.com/signup/patient';
     var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
@@ -69,7 +64,6 @@ export default class SignupButton extends React.Component {
       headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
     })
     .then(res => {
-      console.log(res.isNewUser, res.isOtpSent)
       if(user.isOtpSent && user.isNewUser) {
         this.setState({successful: "new user"})
       }

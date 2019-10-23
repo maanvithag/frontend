@@ -9,20 +9,18 @@ class RenderUser extends React.Component {
 
     this.state = {
       isLoading: true,
-      title: null,
       name: null,
       cell: null,
       email: null,
-      location: null,
-      dob: null,
+      location: null
     };
   }
 
   render() {
-    const { isLoading, title, name, cell, email, location, dob } = this.state;
+    const { isLoading, name, cell, email, location } = this.state;
 
     return (
-      <User isLoading={isLoading}  title={title} name={name} cell={cell} email={email} location={location} dob={dob}/>
+      <User isLoading={isLoading} name={name} cell={cell} email={email} location={location}/>
     );
   }
 
@@ -31,7 +29,7 @@ class RenderUser extends React.Component {
     let userData = await API.get('/', {
       params: {
         results: 1,
-        inc: 'name,email,picture'
+        inc: 'name,cell,email,location'
       }
     });
 
@@ -40,13 +38,17 @@ class RenderUser extends React.Component {
 
     // Update state with new data and re-render our component.
     const name = `${userData.name.first} ${userData.name.last}`;
+    const cell = userData.cell;
     const email = userData.email;
+    const location = userData.location.city;
 
     this.setState({
       ...this.state, ...{
         isLoading: false,
         name,
-        email
+        cell,
+        email,
+        location
       }
     });
   }

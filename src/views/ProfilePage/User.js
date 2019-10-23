@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 
 class User extends React.Component {
   render() {
-    const { name, email, isLoading } = this.props;
+    const { name, cell, email, location, isLoading } = this.props;
 
     const userDetails = (
       <div>
         <h4 className="mb-0">{name}</h4>
-        <span className="text-muted">{email}</span>
+        <span className="text-muted">Number: {cell}</span><br />
+        <span className="text-muted">Email: {email}</span><br />
+        <span className="text-muted">Location city: {location}</span><br />
       </div>
     );
 
@@ -24,7 +26,9 @@ class User extends React.Component {
 
 User.propTypes = {
   name: PropTypes.string,
+  cell: PropTypes.string,
   email: PropTypes.string,
+  location: PropTypes.string,
   isLoading: PropTypes.bool
 };
 
