@@ -62,18 +62,28 @@ export default class LoginForm extends React.Component {
 
     var targetUrl = 'https://infinity-care.herokuapp.com/login/' + this.state.userType;
     var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
-    
-    fetch(targetUrl + queryString, {
-            method: 'POST',
-            credentials: "same-origin", 
-            headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
-        })
-    .then(res => {
+
+    axios({
+      method : 'post',
+      url: 'https://infinity-care.herokuapp.com/login/' + this.state.userType,
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+      data : {
+        username : this.state.username,
+        password : this.state.password
+      }
+    }).then(res => {
       if(user.isOtpSent && user.isCredentialsAccurate) {
         this.setState({successful: true})
       }
     })
   };
+    
+    // fetch(targetUrl + queryString, {
+    //         method: 'POST',
+    //         credentials: "same-origin", 
+    //         headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
+    //     })
+    
 
   responseFacebook(response) {
     console.log(response);
