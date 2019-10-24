@@ -155,7 +155,7 @@ export default class SignupButton extends React.Component {
             />
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-          <Link to="/doctor-authenticateOTP"> 
+          <Link to="/doctor/mfa"> 
             <Button
               onClick={this.handleSubmit}
               style={{ minWidth: "70%" }}

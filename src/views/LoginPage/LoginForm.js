@@ -157,7 +157,7 @@ export default class LoginForm extends React.Component {
             />
           </CardBody>
           <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-            <Link to="/patient-authenticateOTP">
+            <Link to= {this.state.userType + "/mfa"}>
               <Button
                   onClick={this.handleSubmit}
                   style={{ minWidth: "70%" }}

@@ -27,14 +27,14 @@ ReactDOM.render(
       <Route path="/components" component={Components} />
       <Route path="/doctor/signup" component={DoctorSignup}/>
       <Route path="/insurance/signup" component={InsuranceSignup}/>
-      <Route path="/patient/signup" component={PatientSignup}/>
-      <Route path="/doctor" component={DoctorDashboard} />
-      <Route path="/insurance" component={InsuranceDashboard} />
-      <Route path="/patient" component={PatientDashboard} />
-      <Route path="/signin" component={Login}/>
-      <Route path="/patient-authenticateOTP" component={MFAPatientPage}/>
-      <Route path="/doctor-authenticateOTP" component={MFADoctorPage}/>
-      <Route path="/insurance-authenticateOTP" component={MFAInsurancePage}/>
+      <Route path="/patient/mfa" exact component={MFAPatientPage}/>
+      <Route path="/doctor/mfa" component={MFADoctorPage}/>
+      <Route path="/insurance/mfa" component={MFAInsurancePage}/>
+      <Route path="/patient/signup" exact component={PatientSignup}/>
+      <Route path="/doctor" exact component={DoctorDashboard} />
+      <Route path="/insurance" exact component={InsuranceDashboard} />
+      <Route path="/patient" exact component={PatientDashboard} />
+      <Route path="/signin" exact component={Login}/>
 
       <Route path="/" component={LandingPage} />
     </Switch>
