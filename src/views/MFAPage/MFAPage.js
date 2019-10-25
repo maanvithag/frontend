@@ -12,7 +12,7 @@ import Card from "components/Card/Card.js";
 import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
-import MFADoctorForm from "./MFADoctorForm";
+import MFADoctorForm from "./MFAForm";
 
 const useLoginStyles = makeStyles(loginStyles);
 

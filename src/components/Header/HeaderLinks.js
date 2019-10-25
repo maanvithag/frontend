@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
+import TypeSelect from "views/Modals/TypeSelect.js";
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -27,11 +28,12 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem>
-        <Link to="/signin" className={classes.link}>
+        {/* <Link to="/signin" className={classes.link}>
           <Button color="primary">
             Sign In
           </Button>
-        </Link>
+        </Link> */}
+        <TypeSelect />
       </ListItem>
     </List>
   );

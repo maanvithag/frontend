@@ -15,9 +15,7 @@ import PatientSignup from "views/SignupPage/PatientSignupPage.js";
 import DoctorDashboard from "views/Dashboards/DoctorDashboard";
 import InsuranceDashboard from "views/Dashboards/InsuranceDashboard";
 import PatientDashboard from "views/Dashboards/PatientDashboard";
-import MFAPatientPage from "./views/MFAPage/MFAPatientPage";
-import MFADoctorPage from "./views/MFAPage/MFADoctorPage";
-import MFAInsurancePage from "./views/MFAPage/MFAInsurancePage";
+import MFAPage from "./views/MFAPage/MFAPage";
 
 var hist = createBrowserHistory();
 
@@ -25,16 +23,22 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/components" component={Components} />
+      
       <Route path="/doctor/signup" component={DoctorSignup}/>
-      <Route path="/insurance/signup" component={InsuranceSignup}/>
-      <Route path="/patient/mfa" exact component={MFAPatientPage}/>
-      <Route path="/doctor/mfa" component={MFADoctorPage}/>
-      <Route path="/insurance/mfa" component={MFAInsurancePage}/>
+      <Route path="/insurance/signup" exact component={InsuranceSignup}/>
       <Route path="/patient/signup" exact component={PatientSignup}/>
-      <Route path="/doctor" exact component={DoctorDashboard} />
-      <Route path="/insurance" exact component={InsuranceDashboard} />
-      <Route path="/patient" exact component={PatientDashboard} />
-      <Route path="/signin" exact component={Login}/>
+
+      <Route path="/patient/mfa" exact component={MFAPage}/>
+      <Route path="/doctor/mfa" cexact component={MFAPage}/>
+      <Route path="/insurance/mfa" exact component={MFAPage}/>
+
+      <Route path="/doctor/signin" exact component={Login}/>
+      <Route path="/patient/signin" exact component={Login}/>
+      <Route path="/insurance/signin" exact component={Login}/>
+
+      <Route path="/insurance/:insuranceID" exact component={InsuranceDashboard} />
+      <Route path="/patient/:patientID" exact component={PatientDashboard} />
+      <Route path="/doctor/:doctorID" exact component={DoctorDashboard} />
 
       <Route path="/" component={LandingPage} />
     </Switch>

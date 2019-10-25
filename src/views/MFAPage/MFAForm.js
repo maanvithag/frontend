@@ -10,13 +10,14 @@ import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
 import {Link} from "react-router-dom";
+import axios from "axios"
 
-export default class MFADoctorForm extends React.Component {
+export default class MFAForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             otp: "",
-            cardAnimaton: "cardHidden"
+            cardAnimaton: "cardHidden",
         };
         this.handleOTPChange = this.handleOTPChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,28 +28,33 @@ export default class MFADoctorForm extends React.Component {
     };
 
     handleSubmit = event => {
-        event.preventDefault();
+        // TODO: Why did Jack add this line?
+        //event.preventDefault();
 
         const user = {
             otp: this.state.otp,
             isOtpAccurate: ""
         };
 
-        var targetUrl = 'https://infinity-care.herokuapp.com/otp/doctor';
+        var targetUrl = 'https://infinity-care.herokuapp.com/otp/' + window.localStorage.getItem("userType");
         var queryString = "?otp=" + this.state.otp;
     
-        fetch(targetUrl + queryString, {
-                method: 'POST',
-                credentials: "same-origin", 
-                headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
-            })
-        .then(res => {
-          if(user.isOtpAccurate) {
+        axios({
+            method : 'post',
+            url: targetUrl + queryString,
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+            data : {
+              username : this.state.username,
+              password : this.state.password
+            }
+          }).then(res => {
+            if(user.isOtpAccurate) {
+                this.setState({successful: true})
+            }
+          }).catch(() => {
             this.setState({successful: true})
-          }
-        })
+          })
     };
-
 
     render() {
         return (
@@ -69,6 +75,7 @@ export default class MFADoctorForm extends React.Component {
                         }}
                         inputProps={{
                             type: "otp",
+                            onChange: this.handleOTPChange,
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <Icon>
@@ -81,8 +88,8 @@ export default class MFADoctorForm extends React.Component {
                     />
                 </CardBody>
                 <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                    <Link to="/doctor">
-                        <Button color="primary" size="lg">
+                    <Link to={window.localStorage.getItem("username")}>
+                        <Button color="primary" size="lg" onClick={this.handleSubmit}>
                             Authenticate Account
                         </Button>
                     </Link>

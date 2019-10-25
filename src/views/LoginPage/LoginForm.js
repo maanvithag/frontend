@@ -22,26 +22,26 @@ export default class LoginForm extends React.Component {
     this.state = {
       username: "",
       password: "",
-      userType: "",
       successful: "",
+      userType: "",
       cardAnimaton: "cardHidden"
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleUserTypeChange = this.handleUserTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleUsernameChange = event => {
     this.setState({ username: event.target.value });
+
+    var currentURLPath = window.location.pathname
+    this.setState({userType: currentURLPath.substring(1, currentURLPath.indexOf("/signin"))});
+    window.localStorage.setItem("userType", this.state.userType);
+    window.localStorage.setItem("username", event.target.value);
   };
 
   handlePasswordChange = event => {
     this.setState({ password: event.target.value });
-  };
-
-  handleUserTypeChange = event => {
-    this.setState({ userType: event.target.value });
   };
 
   handleSubmit = event => {
@@ -51,12 +51,11 @@ export default class LoginForm extends React.Component {
       password: this.state.password,
       isOtpSent: "",
       isCredentialsAccurate: "",
-      userType: this.state.userType
     };
 
     axios({
       method : 'post',
-      url: 'https://infinity-care.herokuapp.com/login/' + this.state.userType,
+      url: 'https://infinity-care.herokuapp.com/login/' + window.localStorage.getItem("userType"),
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       data : {
         username : this.state.username,
@@ -133,18 +132,6 @@ export default class LoginForm extends React.Component {
                   autoComplete: "off"
                 }}
             />
-            <CustomInput
-                labelText="userType"
-                id="usertype"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  type: "usertype",
-                  onChange: this.handleUserTypeChange,
-                  autoComplete: "off"
-                }}
-            />
             <div style={{display: 'flex', alignSelf: 'right'}}>
               <Button color="primary" simple>
                 Forgot password?
@@ -157,14 +144,14 @@ export default class LoginForm extends React.Component {
             />
           </CardBody>
           <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-            <Link to= {this.state.userType + "/mfa"}>
+            <Link to= {"mfa"}>
               <Button
                   onClick={this.handleSubmit}
                   style={{ minWidth: "70%" }}
                   color="info">
                 Sign In
               </Button>
-                </Link>
+            </Link>
             {this.successful}
           </CardFooter>
         </form>

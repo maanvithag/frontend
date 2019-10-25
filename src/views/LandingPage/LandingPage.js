@@ -12,6 +12,7 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js"
+import TypeSelect from "views/Modals/TypeSelect.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
@@ -48,11 +49,12 @@ export default function LandingPage(props) {
                 Healthcare at your fingertips. Connect with your doctors and insurance, hassle-free.
               </h4>
               <br />
-              <Link to="/signin">
+              {/* <Link to="/signin">
                 <Button color="primary">
                   Sign In
                 </Button>
-              </Link>
+              </Link> */}
+              <TypeSelect />
             </GridItem>
           </GridContainer>
         </div>

@@ -37,7 +37,7 @@ export default function TypeSelect() {
   return (
     <div>
       <Button color="primary" simple onClick={() => setModal(true)}>
-        Sign up
+        Sign In
       </Button>
       <Dialog
         modalClasses={{
@@ -79,7 +79,7 @@ export default function TypeSelect() {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Link to={"patient/signup"}>
+                  <Link to={"patient/signin"}>
                     <InfoArea
                     title="Patient"
                     icon={People}
@@ -89,7 +89,7 @@ export default function TypeSelect() {
                   </Link>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Link to={"doctor/signup"}>
+                  <Link to={"doctor/signin"}>
                     <InfoArea
                     title="Doctor"
                     icon={LocalHospital}
@@ -99,7 +99,7 @@ export default function TypeSelect() {
                   </Link>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Link to={"insurance/signup"}>
+                  <Link to={"insurance/signin"}>
                     <InfoArea
                     title="Insurance Company"
                     icon={Note}
