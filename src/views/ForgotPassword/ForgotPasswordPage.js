@@ -12,11 +12,11 @@ import Card from "components/Card/Card.js";
 import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
-import OTPForm from "./MFAForm";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 
 const useLoginStyles = makeStyles(loginStyles);
 
-export default function MFAForm(props) {
+export default function ForgotPassword(props) {
     const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
     setTimeout(function() {
         setCardAnimation("");
@@ -44,7 +44,7 @@ export default function MFAForm(props) {
                     <GridContainer justify="center">
                         <GridItem xs={12} sm={12} md={4}>
                             <Card className={loginClasses[cardAnimaton]}>
-                                <OTPForm/>
+                                <ForgotPasswordForm/>
                             </Card>
                         </GridItem>
                     </GridContainer>
@@ -53,4 +53,3 @@ export default function MFAForm(props) {
         </div>
     );
 }
-

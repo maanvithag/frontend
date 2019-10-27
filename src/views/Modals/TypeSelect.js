@@ -36,7 +36,7 @@ export default function TypeSelect() {
 
   return (
     <div>
-      <Button color="primary" simple onClick={() => setModal(true)}>
+      <Button color="primary" onClick={() => setModal(true)}>
         Sign In
       </Button>
       <Dialog

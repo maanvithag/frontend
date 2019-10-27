@@ -16,6 +16,7 @@ import DoctorDashboard from "views/Dashboards/DoctorDashboard";
 import InsuranceDashboard from "views/Dashboards/InsuranceDashboard";
 import PatientDashboard from "views/Dashboards/PatientDashboard";
 import MFAPage from "./views/MFAPage/MFAPage";
+import ForgotPassword from "./views/ForgotPassword/ForgotPasswordPage";
 
 var hist = createBrowserHistory();
 
@@ -23,13 +24,15 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/components" component={Components} />
+
+      <Route path="/:userType/forgotpassword" component={ForgotPassword}/>
       
       <Route path="/doctor/signup" component={DoctorSignup}/>
       <Route path="/insurance/signup" exact component={InsuranceSignup}/>
       <Route path="/patient/signup" exact component={PatientSignup}/>
 
       <Route path="/patient/mfa" exact component={MFAPage}/>
-      <Route path="/doctor/mfa" cexact component={MFAPage}/>
+      <Route path="/doctor/mfa" exact component={MFAPage}/>
       <Route path="/insurance/mfa" exact component={MFAPage}/>
 
       <Route path="/doctor/signin" exact component={Login}/>

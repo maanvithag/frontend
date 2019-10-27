@@ -10,7 +10,6 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
-import TypeSelect from "views/Modals/TypeSelect.js";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import axios from "axios"
 import ReCAPTCHA from "react-google-recaptcha";
@@ -44,7 +43,7 @@ export default class LoginForm extends React.Component {
     this.setState({ password: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = () => {
     const user = {
       username: this.state.username,
       email: this.state.email,
@@ -95,7 +94,11 @@ export default class LoginForm extends React.Component {
           <CardBody>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>Don't have an account?</p>
-              <TypeSelect />
+              <Link to= {"signup"}>
+                <Button color="primary" simple>
+                  Sign Up
+                </Button>
+              </Link>
             </div>
             <CustomInput
                 labelText="Username..."
@@ -133,9 +136,11 @@ export default class LoginForm extends React.Component {
                 }}
             />
             <div style={{display: 'flex', alignSelf: 'right'}}>
-              <Button color="primary" simple>
-                Forgot password?
-              </Button>
+              <Link to= {"forgotpassword"}>
+                <Button color="primary" simple>
+                  Forgot password?
+                </Button>
+              </Link>
             </div>
             <small style={{display: 'flex', justifyContent: 'center'}}>I agree to the Terms and Conditions &amp; Privacy Policy</small>
             <ReCAPTCHA
