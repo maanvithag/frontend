@@ -43,6 +43,10 @@ ReactDOM.render(
       <Route path="/patient/:patientID" exact component={PatientDashboard} />
       <Route path="/doctor/:doctorID" exact component={DoctorDashboard} />
 
+      <Route path="/dashboard1" exact component={InsuranceDashboard} />
+      <Route path="/dashboard2" exact component={PatientDashboard} />
+      <Route path="/dashboard3" exact component={DoctorDashboard} />
+
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
