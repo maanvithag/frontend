@@ -7,6 +7,9 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Schedule from "@material-ui/icons/Schedule";
 import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
+import Icon from "@material-ui/core/Icon";
+import LocalOffer from "@material-ui/icons/LocalOffer";
+
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -19,16 +22,19 @@ import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
-
+import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
+const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
+  const tabClasses = useTabStyles();
   const { ...rest } = props;
   return (
     <div>
@@ -216,35 +222,77 @@ export default function ProfilePage(props) {
                     tabButton: "Upcoming appointments",
                     tabIcon: Dashboard,
                     tabContent: (
-                      <span>
-                          <p>
-                            Schedule for current and pass appointments of each patient.
-                          </p>
-                          <br />
-                      </span>
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardHeader color="primary">
+                              <h4 className={classes.cardTitleWhite}>Upcoming appointments</h4>
+                            </CardHeader>
+                            <CardBody>
+                              <Table
+                                tableHeaderColor="primary"
+                                tableHead={["Doctor", "Date", "Time"]}
+                                tableData={[
+                                  ["Dakota Rice", "10/22/2018", "1pm-2pm"],
+                                  ["Minerva Hooper", "11/13/2018", "4pm-5pm"],
+                                ]}
+                              />
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
                     )
                   },
                   {
                     tabButton: "Payments",
                     tabIcon: Schedule,
                     tabContent: (
-                      <span>
-                        <p>
-                          Schedule for current and pass appointments of each patient.
-                        </p>
-                        <br />
-                      </span>
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardHeader color="primary">
+                              <h4 className={classes.cardTitleWhite}>Bills</h4>
+                            </CardHeader>
+                            <CardBody>
+                              <Table
+                                tableHeaderColor="primary"
+                                tableHead={["Doctor", "Date", "Amount"]}
+                                tableData={[
+                                  ["Dakota Rice", "10/22/2018", "$300"],
+                                  ["Minerva Hooper", "11/13/2018", "0"],
+                                ]}
+                              />
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
                     )
                   },
                   {
                     tabButton: "Past appointments",
                     tabIcon: List,
                     tabContent: (
-                      <span>
-                        <p>
-                          Tasks such as confirm appointments, cancel appointments, etc..
-                        </p>
-                      </span>
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardHeader color="primary">
+                              <h4 className={classes.cardTitleWhite}>Past appointments</h4>
+                            </CardHeader>
+                            <CardBody>
+                              <Table
+                                tableHeaderColor="primary"
+                                tableHead={["Doctor", "Date", "Time"]}
+                                tableData={[
+                                  ["Dakota Rice", "10/22/2018", "Oud-Turnhout"],
+                                  ["Minerva Hooper", "11/13/2018", "Sinaai-Waas"],
+                                  ["Sage Rodriguez", "01/05/2019", "Baileux"],
+                                  ["Philip Chaney", "06/25/2019", "Overland Park"],
+                                ]}
+                              />
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
                     )
                   }
                 ]}

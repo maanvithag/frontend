@@ -197,12 +197,25 @@ export default function ProfilePage(props) {
                     tabButton: "IP plans",
                     tabIcon: Dashboard,
                     tabContent: (
-                      <span>
-                        <p>
-                          Schedule for current and pass appointments of each patient.
-                        </p>
-                        <br />
-                      </span>
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardHeader color="primary">
+                              <h4 className={classes.cardTitleWhite}>IP plans</h4>
+                            </CardHeader>
+                            <CardBody>
+                              <Table
+                                tableHeaderColor="primary"
+                                tableHead={["Plan name", "Description", "Cost"]}
+                                tableData={[
+                                  ["Plan 1", "Good plan", "$400/month"],
+                                  ["Plan B", "Okay plan", "$300/month"],
+                                ]}
+                              />
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
                     )
                   },
                   {
