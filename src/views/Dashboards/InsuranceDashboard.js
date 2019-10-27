@@ -20,6 +20,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import Table from "components/Table/Table.js";
+import SignedInHeaders from "views/SignedInHeader.js";
 
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
@@ -36,6 +37,7 @@ export default function ProfilePage(props) {
       <Header
         color="white"
         brand="InfinityCare"
+        rightLinks={<SignedInHeaders />}
         fixed
         changeColorOnScroll={{
           height: 0,
