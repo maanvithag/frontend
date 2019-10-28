@@ -104,7 +104,7 @@ export default class ForgotPasswordForm extends React.Component {
                     />
                 </CardBody>
 
-                {this.state.newPassword == this.state.confirmPassword ? (
+                {this.state.newPassword === this.state.confirmPassword ? (
                     <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
                         <Link to={"mfa"}>
                             <Button color="primary" size="lg" onClick={this.handleSubmit}>
