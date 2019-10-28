@@ -54,7 +54,7 @@
     "compile-sass": "node-sass src/assets/scss/material-kit-react.scss src/assets/css/material-kit-react.css",
     "minify-sass": "node-sass src/assets/scss/material-kit-react.scss src/assets/css/material-kit-react.min.css --output-style compressed",
     "map-sass": "node-sass src/assets/scss/material-kit-react.scss src/assets/css/material-kit-react.css --source-map true",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "GENERATE_SOURCEMAP=false npm run build"
   },
   "browserslist": {
     "production": [
