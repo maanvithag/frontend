@@ -17,6 +17,8 @@ import InsuranceDashboard from "views/Dashboards/InsuranceDashboard";
 import PatientDashboard from "views/Dashboards/PatientDashboard";
 import MFAPage from "./views/MFAPage/MFAPage";
 import ForgotPassword from "./views/ForgotPassword/ForgotPasswordPage";
+import PatientViewOfDoctor from "./views/Dashboards/PatientViewOfDoctor";
+import DoctorViewOfPatient from "./views/Dashboards/DoctorViewOfPatient";
 
 var hist = createBrowserHistory();
 
@@ -42,6 +44,9 @@ ReactDOM.render(
       <Route path="/insurance/:insuranceID" exact component={InsuranceDashboard} />
       <Route path="/patient/:patientID" exact component={PatientDashboard} />
       <Route path="/doctor/:doctorID" exact component={DoctorDashboard} />
+
+      <Route path="/patient/doctor/:doctorID" exact component={PatientViewOfDoctor} />
+      <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
 
       <Route path="/dashboard1" exact component={InsuranceDashboard} />
       <Route path="/dashboard2" exact component={PatientDashboard} />
