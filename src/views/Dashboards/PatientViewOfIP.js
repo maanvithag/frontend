@@ -3,32 +3,34 @@ import React from 'react';
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
+import Dashboard from "@material-ui/icons/Dashboard";
+import Schedule from "@material-ui/icons/Schedule";
+import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
+import NavPills from "components/NavPills/NavPills.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import Table from "components/Table/Table.js";
-import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
+import CardBody from "components/Card/CardBody.js";
+import CardFooter from "components/Card/CardFooter.js";
+
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
     return (
         <div>
@@ -55,12 +57,35 @@ export default function ProfilePage(props) {
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
+                            <GridItem xs={12} sm={12} md={6}>
+                                <h2></h2>
+                            </GridItem>
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Doctor Name</h4>
+                                        <h4 className={classes.cardTitleWhite}>Insurance Provider</h4>
                                     </CardHeader>
                                     <CardBody>
+                                        <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText="Username"
+                                                    id="username"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText="Email address"
+                                                    id="email-address"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                />
+                                            </GridItem>
+                                        </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -82,8 +107,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Email address"
-                                                    id="email-address"
+                                                    labelText="Company"
+                                                    id="company"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -91,29 +116,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Education"
-                                                    id="education"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Hospital Name"
-                                                    id="hospital"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Specialization"
-                                                    id="specialization"
+                                                    labelText="Phone Number"
+                                                    id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -131,62 +135,38 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>About Me</InputLabel>
-                                                <CustomInput
-                                                    labelText="Bio summary"
-                                                    id="doctor-bio"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        multiline: true,
-                                                        rows: 5
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
                                     </CardBody>
                                 </Card>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={8} lg={6}>
-                                <GridContainer>
-                                    <GridItem xs={12} sm={12} md={12}>
-                                        <Card>
-                                            <CardHeader color="primary">
-                                                <h4 className={classes.cardTitleWhite}>Average Rating: 4/5</h4>
-                                            </CardHeader>
-                                            <CardBody>
-                                                <Table
-                                                    tableHeaderColor="primary"
-                                                    tableHead={["Rating (Out of 5)", "Date", "Review"]}
-                                                    tableData={[
-                                                        ["4/5", "Date", "Would recommend to my friends"],
-                                                        ["5/5", "Date", "On time and explained everything thoroughly"],
-                                                        ["5/5", "Date", "Great experience"],
-                                                        ["4/5", "Date", "Had a pleasant visit"],
-                                                        ["2/5", "Date", "Showed up 20 minutes late"],
-                                                        ["4/5", "Date", "Very personable"]
-                                                    ]}
-                                                />
-                                            </CardBody>
-                                        </Card>
-                                    </GridItem>
-                                </GridContainer>
+
+
+
+
+                                                <GridContainer>
+                                                    <GridItem xs={12} sm={12} md={12}>
+                                                        <Card>
+                                                            <CardHeader color="primary">
+                                                                <h4 className={classes.cardTitleWhite}>IP plans</h4>
+                                                            </CardHeader>
+                                                            <CardBody>
+                                                                <Table
+                                                                    tableHeaderColor="primary"
+                                                                    tableHead={["Plan name", "Description", "Cost"]}
+                                                                    tableData={[
+                                                                        ["Plan 1", "Good plan", "$400/month"],
+                                                                        ["Plan B", "Okay plan", "$300/month"],
+                                                                    ]}
+                                                                />
+                                                            </CardBody>
+                                                        </Card>
+                                                    </GridItem>
+                                                </GridContainer>
                             </GridItem>
                         </GridContainer>
-                        <GridContainer justify="center">
-                            <Button color="primary">Book Appointment</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Button color="primary">Leave A Review</Button>
-
-                            <h1><br></br></h1>
-                        </GridContainer>
-                        <br></br><br></br>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-

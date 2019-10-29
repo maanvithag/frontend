@@ -26,6 +26,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);
@@ -53,7 +54,9 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
+                            <Link to="/doctor/:doctorID">
                             <Button color="primary">Return to my Dashboard</Button>
+                            </Link>
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
