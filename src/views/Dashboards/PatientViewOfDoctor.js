@@ -22,7 +22,6 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
-import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);

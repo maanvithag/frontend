@@ -28,7 +28,6 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);
