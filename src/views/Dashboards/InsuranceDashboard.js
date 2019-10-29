@@ -13,7 +13,6 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
 import NavPills from "components/NavPills/NavPills.js";
-import RenderUser from "views/ProfilePage/RenderUser.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -51,8 +50,7 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6}>
-                <h2>Insurance dashboard</h2>
-                <RenderUser />
+                <h2></h2>
               </GridItem>
               <GridItem xs={12} sm={12} md={8}>
                 <Card>
@@ -61,7 +59,7 @@ export default function ProfilePage(props) {
                   </CardHeader>
                   <CardBody>
                     <GridContainer>
-                      <GridItem xs={12} sm={12} md={3}>
+                      <GridItem xs={12} sm={12} md={6}>
                         <CustomInput
                           labelText="Username"
                           id="username"
@@ -70,7 +68,7 @@ export default function ProfilePage(props) {
                           }}
                         />
                       </GridItem>
-                      <GridItem xs={12} sm={12} md={4}>
+                      <GridItem xs={12} sm={12} md={6}>
                         <CustomInput
                           labelText="Email address"
                           id="email-address"
@@ -99,6 +97,15 @@ export default function ProfilePage(props) {
                           }}
                         />
                       </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                            <CustomInput
+                                labelText="Company"
+                                id="company"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                            />
+                        </GridItem>
                       <GridItem xs={12} sm={12} md={6}>
                         <CustomInput
                           labelText="Phone Number"
@@ -110,77 +117,12 @@ export default function ProfilePage(props) {
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
-                      <GridItem xs={12} sm={12} md={4}>
-                        <CustomInput
-                          labelText="City"
-                          id="city"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={4}>
-                        <CustomInput
-                          labelText="Country"
-                          id="country"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={4}>
-                        <CustomInput
-                          labelText="Postal Code"
-                          id="postal-code"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                    </GridContainer>
-                    <GridContainer>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="Insurance Company"
-                          id="insurance-company"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="Insurance Plan"
-                          id="insurance-plan"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                    </GridContainer>
-                    <GridContainer>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="Date of Birth: MM/DD/YYYY"
-                          id="dob"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                    </GridContainer>
-                    <GridContainer>
                       <GridItem xs={12} sm={12} md={12}>
-                        <InputLabel style={{ color: "#AAAAAA", marginTop: '10px'}}>About me</InputLabel>
                         <CustomInput
-                          labelText="Medical History: please list any allgeries, past surgeries, current medications, etc.."
-                          id="medical-info"
+                          labelText="Address"
+                          id="address"
                           formControlProps={{
                             fullWidth: true
-                          }}
-                          inputProps={{
-                            multiline: true,
-                            rows: 5
                           }}
                         />
                       </GridItem>

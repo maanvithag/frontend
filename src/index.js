@@ -21,6 +21,7 @@ import PatientViewOfDoctor from "./views/Dashboards/PatientViewOfDoctor";
 import DoctorViewOfPatient from "./views/Dashboards/DoctorViewOfPatient";
 import ReviewDoctor from "./views/ReviewDoctor/ReviewDoctorPage";
 import BookAppointment from "views/BookAppointment/BookAppointment.js";
+import PatientViewOfIP from "./views/Dashboards/PatientViewOfIP";
 
 var hist = createBrowserHistory();
 
@@ -49,6 +50,7 @@ ReactDOM.render(
       <Route path="/doctor/:doctorID" exact component={DoctorDashboard} />
 
       <Route path="/patient/doctor/:doctorID" exact component={PatientViewOfDoctor} />
+      <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
       <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
       <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
 

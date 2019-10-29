@@ -42,7 +42,7 @@ export default function InsuranceSignupPage(props) {
       >
         <div className={loginClasses.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <Card className={loginClasses[cardAnimaton]}>
                 <InsuranceSignupForm />
               </Card>
