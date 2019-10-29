@@ -57,6 +57,9 @@ export default function ProfilePage(props) {
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
+                            <GridItem xs={12} sm={12} md={6}>
+                                <h2></h2>
+                            </GridItem>
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
@@ -86,6 +89,35 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
+                                                    labelText="First Name"
+                                                    id="first-name"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText="Last Name"
+                                                    id="last-name"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                />
+                                            </GridItem>
+                                        </GridContainer>
+                                        <GridContainer>
+                                            <GridItem xs={12} sm={12} md={12}>
+                                                <CustomInput
+                                                    labelText="Address"
+                                                    id="address"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
                                                     labelText="Phone Number"
                                                     id="phone-number"
                                                     formControlProps={{
@@ -95,7 +127,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Date of Birth"
+                                                    labelText="Date of Birth: MM/DD/YYYY"
                                                     id="dob"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -103,29 +135,30 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance</InputLabel>
                                         <GridContainer>
-                                            <GridItem xs={12} sm={12} md={4}>
+                                            <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="City"
-                                                    id="city"
+                                                    labelText="Insurance Company"
+                                                    id="insurance-company"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                 />
                                             </GridItem>
-                                            <GridItem xs={12} sm={12} md={4}>
+                                            <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Country"
-                                                    id="country"
+                                                    labelText="Insurance Provider"
+                                                    id="insurance-provider"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                 />
                                             </GridItem>
-                                            <GridItem xs={12} sm={12} md={4}>
+                                            <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Postal Code"
-                                                    id="postal-code"
+                                                    labelText="Insurance Plan"
+                                                    id="insurance-plan"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -153,30 +186,9 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance Information</InputLabel>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Insurance Company"
-                                                    id="insurance-company"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Insurance Plan"
-                                                    id="insurance-plan"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Medical History</InputLabel>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>Medical History</InputLabel>
                                                 <CustomInput
                                                     labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
                                                     id="medical-info"
