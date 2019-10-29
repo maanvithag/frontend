@@ -20,12 +20,14 @@ import ForgotPassword from "./views/ForgotPassword/ForgotPasswordPage";
 import PatientViewOfDoctor from "./views/Dashboards/PatientViewOfDoctor";
 import DoctorViewOfPatient from "./views/Dashboards/DoctorViewOfPatient";
 import ReviewDoctor from "./views/ReviewDoctor/ReviewDoctorPage";
+import BookAppointment from "views/BookAppointment/BookAppointment.js";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+      <Route path="/patient/bookappointment" exact component={BookAppointment} />
       <Route path="/components" component={Components} />
 
       <Route path="/:userType/forgotpassword" component={ForgotPassword}/>
@@ -53,6 +55,10 @@ ReactDOM.render(
       <Route path="/dashboard1" exact component={InsuranceDashboard} />
       <Route path="/dashboard2" exact component={PatientDashboard} />
       <Route path="/dashboard3" exact component={DoctorDashboard} />
+      <Route path="/dashboardpd" exact component={PatientViewOfDoctor} />
+      <Route path="/dashboardrd" exact component={ReviewDoctor} />
+      <Route path="/dashboarddp" exact component={DoctorViewOfPatient} />
+      <Route path="/patient/bookappointment" exact component={BookAppointment} />
 
       <Route path="/" component={LandingPage} />
     </Switch>

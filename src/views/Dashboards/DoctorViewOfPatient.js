@@ -63,6 +63,7 @@ export default function ProfilePage(props) {
                                         <h4 className={classes.cardTitleWhite}>Patient Name</h4>
                                     </CardHeader>
                                     <CardBody>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Personal Information</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -71,6 +72,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -80,6 +84,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -91,6 +98,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -100,9 +110,13 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Address</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={4}>
                                                 <CustomInput
@@ -111,6 +125,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={4}>
@@ -120,6 +137,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={4}>
@@ -129,6 +149,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -141,6 +164,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -150,6 +176,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -162,6 +191,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -171,6 +203,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -185,7 +220,8 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         multiline: true,
-                                                        rows: 5
+                                                        rows: 5,
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -58,6 +59,7 @@ export default function ProfilePage(props) {
                                         <h4 className={classes.cardTitleWhite}>Doctor Name</h4>
                                     </CardHeader>
                                     <CardBody>
+                                    <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Personal Information</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={3}>
                                                 <CustomInput
@@ -66,6 +68,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={3}>
@@ -75,6 +80,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -84,6 +92,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -95,6 +106,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -104,6 +118,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -116,6 +133,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -125,6 +145,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -136,6 +159,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={4}>
@@ -145,6 +171,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={4}>
@@ -154,6 +183,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -168,7 +200,8 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         multiline: true,
-                                                        rows: 5
+                                                        rows: 5,
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -203,7 +236,11 @@ export default function ProfilePage(props) {
                             </GridItem>
                         </GridContainer>
                         <GridContainer justify="center">
-                            <Button color="primary">Book Appointment</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Link to="/patient/bookappointment">
+                            <Button color="primary">
+                            Book Appointment
+                            </Button>
+                        </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button color="primary">Leave A Review</Button>
 
                             <h1><br></br></h1>
