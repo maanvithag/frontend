@@ -14,6 +14,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import axios from "axios"
 import ReCAPTCHA from "react-google-recaptcha";
 import {Link} from "react-router-dom";
+import ValidateUserPage from "views/ValidateUser/ValidateUserPage";
 
 export default class LoginForm extends React.Component {
   constructor(props) {
@@ -102,7 +103,7 @@ export default class LoginForm extends React.Component {
             </div>
             <CustomInput
                 labelText="Username..."
-                id="first"
+                id="username"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -136,7 +137,7 @@ export default class LoginForm extends React.Component {
                 }}
             />
             <div style={{display: 'flex', alignSelf: 'right'}}>
-              <Link to= {"forgotpassword"}>
+              <Link to= {"validateuser"}>
                 <Button color="primary" simple>
                   Forgot password?
                 </Button>

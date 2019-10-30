@@ -22,6 +22,7 @@ import DoctorViewOfPatient from "./views/Dashboards/DoctorViewOfPatient";
 import ReviewDoctor from "./views/ReviewDoctor/ReviewDoctorPage";
 import BookAppointment from "views/BookAppointment/BookAppointment.js";
 import PatientViewOfIP from "./views/Dashboards/PatientViewOfIP";
+import ValidateUser from "./views/ValidateUser/ValidateUserPage.js";
 
 var hist = createBrowserHistory();
 
@@ -32,6 +33,7 @@ ReactDOM.render(
       <Route path="/components" component={Components} />
 
       <Route path="/:userType/forgotpassword" component={ForgotPassword}/>
+      <Route path="/:userType/validateuser" component={ValidateUser}/>
       
       <Route path="/doctor/signup" component={DoctorSignup}/>
       <Route path="/insurance/signup" exact component={InsuranceSignup}/>
