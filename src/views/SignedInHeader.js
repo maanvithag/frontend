@@ -53,7 +53,8 @@ export default function SignedInHeaders(props) {
       </ListItem>
       <ListItem>
       <ListItem className={classes.listItem}>
-        <Button
+          <Link to="profile/:ID">
+          <Button
         /*
           href="#pablo"
           className={classes.navLink}
@@ -63,6 +64,7 @@ export default function SignedInHeaders(props) {
         >
           <AccountCircle className={classes.icons} /> Profile
         </Button>
+          </Link>
       </ListItem>
       </ListItem>
       <ListItem>

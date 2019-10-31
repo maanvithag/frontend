@@ -23,6 +23,9 @@ import ReviewDoctor from "./views/ReviewDoctor/ReviewDoctorPage";
 import BookAppointment from "views/BookAppointment/BookAppointment.js";
 import PatientViewOfIP from "./views/Dashboards/PatientViewOfIP";
 import ValidateUser from "./views/ValidateUser/ValidateUserPage.js";
+import DoctorProfilePage from "./views/UserProfilePages/DoctorProfilePage";
+import InsuranceProfilePage from "./views/UserProfilePages/InsuranceProfilePage";
+import PatientProfilePage from "./views/UserProfilePages/PatientProfilePage";
 
 var hist = createBrowserHistory();
 
@@ -55,6 +58,10 @@ ReactDOM.render(
       <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
       <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
       <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
+
+      <Route path="/doctor/profile/:doctorID" exact component={DoctorProfilePage}/>
+      <Route path="/patient/profile/:patientID" exact component={PatientProfilePage}/>
+      <Route path="/insurance/profile/:insuranceID" exact component={InsuranceProfilePage}/>
 
       <Route path="/dashboard1" exact component={InsuranceDashboard} />
       <Route path="/dashboard2" exact component={PatientDashboard} />
