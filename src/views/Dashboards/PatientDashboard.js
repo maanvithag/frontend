@@ -26,6 +26,7 @@ import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
+import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
@@ -235,6 +236,9 @@ export default function ProfilePage(props) {
                               />
                             </CardBody>
                           </Card>
+                        </GridItem>
+                        <GridItem>
+                          <CancelAppointment/>
                         </GridItem>
                       </GridContainer>
                     )

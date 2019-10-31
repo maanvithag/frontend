@@ -50,8 +50,14 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to="/patient/:patientID">
-                            <Button color="primary">Return to my Dashboard</Button>
-                            </Link>
+                            <Button color="primary">Return to Dashboard</Button>
+                            </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Link to="/patient/bookappointment">
+                                <Button color="primary">
+                                Book Appointment
+                                </Button>
+                            </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button color="primary">Leave A Review</Button>
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
@@ -198,16 +204,6 @@ export default function ProfilePage(props) {
                                     </GridItem>
                                 </GridContainer>
                             </GridItem>
-                        </GridContainer>
-                        <GridContainer justify="center">
-                        <Link to="/patient/bookappointment">
-                            <Button color="primary">
-                            Book Appointment
-                            </Button>
-                        </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Button color="primary">Leave A Review</Button>
-
-                            <h1><br></br></h1>
                         </GridContainer>
                         <br></br><br></br>
                     </div>
