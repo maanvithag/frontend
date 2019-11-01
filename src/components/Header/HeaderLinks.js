@@ -33,7 +33,7 @@ export default function HeaderLinks(props) {
             Sign In
           </Button>
         </Link> */}
-        <TypeSelect />
+        {/* <TypeSelect /> */}
       </ListItem>
     </List>
   );

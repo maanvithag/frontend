@@ -11,39 +11,37 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
 import {Link} from "react-router-dom";
 
-export default class MFAForm extends React.Component {
+export default class EnterEmailForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            otp: "",
+            emailID: "",
             cardAnimaton: "cardHidden",
         };
-        this.handleOTPChange = this.handleOTPChange.bind(this);
+        this.handleEmailIDChange = this.handleEmailIDChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleOTPChange = event => {
-        this.setState({ otp: event.target.value });
+    handleEmailIDChange = event => {
+        this.setState({ emailID: event.target.value });
     };
 
     handleSubmit = () => {
-        // TODO: Why did Jack add this line?
-        //event.preventDefault();
-
-        window.localStorage.setItem("isForgotPasswordFlow", "false");
         const user = {
-            otp: this.state.otp,
+            emailID: this.state.emailID,
             isOtpAccurate: ""
         };
 
-        var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/mfa';
+        window.localStorage.setItem("username", this.state.emailID);
+        window.localStorage.setItem("isForgotPasswordFlow", "true");
+        var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/forgotpassword/email';
     
         fetch(targetUrl, {
             method : 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
-            body : JSON.stringify({
-                otp : this.state.otp
+            body: JSON.stringify({
+                emailID: this.state.emailID
             })
           }).then(res => {
             if(user.isOtpAccurate) {
@@ -58,22 +56,22 @@ export default class MFAForm extends React.Component {
         return (
             <form>
                 <CardHeader color="primary">
-                    <h4>Enter OTP</h4>
+                    <h4>Enter Email ID</h4>
                 </CardHeader>
                 <CardBody>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
                         <p style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                            Submit the one time password code sent to your email</p>
+                            Don't worry, we've all been there. We'll help you reset your password.</p>
                     </div>
                     <CustomInput
-                        labelText="One time password"
-                        id="otp"
+                        labelText="Email ID"
+                        id="username"
                         formControlProps={{
                             fullWidth: true
                         }}
                         inputProps={{
-                            type: "otp",
-                            onChange: this.handleOTPChange,
+                            type: "text",
+                            onChange: this.handleEmailIDChange,
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <Icon>
@@ -86,28 +84,18 @@ export default class MFAForm extends React.Component {
                     />
                 </CardBody>
 
-                {this.state.otp != "" ? (
-                    window.localStorage.getItem("isForgotPasswordFlow") == "true" ? (
-                        <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                            <Link to={"forgotpassword"}>
-                                <Button color="primary" size="lg" onClick={this.handleSubmit}>
-                                    Authenticate Account
-                                </Button>
-                            </Link>
-                        </CardFooter>
-                        ): (
-                        <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                            <Link to={window.localStorage.getItem("username")}>
-                                <Button color="primary" size="lg" onClick={this.handleSubmit}>
-                                    Authenticate Account
-                                </Button>
-                            </Link>
-                        </CardFooter>
-                        )
+                {this.state.emailID != "" ? (
+                    <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
+                        <Link to={"/" + window.localStorage.getItem("userType") + "/mfa"}>
+                            <Button color="primary" size="lg" onClick={this.handleSubmit}>
+                                Check if valid user
+                            </Button>
+                        </Link>
+                    </CardFooter>
                     ): (
                     <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
                         <Button color="primary" size="lg">
-                            Authenticate Account
+                            Check if valid user
                         </Button>
                     </CardFooter>
                  )}

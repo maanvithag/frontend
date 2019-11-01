@@ -16,12 +16,17 @@ import DoctorDashboard from "views/Dashboards/DoctorDashboard";
 import InsuranceDashboard from "views/Dashboards/InsuranceDashboard";
 import PatientDashboard from "views/Dashboards/PatientDashboard";
 import MFAPage from "./views/MFAPage/MFAPage";
+import EnterEmail from "./views/ForgotPassword/EnterEmailPage";
 import ForgotPassword from "./views/ForgotPassword/ForgotPasswordPage";
 import PatientViewOfDoctor from "./views/Dashboards/PatientViewOfDoctor";
 import DoctorViewOfPatient from "./views/Dashboards/DoctorViewOfPatient";
 import ReviewDoctor from "./views/ReviewDoctor/ReviewDoctorPage";
 import BookAppointment from "views/BookAppointment/BookAppointment.js";
 import PatientViewOfIP from "./views/Dashboards/PatientViewOfIP";
+import ValidateUser from "./views/ValidateUser/ValidateUserPage.js";
+import DoctorProfilePage from "./views/UserProfilePages/DoctorProfilePage";
+import InsuranceProfilePage from "./views/UserProfilePages/InsuranceProfilePage";
+import PatientProfilePage from "./views/UserProfilePages/PatientProfilePage";
 
 var hist = createBrowserHistory();
 
@@ -31,15 +36,16 @@ ReactDOM.render(
       <Route path="/patient/bookappointment" exact component={BookAppointment} />
       <Route path="/components" component={Components} />
 
-      <Route path="/:userType/forgotpassword" component={ForgotPassword}/>
+      <Route path="/:userType/forgotpassword" exact component={ForgotPassword}/>
+      <Route path="/:userType/forgotpassword/email" exact component={EnterEmail}/>
+
+      <Route path="/:userType/validateuser" component={ValidateUser}/>
       
       <Route path="/doctor/signup" component={DoctorSignup}/>
       <Route path="/insurance/signup" exact component={InsuranceSignup}/>
       <Route path="/patient/signup" exact component={PatientSignup}/>
 
-      <Route path="/patient/mfa" exact component={MFAPage}/>
-      <Route path="/doctor/mfa" exact component={MFAPage}/>
-      <Route path="/insurance/mfa" exact component={MFAPage}/>
+      <Route path="/:userType/mfa" exact component={MFAPage}/>
 
       <Route path="/doctor/signin" exact component={Login}/>
       <Route path="/patient/signin" exact component={Login}/>
@@ -53,6 +59,10 @@ ReactDOM.render(
       <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
       <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
       <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
+
+      <Route path="/doctor/profile/:doctorID" exact component={DoctorProfilePage}/>
+      <Route path="/patient/profile/:patientID" exact component={PatientProfilePage}/>
+      <Route path="/insurance/profile/:insuranceID" exact component={InsuranceProfilePage}/>
 
       <Route path="/dashboard1" exact component={InsuranceDashboard} />
       <Route path="/dashboard2" exact component={PatientDashboard} />

@@ -1,19 +1,18 @@
-import React from "react";
+import Icon from "@material-ui/core/Icon";
 // material-ui components
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import People from "@material-ui/icons/People";
+import CardBody from "components/Card/CardBody.js";
+import CardFooter from "components/Card/CardFooter";
+import CardHeader from "components/Card/CardHeader.js";
 // core components
 import Button from "components/CustomButtons/Button.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import CardFooter from "components/Card/CardFooter";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import axios from "axios"
+import React from "react";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import ReCAPTCHA from "react-google-recaptcha";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class LoginForm extends React.Component {
   constructor(props) {
@@ -22,9 +21,13 @@ export default class LoginForm extends React.Component {
       username: "",
       password: "",
       successful: "",
-      userType: "",
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      jsonResponse: "",
     };
+    let currentURLPath = window.location.pathname;
+    window.localStorage.setItem("userType", currentURLPath.substring(1, currentURLPath.indexOf("/signin")));
+
+    window.localStorage.setItem("baseURL", "http://127.0.0.1:8080/");
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,10 +35,6 @@ export default class LoginForm extends React.Component {
 
   handleUsernameChange = event => {
     this.setState({ username: event.target.value });
-
-    var currentURLPath = window.location.pathname
-    this.setState({userType: currentURLPath.substring(1, currentURLPath.indexOf("/signin"))});
-    window.localStorage.setItem("userType", this.state.userType);
     window.localStorage.setItem("username", event.target.value);
   };
 
@@ -52,21 +51,24 @@ export default class LoginForm extends React.Component {
       isCredentialsAccurate: "",
     };
 
-    axios({
-      method : 'post',
-      url: 'https://infinity-care.herokuapp.com/login/' + window.localStorage.getItem("userType"),
-      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-      data : {
-        username : this.state.username,
-        password : this.state.password
-      }
-    }).then(res => {
-      if(user.isOtpSent && user.isCredentialsAccurate) {
-        this.setState({successful: true})
-      }
-    })
+    this.fireAndGetResponseInJSON();
+    //console.log(this.state.getItem('jsonResponse'))
+    //this.props.history.push('/abc')
   };
     
+  fireAndGetResponseInJSON() {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/login', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
+    })
+    //}).then(response => response.json().then(data => this.state.setItem("jsonResponse" , data)))
+  }
+
   render() {
     return (
         <form>
@@ -102,7 +104,7 @@ export default class LoginForm extends React.Component {
             </div>
             <CustomInput
                 labelText="Username..."
-                id="first"
+                id="username"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -136,7 +138,8 @@ export default class LoginForm extends React.Component {
                 }}
             />
             <div style={{display: 'flex', alignSelf: 'right'}}>
-              <Link to= {"forgotpassword"}>
+              <Link to= {"forgotpassword/email"}>
+              {/* </Link><Link to= {"validateuser"}> */}
                 <Button color="primary" simple>
                   Forgot password?
                 </Button>
