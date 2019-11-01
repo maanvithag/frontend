@@ -13,7 +13,16 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
 import NavPills from "components/NavPills/NavPills.js";
-import RenderUser from "views/ProfilePage/RenderUser.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/CustomButtons/Button.js";
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import InputLabel from "@material-ui/core/InputLabel";
+import Table from "components/Table/Table.js";
+import SignedInHeaders from "views/SignedInHeader.js";
+
+import CardBody from "components/Card/CardBody.js";
+import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
@@ -27,6 +36,7 @@ export default function ProfilePage(props) {
       <Header
         color="white"
         brand="InfinityCare"
+        rightLinks={<SignedInHeaders />}
         fixed
         changeColorOnScroll={{
           height: 0,
@@ -39,47 +49,62 @@ export default function ProfilePage(props) {
         <div>
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6}>
-                <h2>Insurance dashboard</h2>
-                <RenderUser />
-              </GridItem>
               <GridItem xs={12} sm={12} md={8} lg={6}>
               <NavPills
                 color="primary"
                 tabs={[
                   {
-                    tabButton: "Dashboard",
+                    tabButton: "IP plans",
                     tabIcon: Dashboard,
                     tabContent: (
-                      <span>
-                        <p>
-                          Dashboard for insurance companies and includes things tailored for the insurance userType
-                        </p>
-                        <br />
-                      </span>
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardHeader color="primary">
+                              <h4 className={classes.cardTitleWhite}>IP plans</h4>
+                            </CardHeader>
+                            <CardBody>
+                              <Table
+                                tableHeaderColor="primary"
+                                tableHead={["Plan name", "Description", "Cost"]}
+                                tableData={[
+                                  ["Plan 1", "Good plan", "$400/month"],
+                                  ["Plan B", "Okay plan", "$300/month"],
+                                ]}
+                              />
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
                     )
                   },
                   {
-                    tabButton: "Network",
-                    tabIcon: Schedule,
-                    tabContent: (
-                      <span>
-                        <p>
-                          View each network of doctors and patients associated with the insurance.
-                        </p>
-                        <br />
-                      </span>
-                    )
-                  },
-                  {
-                    tabButton: "Plans",
+                    tabButton: "Patients",
                     tabIcon: List,
                     tabContent: (
-                      <span>
-                        <p>
-                          Create and manage already insurance plans
-                        </p>
-                      </span>
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardHeader color="primary">
+                              <h4 className={classes.cardTitleWhite}>Patient Table</h4>
+                            </CardHeader>
+                            <CardBody>
+                              <Table
+                                tableHeaderColor="primary"
+                                tableHead={["Patient Name", "Patient profile"]}
+                                tableData={[
+                                  ["Dakota Rice", "Link1"],
+                                  ["Minerva Hooper", "Link2"],
+                                  ["Sage Rodriguez", "Link3"],
+                                  ["Philip Chaney", "Link4"],
+                                  ["Doris Greene", "Link5"],
+                                  ["Mason Porter", "Link6"]
+                                ]}
+                              />
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
                     )
                   }
                 ]}

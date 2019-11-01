@@ -104,7 +104,7 @@ export default class LoginForm extends React.Component {
             </div>
             <CustomInput
                 labelText="Username..."
-                id="first"
+                id="username"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -139,6 +139,7 @@ export default class LoginForm extends React.Component {
             />
             <div style={{display: 'flex', alignSelf: 'right'}}>
               <Link to= {"forgotpassword/email"}>
+              {/* </Link><Link to= {"validateuser"}> */}
                 <Button color="primary" simple>
                   Forgot password?
                 </Button>

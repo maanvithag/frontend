@@ -13,6 +13,8 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
 import {Link} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import GridItem from "../../components/Grid/GridItem";
+import GridContainer from "../../components/Grid/GridContainer";
 
 export default class SignupButton extends React.Component {
   constructor(props) {
@@ -21,6 +23,10 @@ export default class SignupButton extends React.Component {
       username: "",
       email: "",
       password: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      hospital: "",
       userType: "doctor",
       specialization: "",
       successful: "",
@@ -32,6 +38,10 @@ export default class SignupButton extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSpecializationChange = this.handleSpecializationChange.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
+    this.handleHospitalChange = this.handleHospitalChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -51,11 +61,30 @@ export default class SignupButton extends React.Component {
     this.setState({ specialization: event.target.value });
   };
 
+  handleAddressChange = event => {
+    this.setState({ address: event.target.value });
+  };
+  handleFirstNameChange = event => {
+    this.setState({ firstName: event.target.value });
+  };
+  handleLastNameChange = event => {
+    this.setState({ lastName: event.target.value });
+  };
+
+  handleHospitalChange = event => {
+    this.setState({ hospital: event.target.value });
+  };
+
   handleSubmit = () => {
     const user = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      address: this.state.address,
+      hospital: this.state.hospital,
+      specialization: this.state.specialization,
       isOtpSent: "",
       isNewUser:"",
       userType: this.state.userType
@@ -87,53 +116,105 @@ export default class SignupButton extends React.Component {
     return (
       <form>
         <CardHeader color="primary">
-          <h4>Doctor sign up</h4>
+          <h4>Doctor Sign Up</h4>
         </CardHeader>
         <CardBody>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+
+              <CustomInput
+                  labelText="First Name"
+                  id="firstName"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    type: "text",
+                    onChange: this.handleFirstNameChange
+                  }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <CustomInput
+                  labelText="Last Name"
+                  id="lastName"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    type: "text",
+                    onChange: this.handleLastNameChange
+                  }}
+              />
+            </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Username..."
+            labelText="Username"
             id="first"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
               type: "text",
-              onChange: this.handleUsernameChange,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <People />
-                </InputAdornment>
-              )
+              onChange: this.handleUsernameChange
             }}
           />
-          <CustomInput
-            labelText="Email..."
-            id="email"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "email",
-              onChange: this.handleEmailChange,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Email />
-                </InputAdornment>
-              )
-            }}
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+                labelText="Email"
+                id="email"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "email",
+                  onChange: this.handleEmailChange
+                }}
+            />
+          </GridItem>
+
+            <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText="Hospital"
+              id="hospital"
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                type: "text",
+                onChange: this.handleHospitalChange
+              }}
           />
-          <CustomInput
-            labelText="Specialization..."
-            id="specialization"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "text",
-              onChange: this.handleSpecializationChange
-            }}
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <CustomInput
+                  labelText="Specialization"
+                  id="specialization"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    type: "text",
+                    onChange: this.handleSpecializationChange
+                  }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={12}>
+            <CustomInput
+              labelText="Hospital Address"
+              id="address"
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                type: "text",
+                onChange: this.handleAddressChange
+              }}
           />
-          <CustomInput
+            </GridItem>
+            <GridItem xs={12} sm={12} md={12}>
+            <CustomInput
             labelText="Password"
             id="password"
             formControlProps={{
@@ -150,6 +231,8 @@ export default class SignupButton extends React.Component {
               autoComplete: "off"
             }}
           />
+            </GridItem>
+          </GridContainer>
           <ReCAPTCHA
                 sitekey="6LeqvL4UAAAAAGSZCz_PjOT8nMVh2CDpx_GUGyXj"
                 onChange={this.onChange}
