@@ -7,13 +7,14 @@ import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
 import {Link} from "react-router-dom";
-import axios from "axios"
 
 export default class ForgotPasswordForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             newPassword: "",
+            // If initially both the passwords are the same, then clicking the Submit button would lead to the next page. The code is such that until and
+            // unless both the passwords are same, the submit button wouldn't render a new page
             confirmPassword: "password",
             cardAnimaton: "cardHidden",
         };
@@ -31,28 +32,18 @@ export default class ForgotPasswordForm extends React.Component {
     }
 
     handleSubmit = () => {
-
         const user = {
             otp: this.state.newPassword,
             isOtpAccurate: ""
         };
-
-        var targetUrl = 'https://infinity-care.herokuapp.com/' + window.localStorage.getItem("userType") + "/forgotpassword";
-    
-        axios({
+        var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + "/forgotpassword";
+        fetch(targetUrl, {
             method : 'post',
-            url: targetUrl,
-            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-            data : {
+            headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
+            body : JSON.stringify({
                 username : window.localStorage.getItem("username"),
-                newPassword : this.state.newPassword
-            }
-            }).then(res => {
-            if(user.isOtpAccurate) {
-                this.setState({successful: true})
-            }
-            }).catch(() => {
-            this.setState({successful: true})
+                password : this.state.newPassword
+            })
         })
     };
 
@@ -106,7 +97,7 @@ export default class ForgotPasswordForm extends React.Component {
 
                 {this.state.newPassword == this.state.confirmPassword ? (
                     <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                        <Link to={"mfa"}>
+                        <Link to={""}>
                             <Button color="primary" size="lg" onClick={this.handleSubmit}>
                                 Submit
                             </Button>
@@ -114,7 +105,7 @@ export default class ForgotPasswordForm extends React.Component {
                     </CardFooter>
                     ): (
                     <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                        <Button color="primary" size="lg" onClick={this.handleSubmit}>
+                        <Button color="primary" size="lg">
                             Submit
                         </Button>
                     </CardFooter>

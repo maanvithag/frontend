@@ -49,11 +49,6 @@ export default function LandingPage(props) {
                 Healthcare at your fingertips. Connect with your doctors and insurance, hassle-free.
               </h4>
               <br />
-              {/* <Link to="/signin">
-                <Button color="primary">
-                  Sign In
-                </Button>
-              </Link> */}
               <TypeSelect />
             </GridItem>
           </GridContainer>

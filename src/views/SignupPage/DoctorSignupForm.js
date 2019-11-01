@@ -51,7 +51,7 @@ export default class SignupButton extends React.Component {
     this.setState({ specialization: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = () => {
     const user = {
       username: this.state.username,
       email: this.state.email,
@@ -61,26 +61,27 @@ export default class SignupButton extends React.Component {
       userType: this.state.userType
     };
 
-    var targetUrl = 'https://infinity-care.herokuapp.com/signup/doctor';
-    var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
+    var targetUrl = window.localStorage.getItem("baseURL") + 'doctor/signup';
 
-    fetch(targetUrl + queryString, {
-            method: 'POST',
-            credentials: "same-origin", 
-            headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
-        })
-    .then(res => {
+    fetch(targetUrl, {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
+      body : JSON.stringify({
+        username : this.state.username,
+        password : this.state.password,
+        email : this.state.email,
+      })
+    }).then(res => {
       if(user.isOtpSent && user.isNewUser) {
         this.setState({successful: "new user"})
+      } else if(res.isOtpSent) {
+         this.setState({successful: "old user"})
+      } else {
+         this.setState({successful: "user not recognized"})
       }
-      else if(res.isOtpSent) {
-        this.setState({successful: "old user"})
-      }
-      else {
-          this.setState({successful: "user not recognized"})
-        }
     })
-};
+  };
   
   render() {
     return (
