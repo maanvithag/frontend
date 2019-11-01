@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -39,6 +39,9 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const tabClasses = useTabStyles();
     const { ...rest } = props;
+    const [editGeneral, setEditGeneral] = useState(true);
+    const [editEmergency, setEditEmergency] = useState(true);
+    const [editMedical, setEditMedical] = useState(true);
     return (
         <div>
             <Header
@@ -73,6 +76,12 @@ export default function ProfilePage(props) {
                                         <h4 className={classes.cardTitleWhite}>Your Profile</h4>
                                     </CardHeader>
                                     <CardBody>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>General information
+                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}> 
+                                            <i
+                                            className={"fas fa-edit"}
+                                            />
+                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -80,6 +89,9 @@ export default function ProfilePage(props) {
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -89,6 +101,9 @@ export default function ProfilePage(props) {
                                                     id="email-address"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -101,6 +116,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -109,6 +127,9 @@ export default function ProfilePage(props) {
                                                     id="last-name"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -121,6 +142,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editGeneral
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -129,6 +153,9 @@ export default function ProfilePage(props) {
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
@@ -139,11 +166,14 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                    }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                         <Link to="/patient/insurance/:insuranceID">
-                                            <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance</InputLabel>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance</InputLabel>
                                         </Link>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -152,6 +182,9 @@ export default function ProfilePage(props) {
                                                     id="insurance-company"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -162,6 +195,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -171,10 +207,18 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                    }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact</InputLabel>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency contact
+                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditEmergency(false)}> 
+                                            <i
+                                            className={"fas fa-edit"}
+                                            />
+                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -182,6 +226,9 @@ export default function ProfilePage(props) {
                                                     id="emergency-name"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editEmergency
                                                     }}
                                                 />
                                             </GridItem>
@@ -192,12 +239,20 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editEmergency
+                                                    }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>Medical History</InputLabel>
+                                            <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Medical history
+                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditMedical(false)}> 
+                                            <i
+                                            className={"fas fa-edit"}
+                                            />
+                                        </Button></InputLabel>
                                                 <CustomInput
                                                     labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
                                                     id="medical-info"
@@ -206,7 +261,8 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         multiline: true,
-                                                        rows: 5
+                                                        rows: 5,
+                                                        disabled: editMedical
                                                     }}
                                                 />
                                             </GridItem>
