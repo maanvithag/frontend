@@ -157,7 +157,6 @@ export default class LoginForm extends React.Component {
                 Sign In
               </Button>
             </Link>
-            {this.successful}
           </CardFooter>
         </form>
     );

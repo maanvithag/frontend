@@ -30,6 +30,8 @@ export default class SignupButton extends React.Component {
       userType: "doctor",
       specialization: "",
       successful: "",
+      showResults: false,
+      canSignup: false,
       isOtpSent: "",
       isNewUser: true,
       cardAnimaton: "cardHidden"
@@ -75,7 +77,6 @@ export default class SignupButton extends React.Component {
     this.setState({ hospital: event.target.value });
   };
 
-
   handleSubmit = event => {
     const user = {
       username: this.state.username,
@@ -90,10 +91,19 @@ export default class SignupButton extends React.Component {
       isNewUser:"",
       userType: this.state.userType
     };
-
+    
     var targetUrl = 'https://infinity-care.herokuapp.com/signup/doctor';
     var queryString = "?username=" + this.state.username + "&password=" + this.state.password;
 
+    if(this.username === "" || this.email === "" || this.password === "" || this.firstName === "" || 
+      this.lastName === "" || this.address === "" || this.hostpital === "" || this.specialization === "")
+      {
+      this.setState({ showResults: false });
+    }
+    else {
+      this.setState({ showResults: true });
+    }
+  
     fetch(targetUrl + queryString, {
             method: 'POST',
             credentials: "same-origin", 
@@ -113,6 +123,12 @@ export default class SignupButton extends React.Component {
 };
   
   render() {
+    if(this.username !== "" || this.email !== "" || this.password !== "" || this.firstName !== "" || 
+      this.lastName !== "" || this.address !== "" || this.hostpital !== "" || this.specialization !== "")
+      {
+      this.setState({ canSignup: true });
+    }
+
     return (
       <form>
         <CardHeader color="primary">
@@ -150,7 +166,7 @@ export default class SignupButton extends React.Component {
           <GridItem xs={12} sm={12} md={6}>
           <CustomInput
             labelText="Username"
-            id="first"
+            id="username"
             formControlProps={{
               fullWidth: true
             }}
@@ -237,18 +253,29 @@ export default class SignupButton extends React.Component {
                 sitekey="6LeqvL4UAAAAAGSZCz_PjOT8nMVh2CDpx_GUGyXj"
                 onChange={this.onChange}
             />
+          { this.state.showResults ? <div><p style={{ color: "red" }}>Please fill in all of the fields</p><br/><br/><br/><br/></div> : null }
         </CardBody>
         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-          <Link to="/doctor/mfa"> 
+        {console.log(this.state.canSignup)}
+        {console.log(this.state.showResults)}
+          { this.state.canSignup ? 
+            <Link to="/doctor/mfa"> 
+              <Button
+                onClick={this.handleSubmit}
+                style={{ minWidth: "70%" }}
+                color="info"
+              >
+              Sign up
+              </Button>
+            </Link> : 
             <Button
               onClick={this.handleSubmit}
               style={{ minWidth: "70%" }}
               color="info"
             >
             Sign up
-            </Button>
-          </Link>
-        {this.successful}
+            </Button> 
+          }
         </CardFooter>
       </form>
     );
