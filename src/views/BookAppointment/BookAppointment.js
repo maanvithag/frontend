@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -20,6 +20,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import CustomDropdown from 'components/CustomDropdown/CustomDropdown.js';
 import Badge from 'components/Badge/Badge.js';
 import BookAppointment from "views/BookAppointment/AppointmentConfirmation.js";
+import Calendar from 'react-calendar';
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
@@ -32,6 +33,8 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const tabClasses = useTabStyles();
     const { ...rest } = props;
+    const [date, setDate] = useState(new Date());
+    const changeDate = (date) => {setDate({ date })};
     return (
         <div>
             <Header
@@ -63,15 +66,10 @@ export default function ProfilePage(props) {
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Doctor name"
-                                                    id="doctor"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
+                                            <Calendar
+                                                onChange={changeDate}
+                                                value={date}
+                                            />
                                             <CustomDropdown
                                                 buttonText="Time"
                                                 dropdownList={[

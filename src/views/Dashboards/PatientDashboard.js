@@ -68,24 +68,20 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          <Card>
-                            <CardHeader color="primary">
-                              <h4 className={classes.cardTitleWhite}>Upcoming Appointments</h4>
-                            </CardHeader>
-                            <CardBody>
-                              <Table
-                                tableHeaderColor="primary"
-                                tableHead={["Doctor", "Date", "Time"]}
-                                tableData={[
-                                  ["Dakota Rice", "10/22/2018", "1pm-2pm"],
-                                  ["Minerva Hooper", "11/13/2018", "4pm-5pm"],
-                                ]}
-                              />
-                            </CardBody>
-                          </Card>
-                        </GridItem>
-                        <GridItem>
-                          <CancelAppointment/>
+                        <Card style={{width: "20rem", borderColor: "primary"}}>
+                          <CardBody>
+                            <h4 className={classes.cardTitle}>Doctor name</h4>
+                            <p>Date and time of appointment</p>
+                            <CancelAppointment/>
+                          </CardBody>
+                        </Card>
+                        <Card style={{width: "20rem", borderColor: "primary"}}>
+                          <CardBody>
+                            <h4 className={classes.cardTitle}>Doctor name</h4>
+                            <p>Date and time of appointment</p>
+                            <CancelAppointment/>
+                          </CardBody>
+                        </Card>
                         </GridItem>
                       </GridContainer>
                     )
