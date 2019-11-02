@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -40,6 +40,7 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const tabClasses = useTabStyles();
   const { ...rest } = props;
+  const [appointments, setAppointments] = useState([{"doctor": "doctor1", "date": "date1", "time": "time1"},{"doctor": "doctor2", "date": "date2", "time": "time2"}]);
   return (
     <div>
       <Header
@@ -82,6 +83,14 @@ export default function ProfilePage(props) {
                             <CancelAppointment/>
                           </CardBody>
                         </Card>
+                        <ul><li>Quote: {JSON.stringify(appointments)}</li></ul>
+                        { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          <CardBody>
+                            <h4 className={classes.cardTitle}>{item.doctor}</h4>
+                            <p>{item.time} at {item.date}</p>
+                            <CancelAppointment/>
+                          </CardBody>
+                        </Card>))};
                         </GridItem>
                       </GridContainer>
                     )

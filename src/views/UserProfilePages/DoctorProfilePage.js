@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -9,6 +9,7 @@ import Schedule from "@material-ui/icons/Schedule";
 import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
 import LocalOffer from "@material-ui/icons/LocalOffer";
+import EditIcon from '@material-ui/icons/Edit';
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -37,6 +38,9 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const tabClasses = useTabStyles();
     const { ...rest } = props;
+    const [editHospital, setEditHospital] = useState(true);
+    const [editBio, setEditBio] = useState(true);
+    const [editGeneral, setEditGeneral] = useState(true);
     return (
         <div>
             <Header
@@ -68,6 +72,12 @@ export default function ProfilePage(props) {
                                         <h4 className={classes.cardTitleWhite}>Your Profile</h4>
                                     </CardHeader>
                                     <CardBody>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>General information
+                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}> 
+                                            <i
+                                            className={"fas fa-edit"}
+                                            />
+                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -75,6 +85,9 @@ export default function ProfilePage(props) {
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -84,6 +97,9 @@ export default function ProfilePage(props) {
                                                     id="email-address"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -96,6 +112,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -104,6 +123,9 @@ export default function ProfilePage(props) {
                                                     id="last-name"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -116,10 +138,18 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editGeneral
+                                                    }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital
+                                                <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditHospital(false)}> 
+                                            <i
+                                            className={"fas fa-edit"}
+                                            />
+                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -128,7 +158,10 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
-                                                />
+                                                    inputProps={{
+                                                        disabled: editHospital
+                                                    }}
+                                                />{console.log(editHospital)}
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -136,6 +169,9 @@ export default function ProfilePage(props) {
                                                     id="specialization"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editHospital
                                                     }}
                                                 />
                                             </GridItem>
@@ -146,13 +182,22 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editHospital
+                                                    }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
-
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>About Me</InputLabel>
+                                                <div>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>About Me
+                                                <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditBio(false)}>
+                                                    <i
+                                                    className={"fas fa-edit"}
+                                                    />
+                                                </Button></InputLabel>
+                                                </div>
                                                 <CustomInput
                                                     labelText="Bio summary"
                                                     id="doctor-bio"
@@ -161,7 +206,8 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         multiline: true,
-                                                        rows: 5
+                                                        rows: 5,
+                                                        disabled: editBio
                                                     }}
                                                 />
                                             </GridItem>
