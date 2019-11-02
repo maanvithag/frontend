@@ -26,8 +26,9 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 
 const useStyles = makeStyles(styles);
 
-export default function SignedInHeaders(props) {
+export default function SignedInHeaders(props){ 
   const classes = useStyles();
+
   return (
     <List className={classes.list} style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
       <ListItem>
@@ -69,7 +70,7 @@ export default function SignedInHeaders(props) {
       </ListItem>
       <ListItem>
         <Link to="/" className={classes.link}>
-          <Button color="primary">
+          <Button color="primary" onClick={handleSignOut}>
             Sign out
           </Button>
         </Link> 
@@ -77,3 +78,14 @@ export default function SignedInHeaders(props) {
     </List>
   );
 }
+
+function handleSignOut() {
+  var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/signout';
+  fetch(targetUrl, {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(res => {
+    }).catch(() => {
+  })
+};
