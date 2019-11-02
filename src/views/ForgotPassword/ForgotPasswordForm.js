@@ -39,7 +39,7 @@ export default class ForgotPasswordForm extends React.Component {
         var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + "/forgotpassword";
         fetch(targetUrl, {
             method : 'post',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body : JSON.stringify({
                 username : window.localStorage.getItem("username"),
                 password : this.state.newPassword

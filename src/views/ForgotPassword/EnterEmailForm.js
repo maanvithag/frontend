@@ -39,7 +39,7 @@ export default class EnterEmailForm extends React.Component {
         fetch(targetUrl, {
             method : 'post',
             credentials: 'include',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body: JSON.stringify({
                 emailID: this.state.emailID
             })
