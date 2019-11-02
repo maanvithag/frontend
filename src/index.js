@@ -51,9 +51,9 @@ ReactDOM.render(
       <Route path="/patient/signin" exact component={Login}/>
       <Route path="/insurance/signin" exact component={Login}/>
 
-      <Route path="/insurance/:insuranceID" exact component={InsuranceDashboard} />
-      <Route path="/patient/:patientID" exact component={PatientDashboard} />
-      <Route path="/doctor/:doctorID" exact component={DoctorDashboard} />
+      <Route path="/insurance/dashboard" exact component={InsuranceDashboard} />
+      <Route path="/patient/dashboard" exact component={PatientDashboard} />
+      <Route path="/doctor/dashboard" exact component={DoctorDashboard} />
 
       <Route path="/patient/doctor/:doctorID" exact component={PatientViewOfDoctor} />
       <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />

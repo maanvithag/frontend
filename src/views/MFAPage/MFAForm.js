@@ -97,7 +97,7 @@ export default class MFAForm extends React.Component {
                         </CardFooter>
                         ): (
                         <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                            <Link to={window.localStorage.getItem("username")}>
+                            <Link to={'dashboard'}>
                                 <Button color="primary" size="lg" onClick={this.handleSubmit}>
                                     Authenticate Account
                                 </Button>
