@@ -124,12 +124,6 @@ export default class SignupButton extends React.Component {
   };
   
   render() {
-    if(this.username !== "" || this.email !== "" || this.password !== "" || this.firstName !== "" || 
-      this.lastName !== "" || this.address !== "" || this.hostpital !== "" || this.specialization !== "")
-      {
-      this.setState({ canSignup: true });
-    }
-
     return (
       <form>
         <CardHeader color="primary">
