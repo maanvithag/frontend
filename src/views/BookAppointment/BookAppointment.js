@@ -34,7 +34,6 @@ export default function ProfilePage(props) {
     const tabClasses = useTabStyles();
     const { ...rest } = props;
     const [date, setDate] = useState(new Date());
-    const changeDate = (date) => {setDate({ date })};
     return (
         <div>
             <Header
@@ -64,12 +63,13 @@ export default function ProfilePage(props) {
                                         <h4 className={classes.cardTitleWhite}>Book your appointment</h4>
                                     </CardHeader>
                                     <CardBody>
-                                        <GridContainer>
+                                        <GridContainer style={{ display: 'flex', flexDirection: 'row' }}>
                                             <GridItem xs={12} sm={12} md={6}>
                                             <Calendar
-                                                onChange={changeDate}
+                                                onChange={(date) => setDate(date)}
                                                 value={date}
                                             />
+                                            The available times for selected dates are:
                                             <CustomDropdown
                                                 buttonText="Time"
                                                 dropdownList={[
