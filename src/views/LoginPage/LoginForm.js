@@ -27,7 +27,7 @@ export default class LoginForm extends React.Component {
     let currentURLPath = window.location.pathname;
     window.localStorage.setItem("userType", currentURLPath.substring(1, currentURLPath.indexOf("/signin")));
 
-    window.localStorage.setItem("baseURL", "http://127.0.0.1:8080/");
+    window.localStorage.setItem("baseURL", "https://infinity-care.herokuapp.com/");
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,7 +60,7 @@ export default class LoginForm extends React.Component {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/login', {
       method: 'POST',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password

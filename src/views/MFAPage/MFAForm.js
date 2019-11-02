@@ -41,7 +41,7 @@ export default class MFAForm extends React.Component {
         fetch(targetUrl, {
             method : 'post',
             credentials: 'include',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body : JSON.stringify({
                 otp : this.state.otp
             })

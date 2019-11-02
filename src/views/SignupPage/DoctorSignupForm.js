@@ -106,7 +106,7 @@ export default class SignupButton extends React.Component {
     fetch(targetUrl, {
       method : 'post',
       credentials: 'include',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'},
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       body : JSON.stringify({
         username : this.state.username,
         password : this.state.password,
