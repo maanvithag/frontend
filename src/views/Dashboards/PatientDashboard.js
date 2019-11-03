@@ -139,9 +139,6 @@ export default function ProfilePage(props) {
                 ]}
               />
             </GridItem>
-            <GridItem xs={5} sm={5} md={5} lg={5}>
-              <Map />
-            </GridItem>
             </GridContainer>
           </div>
         </div>
