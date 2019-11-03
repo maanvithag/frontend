@@ -12,13 +12,6 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import TypeSelect from "views/Modals/TypeSelect.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -31,6 +24,8 @@ import Button from "components/CustomButtons/Button.js";
 import {primaryColor} from "../assets/jss/material-kit-react";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles(styles);
 
@@ -38,49 +33,29 @@ export default function SignedInHeaders(props){
   const classes = useStyles();
   const [value, setValue] = React.useState('name');
 
-  // const handleChange = event => {
-  //   setValue(event.target.value);
-  // };
+  const inputLabel = React.useRef(null);
+  const [age, setAge] = React.useState('');
+  const [labelWidth, setLabelWidth] = React.useState(0);
 
-  const [state, setState] = React.useState({
-    checkedA: true
-  });
-
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+  const handleChange = event => {
+    setAge(event.target.value);
   };
 
   return (
     <List className={classes.list} style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
       <ListItem>
-      <FormGroup row>
-      <FormControlLabel
-        control={
-          <Checkbox 
-            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-            checkedIcon={<CheckBoxIcon fontSize="small" />}
-            checked={state.checkedA} 
-            onChange={handleChange('checkedA')} 
-            color="primary"
-            value="checkedA" 
-          />
-        }
-        label="Name"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-            checkedIcon={<CheckBoxIcon fontSize="small" />}
-            checked={state.checkedB}
-            onChange={handleChange('checkedB')}
-            color="primary"
-            value="checkedB"
-          />
-        }
-        label="Specialization"
-      />
-      </FormGroup>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={age}
+          onChange={handleChange}
+          labelWidth={labelWidth}
+          defaultValue={value}
+        >
+          <MenuItem value={"name"} selected="selected">Name</MenuItem>
+          <MenuItem value={"specialization"}>Specialization</MenuItem>
+          <MenuItem value={"location"}>Location</MenuItem>
+        </Select>
       </ListItem>
       <ListItem>
       <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
