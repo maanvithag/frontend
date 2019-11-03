@@ -59,7 +59,7 @@ export default function CancelAppointment() {
           >
             <Close className={modalClasses.modalClose} />
           </IconButton>
-          <h4 className={modalClasses.modalTitle}>Cancel Appointment</h4>
+          <h3 className={modalClasses.modalTitle}>Cancel Appointment</h3>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
