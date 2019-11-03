@@ -12,6 +12,13 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import TypeSelect from "views/Modals/TypeSelect.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -21,6 +28,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
+import {primaryColor} from "../assets/jss/material-kit-react";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 
@@ -28,9 +36,52 @@ const useStyles = makeStyles(styles);
 
 export default function SignedInHeaders(props){ 
   const classes = useStyles();
+  const [value, setValue] = React.useState('name');
+
+  // const handleChange = event => {
+  //   setValue(event.target.value);
+  // };
+
+  const [state, setState] = React.useState({
+    checkedA: true
+  });
+
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+  };
 
   return (
     <List className={classes.list} style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
+      <ListItem>
+      <FormGroup row>
+      <FormControlLabel
+        control={
+          <Checkbox 
+            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+            checkedIcon={<CheckBoxIcon fontSize="small" />}
+            checked={state.checkedA} 
+            onChange={handleChange('checkedA')} 
+            color="primary"
+            value="checkedA" 
+          />
+        }
+        label="Name"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+            checkedIcon={<CheckBoxIcon fontSize="small" />}
+            checked={state.checkedB}
+            onChange={handleChange('checkedB')}
+            color="primary"
+            value="checkedB"
+          />
+        }
+        label="Specialization"
+      />
+      </FormGroup>
+      </ListItem>
       <ListItem>
       <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
         <CustomInput
@@ -47,9 +98,11 @@ export default function SignedInHeaders(props){
             }
           }}
         />
-        <Button justIcon round color="primary">
+        <Link to="/doctorsearch/search">
+        <Button justIcon round color="primary"> {/* Add onClick={handleSearch} */}
           <Search className={classes.searchIcon} />
         </Button>
+        </Link>
       </div>
       </ListItem>
       <ListItem>
@@ -89,3 +142,5 @@ function handleSignOut() {
     }).catch(() => {
   })
 };
+
+// TODO onSearch() fetch request gets blocked by CORS. Figure our why!

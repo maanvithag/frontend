@@ -27,6 +27,7 @@ import ValidateUser from "./views/ValidateUser/ValidateUserPage.js";
 import DoctorProfilePage from "./views/UserProfilePages/DoctorProfilePage";
 import InsuranceProfilePage from "./views/UserProfilePages/InsuranceProfilePage";
 import PatientProfilePage from "./views/UserProfilePages/PatientProfilePage";
+import SearchPage from "./views/Search/SearchPage";
 
 var hist = createBrowserHistory();
 
@@ -59,6 +60,7 @@ ReactDOM.render(
       <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
       <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
       <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
+      <Route path="/insurance/patient/:patientID" exact component={DoctorViewOfPatient} />
 
       <Route path="/doctor/profile/:doctorID" exact component={DoctorProfilePage}/>
       <Route path="/patient/profile/:patientID" exact component={PatientProfilePage}/>
@@ -71,6 +73,10 @@ ReactDOM.render(
       <Route path="/dashboardrd" exact component={ReviewDoctor} />
       <Route path="/dashboarddp" exact component={DoctorViewOfPatient} />
       <Route path="/patient/bookappointment" exact component={BookAppointment} />
+
+      <Route path="/patientsearch/search" exact component={SearchPage} />
+      <Route path="/doctorsearch/search" exact component={SearchPage} />
+      <Route path="/insurancesearch/search" exact component={SearchPage} />
 
       <Route path="/" component={LandingPage} />
     </Switch>

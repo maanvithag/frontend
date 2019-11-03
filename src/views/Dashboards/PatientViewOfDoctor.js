@@ -22,6 +22,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
+import AddDoctorReview from "views/Dashboards/AddDoctorReview.js";
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);
@@ -57,7 +58,7 @@ export default function ProfilePage(props) {
                                 Book Appointment
                                 </Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Button color="primary">Leave A Review</Button>
+                            <AddDoctorReview/>
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -20,9 +20,12 @@ import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import Table from "components/Table/Table.js";
 import SignedInHeaders from "views/SignedInHeader.js";
+import DeleteIpPlan from "views/Dashboards/DeleteIpPlan.js"
+import AddIpPlan from "views/Dashboards/AddIpPlan.js"
 
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import {Link} from "react-router-dom";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
@@ -31,6 +34,14 @@ const useStyles = makeStyles(styles);
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const [iplans, setIplans] = useState([
+    {"plan": "plan 1", "price": "price 1", "details": "details 1"},
+    {"plan": "plan 1", "price": "price 1", "details": "details 1"}
+  ]);
+  const [patients, setPatients] = useState([
+    {"patient": "patient 1"},
+    {"patient": "patient 2"}
+  ]);
   return (
     <div>
       <Header
@@ -59,21 +70,15 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          <Card>
-                            <CardHeader color="primary">
-                              <h4 className={classes.cardTitleWhite}>IP plans</h4>
-                            </CardHeader>
-                            <CardBody>
-                              <Table
-                                tableHeaderColor="primary"
-                                tableHead={["Plan name", "Description", "Cost"]}
-                                tableData={[
-                                  ["Plan 1", "Good plan", "$400/month"],
-                                  ["Plan B", "Okay plan", "$300/month"],
-                                ]}
-                              />
-                            </CardBody>
-                          </Card>
+                        <AddIpPlan/>
+                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
+                          { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          <CardBody>
+                            <h3 className={classes.cardTitle}>{item.plan}</h3>
+                            <p>{item.price}, {item.details}</p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/>
+                          </CardBody> 
+                        </Card>))}
                         </GridItem>
                       </GridContainer>
                     )
@@ -84,25 +89,17 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          <Card>
-                            <CardHeader color="primary">
-                              <h4 className={classes.cardTitleWhite}>Patient Table</h4>
-                            </CardHeader>
-                            <CardBody>
-                              <Table
-                                tableHeaderColor="primary"
-                                tableHead={["Patient Name", "Patient profile"]}
-                                tableData={[
-                                  ["Dakota Rice", "Link1"],
-                                  ["Minerva Hooper", "Link2"],
-                                  ["Sage Rodriguez", "Link3"],
-                                  ["Philip Chaney", "Link4"],
-                                  ["Doris Greene", "Link5"],
-                                  ["Mason Porter", "Link6"]
-                                ]}
-                              />
-                            </CardBody>
-                          </Card>
+                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
+                          { patients.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          <CardBody>
+                            <h4 className={classes.cardTitle}>{item.patient}</h4> 
+                            <Link to= {"/insurance/patient/:patientID"}>
+                              <Button color="primary">
+                                View Patient
+                              </Button>
+                            </Link>
+                          </CardBody>
+                        </Card>))}
                         </GridItem>
                       </GridContainer>
                     )
