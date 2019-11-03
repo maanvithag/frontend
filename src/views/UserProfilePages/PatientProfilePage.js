@@ -172,9 +172,12 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <Link to="/patient/insurance/:insuranceID">
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance</InputLabel>
-                                        </Link>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance
+                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}> 
+                                            <i
+                                            className={"fas fa-edit"}
+                                            />
+                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput

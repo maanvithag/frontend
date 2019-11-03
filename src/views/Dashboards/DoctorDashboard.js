@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -24,8 +24,10 @@ import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
+import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
 
 import {primaryColor} from "../../assets/jss/material-kit-react";
+import {Link} from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 
@@ -36,6 +38,14 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const tabClasses = useTabStyles();
   const { ...rest } = props;
+  const [appointments, setAppointments] = useState([
+    {"patient": "patient 1", "date": "date 1", "time": "time 1"},
+    {"patient": "patient 2", "date": "date 2", "time": "time 2"}
+  ]);
+  const [pastAppointments, setPastAppointments] = useState([
+    {"patient": "patient 1", "date": "date 1", "time": "time 1"},
+    {"patient": "patient 2", "date": "date 2", "time": "time 2"}
+  ]);
   return (
     <div>
       <Header
@@ -64,25 +74,14 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          <Card>
-                            <CardHeader color="primary">
-                              <h4 className={classes.cardTitleWhite}>Patient Table</h4>
-                            </CardHeader>
+                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
+                          { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                             <CardBody>
-                              <Table
-                                tableHeaderColor="primary"
-                                tableHead={["Patient Name", "Date", "Patient profile"]}
-                                tableData={[
-                                  ["Dakota Rice", "Date", "Link1"],
-                                  ["Minerva Hooper", "Date", "Link2"],
-                                  ["Sage Rodriguez", "Date", "Link3"],
-                                  ["Philip Chaney", "Date", "Link4"],
-                                  ["Doris Greene", "Date", "Link5"],
-                                  ["Mason Porter", "Date", "Link6"]
-                                ]}
-                              />
+                              <h3 className={classes.cardTitle}>{item.patient}</h3>
+                              <p>{item.time} at {item.date}</p>
+                              <CancelAppointment/>
                             </CardBody>
-                          </Card>
+                          </Card>))}
                         </GridItem>
                       </GridContainer>
                     )
@@ -93,25 +92,18 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          <Card>
-                            <CardHeader color="primary">
-                              <h4 className={classes.cardTitleWhite}>Patient Table</h4>
-                            </CardHeader>
+                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
+                          { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                             <CardBody>
-                              <Table
-                                tableHeaderColor="primary"
-                                tableHead={["Patient Name", "Date", "Patient profile"]}
-                                tableData={[
-                                  ["Dakota Rice", "Date", "Link1"],
-                                  ["Minerva Hooper", "Date", "Link2"],
-                                  ["Sage Rodriguez", "Date", "Link3"],
-                                  ["Philip Chaney", "Date", "Link4"],
-                                  ["Doris Greene", "Date", "Link5"],
-                                  ["Mason Porter", "Date", "Link6"]
-                                ]}
-                              />
+                              <h3 className={classes.cardTitle}>{item.patient}</h3>
+                              <p>{item.time} at {item.date}</p>
+                              <Link to= {"/doctor/patient/:patientID"}>
+                              <Button color="primary">
+                                View Patient
+                              </Button>
+                              </Link>
                             </CardBody>
-                          </Card>
+                          </Card>))}
                         </GridItem>
                       </GridContainer>
                     )
