@@ -27,6 +27,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
+import Map from "views/Map/Map.js"
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
@@ -65,8 +66,8 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} lg={6}>
+            <GridContainer justify="space-around">
+              <GridItem xs={5} sm={5} md={5} lg={5}>
               <NavPills
                 color="primary"
                 tabs={[
