@@ -3,25 +3,17 @@ import React, { useState } from 'react';
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Icon from "@material-ui/core/Icon";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-import EditIcon from '@material-ui/icons/Edit';
+
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
-import NavPills from "components/NavPills/NavPills.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
@@ -69,15 +61,13 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Your Profile</h4>
+                                        <h4 className={classes.cardTitleWhite}>General Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}>
+                                            <i
+                                                className={"fas fa-edit"}
+                                            />
+                                        </Button></h4>
                                     </CardHeader>
                                     <CardBody>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>General information
-                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}> 
-                                            <i
-                                            className={"fas fa-edit"}
-                                            />
-                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -87,7 +77,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
@@ -99,7 +89,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
@@ -113,7 +103,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
@@ -125,7 +115,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
@@ -144,12 +134,21 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital
-                                                <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditHospital(false)}> 
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button color="primary" onClick={() => setEditGeneral(true)}>Save</Button>
+                                    </CardFooter>
+                                </Card>
+                                <br></br>
+                                <Card>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>Hospital<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditHospital(false)}>
                                             <i
-                                            className={"fas fa-edit"}
+                                                className={"fas fa-edit"}
                                             />
-                                        </Button></InputLabel>
+                                        </Button></h4>
+                                    </CardHeader>
+                                    <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -188,33 +187,38 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <div>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>About Me
-                                                <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditBio(false)}>
-                                                    <i
-                                                    className={"fas fa-edit"}
-                                                    />
-                                                </Button></InputLabel>
-                                                </div>
-                                                <CustomInput
-                                                    labelText="Bio summary"
-                                                    id="doctor-bio"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        multiline: true,
-                                                        rows: 5,
-                                                        disabled: editBio
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
                                     </CardBody>
                                     <CardFooter>
-                                        <Button color="primary">Update Profile</Button>
+                                        <Button color="primary" onClick={() => setEditHospital(true)}>Save</Button>
+                                    </CardFooter>
+                                </Card>
+                                <br></br>
+                                <Card>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>About Me<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditBio(false)}>
+                                            <i
+                                                className={"fas fa-edit"}
+                                            />
+                                        </Button></h4>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <CustomInput
+                                                labelText="Bio summary"
+                                                id="doctor-bio"
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                                inputProps={{
+                                                    multiline: true,
+                                                    rows: 5,
+                                                    disabled: editBio
+                                                }}
+                                            />
+                                        </GridItem>
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button color="primary" onClick={() => setEditBio(true)}>Save</Button>
                                     </CardFooter>
                                 </Card>
                             </GridItem>
@@ -225,3 +229,4 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+

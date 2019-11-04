@@ -72,9 +72,9 @@ export default function AppointmentConfirmation() {
           className={modalClasses.modalBody}
         >
             <div className={productClasses.section} style={{padding: 0}}>
-              Your appointment has been booked! Please check your email for an confirmation receipt.
+              Your appointment is confirmed. Please check your email for an confirmation receipt.
             </div>
-            <Link to="/dashboard2">
+            <Link to="/patient/dashboard">
                 <Button color="primary">
                   Okay
                 </Button>
