@@ -26,96 +26,108 @@ import {primaryColor} from "../assets/jss/material-kit-react";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import {InputLabel} from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
-export default function SignedInHeaders(props){ 
-  const classes = useStyles();
-  const [value, setValue] = React.useState('name');
+export default function SignedInHeaders(props){
+    const classes = useStyles();
+    const [value, setValue] = React.useState('name');
 
-  const inputLabel = React.useRef(null);
-  const [keyword, setKeyword] = React.useState('');
-  const [labelWidth, setLabelWidth] = React.useState(0);
+    const inputLabel = React.useRef(null);
+    const [keyword, setKeyword] = React.useState('');
+    const [labelWidth, setLabelWidth] = React.useState(0);
 
-  const handleChange = event => {
-    setKeyword(event.target.value);
-  };
+    const handleChange = event => {
+        setKeyword(event.target.value);
+    };
 
-  return (
-    <List className={classes.list} style={{display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
-      <ListItem>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={keyword}
-          onChange={handleChange}
-          labelWidth={labelWidth}
-          defaultValue={value}
-        >
-          <MenuItem value={"name"} selected="selected">Name</MenuItem>
-          <MenuItem value={"specialization"}>Specialization</MenuItem>
-          <MenuItem value={"location"}>Location</MenuItem>
-        </Select>
-      </ListItem>
-      <ListItem>
-      <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-        <CustomInput
-          primary
-          inputRootCustomClasses={classes.inputRootCustomClasses}
-          formControlProps={{
-            className: classes.formControl
-          }}
-          inputProps={{
-            placeholder: "Search",
-            inputProps: {
-              "aria-label": "Search",
-              className: classes.searchInput
-            }
-          }}
-        />
-        <Link to="/doctorsearch/search">
-        <Button justIcon round color="primary"> {/* Add onClick={handleSearch} */}
-          <Search className={classes.searchIcon} />
-        </Button>
-        </Link>
-      </div>
-      </ListItem>
-      <ListItem>
-      <ListItem className={classes.listItem}>
-          <Link to="profile/:ID">
-          <Button
-        /*
-          href="#pablo"
-          className={classes.navLink}
-          onClick={e => e.preventDefault()}
-          */
-          color="primary"
-        >
-          <AccountCircle className={classes.icons} /> Profile
-        </Button>
-          </Link>
-      </ListItem>
-      </ListItem>
-      <ListItem>
-        <Link to="/" className={classes.link}>
-          <Button color="primary" onClick={handleSignOut}>
-            Sign out
-          </Button>
-        </Link> 
-      </ListItem>
-    </List>
-  );
+    let options;
+    options=[{label: "Name", value: "name"}]
+
+
+    return (
+        <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+            <ListItem>
+                <div style={{width:100, fontSize:"smaller"}}>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={keyword}
+                        onChange={handleChange}
+                        labelWidth={labelWidth}
+                        displayEmpty
+                        // might have to change this approach for showing default value
+
+                    >
+                        <MenuItem value={""} selected="selected">Name</MenuItem>
+                        <MenuItem value={"specialization"}>Specialization</MenuItem>
+                        <MenuItem value={"location"}>Location</MenuItem>
+                    </Select>
+                </div>
+            </ListItem>
+            <ListItem>
+                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:200}}>
+                    <CustomInput
+                        primary
+
+                        inputRootCustomClasses={classes.inputRootCustomClasses}
+                        formControlProps={{
+                            className: classes.formControl
+                        }}
+                        inputProps={{
+                            width: 1000,
+
+                            placeholder: "Search",
+                            inputProps: {
+                                "aria-label": "Search",
+                                className: classes.searchInput
+                            }
+                        }}
+                    />
+                    <Link to="/doctorsearch/search">
+                        <Button justIcon round color="primary"> {/* Add onClick={handleSearch} */}
+                            <Search className={classes.searchIcon} />
+                        </Button>
+                    </Link>
+                </div>
+            </ListItem>
+            <ListItem>
+                <ListItem className={classes.listItem}>
+                    <Link to="profile/:ID">
+                        <Button
+                            /*
+                              href="#pablo"
+                              className={classes.navLink}
+                              onClick={e => e.preventDefault()}
+                              */
+                            color="primary"
+                        >
+                            <AccountCircle className={classes.icons} /> Profile
+                        </Button>
+                    </Link>
+                </ListItem>
+            </ListItem>
+            <ListItem>
+                <Link to="/" className={classes.link}>
+                    <Button color="primary" onClick={handleSignOut}>
+                        Sign out
+                    </Button>
+                </Link>
+            </ListItem>
+        </List>
+    );
 }
 
 function handleSignOut() {
-  var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/signout';
-  fetch(targetUrl, {
-      method : 'post',
-      credentials: 'include',
-      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/signout';
+    fetch(targetUrl, {
+        method : 'post',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     }).then(res => {
     }).catch(() => {
-  })
+    })
 };
 
 // TODO onSearch() fetch request gets blocked by CORS. Figure our why!
