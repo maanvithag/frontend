@@ -32,6 +32,11 @@ class LoginForm extends React.Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
+  }
+
+  responseFacebook = (response) => {
+    console.log(response);
   }
 
   handleUsernameChange = event => {
@@ -66,7 +71,8 @@ class LoginForm extends React.Component {
       })
     }).then(response => response.json())
     .then(data => {
-      if(data.isOtpSent) {
+      if(data.isCredentialsAccurate) {
+        console.log(data.isOtpSent)
         this.props.history.push("mfa");
       } else {
         alert("Please enter correct credentials");

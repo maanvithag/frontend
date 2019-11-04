@@ -9,9 +9,9 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
-import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
-export default class MFAForm extends React.Component {
+class MFAForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,10 +31,6 @@ export default class MFAForm extends React.Component {
         //event.preventDefault();
 
         window.localStorage.setItem("isForgotPasswordFlow", "false");
-        const user = {
-            otp: this.state.otp,
-            isOtpAccurate: ""
-        };
 
         var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/mfa';
     
@@ -45,13 +41,18 @@ export default class MFAForm extends React.Component {
             body : JSON.stringify({
                 otp : this.state.otp
             })
-          }).then(res => {
-            if(user.isOtpAccurate) {
-                this.setState({successful: true})
+          }).then(response => response.json())
+          .then(data => {
+            if(data.isOtpAccurate) {
+              if(window.localStorage.getItem("isForgotPasswordFlow") == "true") {
+                this.props.history.push("forgotpassword");
+              } else {
+                  this.props.history.push("dashboard")
+              }
+            } else {
+              alert("Please enter correct credentials");
             }
-          }).catch(() => {
-            this.setState({successful: true})
-        })
+          })
     };
 
     render() {
@@ -86,33 +87,15 @@ export default class MFAForm extends React.Component {
                     />
                 </CardBody>
 
-                {this.state.otp != "" ? (
-                    window.localStorage.getItem("isForgotPasswordFlow") == "true" ? (
-                        <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                            <Link to={"forgotpassword"}>
-                                <Button color="primary" size="lg" onClick={this.handleSubmit}>
-                                    Authenticate Account
-                                </Button>
-                            </Link>
-                        </CardFooter>
-                        ): (
-                        <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                            <Link to={'dashboard'}>
-                                <Button color="primary" size="lg" onClick={this.handleSubmit}>
-                                    Authenticate Account
-                                </Button>
-                            </Link>
-                        </CardFooter>
-                        )
-                    ): (
-                    <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                        <Button color="primary" size="lg">
-                            Authenticate Account
-                        </Button>
-                    </CardFooter>
-                 )}
+                <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
+                    <Button color="primary" size="lg" onClick={this.handleSubmit}>
+                        Authenticate Account
+                    </Button>
+                </CardFooter>
 
             </form>
         );
     }
 }
+
+export default withRouter(MFAForm)
