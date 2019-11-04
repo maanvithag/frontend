@@ -33,7 +33,7 @@ export default function ProfilePage(props) {
   ]);
 
   const handleLoad = (event) => {
-    fetch(window.localStorage.getItem("baseURL") + 'insurance/iplans', {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/iplans', {
       method : 'post',
       credentials: 'include',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
