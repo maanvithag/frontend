@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
     window.localStorage.setItem("userType", currentURLPath.substring(1, currentURLPath.indexOf("/signin")));
 
     //window.localStorage.setItem("baseURL", "http://localhost:8080/");
-    window.localStorage.setItem("baseURL", "https://infinity-care.herokuapp.com/");
+    window.localStorage.setItem("baseURL", "https://infinity-care-backend.herokuapp.com/");
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

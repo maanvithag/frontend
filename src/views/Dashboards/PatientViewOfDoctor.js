@@ -22,6 +22,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
+import { useState, useEffect } from 'react';
 import AddDoctorReview from "views/Dashboards/AddDoctorReview.js";
 
 const useStyles = makeStyles(styles);
@@ -31,6 +32,26 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const tabClasses = useTabStyles();
     const { ...rest } = props;
+    const [profile, setProfile] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const [rating, setRating] = useState([]);
+
+    const handleLoad = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor' + '/bWFhbmkuaGFycnlAZ21haWwuY29t', {
+        method : 'post',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+        setProfile(data)
+        setReviews(data.reviews)
+        setRating(Math.round(data.totalrating * 10) / 10)
+    })
+    }
+    useEffect(() => {handleLoad()}, {})
+
+    console.log(profile);
+
     return (
         <div>
             <Header
@@ -72,7 +93,7 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="First Name"
+                                                    labelText={profile.name}
                                                     id="first-name"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -84,31 +105,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Last Name"
-                                                    id="last-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Email address"
-                                                    id="email-address"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Education"
+                                                    labelText={profile.education}
                                                     id="education"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -123,7 +120,7 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Hospital Name"
+                                                    labelText={profile.hospital}
                                                     id="hospital"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -135,7 +132,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Specialization"
+                                                    labelText={profile.specialization}
                                                     id="specialization"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -149,8 +146,20 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
-                                                    labelText="Address"
+                                                    labelText={profile.address}
                                                     id="address"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true
+                                                      }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={12}>
+                                                <CustomInput
+                                                    labelText={profile.phonenumber}
+                                                    id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -164,7 +173,7 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>About Me</InputLabel>
                                                 <CustomInput
-                                                    labelText="Bio summary"
+                                                    labelText={profile.biosummary}
                                                     id="doctor-bio"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -180,26 +189,20 @@ export default function ProfilePage(props) {
                                     </CardBody>
                                 </Card>
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={8} lg={6}>
+                            <GridItem xs={12} sm={12} md={8}>
                                 <GridContainer>
                                     <GridItem xs={12} sm={12} md={12}>
                                         <Card>
                                             <CardHeader color="primary">
-                                                <h4 className={classes.cardTitleWhite}>Average Rating: 4/5</h4>
+                                                <h4 className={classes.cardTitleWhite}>Average Rating: {rating}</h4>
                                             </CardHeader>
                                             <CardBody>
-                                                <Table
-                                                    tableHeaderColor="primary"
-                                                    tableHead={["Rating (Out of 5)", "Date", "Review"]}
-                                                    tableData={[
-                                                        ["4/5", "Date", "Would recommend to my friends"],
-                                                        ["5/5", "Date", "On time and explained everything thoroughly"],
-                                                        ["5/5", "Date", "Great experience"],
-                                                        ["4/5", "Date", "Had a pleasant visit"],
-                                                        ["2/5", "Date", "Showed up 20 minutes late"],
-                                                        ["4/5", "Date", "Very personable"]
-                                                    ]}
-                                                />
+                                            {reviews.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                                                <CardBody>
+                                                    <p>Rating: {item.rating}</p> 
+                                                    <p>Review: {item.review}</p>
+                                                </CardBody>
+                                                </Card>))}
                                             </CardBody>
                                         </Card>
                                     </GridItem>
