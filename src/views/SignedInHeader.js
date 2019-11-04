@@ -35,32 +35,31 @@ export default function SignedInHeaders(props){
     const [value, setValue] = React.useState('name');
 
     const inputLabel = React.useRef(null);
-    const [keyword, setKeyword] = React.useState('');
+    const [keyword, setKeyword] = React.useState('name');
     const [labelWidth, setLabelWidth] = React.useState(0);
 
     const handleChange = event => {
         setKeyword(event.target.value);
     };
 
-    let options;
-    options=[{label: "Name", value: "name"}]
 
 
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <ListItem>
-                <div style={{width:100, fontSize:"smaller"}}>
+                <div style={{width:120, fontSize:"smaller"}}>
                     <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
                         value={keyword}
                         onChange={handleChange}
                         labelWidth={labelWidth}
-                        displayEmpty
+                        defaultValue={"name"}
+
                         // might have to change this approach for showing default value
 
                     >
-                        <MenuItem value={""} selected="selected">Name</MenuItem>
+                        <MenuItem value={"name"} selected="selected">Name</MenuItem>
                         <MenuItem value={"specialization"}>Specialization</MenuItem>
                         <MenuItem value={"location"}>Location</MenuItem>
                     </Select>
