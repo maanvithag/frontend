@@ -1,38 +1,28 @@
-import React, { useState } from 'react';
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/core components
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
 import List from "@material-ui/icons/List";
-import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-
-// core components
-import Header from "components/Header/Header.js";
+import Schedule from "@material-ui/icons/Schedule";
+import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Parallax from "components/Parallax/Parallax.js";
+// core components
+import Header from "components/Header/Header.js";
 import NavPills from "components/NavPills/NavPills.js";
-import RenderUser from "views/ProfilePage/RenderUser.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
+import Parallax from "components/Parallax/Parallax.js";
 import Table from "components/Table/Table.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
-import SignedInHeaders from "views/SignedInHeader.js";
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
-import Map from "views/Map/Map.js"
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
-import {Link} from "react-router-dom";
+import SignedInHeaders from "views/SignedInHeader.js";
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);
@@ -41,10 +31,20 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const tabClasses = useTabStyles();
   const { ...rest } = props;
-  const [appointments, setAppointments] = useState([
-    {"doctor": "doctor1", "date": "date1", "time": "time1"},
-    {"doctor": "doctor2", "date": "date2", "time": "time2"}
-  ]);
+  const [appointments, setAppointments] = useState([]);
+
+  const handleLoad = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/getappointments', {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+      setAppointments(data)
+    })
+  }
+  useEffect(() => {handleLoad()},[])
+
   const [pastAppointments, setPastAppointments] = useState([
     {"doctor": "doctor1", "date": "date1", "time": "time1"},
     {"doctor": "doctor2", "date": "date2", "time": "time2"}
@@ -80,8 +80,8 @@ export default function ProfilePage(props) {
                         {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                         { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h3 className={classes.cardTitle}>{item.doctor}</h3>
-                            <p>{item.time} at {item.date}</p>
+                            <h3 className={classes.cardTitle}>{item.mDoctorUsername}</h3>
+                            <p>Time: {item.mDisplayDate}</p>
                             <CancelAppointment/>
                           </CardBody>
                         </Card>))}
