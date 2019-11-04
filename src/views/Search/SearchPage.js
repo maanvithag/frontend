@@ -43,11 +43,11 @@ export default function SearchPage(props) {
   const { ...rest } = props;
   const [searchResults, setAppointments] = useState(
     [
-      {username: "doctor1@gmail.com", name: "firstname1 + lastname1", specialization: "specialization 1", hospital: "hospital 1", address: "address 1"},
-      {username: "doctor2@gmail.com", name: "firstname2 + lastname2", specialization: "specialization 2", hospital: "hospital 2", address: "address 2"},
-      {username: "doctor3@gmail.com", name: "firstname3 + lastname3", specialization: "specialization 3", hospital: "hospital 3", address: "address 3"},
-      {username: "doctor4@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 4", hospital: "hospital 4", address: "address 4"},
-      {username: "doctor5@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 5", hospital: "hospital 5", address: "address 5"}
+      {username: "doctor1@gmail.com", name: "firstname1 + lastname1", specialization: "specialization 1", hospital: "hospital 1", address: "address 1", doctorURL: "link1"},
+      {username: "doctor2@gmail.com", name: "firstname2 + lastname2", specialization: "specialization 2", hospital: "hospital 2", address: "address 2", doctorURL: "link2"},
+      {username: "doctor3@gmail.com", name: "firstname3 + lastname3", specialization: "specialization 3", hospital: "hospital 3", address: "address 3", doctorURL: "link3"},
+      {username: "doctor4@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 4", hospital: "hospital 4", address: "address 4", doctorURL: "link4"},
+      {username: "doctor5@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 5", hospital: "hospital 5", address: "address 5", doctorURL: "link5"}
     ]);
   return (
     <div>
@@ -81,7 +81,7 @@ export default function SearchPage(props) {
                             Book Appointment
                           </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </Link>
-                        <Link to= {"/patient/doctor/:doctorID"}>
+                        <Link to= {item.doctorURL}>
                           <Button color="primary">
                             View Profile
                           </Button>

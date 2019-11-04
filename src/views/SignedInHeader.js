@@ -34,11 +34,11 @@ export default function SignedInHeaders(props){
   const [value, setValue] = React.useState('name');
 
   const inputLabel = React.useRef(null);
-  const [age, setAge] = React.useState('');
+  const [keyword, setKeyword] = React.useState('');
   const [labelWidth, setLabelWidth] = React.useState(0);
 
   const handleChange = event => {
-    setAge(event.target.value);
+    setKeyword(event.target.value);
   };
 
   return (
@@ -47,7 +47,7 @@ export default function SignedInHeaders(props){
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={keyword}
           onChange={handleChange}
           labelWidth={labelWidth}
           defaultValue={value}
