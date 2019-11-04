@@ -61,11 +61,8 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Personal Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditPersonal(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
+                                        <h4 className={classes.cardTitleWhite}>Personal Information
+                                           </h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -122,7 +119,6 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                     </CardBody>
                                     <CardFooter>
-                                        <Button color="primary" onClick={() => setEditPersonal(true)}>Save</Button>
                                     </CardFooter>
                                 </Card>
                                 <br></br>

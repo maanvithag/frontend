@@ -77,7 +77,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -103,7 +103,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -115,7 +115,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
