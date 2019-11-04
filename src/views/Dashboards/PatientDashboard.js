@@ -32,6 +32,7 @@ export default function ProfilePage(props) {
   const tabClasses = useTabStyles();
   const { ...rest } = props;
   const [appointments, setAppointments] = useState([]);
+  const [pastAppointments, setPastAppointments] = useState([]);
 
   const handleLoad = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/getappointments', {
@@ -40,15 +41,12 @@ export default function ProfilePage(props) {
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     }).then(response => response.json())
     .then(data => {
-      setAppointments(data)
+      setAppointments(data.CurrentAppointments)
+      setPastAppointments(data.PastAppointments)
     })
   }
   useEffect(() => {handleLoad()},[])
 
-  const [pastAppointments, setPastAppointments] = useState([
-    {"doctor": "doctor1", "date": "date1", "time": "time1"},
-    {"doctor": "doctor2", "date": "date2", "time": "time2"}
-  ]);
   return (
     <div>
       <Header
@@ -97,7 +95,7 @@ export default function ProfilePage(props) {
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                        { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                        { pastAppointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
                             <h4 className={classes.cardTitle}>{item.mDoctorUsername}</h4>
                             <p>Date: {item.mDisplayDate}</p>

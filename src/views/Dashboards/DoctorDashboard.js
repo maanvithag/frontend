@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/icons/List";
+import Schedule from "@material-ui/icons/Schedule";
+import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-// @material-ui/core components
-// @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Icon from "@material-ui/core/Icon";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
-import { makeStyles } from "@material-ui/core/styles";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-// core components
-import Header from "components/Header/Header.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Parallax from "components/Parallax/Parallax.js";
+// core components
+import Header from "components/Header/Header.js";
 import NavPills from "components/NavPills/NavPills.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
-import SignedInHeaders from "views/SignedInHeader.js";
+import Parallax from "components/Parallax/Parallax.js";
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
+import SignedInHeaders from "views/SignedInHeader.js";
 
-import {primaryColor} from "../../assets/jss/material-kit-react";
-import {Link} from "react-router-dom";
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);
@@ -46,6 +35,20 @@ export default function ProfilePage(props) {
     {"patient": "patient 1", "date": "date 1", "time": "time 1"},
     {"patient": "patient 2", "date": "date 2", "time": "time 2"}
   ]);
+
+  const handleLoad = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/getappointments', {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+      setAppointments(data.CurrentAppointments)
+      setPastAppointments(data.PastAppointments)
+    })
+  }
+  useEffect(() => {handleLoad()},[])
+  
   return (
     <div>
       <Header
@@ -77,8 +80,9 @@ export default function ProfilePage(props) {
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                             <CardBody>
-                              <h3 className={classes.cardTitle}>{item.patient}</h3>
-                              <p>{item.time} at {item.date}</p>
+                            <h4 className={classes.cardTitle}>{item.mDoctorUsername}</h4>
+                            <p>Date: {item.mDisplayDate}</p>
+                            <p>Time: {item.mDisplayTime}</p>
                               <CancelAppointment/>
                             </CardBody>
                           </Card>))}
@@ -93,11 +97,12 @@ export default function ProfilePage(props) {
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          { pastAppointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                             <CardBody>
-                              <h3 className={classes.cardTitle}>{item.patient}</h3>
-                              <p>{item.time} at {item.date}</p>
-                              <Link to= {"/doctor/patient/:patientID"}>
+                            <h4 className={classes.cardTitle}>{item.mDoctorUsername}</h4>
+                            <p>Date: {item.mDisplayDate}</p>
+                            <p>Time: {item.mDisplayTime}</p>
+                              <Link to= {"/doctor/patient/" + item.mEncodedPatientName}>
                               <Button color="primary">
                                 View Patient
                               </Button>
