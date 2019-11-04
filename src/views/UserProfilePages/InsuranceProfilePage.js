@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -30,6 +30,8 @@ const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
+    const [editCompany, setEditCompany] = useState(true);
+    const [editPersonal, setEditPersonal] = useState(true);
     const { ...rest } = props;
     return (
         <div>
@@ -59,7 +61,11 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Your Profile</h4>
+                                        <h4 className={classes.cardTitleWhite}>Personal Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditPersonal(false)}>
+                                            <i
+                                                className={"fas fa-edit"}
+                                            />
+                                        </Button></h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -70,6 +76,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editPersonal
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -78,6 +87,9 @@ export default function ProfilePage(props) {
                                                     id="email-address"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editPersonal
                                                     }}
                                                 />
                                             </GridItem>
@@ -90,6 +102,9 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editPersonal
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
@@ -99,14 +114,37 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editPersonal
+                                                    }}
                                                 />
                                             </GridItem>
+                                        </GridContainer>
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button color="primary" onClick={() => setEditPersonal(true)}>Save</Button>
+                                    </CardFooter>
+                                </Card>
+                                <br></br>
+                                <Card>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>Company Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditCompany(false)}>
+                                            <i
+                                                className={"fas fa-edit"}
+                                            />
+                                        </Button></h4>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
                                                     labelText="Company"
                                                     id="company"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editCompany
                                                     }}
                                                 />
                                             </GridItem>
@@ -116,6 +154,9 @@ export default function ProfilePage(props) {
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editCompany
                                                     }}
                                                 />
                                             </GridItem>
@@ -128,12 +169,15 @@ export default function ProfilePage(props) {
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: editCompany
+                                                    }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
                                     <CardFooter>
-                                        <Button color="primary">Update Profile</Button>
+                                        <Button color="primary" onClick={() => setEditCompany(true)}>Save</Button>
                                     </CardFooter>
                                 </Card>
                             </GridItem>
@@ -144,3 +188,4 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+
