@@ -25,6 +25,7 @@ const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
+  const tabClasses = useTabStyles();
   const { ...rest } = props;
   const [appointments, setAppointments] = useState([
     {"patient": "patient 1", "date": "date 1", "time": "time 1"},

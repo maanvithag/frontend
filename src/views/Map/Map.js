@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
+import Geocode from "react-geocode";
 
 const SimpleMap = (props) => {
   const getMapOptions = (maps) => {
