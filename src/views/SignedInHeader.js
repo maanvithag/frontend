@@ -27,6 +27,7 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import {InputLabel} from "@material-ui/core";
+import {string} from "prop-types";
 
 const useStyles = makeStyles(styles);
 
@@ -35,44 +36,44 @@ export default function SignedInHeaders(props){
     const [value, setValue] = React.useState('name');
     const [searchInput, setSearchInput] = useState("");
 
+
     const inputLabel = React.useRef(null);
-    const [keyword, setKeyword] = React.useState('name');
+    const [keyword, setKeyword] = React.useState('doctor');
     const [labelWidth, setLabelWidth] = React.useState(0);
 
     const handleChange = event => {
         setKeyword(event.target.value);
     };
 
-    const handleSearchChange = event => {
-    setSearchInput(event.target.value);
-    console.log(searchInput);
-  };
-
+    const handleSearch = event => {
+        window.localStorage.setItem("searchItem", document.getElementById('inputEntry').value);
+        window.localStorage.setItem("searchUserType", document.getElementById('inputUserType').value);
+    };
 
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <ListItem>
-                <div style={{width:120, fontSize:"smaller"}}>
+                <div style={{width:70, fontSize:"smaller"}}>
                     <Select
                         labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
+                        id={"inputUserType"}
                         value={keyword}
                         onChange={handleChange}
                         labelWidth={labelWidth}
-                        defaultValue={"name"}
+                        defaultValue={"doctor"}
 
                         // might have to change this approach for showing default value
 
                     >
-                        <MenuItem value={"name"} selected="selected">Name</MenuItem>
-                        <MenuItem value={"specialization"}>Specialization</MenuItem>
-                        <MenuItem value={"location"}>Location</MenuItem>
+                        <MenuItem value={"doctor"} selected="selected">Doctor</MenuItem>
+                        <MenuItem value={"insurance"}>Insurance</MenuItem>
                     </Select>
                 </div>
             </ListItem>
             <ListItem>
                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:200}}>
                     <CustomInput
+                        id={"inputEntry"}
                         primary
 
                         inputRootCustomClasses={classes.inputRootCustomClasses}
@@ -90,8 +91,9 @@ export default function SignedInHeaders(props){
                             }
                         }}
                     />
-                    <Link to={"/doctorsearch/" +  searchInput}>
-                        <Button justIcon round color="primary"> {/* Add onClick={handleSearch} */}
+
+                    <Link to="/search">
+                        <Button justIcon round color="primary" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
                             <Search className={classes.searchIcon} />
                         </Button>
                     </Link>
@@ -99,7 +101,7 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to="profile/:ID">
+                    <Link to={"/"+ window.localStorage.getItem("userType") +"/profile/" + window.localStorage.getItem("encryptedUserName")}>
                         <Button
                             /*
                               href="#pablo"

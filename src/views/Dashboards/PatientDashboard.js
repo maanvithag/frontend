@@ -25,11 +25,9 @@ import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
-  const tabClasses = useTabStyles();
   const { ...rest } = props;
   const [appointments, setAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
@@ -74,13 +72,18 @@ export default function ProfilePage(props) {
                     tabIcon: Dashboard,
                     tabContent: (
                       <GridContainer>
-                        <GridItem xs={12} sm={12} md={12}>
+                        <GridItem xs={20} sm={20} md={20}>
                         {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mDoctorUsername}</h4>
+                            <h4 className={classes.cardTitle}>{item.mDoctorName}</h4>
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
+                            <Link to= {"/patient/doctor/" + item.mEncodedDoctorUserName}>
+                              <Button color="primary">
+                                View Doctor
+                              </Button>
+                            </Link> 
                             <CancelAppointment/>
                           </CardBody>
                         </Card>))}
@@ -97,7 +100,7 @@ export default function ProfilePage(props) {
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                         { pastAppointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mDoctorUsername}</h4>
+                            <h4 className={classes.cardTitle}>{item.mDoctorName}</h4>
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
                             <Link to= {"/patient/doctor/" + item.mEncodedDoctorUserName}>

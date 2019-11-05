@@ -15,7 +15,6 @@ import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
@@ -30,7 +29,6 @@ const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
     const [profile, setProfile] = useState({});
     const [reviews, setReviews] = useState([]);
@@ -71,7 +69,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/:patientID">
+                            <Link to="/patient/dashboard">
                             <Button color="primary">Return to Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Link to="/patient/bookappointment">
