@@ -75,20 +75,6 @@ export default class SignupButton extends React.Component {
   };
 
   handleSubmit = () => {
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      isOtpSent: "",
-      isNewUser:"",
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      address: this.state.address,
-      phoneNumber: this.state.phoneNumber,
-      dob: this.state.dob,
-      userType: this.state.userType
-    };
-
     var targetUrl = window.localStorage.getItem("baseURL") + 'patient/signup';
 
     fetch(targetUrl, {
@@ -99,14 +85,18 @@ export default class SignupButton extends React.Component {
         username : this.state.username,
         password : this.state.password,
         email : this.state.email,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        dob: this.state.dob,
+        phoneNumber: this.state.phoneNumber,
+        address: this.state.address
       })
-    }).then(res => {
-      if(user.isOtpSent && user.isNewUser) {
-        this.setState({successful: "new user"})
-      } else if(res.isOtpSent) {
-         this.setState({successful: "old user"})
+    }).then(response => response.json())
+    .then(data => {
+      if(data.isNewUser) {
+        this.props.history.push("mfa");
       } else {
-         this.setState({successful: "user not recognized"})
+         alert("Existing user or improper data submitted")
       }
     })
   };

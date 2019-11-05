@@ -1,47 +1,50 @@
-import React, { useState } from 'react';
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/core components
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
 import List from "@material-ui/icons/List";
-import { makeStyles } from "@material-ui/core/styles";
-// core components
-import Header from "components/Header/Header.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Parallax from "components/Parallax/Parallax.js";
+// core components
+import Header from "components/Header/Header.js";
 import NavPills from "components/NavPills/NavPills.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
+import Parallax from "components/Parallax/Parallax.js";
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import AddIpPlan from "views/Dashboards/AddIpPlan.js";
+import DeleteIpPlan from "views/Dashboards/DeleteIpPlan.js";
 import SignedInHeaders from "views/SignedInHeader.js";
-import DeleteIpPlan from "views/Dashboards/DeleteIpPlan.js"
-import AddIpPlan from "views/Dashboards/AddIpPlan.js"
-
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
-import {Link} from "react-router-dom";
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const [iplans, setIplans] = useState([
-    {"plan": "plan 1", "price": "price 1", "details": "details 1"},
-    {"plan": "plan 1", "price": "price 1", "details": "details 1"}
-  ]);
+  const [iplans, setIplans] = useState([]);
   const [patients, setPatients] = useState([
-    {"patient": "patient 1"},
-    {"patient": "patient 2"}
+    {"patient": "patient 1", "date": "date 1", "time": "time 1"},
+    {"patient": "patient 2", "date": "date 2", "time": "time 2"}
   ]);
+
+  const handleLoad = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/iplans', {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+      setIplans(data.IPlans)
+      setPatients(data.Patients)
+    })
+  }
+  useEffect(() => {handleLoad()},[])
+
   return (
     <div>
       <Header
@@ -74,8 +77,9 @@ export default function ProfilePage(props) {
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h3 className={classes.cardTitle}>{item.plan}</h3>
-                            <p>{item.price}, {item.details}</p>
+                            <h4 className={classes.cardTitle}>{item.mProvider}</h4>
+                            <p>Price: {item.price}</p>
+                            <p>Details: {item.mDetails}</p>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/>
                           </CardBody> 
                         </Card>))}

@@ -25,6 +25,7 @@ import Calendar from 'react-calendar';
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
+import CardFooter from 'components/Card/CardFooter';
 
 const useStyles = makeStyles(styles);
 const useTabStyles = makeStyles(tabStyles);
@@ -34,6 +35,15 @@ export default function ProfilePage(props) {
     const tabClasses = useTabStyles();
     const { ...rest } = props;
     const [date, setDate] = useState(new Date());
+    const [timeslots, setTimeslots] = useState([
+        "Timeslot1",
+        "Timeslot2",
+        "Timeslot3",
+    ]);
+    const [ts, setTs] = useState();
+    const handleChange = event => {
+        setTs(event.target.value);
+    };
     return (
         <div>
             <Header
@@ -63,28 +73,27 @@ export default function ProfilePage(props) {
                                         <h4 className={classes.cardTitleWhite}>Book your appointment</h4>
                                     </CardHeader>
                                     <CardBody>
-                                        <GridContainer style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <GridContainer style={{ display: 'flex', flexDirection: 'row' }} justify="center">
                                             <GridItem xs={12} sm={12} md={6}>
                                             <Calendar
                                                 onChange={(date) => setDate(date)}
                                                 value={date}
-                                            />
-                                            The available times for selected dates are:
+                                            />  <br/>
+                                            <h4> Please select a time: </h4>
                                             <CustomDropdown
                                                 buttonText="Time"
-                                                dropdownList={[
-                                                "Timeslot1",
-                                                "Timeslot2",
-                                                "Timeslot3",
-                                                ]}
-                                            />
+                                                buttonProps={{
+                                                    color: "primary"
+                                                }}
+                                                onChange={handleChange}
+                                                value={ts}
+                                                dropdownList={timeslots}
+                                            /> <br/>
+                                            <BookAppointment/>
                                             </GridItem>
-                                        </GridContainer>
+                                        </GridContainer> <br/>
                                     </CardBody>
                                 </Card>
-                            </GridItem>
-                            <GridItem>
-                                <BookAppointment />
                             </GridItem>
                         </GridContainer>
                     </div>

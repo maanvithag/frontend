@@ -40,6 +40,7 @@ export default function ProfilePage(props) {
     const tabClasses = useTabStyles();
     const { ...rest } = props;
     const [editGeneral, setEditGeneral] = useState(true);
+    const [editInsurance, setEditInsurance] = useState(true);
     const [editEmergency, setEditEmergency] = useState(true);
     const [editMedical, setEditMedical] = useState(true);
     return (
@@ -73,15 +74,13 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Your Profile</h4>
+                                        <h4 className={classes.cardTitleWhite}>General Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}>
+                                            <i
+                                                className={"fas fa-edit"}
+                                            />
+                                        </Button></h4>
                                     </CardHeader>
                                     <CardBody>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>General information
-                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}> 
-                                            <i
-                                            className={"fas fa-edit"}
-                                            />
-                                        </Button></InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -103,7 +102,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
@@ -167,17 +166,26 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editGeneral
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance
-                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}> 
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button color="primary" onClick={() => setEditGeneral(true)}>Save</Button>
+                                    </CardFooter>
+                                </Card>
+                                <br></br>
+                                <Card>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>Insurance Details<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditInsurance(false)}>
                                             <i
-                                            className={"fas fa-edit"}
+                                                className={"fas fa-edit"}
                                             />
-                                        </Button></InputLabel>
+                                        </Button></h4>
+                                    </CardHeader>
+                                    <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -187,7 +195,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editInsurance
                                                     }}
                                                 />
                                             </GridItem>
@@ -199,7 +207,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editInsurance
                                                     }}
                                                 />
                                             </GridItem>
@@ -211,17 +219,26 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editInsurance
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency contact
-                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditEmergency(false)}> 
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button color="primary" onClick={() => setEditInsurance(true)}>Save</Button>
+                                    </CardFooter>
+                                </Card>
+                                <br></br>
+                                <Card>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>Emergency Contact<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditEmergency(false)}>
                                             <i
-                                            className={"fas fa-edit"}
+                                                className={"fas fa-edit"}
                                             />
-                                        </Button></InputLabel>
+                                        </Button></h4>
+                                    </CardHeader>
+                                    <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -248,31 +265,38 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                            <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Medical history
-                                            <Button color="primary" simple sm style={{ margin: '0px'}} onClick={() => setEditMedical(false)}> 
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button color="primary" onClick={() => setEditEmergency(true)}>Save</Button>
+                                    </CardFooter>
+                                </Card>
+                                <br></br>
+                                <Card>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>Medical Details<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditMedical(false)}>
                                             <i
-                                            className={"fas fa-edit"}
+                                                className={"fas fa-edit"}
                                             />
-                                        </Button></InputLabel>
-                                                <CustomInput
-                                                    labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
-                                                    id="medical-info"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        multiline: true,
-                                                        rows: 5,
-                                                        disabled: editMedical
-                                                    }}
-                                                />
-                                            </GridItem>
+                                        </Button></h4>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <GridContainer>
+                                            <CustomInput
+                                                labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
+                                                id="medical-info"
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                                inputProps={{
+                                                    multiline: true,
+                                                    rows: 5,
+                                                    disabled: editMedical
+                                                }}
+                                            />
                                         </GridContainer>
                                     </CardBody>
                                     <CardFooter>
-                                        <Button color="primary">Update Profile</Button>
+                                        <Button color="primary" onClick={() => setEditMedical(true)}>Save</Button>
                                     </CardFooter>
                                 </Card>
                             </GridItem>
@@ -283,3 +307,4 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+

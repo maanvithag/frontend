@@ -12,9 +12,9 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import React from "react";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import ReCAPTCHA from "react-google-recaptcha";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,10 +28,15 @@ export default class LoginForm extends React.Component {
     window.localStorage.setItem("userType", currentURLPath.substring(1, currentURLPath.indexOf("/signin")));
 
     //window.localStorage.setItem("baseURL", "http://localhost:8080/");
-    window.localStorage.setItem("baseURL", "https://infinity-care.herokuapp.com/");
+    window.localStorage.setItem("baseURL", "https://infinity-care-backend.herokuapp.com/");
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
+  }
+
+  responseFacebook = (response) => {
+    console.log(response);
   }
 
   handleUsernameChange = event => {
@@ -53,8 +58,6 @@ export default class LoginForm extends React.Component {
     };
 
     this.fireAndGetResponseInJSON();
-    //console.log(this.state.getItem('jsonResponse'))
-    //this.props.history.push('/abc')
   };
     
   fireAndGetResponseInJSON() {
@@ -66,9 +69,15 @@ export default class LoginForm extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
-    //})
     }).then(response => response.json())
-    .then(data => console.log(data.isOtpSent))
+    .then(data => {
+      if(data.isCredentialsAccurate) {
+        console.log(data.isOtpSent)
+        this.props.history.push("mfa");
+      } else {
+        alert("Please enter correct credentials");
+      }
+    })
   }
 
   render() {
@@ -105,7 +114,7 @@ export default class LoginForm extends React.Component {
               </Link>
             </div>
             <CustomInput
-                labelText="Username..."
+                labelText="Registered Email ID"
                 id="username"
                 formControlProps={{
                   fullWidth: true
@@ -121,7 +130,7 @@ export default class LoginForm extends React.Component {
                 }}
             />
             <CustomInput
-                labelText="Password..."
+                labelText="Password"
                 id="password"
                 formControlProps={{
                   fullWidth: true
@@ -141,7 +150,6 @@ export default class LoginForm extends React.Component {
             />
             <div style={{display: 'flex', alignSelf: 'right'}}>
               <Link to= {"forgotpassword/email"}>
-              {/* </Link><Link to= {"validateuser"}> */}
                 <Button color="primary" simple>
                   Forgot password?
                 </Button>
@@ -154,17 +162,16 @@ export default class LoginForm extends React.Component {
             />
           </CardBody>
           <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-            <Link to= {"mfa"}>
-              <Button
-                  onClick={this.handleSubmit}
-                  style={{ minWidth: "70%" }}
-                  color="info">
+            <Button
+              onClick={this.handleSubmit}
+              style={{ minWidth: "70%" }}
+              color="info">
                 Sign In
-              </Button>
-            </Link>
+            </Button>
           </CardFooter>
         </form>
     );
   }
 }
 
+export default withRouter(LoginForm)
