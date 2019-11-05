@@ -7,9 +7,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
 
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
@@ -26,12 +23,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const useModalStyles = makeStyles(modalStyles);
-const useProductStyles = makeStyles(productStyles);
 
 export default function AddIpPlan() {
   const [modal, setModal] = React.useState(false);
   const modalClasses = useModalStyles();
-  const productClasses = useProductStyles();
 
   const [value, setValue] = React.useState('1');
 

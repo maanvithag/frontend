@@ -36,6 +36,8 @@ class LoginForm extends React.Component {
   }
 
   responseFacebook = (response) => {
+    this.setState({ username: response.email });
+    this.setState({ password: "" });
     console.log(response);
   };
 

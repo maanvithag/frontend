@@ -33,7 +33,6 @@ const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
     return (
         <div>
