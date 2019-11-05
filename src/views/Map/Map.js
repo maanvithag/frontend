@@ -19,21 +19,26 @@ const SimpleMap = (props) => {
         {"doctor": "doctor1", "lat": "11.0168", "lng": "76.9558" }, 
         {"doctor": "doctor2", "lat": "11.0200", "lng": "77.000" }
     ]);
+    const [passedInfo, setPassedInfo] = useState(props.passedInfo);
     console.log(center.lat, center.lng);
+    console.log(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1));
+
     {/*
     Geocode.fromAddress("Bloomington").then(
-        response => {
-          const { latR, lngR } = response.results[0].geometry.location;
-          setCenter({lat: latR, lng: lngR})
-          console.log(latR, lngR);
-        },
-        error => {
-          console.error(error);
-        }
-      );
+      response => {
+        const { latR, lngR } = response.results[0].geometry.location;
+        setCenter({lat: latR, lng: lngR})
+        console.log(latR, lngR);
+      },
+      error => {
+        console.error(error);
+      }
+    );
     */}
+
     return (
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '80vh', width: '100%' }}>
+        {passedInfo}
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyB8gxX2h4_2Xw1sKg-jDdv8T_uut8-KV8s' }}
           defaultCenter={center}

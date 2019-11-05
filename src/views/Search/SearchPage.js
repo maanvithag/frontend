@@ -41,7 +41,7 @@ export default function SearchPage(props) {
   const classes = useStyles();
   const tabClasses = useTabStyles();
   const { ...rest } = props;
-  const [searchResults, setAppointments] = useState(
+  const [searchResults, setSearchResults] = useState(
     [
       {username: "doctor1@gmail.com", name: "firstname1 + lastname1", specialization: "specialization 1", hospital: "hospital 1", address: "address 1", doctorURL: "link1"},
       {username: "doctor2@gmail.com", name: "firstname2 + lastname2", specialization: "specialization 2", hospital: "hospital 2", address: "address 2", doctorURL: "link2"},

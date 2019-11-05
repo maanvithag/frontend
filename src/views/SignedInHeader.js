@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
@@ -33,6 +33,7 @@ const useStyles = makeStyles(styles);
 export default function SignedInHeaders(props){
     const classes = useStyles();
     const [value, setValue] = React.useState('name');
+    const [searchInput, setSearchInput] = useState("");
 
     const inputLabel = React.useRef(null);
     const [keyword, setKeyword] = React.useState('name');
@@ -42,6 +43,10 @@ export default function SignedInHeaders(props){
         setKeyword(event.target.value);
     };
 
+    const handleSearchChange = event => {
+    setSearchInput(event.target.value);
+    console.log(searchInput);
+  };
 
 
     return (
@@ -76,6 +81,7 @@ export default function SignedInHeaders(props){
                         }}
                         inputProps={{
                             width: 1000,
+                            onChange: handleSearchChange,
 
                             placeholder: "Search",
                             inputProps: {
@@ -84,7 +90,7 @@ export default function SignedInHeaders(props){
                             }
                         }}
                     />
-                    <Link to="/doctorsearch/search">
+                    <Link to={"/doctorsearch/" +  searchInput}>
                         <Button justIcon round color="primary"> {/* Add onClick={handleSearch} */}
                             <Search className={classes.searchIcon} />
                         </Button>
