@@ -37,7 +37,7 @@ class LoginForm extends React.Component {
 
   responseFacebook = (response) => {
     console.log(response);
-  }
+  };
 
   handleUsernameChange = event => {
     this.setState({ username: event.target.value });
@@ -56,6 +56,8 @@ class LoginForm extends React.Component {
       isOtpSent: "",
       isCredentialsAccurate: "",
     };
+
+    window.localStorage.setItem("encryptedUserName", btoa(user.username));
 
     this.fireAndGetResponseInJSON();
   };

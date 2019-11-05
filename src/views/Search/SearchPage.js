@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -41,14 +41,42 @@ export default function SearchPage(props) {
   const classes = useStyles();
   const tabClasses = useTabStyles();
   const { ...rest } = props;
-  const [searchResults, setAppointments] = useState(
-    [
-      {username: "doctor1@gmail.com", name: "firstname1 + lastname1", specialization: "specialization 1", hospital: "hospital 1", address: "address 1", doctorURL: "link1"},
-      {username: "doctor2@gmail.com", name: "firstname2 + lastname2", specialization: "specialization 2", hospital: "hospital 2", address: "address 2", doctorURL: "link2"},
-      {username: "doctor3@gmail.com", name: "firstname3 + lastname3", specialization: "specialization 3", hospital: "hospital 3", address: "address 3", doctorURL: "link3"},
-      {username: "doctor4@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 4", hospital: "hospital 4", address: "address 4", doctorURL: "link4"},
-      {username: "doctor5@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 5", hospital: "hospital 5", address: "address 5", doctorURL: "link5"}
-    ]);
+
+    const searchItem = window.localStorage.getItem("searchItem");
+    const searchUserType = window.localStorage.getItem("searchUserType");
+    const [searchResults, setSearchResults] = useState([]);
+    /* change for search */
+    const handleLoad = (event) => {
+        fetch(window.localStorage.getItem("baseURL") +
+            window.localStorage.getItem("searchUserType") +
+            '/search?query=' + localStorage.getItem("searchItem"),{
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        }).then(response => response.json())
+            .then(data => {
+                setSearchResults(data)
+            })
+    };
+    useEffect(() => {handleLoad()},[]);
+
+    function condHiding() {
+        if(window.localStorage.getItem("searchUserType")==="doctor") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+    var caption;
+    if(searchUserType === "doctor"){
+         caption="doctors";
+    } else  caption="insurance providers";
+
   return (
     <div>
       <Header
@@ -70,24 +98,37 @@ export default function SearchPage(props) {
                 <GridItem xs={5} sm={5} md={5} lg={5}>
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
-                    { searchResults.map((item, index) => (<Link to= {"/"}><Card style={{width: "25rem", borderColor: "primary"}}>
-                        <CardBody>
-                        <h3 className={classes.cardTitle}>{item.name}</h3>
-                        <h4>{item.specialization}</h4>
-                        <p>{item.hospital}</p>
-                        <p>{item.address}</p>
-                        <Link to= {"/patient/bookappointment"}>
-                          <Button color="primary">
-                            Book Appointment
-                          </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </Link>
-                        <Link to= {item.doctorURL}>
+                        <h3>
+                            Searching for {searchItem} in {caption}
+                        </h3>
+
+                        { searchResults.map((item, index) => (
+
+                            <Card style={{width: "20rem", borderColor: "primary"}}>
+
+                                <CardBody>
+                                    <h3 className={classes.cardTitle}>
+                                        {item.mFirstName} {item.mLastName}
+                                    </h3>
+                                    <h4>{item.mSpecialization}</h4>
+                                    <h4>{item.mCompany}</h4>
+                                    <p>{item.mHospital}</p>
+                                    <p>{item.mAddress}</p>
+
+
+                                    { condHiding() && (<Link to= {"/patient/bookappointment"}>
+                                        <Button color="primary">
+                                            Book Appointment
+                                        </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </Link>) }
+
+                        <Link to= {window.localStorage.getItem("userType") + "/" +window.localStorage.getItem("searchUserType")+"/"+   btoa(item.mUserName)}>
                           <Button color="primary">
                             View Profile
                           </Button>
                         </Link>
                         </CardBody>
-                        </Card></Link>))}
+                        </Card>))}
                     </GridItem>
                 </GridContainer>
                 </GridItem>

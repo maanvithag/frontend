@@ -52,7 +52,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/insurance/:insuranceID">
+                            <Link to="/insurance/dashboard">
                                 <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>

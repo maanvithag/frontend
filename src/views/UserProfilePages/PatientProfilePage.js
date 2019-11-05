@@ -62,7 +62,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/:patientID">
+                            <Link to="/patient/dashboard">
                                 <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
