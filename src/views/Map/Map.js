@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
+import Geocode from "react-geocode";
 
 const SimpleMap = (props) => {
   const getMapOptions = (maps) => {
@@ -22,7 +23,7 @@ const SimpleMap = (props) => {
     console.log(center.lat, center.lng);
     console.log(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1));
 
-    {/*
+  
     Geocode.fromAddress("Bloomington").then(
       response => {
         const { latR, lngR } = response.results[0].geometry.location;
@@ -33,7 +34,6 @@ const SimpleMap = (props) => {
         console.error(error);
       }
     );
-    */}
 
     return (
         <div style={{ height: '80vh', width: '100%' }}>
