@@ -9,30 +9,21 @@ import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import CustomDropdown from 'components/CustomDropdown/CustomDropdown.js';
-import Badge from 'components/Badge/Badge.js';
 import BookAppointment from "views/BookAppointment/AppointmentConfirmation.js";
 import Calendar from 'react-calendar';
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
-import CardFooter from 'components/Card/CardFooter';
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
     const [date, setDate] = useState(new Date());
     const [timeslots, setTimeslots] = useState([

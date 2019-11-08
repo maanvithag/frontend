@@ -3,46 +3,48 @@ import React, {useState} from 'react';
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
-import LocalOffer from "@material-ui/icons/LocalOffer";
 
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
-import NavPills from "components/NavPills/NavPills.js";
-import RenderUser from "views/ProfilePage/RenderUser.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
     const [editGeneral, setEditGeneral] = useState(true);
     const [editInsurance, setEditInsurance] = useState(true);
     const [editEmergency, setEditEmergency] = useState(true);
     const [editMedical, setEditMedical] = useState(true);
+    const [profile, setProfile] = useState({
+        username: "maani.harry@gmail.com",
+        emailaddress: "maani.harry@gmail.com",
+        firstname: "Sansa",
+        lastname: "Stark",
+        address: "700 N. Woodlawn Ave, Bloomington, IN, 4740",
+        phonenumber: "7777777777",
+        dob: "09/23/1990",
+        insurancecompany: "Aetna",
+        insuranceprovider: "maani.harry@gmail.com",
+        insuranceplan: "HMO",
+        emergencyname: "Arya Stark",
+        emergencyphone: "9999999999",
+        medicalinfo: "Walnut Allergy"
+    })
     return (
         <div>
             <Header
@@ -62,7 +64,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/:patientID">
+                            <Link to="/patient/dashboard">
                                 <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
@@ -84,7 +86,7 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Username"
+                                                    labelText={profile.username}
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -96,8 +98,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Email address"
-                                                    id="email-address"
+                                                    labelText={profile.emailaddress}
+                                                    id="emailaddress"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -110,8 +112,8 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="First Name"
-                                                    id="first-name"
+                                                    labelText={profile.firstname}
+                                                    id="firstname"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -122,8 +124,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Last Name"
-                                                    id="last-name"
+                                                    labelText={profile.lastname}
+                                                    id="lastname"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -136,7 +138,7 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
-                                                    labelText="Address"
+                                                    labelText={profile.address}
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -148,8 +150,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Phone Number"
-                                                    id="phone-number"
+                                                    labelText={profile.phonenumber}
+                                                    id="phonenumber"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -160,7 +162,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Date of Birth: MM/DD/YYYY"
+                                                    labelText={profile.dob}
                                                     id="dob"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -189,8 +191,8 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Company"
-                                                    id="insurance-company"
+                                                    labelText={profile.insurancecompany}
+                                                    id="insurancecompany"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -201,8 +203,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Provider"
-                                                    id="insurance-provider"
+                                                    labelText={profile.insuranceprovider}
+                                                    id="insuranceprovider"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -213,8 +215,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Plan"
-                                                    id="insurance-plan"
+                                                    labelText={profile.insuranceplan}
+                                                    id="insuranceplan"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -242,8 +244,8 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Emergency Contact Name"
-                                                    id="emergency-name"
+                                                    labelText={profile.emergencyname}
+                                                    id="emergencyname"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -254,8 +256,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Emergency Phone Number"
-                                                    id="emergency-phone"
+                                                    labelText={profile.emergencyphone}
+                                                    id="emergencyphone"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -282,8 +284,8 @@ export default function ProfilePage(props) {
                                     <CardBody>
                                         <GridContainer>
                                             <CustomInput
-                                                labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
-                                                id="medical-info"
+                                                labelText={profile.medicalinfo}
+                                                id="medicalinfo"
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}

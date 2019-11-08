@@ -33,7 +33,6 @@ const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
     return (
         <div>
@@ -54,7 +53,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/doctor/:doctorID">
+                            <Link to="/doctor/dashboard">
                             <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
