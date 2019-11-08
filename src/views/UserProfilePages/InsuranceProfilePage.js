@@ -3,16 +3,21 @@ import React, {useState} from 'react';
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
+import Dashboard from "@material-ui/icons/Dashboard";
+import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
+import NavPills from "components/NavPills/NavPills.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
+import InputLabel from "@material-ui/core/InputLabel";
+import Table from "components/Table/Table.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
 import CardBody from "components/Card/CardBody.js";
@@ -47,7 +52,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/insurance/dashboard">
+                            <Link to="/insurance/:insuranceID">
                                 <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>

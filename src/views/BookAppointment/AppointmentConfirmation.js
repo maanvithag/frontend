@@ -9,9 +9,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
-
+import LocalHospital from "@material-ui/icons/LocalHospital";
+import People from "@material-ui/icons/People";
+import Note from "@material-ui/icons/Note";
 // core components
 import Button from "components/CustomButtons/Button.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
+import InfoArea from "components/InfoArea/InfoArea.js";
 
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";

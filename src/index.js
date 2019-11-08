@@ -74,7 +74,9 @@ ReactDOM.render(
       <Route path="/dashboarddp" exact component={DoctorViewOfPatient} />
       <Route path="/patient/bookappointment" exact component={BookAppointment} />
 
-      <Route path="/search" exact component={SearchPage} />
+      <Route path="/patientsearch/search" exact component={SearchPage} />
+      <Route path="/doctorsearch/:search" exact component={SearchPage} />
+      <Route path="/insurancesearch/search" exact component={SearchPage} />
 
       <Route path="/" component={LandingPage} />
     </Switch>
