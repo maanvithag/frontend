@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -30,21 +30,22 @@ export default function ProfilePage(props) {
     const [editInsurance, setEditInsurance] = useState(true);
     const [editEmergency, setEditEmergency] = useState(true);
     const [editMedical, setEditMedical] = useState(true);
-    const [profile, setProfile] = useState({
-        username: "maani.harry@gmail.com",
-        emailaddress: "maani.harry@gmail.com",
-        firstname: "Sansa",
-        lastname: "Stark",
-        address: "700 N. Woodlawn Ave, Bloomington, IN, 4740",
-        phonenumber: "7777777777",
-        dob: "09/23/1990",
-        insurancecompany: "Aetna",
-        insuranceprovider: "maani.harry@gmail.com",
-        insuranceplan: "HMO",
-        emergencyname: "Arya Stark",
-        emergencyphone: "9999999999",
-        medicalinfo: "Walnut Allergy"
-    })
+    const [profile, setProfile] = useState({})
+
+    const handleLoad = (event) => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
+          method : 'post',
+          credentials: 'include',
+          headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        }).then(response => response.json())
+        .then(data => {
+          setProfile(data)
+        })
+      }
+    useEffect(() => {handleLoad()},[])
+      
+    console.log(profile)
+
     return (
         <div>
             <Header
@@ -225,6 +226,11 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
+                                            <GridItem>
+                                            <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
+                                                <Button color="primary">View Insurance Provider Profile</Button>
+                                            </Link>
+                                            </GridItem>
                                         </GridContainer>
                                     </CardBody>
                                     <CardFooter>
@@ -244,7 +250,7 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText={profile.emergencyname}
+                                                    labelText={profile.emergencycontactname}
                                                     id="emergencyname"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -256,7 +262,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText={profile.emergencyphone}
+                                                    labelText={profile.emergencycontactnumber}
                                                     id="emergencyphone"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -284,7 +290,7 @@ export default function ProfilePage(props) {
                                     <CardBody>
                                         <GridContainer>
                                             <CustomInput
-                                                labelText={profile.medicalinfo}
+                                                labelText={profile.medicalhistory}
                                                 id="medicalinfo"
                                                 formControlProps={{
                                                     fullWidth: true

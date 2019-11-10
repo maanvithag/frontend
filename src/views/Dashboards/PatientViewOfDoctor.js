@@ -19,13 +19,11 @@ import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
 import { useState, useEffect } from 'react';
 import AddDoctorReview from "views/Dashboards/AddDoctorReview.js";
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
@@ -34,8 +32,10 @@ export default function ProfilePage(props) {
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState([]);
 
+    const doctorusername = window.location.href.split('/')[5]
+
     const handleLoad = (event) => {
-    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor' + '/bWFhbmkuaGFycnlAZ21haWwuY29t', {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/' + doctorusername, {
         method : 'post',
         credentials: 'include',
         headers: {'Content-Type': 'application/json', Accept: 'application/json'},
@@ -195,7 +195,7 @@ export default function ProfilePage(props) {
                                                 <h4 className={classes.cardTitleWhite}>Average Rating: {rating}</h4>
                                             </CardHeader>
                                             <CardBody>
-                                            {reviews.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                                            {reviews.map((item, index) => (<Card style={{borderColor: "primary"}}>
                                                 <CardBody>
                                                     <p>Rating: {item.rating}</p> 
                                                     <p>Review: {item.review}</p>
