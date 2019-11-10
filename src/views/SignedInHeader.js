@@ -101,12 +101,14 @@ export default function SignedInHeaders(props){
                 <ListItem className={classes.listItem}>
                     <Link to={"/"+ window.localStorage.getItem("userType") +"/profile/" + window.localStorage.getItem("encryptedUserName")}>
                         <Button
+                            size="small"
                             /*
                               href="#pablo"
                               className={classes.navLink}
                               onClick={e => e.preventDefault()}
                               */
-                            color="primary"
+                            color="github"
+                            round
                         >
                             <AccountCircle className={classes.icons} /> Profile
                         </Button>
@@ -115,7 +117,7 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <Link to="/" className={classes.link}>
-                    <Button color="primary" onClick={handleSignOut}>
+                    <Button color='github' size="small" round onClick={handleSignOut}>
                         Sign out
                     </Button>
                 </Link>

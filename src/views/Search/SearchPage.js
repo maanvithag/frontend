@@ -74,13 +74,13 @@ export default function SearchPage(props) {
         {...rest}
       />
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classNames(classes.main, classes.mainRaised)} color={"info"}>
         <div>
           <div className={classes.container}>
-            <GridContainer justify="space-around" direction="row">
-                <GridItem xs={5} sm={5} md={5} lg={5}>
-                <GridContainer>
-                    <GridItem xs={12} sm={12} md={12}>
+            <GridContainer justify="space-around" direction="row" color={"info"}>
+                <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
+                <GridContainer color={"info"}>
+                    <GridItem xs={16} sm={16} md={16}>
                         <h3>
                             Searching for {searchItem} in {caption}
                         </h3>
@@ -97,19 +97,23 @@ export default function SearchPage(props) {
                                     <h4>{item.mCompany}</h4>
                                     <p>{item.mHospital}</p>
                                     <p>{item.mAddress}</p>
-
+                                    <GridContainer justify="center">
+                                        <GridItem xs={12} sm={12} md={6}>
 
                                     { condHiding() && (<Link to= {"/patient/bookappointment"}>
-                                        <Button color="primary">
+                                        <Button fullWidth color="primary">
                                             Book Appointment
-                                        </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </Button>
                                     </Link>) }
-
-                        <Link to= {window.localStorage.getItem("userType") + "/" +window.localStorage.getItem("searchUserType")+"/"+   btoa(item.mUserName)}>
-                          <Button color="primary">
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={6}>
+                                        <Link to= {window.localStorage.getItem("userType") + "/" +window.localStorage.getItem("searchUserType")+"/"+ btoa(item.mUserName)}>
+                          <Button fullWidth color="primary">
                             View Profile
                           </Button>
                         </Link>
+                                        </GridItem>
+                                    </GridContainer>
                         </CardBody>
                         </Card>))}
                     </GridItem>

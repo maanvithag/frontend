@@ -59,7 +59,7 @@ class MFAForm extends React.Component {
         return (
             <form>
                 <CardHeader color="primary">
-                    <h4>Enter OTP</h4>
+                    <h4>Check your Email for your Verification Code</h4>
                 </CardHeader>
                 <CardBody>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>

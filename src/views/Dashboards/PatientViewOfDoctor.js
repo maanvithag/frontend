@@ -84,7 +84,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Doctor Name</h4>
+                                        <h4 className={classes.cardTitleWhite}>{profile.name}</h4>
                                     </CardHeader>
                                     <CardBody>
                                     <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Personal Information</InputLabel>
