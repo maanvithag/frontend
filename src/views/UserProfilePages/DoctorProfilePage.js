@@ -71,12 +71,12 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Username"
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        placeholder: "Username",
                                                         disabled: true
                                                     }}
                                                 />
@@ -97,24 +97,24 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="First Name"
                                                     id="first-name"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        placeholder: "First name",
                                                         disabled: true
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Last Name"
                                                     id="last-name"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        placeholder: "Last name",
                                                         disabled: true
                                                     }}
                                                 />
