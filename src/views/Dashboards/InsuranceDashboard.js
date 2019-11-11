@@ -27,10 +27,7 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   const [iplans, setIplans] = useState([]);
-  const [patients, setPatients] = useState([
-    {"patient": "patient 1", "date": "date 1", "time": "time 1"},
-    {"patient": "patient 2", "date": "date 2", "time": "time 2"}
-  ]);
+  const [patients, setPatients] = useState([]);
 
   const handleLoad = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/iplans', {
@@ -44,6 +41,10 @@ export default function ProfilePage(props) {
     })
   }
   useEffect(() => {handleLoad()},[])
+
+  console.log(iplans)
+
+  console.log(patients)
 
   return (
     <div>
@@ -77,7 +78,7 @@ export default function ProfilePage(props) {
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mProvider}</h4>
+                            <h4 className={classes.cardTitle}>{item.mName}</h4>
                             <p>Price: {item.price}</p>
                             <p>Details: {item.mDetails}</p>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/>

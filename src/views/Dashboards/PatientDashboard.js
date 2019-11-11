@@ -26,7 +26,6 @@ import Parallax from "components/Parallax/Parallax.js";
 import Table from "components/Table/Table.js";
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
@@ -120,7 +119,6 @@ export default function ProfilePage(props) {
                                 View Doctor
                               </Button>
                             </Link> 
-                            {/* <CancelAppointment/> */}
                             <div>
                             <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
                               Cancel Appointment
