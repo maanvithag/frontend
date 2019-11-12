@@ -78,8 +78,6 @@ export default function ProfilePage(props) {
     })
   }
 
-  console.log(cancelAppointment)
-
   return (
     <div>
       <Header

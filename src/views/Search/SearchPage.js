@@ -25,40 +25,34 @@ export default function SearchPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-    const searchItem = window.localStorage.getItem("searchItem");
-    const searchUserType = window.localStorage.getItem("searchUserType");
-    const [searchResults, setSearchResults] = useState([]);
-    /* change for search */
-    const handleLoad = (event) => {
-        fetch(window.localStorage.getItem("baseURL") +
-            window.localStorage.getItem("searchUserType") +
-            '/search?query=' + localStorage.getItem("searchItem"),{
-            method : 'post',
-            credentials: 'include',
-            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-        }).then(response => response.json())
-            .then(data => {
-                setSearchResults(data)
-            })
-    };
-    useEffect(() => {handleLoad()},[]);
+  const searchItem = window.localStorage.getItem("searchItem");
+  const searchUserType = window.localStorage.getItem("searchUserType");
+  const [searchResults, setSearchResults] = useState([]);
+  /* change for search */
+  const handleLoad = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search?query=' + localStorage.getItem("searchItem"), {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+        setSearchResults(data)
+    })
+  };
+  useEffect(() => {handleLoad()},[]);
 
-    function condHiding() {
-        if(window.localStorage.getItem("searchUserType")==="doctor") {
-            return true;
-        } else {
-            return false;
-        }
+  function condHiding() {
+    if(window.localStorage.getItem("searchUserType")==="doctor") {
+        return true;
+    } else {
+        return false;
     }
+  }
 
-
-
-
-
-    var caption;
-    if(searchUserType === "doctor"){
-         caption="doctors";
-    } else  caption="insurance providers";
+  var caption;
+  if(searchUserType === "doctor"){
+    caption="doctors";
+  } else  caption="insurance providers";
 
   return (
     <div>
@@ -71,8 +65,7 @@ export default function SearchPage(props) {
           height: 0,
           color: "white"
         }}
-        {...rest}
-      />
+        {...rest}/>
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)} color={"info"}>
         <div>
@@ -80,46 +73,37 @@ export default function SearchPage(props) {
             <GridContainer justify="space-around" direction="row" color={"info"}>
                 <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
                 <GridContainer color={"info"}>
-                    <GridItem xs={16} sm={16} md={16}>
-                        <h3>
-                            Searching for {searchItem} in {caption}
-                        </h3>
-
-                        { searchResults.map((item, index) => (
-
-                            <Card style={{width: "20rem", borderColor: "primary"}}>
-
-                                <CardBody>
-                                    <h3 className={classes.cardTitle}>
-                                        {item.mFirstName} {item.mLastName}
-                                    </h3>
-                                    <h4>{item.mSpecialization}</h4>
-                                    <h4>{item.mCompany}</h4>
-                                    <p>{item.mHospital}</p>
-                                    <p>{item.mAddress}</p>
-                                    <GridContainer justify="center">
-                                        <GridItem xs={12} sm={12} md={6}>
-
-                                    { condHiding() && (<Link to= {"/patient/bookappointment"}>
-                                        <Button fullWidth color="primary">
-                                            Book Appointment
-                                        </Button>
-                                    </Link>) }
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={6}>
-                                        <Link to= {window.localStorage.getItem("userType") + "/" +window.localStorage.getItem("searchUserType")+"/"+ btoa(item.mUserName)}>
-                          <Button fullWidth color="primary">
-                            View Profile
-                          </Button>
-                        </Link>
-                                        </GridItem>
-                                    </GridContainer>
+                  <GridItem xs={16} sm={16} md={16}>
+                    <h3>Searching for {searchItem} in {caption}</h3>
+                    { searchResults.map((item, index) => (
+                      <Card style={{width: "20rem", borderColor: "primary"}}>
+                        <CardBody>
+                          <h3 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h3>
+                          <h4>{item.mSpecialization}</h4>
+                          <h4>{item.mCompany}</h4>
+                          <p>{item.mHospital}</p>
+                          <p>{item.mAddress}</p>
+                          <GridContainer justify="center">
+                            <GridItem xs={13} sm={12} md={6}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
+                              <Button fullWidth color="primary">
+                                  Book Appointment
+                              </Button></Link>) }
+                              </GridItem>
+                              <GridItem xs={13} sm={12} md={6}>
+                              <Link to= {window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType")+ "/" + btoa(item.mUserName)}>
+                              <Button fullWidth color="primary">
+                                View Profile
+                              </Button>
+                              </Link>
+                            </GridItem>
+                          </GridContainer>
                         </CardBody>
-                        </Card>))}
-                    </GridItem>
+                    </Card>))}
+                  </GridItem>
                 </GridContainer>
                 </GridItem>
-                <GridItem xs={5} sm={5} md={5} lg={5}>
+                <GridItem xs={5} sm={5} md={5}>
+                  <br/><br/>
                   <Map />
                 </GridItem>
             </GridContainer>

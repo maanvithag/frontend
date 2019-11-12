@@ -121,7 +121,7 @@ export default function ProfilePage(props) {
                             <Link to="/patient/dashboard">
                             <Button color="primary">Return to Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Link to="/patient/bookappointment">
+                            <Link to= {"/patient/doctor/bookappointment/" + doctorusername}>
                                 <Button color="primary">
                                 Book Appointment
                                 </Button>

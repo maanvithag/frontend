@@ -19,7 +19,7 @@ const SimpleMap = (props) => {
         {"doctor": "doctor2", "lat": "11.0200", "lng": "77.000" }
     ]);
     return (
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '50vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyB8gxX2h4_2Xw1sKg-jDdv8T_uut8-KV8s' }}
           defaultCenter={center}

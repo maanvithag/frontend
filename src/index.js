@@ -34,7 +34,7 @@ var hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-      <Route path="/patient/bookappointment" exact component={BookAppointment} />
+      <Route path="/patient/doctor/bookappointment/:doctorID" exact component={BookAppointment} />
       <Route path="/components" component={Components} />
 
       <Route path="/:userType/forgotpassword" exact component={ForgotPassword}/>
