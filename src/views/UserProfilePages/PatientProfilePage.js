@@ -46,7 +46,14 @@ export default function ProfilePage(props) {
         })
       }
     useEffect(() => {handleLoad()},[])
-      
+
+    const style = {
+        link: {
+            color: 'white'
+        }
+    };
+
+
     console.log(profile)
 
     return (
@@ -107,9 +114,7 @@ export default function ProfilePage(props) {
                                                         disabled: editEmail,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditEmail(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editEmail && (<i onClick={() => setEditEmail(false)} className={"fas fa-edit"}/>)}
                                                                 {editEmail ? "" : <i onClick={() => setEditEmail(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -155,9 +160,7 @@ export default function ProfilePage(props) {
                                                         disabled: editAddress,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditAddress(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editAddress && (<i onClick={() => setEditAddress(false)} className={"fas fa-edit"}/>)}
                                                                 {editAddress ? "" : <i onClick={() => setEditAddress(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -176,9 +179,7 @@ export default function ProfilePage(props) {
                                                         disabled: editPhone,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditPhone(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editPhone && (<i onClick={() => setEditPhone(false)} className={"fas fa-edit"}/>)}
                                                                 {editPhone ? "" : <i onClick={() => setEditPhone(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -203,7 +204,10 @@ export default function ProfilePage(props) {
                                 <br></br>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Insurance Details</h4>
+                                        <h4 className={classes.cardTitleWhite}>Insurance Details </h4>
+                                        <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
+                                        <h7 style={style.link}> View Provider&nbsp;&nbsp;&nbsp;<i className={"fas fa-external-link-square-alt"}/> </h7>
+                                        </Link>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -243,18 +247,13 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
-                                            <GridItem>
-                                            <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
-                                                <Button color="primary">View Insurance Provider Profile</Button>
-                                            </Link>
-                                            </GridItem>
                                         </GridContainer>
                                     </CardBody>
                                 </Card>
                                 <br></br>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Emergency Contact></h4>
+                                        <h4 className={classes.cardTitleWhite}>Emergency Contact</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -270,9 +269,7 @@ export default function ProfilePage(props) {
                                                         disabled: editEmergencyName,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditEmergencyName(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editEmergencyName && (<i onClick={() => setEditEmergencyName(false)} className={"fas fa-edit"}/>)}
                                                                 {editEmergencyName ? "" : <i onClick={() => setEditEmergencyName(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -291,9 +288,7 @@ export default function ProfilePage(props) {
                                                         disabled: editEmergencyNum,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditEmergencyNum(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editEmergencyNum && (<i onClick={() => setEditEmergencyNum(false)} className={"fas fa-edit"}/>)}
                                                                 {editEmergencyNum ? "" : <i onClick={() => setEditEmergencyNum(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -306,7 +301,7 @@ export default function ProfilePage(props) {
                                 <br></br>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Medical Details></h4>
+                                        <h4 className={classes.cardTitleWhite}>Medical Details</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -322,9 +317,7 @@ export default function ProfilePage(props) {
                                                     disabled: editHistory,
                                                     endAdornment: (
                                                         <InputAdornment position="end">
-                                                            <i onClick={() => setEditHistory(false)}
-                                                                className={"fas fa-edit"}
-                                                            />
+                                                            {editHistory && (<i onClick={() => setEditHistory(false)} className={"fas fa-edit"}/>)}
                                                             {editHistory ? "" : <i onClick={() => setEditHistory(true)} className="fas fa-save"></i>}
                                                         </InputAdornment>
                                                     )

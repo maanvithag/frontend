@@ -88,13 +88,11 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        placeholder: "Email address",
+                                                        placeholder: "Email Address",
                                                         disabled: editEmail,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditEmail(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editEmail && (<i onClick={() => setEditEmail(false)} className={"fas fa-edit"}/>)}
                                                                 {editEmail ? "" : <i onClick={() => setEditEmail(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -110,7 +108,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        placeholder: "First name",
+                                                        placeholder: "First Name",
                                                         disabled: true
                                                     }}
                                                 />
@@ -122,7 +120,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        placeholder: "Last name",
+                                                        placeholder: "Last Name",
                                                         disabled: true
                                                     }}
                                                 />
@@ -140,9 +138,7 @@ export default function ProfilePage(props) {
                                                         disabled: editEducation,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditEducation(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editEducation && (<i onClick={() => setEditEducation(false)} className={"fas fa-edit"}/>)}
                                                                 {editEducation ? "" : <i onClick={() => setEditEducation(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -170,9 +166,7 @@ export default function ProfilePage(props) {
                                                         disabled: editHospital,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditHospital(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editHospital && (<i onClick={() => setEditHospital(false)} className={"fas fa-edit"}/>)}
                                                                 {editHospital ? "" : <i onClick={() => setEditHospital(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -190,9 +184,7 @@ export default function ProfilePage(props) {
                                                         disabled: editSpecialization,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditSpecialization(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editSpecialization && (<i onClick={() => setEditSpecialization(false)} className={"fas fa-edit"}/>)}
                                                                 {editSpecialization ? "" : <i onClick={() => setEditSpecialization(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -210,9 +202,7 @@ export default function ProfilePage(props) {
                                                         disabled: editAddress,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
-                                                                <i onClick={() => setEditAddress(false)}
-                                                                    className={"fas fa-edit"}
-                                                                />
+                                                                {editAddress && (<i onClick={() => setEditAddress(false)} className={"fas fa-edit"}/>)}
                                                                 {editAddress ? "" : <i onClick={() => setEditAddress(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
@@ -241,9 +231,7 @@ export default function ProfilePage(props) {
                                                     disabled: editBio,
                                                     endAdornment: (
                                                         <InputAdornment position="end">
-                                                            <i onClick={() => setEditBio(false)}
-                                                                className={"fas fa-edit"}
-                                                            />
+                                                            {editBio && (<i onClick={() => setEditBio(false)} className={"fas fa-edit"}/>)}
                                                             {editBio ? "" : <i onClick={() => setEditBio(true)} className="fas fa-save"></i>}
                                                         </InputAdornment>
                                                     )
