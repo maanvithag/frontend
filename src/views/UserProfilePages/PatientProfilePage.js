@@ -33,28 +33,39 @@ export default function ProfilePage(props) {
     const [editEmail, setEditEmail] = useState(true);
     const [editPhone, setEditPhone] = useState(true);
     const [editAddress, setEditAddress] = useState(true);
+    const [editIPCompany, setEditIPCompany] = useState(true);
+    const [editIPContact, setEditIPContact] = useState(true);
+    const [editMembershipID, setEditMembershipID] = useState(true);
+    const [editIPlan, setEditIPlan] = useState(true);
+    const [editDeductible, setEditDeductible] = useState(true);
+
     const [profile, setProfile] = useState({})
 
     const handleLoad = (event) => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
-          method : 'post',
-          credentials: 'include',
-          headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
         }).then(response => response.json())
-        .then(data => {
-          setProfile(data)
-        })
-      }
+            .then(data => {
+                setProfile(data)
+            })
+    };
     useEffect(() => {handleLoad()},[])
 
     const style = {
         link: {
             color: 'white'
+        },
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
         }
     };
 
 
-    console.log(profile)
+    console.log(profile);
 
     return (
         <div>
@@ -71,7 +82,7 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
@@ -206,7 +217,7 @@ export default function ProfilePage(props) {
                                     <CardHeader color="primary">
                                         <h4 className={classes.cardTitleWhite}>Insurance Details </h4>
                                         <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
-                                        <h7 style={style.link}> View Provider&nbsp;&nbsp;&nbsp;<i className={"fas fa-external-link-square-alt"}/> </h7>
+                                            <h7 style={style.link}> View Provider&nbsp;&nbsp;&nbsp;<i className={"fas fa-external-link-square-alt"}/> </h7>
                                         </Link>
                                     </CardHeader>
                                     <CardBody>
@@ -219,7 +230,13 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editIPCompany,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editIPCompany && (<i onClick={() => setEditIPCompany(false)} className={"fas fa-edit"}/>)}
+                                                                {editIPCompany ? "" : <i onClick={() => setEditIPCompany(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -231,7 +248,13 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editIPContact,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editIPContact && (<i onClick={() => setEditIPContact(false)} className={"fas fa-edit"}/>)}
+                                                                {editIPContact ? "" : <i onClick={() => setEditIPContact(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -243,7 +266,49 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: editIPlan,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editIPlan && (<i onClick={() => setEditIPlan(false)} className={"fas fa-edit"}/>)}
+                                                                {editIPlan ? "" : <i onClick={() => setEditIPlan(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText={profile.membershipid}
+                                                    id="membershipid"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editMembershipID,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editMembershipID && (<i onClick={() => setEditMembershipID(false)} className={"fas fa-edit"}/>)}
+                                                                {editMembershipID ? "" : <i onClick={() => setEditMembershipID(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={12}>
+                                                <CustomInput
+                                                    labelText={profile.deductible}
+                                                    id="deductible"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editDeductible,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editDeductible && (<i onClick={() => setEditDeductible(false)} className={"fas fa-edit"}/>)}
+                                                                {editDeductible ? "" : <i onClick={() => setEditDeductible(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -334,4 +399,5 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+
 
