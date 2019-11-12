@@ -14,7 +14,7 @@ import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import SignedInHeaders from "views/SignedInHeader.js";
-
+import InputAdornment from '@material-ui/core/InputAdornment';
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
@@ -25,8 +25,9 @@ const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const [editCompany, setEditCompany] = useState(true);
-    const [editPersonal, setEditPersonal] = useState(true);
+    const [editEmail, setEditEmail] = useState(true);
+    const [editAddress, setEditAddress] = useState(true);
+    const [editPhone, setEditPhone] = useState(true);
     const { ...rest } = props;
     const [profile, setProfile] = useState({});
 
@@ -86,7 +87,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editPersonal
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -98,7 +99,16 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editPersonal
+                                                        placeholder: profile.email,
+                                                        disabled: editEmail,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <i onClick={() => setEditEmail(false)}
+                                                                    className={"fas fa-edit"}
+                                                                />
+                                                                {editEmail ? "" : <i onClick={() => setEditEmail(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -112,7 +122,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editPersonal
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -124,7 +134,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editPersonal
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
@@ -136,11 +146,7 @@ export default function ProfilePage(props) {
                                 <br></br>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Company Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditCompany(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
+                                        <h4 className={classes.cardTitleWhite}>Company Information</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -152,19 +158,27 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editCompany
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText={profile.phonenumber}
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editCompany
+                                                        placeholder: profile.phonenumber,
+                                                        disabled: editPhone,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <i onClick={() => setEditPhone(false)}
+                                                                    className={"fas fa-edit"}
+                                                                />
+                                                                {editPhone ? "" : <i onClick={() => setEditPhone(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -172,21 +186,26 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
-                                                    labelText={profile.address}
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editCompany
+                                                        placeholder: profile.address,
+                                                        disabled: editAddress,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <i onClick={() => setEditAddress(false)}
+                                                                    className={"fas fa-edit"}
+                                                                />
+                                                                {editAddress ? "" : <i onClick={() => setEditAddress(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                        <Button color="primary" onClick={() => setEditCompany(true)}>Save</Button>
-                                    </CardFooter>
                                 </Card>
                             </GridItem>
                         </GridContainer>
