@@ -33,18 +33,25 @@ export default function ProfilePage(props) {
 
     const handleLoad = (event) => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
-          method : 'post',
-          credentials: 'include',
-          headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
         }).then(response => response.json())
-        .then(data => {
-          setProfile(data)
-        })
+            .then(data => {
+                setProfile(data)
+            })
     }
     useEffect(() => {handleLoad()},[])
-      
+
     console.log(profile)
 
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
 
     return (
         <div>
@@ -61,7 +68,7 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
@@ -208,4 +215,5 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+
 
