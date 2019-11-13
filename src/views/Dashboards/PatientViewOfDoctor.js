@@ -26,6 +26,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import StarRatings from 'react-star-ratings';
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
@@ -313,7 +314,13 @@ export default function ProfilePage(props) {
                                             <CardBody>
                                             {reviews.map((item, index) => (<Card style={{borderColor: "primary"}}>
                                                 <CardBody>
-                                                    <p>Rating: {item.rating}</p> 
+                                                <StarRatings
+                                                        rating={item.rating}
+                                                        starDimension="20px"
+                                                        starSpacing="5px"
+                                                        starRatedColor="orange"
+                                                    />
+                                                    {/* <p>Rating: {item.rating}</p> */}
                                                     <p>Review: {item.review}</p>
                                                 </CardBody>
                                                 </Card>))}
