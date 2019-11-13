@@ -188,7 +188,7 @@ export default function ProfilePage(props) {
                                 Thank you for taking the time to review.
                                 </div> <br></br>
                                 <Link to="/dashboard2"> 
-                                    <Button color="primary" onClick={() => setModal(false)}>
+                                    <Button color="primary" onClick={(event) => {setModal(false); handleAddReview();}}>
                                     Submit Review
                                     </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </Link>

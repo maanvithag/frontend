@@ -88,7 +88,7 @@ export default function ProfilePage(props) {
         })
     }
 
-    console.log(createAppointment)
+    console.log(ts)
     
 
     return (
@@ -128,12 +128,11 @@ export default function ProfilePage(props) {
                                             />  <br/>
                                             <h4> Please select a time: </h4>
                                             <CustomDropdown
-                                                buttonText="Time"
                                                 buttonProps={{
                                                     color: "primary"
                                                 }}
-                                                onChange={handleChange}
                                                 value={ts}
+                                                onChange={handleChange}
                                                 dropdownList={timeslots}
                                             /> <br/>
                                             {/* <BookAppointment/> */}
