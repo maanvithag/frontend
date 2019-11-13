@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 import SignedInHeaders from "views/SignedInHeader.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import {Create, Payment} from "@material-ui/icons";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -197,8 +198,8 @@ export default function ProfilePage(props) {
                     )
                   },
                   {
-                    tabButton: "Payments",
-                    tabIcon: Schedule,
+                    tabButton: "Billing",
+                    tabIcon: Payment,
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>

@@ -54,6 +54,19 @@ export default function SearchPage(props) {
     caption="doctors";
   } else  caption="insurance providers";
 
+    const style = {
+        btn: {
+            color: 'white',
+            textTransform: 'capitalize',
+            fontSize: 'small'
+        },
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
+
   return (
     <div>
       <Header
@@ -68,7 +81,7 @@ export default function SearchPage(props) {
         {...rest}/>
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)} color={"info"}>
-        <div>
+        <div style={style.bg}>
           <div className={classes.container}>
             <GridContainer justify="space-around" direction="row" color={"info"}>
                 <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
@@ -85,13 +98,13 @@ export default function SearchPage(props) {
                           <p>{item.mAddress}</p>
                           <GridContainer justify="center">
                             <GridItem xs={13} sm={12} md={6}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
-                              <Button fullWidth color="primary">
+                              <Button fullWidth color="primary" style={style.btn}>
                                   Book Appointment
                               </Button></Link>) }
                               </GridItem>
                               <GridItem xs={13} sm={12} md={6}>
                               <Link to= {window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType")+ "/" + btoa(item.mUserName)}>
-                              <Button fullWidth color="primary">
+                              <Button fullWidth color="primary" style={style.btn}>
                                 View Profile
                               </Button>
                               </Link>

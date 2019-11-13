@@ -49,6 +49,26 @@ export default function SignedInHeaders(props){
         window.localStorage.setItem("searchUserType", document.getElementById('inputUserType').value);
     };
 
+    const style = {
+        btn: {
+            color: 'white',
+            fontSize: 'small',
+            margin: '-20px',
+            padding: '12px'
+        },
+        btnProfile: {
+            color: 'white',
+            fontSize: 'small',
+            margin: '-20px',
+            padding: '15px',
+            width: '50px'
+        },
+        searchBar: {
+            width: '100%',
+            display: 'inline-block'
+        }
+    };
+
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <ListItem>
@@ -74,14 +94,13 @@ export default function SignedInHeaders(props){
                     <CustomInput
                         id={"inputEntry"}
                         primary
+                        style={style.searchBar}
 
                         inputRootCustomClasses={classes.inputRootCustomClasses}
                         formControlProps={{
                             className: classes.formControl
                         }}
                         inputProps={{
-                            width: 1000,
-
                             placeholder: "Search",
                             inputProps: {
                                 "aria-label": "Search",
@@ -100,24 +119,15 @@ export default function SignedInHeaders(props){
             <ListItem>
                 <ListItem className={classes.listItem}>
                     <Link to={"/"+ window.localStorage.getItem("userType") +"/profile/" + window.localStorage.getItem("encryptedUserName")}>
-                        <Button
-                            size="small"
-                            /*
-                              href="#pablo"
-                              className={classes.navLink}
-                              onClick={e => e.preventDefault()}
-                              */
-                            color="github"
-                            round
-                        >
-                            <AccountCircle className={classes.icons} /> Profile
-                        </Button>
+                            <Button justIcon round color="primary" onClick={handleSearch} color={"github"}> {/* Add onClick={handleSearch} */}
+                                <AccountCircle className={classes.icons} />
+                            </Button>
                     </Link>
                 </ListItem>
             </ListItem>
             <ListItem>
                 <Link to="/" className={classes.link}>
-                    <Button color='github' size="small" round onClick={handleSignOut}>
+                    <Button color='github' size="small" round onClick={handleSignOut} style={style.btn}>
                         Sign out
                     </Button>
                 </Link>

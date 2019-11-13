@@ -107,7 +107,7 @@ export default function ProfilePage(props) {
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                             <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mDoctorName}</h4>
+                            <h4 className={classes.cardTitle}>{item.mPatientName}</h4>
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
                               {/* <CancelAppointment/> */}
@@ -181,7 +181,7 @@ export default function ProfilePage(props) {
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { pastAppointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                             <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mDoctorName}</h4>
+                            <h4 className={classes.cardTitle}>{item.mPatientName}</h4>
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
                               <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
