@@ -81,9 +81,10 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Personal Information</h4>
+                                        <h4 className={classes.cardTitleWhite}>Insurance: First Name Last Name</h4>
                                     </CardHeader>
                                     <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
@@ -117,42 +118,9 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText={profile.firstname}
-                                                    id="first-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText={profile.lastname}
-                                                    id="last-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                    </CardFooter>
-                                </Card>
-                                <br></br>
-                                <Card>
-                                    <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Company Information</h4>
-                                    </CardHeader>
                                     <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Company Information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
