@@ -110,7 +110,7 @@ export default function SignedInHeaders(props){
                     />
 
                     <Link to="/search">
-                        <Button justIcon round color="primary" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
+                        <Button justIcon round color="github" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
                             <Search className={classes.searchIcon} />
                         </Button>
                     </Link>
