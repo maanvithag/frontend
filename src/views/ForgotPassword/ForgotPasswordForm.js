@@ -32,16 +32,12 @@ export default class ForgotPasswordForm extends React.Component {
     }
 
     handleSubmit = () => {
-        const user = {
-            otp: this.state.newPassword,
-            isOtpAccurate: ""
-        };
         var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + "/forgotpassword";
         fetch(targetUrl, {
             method : 'post',
+            credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body : JSON.stringify({
-                username : window.localStorage.getItem("username"),
                 password : this.state.newPassword
             })
         })
@@ -97,7 +93,7 @@ export default class ForgotPasswordForm extends React.Component {
 
                 {this.state.newPassword === this.state.confirmPassword ? (
                     <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
-                        <Link to={""}>
+                        <Link to={"dashboard"}>
                             <Button color="primary" size="lg" onClick={this.handleSubmit}>
                                 Submit
                             </Button>

@@ -32,7 +32,6 @@ export default class EnterEmailForm extends React.Component {
             isOtpAccurate: ""
         };
 
-        window.localStorage.setItem("username", this.state.emailID);
         window.localStorage.setItem("isForgotPasswordFlow", "true");
         var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/forgotpassword/email';
     
