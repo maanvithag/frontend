@@ -1,26 +1,23 @@
-import React, {useState, useEffect} from 'react';
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import InputAdornment from '@material-ui/core/InputAdornment';
 // @material-ui/core components
 // @material-ui/icons
 import { makeStyles } from "@material-ui/core/styles";
-
-// core components
-import Header from "components/Header/Header.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+// core components
+import Header from "components/Header/Header.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import SignedInHeaders from "views/SignedInHeader.js";
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -41,7 +38,15 @@ export default function ProfilePage(props) {
 
     const [profile, setProfile] = useState({})
 
-    const handleLoad = (event) => {
+    const [emailaddress, setEmailAddress] = useState({})
+    const [phonenumber, setPhoneNumber] = useState({})
+    const [address, setAddress] = useState({})
+
+    const [emergencycontactnumber, setEmergencyContactNumber] = useState({})
+    const [emergencycontactname, setEmergencyContactName] = useState({})
+    const [medicalhistory, setMedicalHistory] = useState({})
+
+    const handleLoad = () => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
             method : 'post',
             credentials: 'include',
@@ -49,9 +54,55 @@ export default function ProfilePage(props) {
         }).then(response => response.json())
             .then(data => {
                 setProfile(data)
+                setEmailAddress("")
+                setAddress("")
+                setPhoneNumber("")
+                setEmergencyContactName("")
+                setEmergencyContactNumber("")
+                setMedicalHistory("")
             })
     };
     useEffect(() => {handleLoad()},[])
+
+    const handleEmailAddressChange = (event) => {
+        setEmailAddress(event.target.value)
+    }
+
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value)
+    }
+
+    const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value)
+    }
+
+    const handleEmergencyContactNumberChange = (event) => {
+        setEmergencyContactNumber(event.target.value)
+    }
+
+    const handleEmergencyContactNameChange = (event) => {
+        setEmergencyContactName(event.target.value)
+    }
+
+    const handlMedicalHistoryChange = (event) => {
+        setMedicalHistory(event.target.value)
+    }
+
+    const saveUserInfoOnServer = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile/update', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+                emailaddress: emailaddress,
+                address: address,
+                phonenumber: phonenumber,
+                emergencycontactname: emergencycontactname,
+                emergencycontactnumber: emergencycontactnumber,
+                medicalhistory: medicalhistory
+            })
+          }).then(response => response.json())
+    }
 
     const style = {
         link: {
@@ -63,8 +114,6 @@ export default function ProfilePage(props) {
             borderRadius: 5
         }
     };
-
-    console.log(profile);
 
     return (
         <div>
@@ -86,7 +135,10 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to="/patient/dashboard">
-                                <Button color="primary">Return to my Dashboard</Button>
+                                <Button 
+                                onClick = {saveUserInfoOnServer}
+                                color="primary"
+                                >Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -97,7 +149,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Patient: First Name Last Name</h4>
+                                        <h4 className={classes.cardTitleWhite}>Patient: {profile.firstname} {profile.lastname}</h4>
                                     </CardHeader>
                                     <CardBody>
                                     <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
@@ -121,6 +173,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange: handleEmailAddressChange,
                                                         placeholder: profile.emailaddress,
                                                         disabled: editEmail,
                                                         endAdornment: (
@@ -167,6 +220,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange: handleAddressChange,
                                                         placeholder: profile.address,
                                                         disabled: editAddress,
                                                         endAdornment: (
@@ -186,6 +240,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange: handlePhoneNumberChange,
                                                         placeholder: profile.phonenumber,
                                                         disabled: editPhone,
                                                         endAdornment: (
@@ -222,6 +277,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange: handleEmergencyContactNameChange,
                                                         placeholder: profile.emergencycontactname,
                                                         disabled: editEmergencyName,
                                                         endAdornment: (
@@ -241,6 +297,7 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange: handleEmergencyContactNumberChange,
                                                         placeholder: profile.emergencycontactnumber,
                                                         disabled: editEmergencyNum,
                                                         endAdornment: (
@@ -263,6 +320,7 @@ export default function ProfilePage(props) {
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
+                                                    onChange: handlMedicalHistoryChange,
                                                     placeholder: profile.medicalhistory,
                                                     multiline: true,
                                                     rows: 5,

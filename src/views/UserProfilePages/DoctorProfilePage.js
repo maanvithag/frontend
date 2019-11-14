@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -19,7 +19,6 @@ import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-import {primaryColor} from "../../assets/jss/material-kit-react";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {Link} from "react-router-dom";
@@ -46,6 +45,73 @@ export default function ProfilePage(props) {
         }
     };
 
+    const [profile, setProfile] = useState({})
+
+    const [emailaddress, setEmailAddress] = useState({})
+    const [education, setEducation] = useState({})
+    
+    const [hospital, setHospital] = useState({})
+    const [specialization, setSpecialization] = useState({})
+    const [address, setAddress] = useState({})
+
+    const [summary, setSummary] = useState({})
+
+    const handleLoad = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        }).then(response => response.json())
+            .then(data => {
+                setProfile(data)
+                setEmailAddress("")
+                setEducation("")
+                setHospital("")
+                setSpecialization("")
+                setSpecialization("")
+                setAddress("")
+                setSummary("")
+            })
+    };
+    useEffect(() => {handleLoad()},[])
+
+    const handleEmailAddressChange = (event) => {
+        setEmailAddress(event.target.value)
+    }
+    const handleEducationChange = (event) => {
+        setEducation(event.target.value)
+    }
+
+    const handleHospitalChange = (event) => {
+        setHospital(event.target.value)
+    }
+    const handleSpecializationChange = (event) => {
+        setSpecialization(event.target.value)
+    }
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value)
+    }
+
+    const handleSummaryChange = (event) => {
+        setSummary(event.target.value)
+    }
+
+    const saveUserInfoOnServer = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile/update', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+                emailaddress: emailaddress,
+                address: address,
+                education: education,
+                hospital: hospital,
+                specialization: specialization,
+                biosummary: summary
+            })
+          }).then(response => response.json())
+    }
+
     return (
         <div>
             <Header
@@ -66,7 +132,10 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to="/doctor/dashboard">
-                                <Button color="primary">Return to my Dashboard</Button>
+                                <Button 
+                                onClick={saveUserInfoOnServer}
+                                color="primary"
+                                >Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -74,13 +143,14 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Doctor: First Name Last Name</h4>
+                                        <h4 className={classes.cardTitleWhite}>Doctor: {profile.firstname} {profile.lastname}</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
+                                                    labelText={profile.username}
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -94,10 +164,12 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
                                                     id="email-address"
+                                                    labelText={profile.email}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange:handleEmailAddressChange,
                                                         placeholder: "Email Address",
                                                         disabled: editEmail,
                                                         endAdornment: (
@@ -114,10 +186,12 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
                                                     id="education"
+                                                    labelText={profile.education}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange:handleEducationChange,
                                                         placeholder: "Education",
                                                         disabled: editEducation,
                                                         endAdornment: (
@@ -137,10 +211,12 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
                                                     id="hospital"
+                                                    labelText = {profile.hospital}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange:handleHospitalChange,
                                                         placeholder: "Hospital",
                                                         disabled: editHospital,
                                                         endAdornment: (
@@ -155,10 +231,12 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
                                                     id="specialization"
+                                                    labelText={profile.specialization}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange:handleSpecializationChange,
                                                         placeholder: "Specialization",
                                                         disabled: editSpecialization,
                                                         endAdornment: (
@@ -173,10 +251,12 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
                                                     id="address"
+                                                    labelText={profile.address}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        onChange:handleAddressChange,
                                                         placeholder: "Address",
                                                         disabled: editAddress,
                                                         endAdornment: (
@@ -195,10 +275,12 @@ export default function ProfilePage(props) {
                                         <GridItem xs={12} sm={12} md={12}>
                                             <CustomInput
                                                 id="doctor-bio"
+                                                labelText={profile.biosummary}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
+                                                    onChange:handleSummaryChange,
                                                     placeholder: "Bio summary",
                                                     multiline: true,
                                                     rows: 5,
