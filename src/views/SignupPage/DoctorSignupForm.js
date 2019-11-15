@@ -77,8 +77,6 @@ class SignupButton extends React.Component {
 
   handleSubmit = () => {
     var targetUrl = window.localStorage.getItem("baseURL") + 'doctor/signup';
-    window.localStorage.setItem("encryptedUserName", btoa(this.state.username));
-
 
     fetch(targetUrl, {
       method : 'post',

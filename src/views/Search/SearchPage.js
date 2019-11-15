@@ -28,8 +28,11 @@ export default function SearchPage(props) {
   const searchItem = window.localStorage.getItem("searchItem");
   const searchUserType = window.localStorage.getItem("searchUserType");
   const [searchResults, setSearchResults] = useState([]);
+
   /* change for search */
-  const handleLoad = (event) => {
+  // Until and unless the searchItem parameter is changed, the useEffect will not be executed. If this is removed, the useEffect will be called 
+  // infinite number of times.
+  useEffect(() => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search?query=' + localStorage.getItem("searchItem"), {
       method : 'post',
       credentials: 'include',
@@ -38,8 +41,7 @@ export default function SearchPage(props) {
     .then(data => {
         setSearchResults(data)
     })
-  };
-  useEffect(() => {handleLoad()},[]);
+  }, [searchItem]);
 
   function condHiding() {
     if(window.localStorage.getItem("searchUserType")==="doctor") {
@@ -53,7 +55,6 @@ export default function SearchPage(props) {
   if(searchUserType === "doctor"){
     caption="doctors";
   } else  caption="insurance providers";
-
     const style = {
         btn: {
             color: 'white',
@@ -97,12 +98,12 @@ export default function SearchPage(props) {
                           <p>{item.mHospital}</p>
                           <p>{item.mAddress}</p>
                           <GridContainer justify="center">
-                            <GridItem xs={13} sm={12} md={6}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
+                            <GridItem xs={13} sm={12} md={7}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
                                   Book Appointment
                               </Button></Link>) }
                               </GridItem>
-                              <GridItem xs={13} sm={12} md={6}>
+                              <GridItem xs={13} sm={12} md={5}>
                               <Link to= {window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType")+ "/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
                                 View Profile

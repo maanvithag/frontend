@@ -118,7 +118,7 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to={"/"+ window.localStorage.getItem("userType") +"/profile/" + window.localStorage.getItem("encryptedUserName")}>
+                    <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
                             <Button justIcon round color="primary" onClick={handleSearch} color={"github"}> {/* Add onClick={handleSearch} */}
                                 <AccountCircle className={classes.icons} />
                             </Button>

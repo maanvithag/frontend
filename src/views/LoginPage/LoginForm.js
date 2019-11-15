@@ -59,8 +59,6 @@ class LoginForm extends React.Component {
       isCredentialsAccurate: "",
     };
 
-    window.localStorage.setItem("encryptedUserName", btoa(user.username));
-
     this.fireAndGetResponseInJSON();
   };
     
