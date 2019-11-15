@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, {useState} from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
@@ -27,62 +27,80 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import {InputLabel} from "@material-ui/core";
+import {string} from "prop-types";
 
 const useStyles = makeStyles(styles);
 
 export default function SignedInHeaders(props){
     const classes = useStyles();
     const [value, setValue] = React.useState('name');
-    const [searchInput, setSearchInput] = useState("");
+
 
     const inputLabel = React.useRef(null);
-    const [keyword, setKeyword] = React.useState('name');
+    const [keyword, setKeyword] = React.useState('doctor');
     const [labelWidth, setLabelWidth] = React.useState(0);
 
     const handleChange = event => {
         setKeyword(event.target.value);
     };
 
-    const handleSearchChange = event => {
-    setSearchInput(event.target.value);
-    console.log(searchInput);
-  };
+    const handleSearch = event => {
+        window.localStorage.setItem("searchItem", document.getElementById('inputEntry').value);
+        window.localStorage.setItem("searchUserType", document.getElementById('inputUserType').value);
+    };
 
+    const style = {
+        btn: {
+            color: 'white',
+            fontSize: 'small',
+            margin: '-20px',
+            padding: '12px'
+        },
+        btnProfile: {
+            color: 'white',
+            fontSize: 'small',
+            margin: '-20px',
+            padding: '15px',
+            width: '50px'
+        },
+        searchBar: {
+            width: '100%',
+            display: 'inline-block'
+        }
+    };
 
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <ListItem>
-                <div style={{width:120, fontSize:"smaller"}}>
+                <div style={{width:70, fontSize:"smaller"}}>
                     <Select
                         labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
+                        id={"inputUserType"}
                         value={keyword}
                         onChange={handleChange}
                         labelWidth={labelWidth}
-                        defaultValue={"name"}
+                        defaultValue={"doctor"}
 
                         // might have to change this approach for showing default value
 
                     >
-                        <MenuItem value={"name"} selected="selected">Name</MenuItem>
-                        <MenuItem value={"specialization"}>Specialization</MenuItem>
-                        <MenuItem value={"location"}>Location</MenuItem>
+                        <MenuItem value={"doctor"} selected="selected">Doctor</MenuItem>
+                        <MenuItem value={"insurance"}>Insurance</MenuItem>
                     </Select>
                 </div>
             </ListItem>
             <ListItem>
                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:200}}>
                     <CustomInput
+                        id={"inputEntry"}
                         primary
+                        style={style.searchBar}
 
                         inputRootCustomClasses={classes.inputRootCustomClasses}
                         formControlProps={{
                             className: classes.formControl
                         }}
                         inputProps={{
-                            width: 1000,
-                            onChange: handleSearchChange,
-
                             placeholder: "Search",
                             inputProps: {
                                 "aria-label": "Search",
@@ -90,8 +108,9 @@ export default function SignedInHeaders(props){
                             }
                         }}
                     />
-                    <Link to={"/doctorsearch/" +  searchInput}>
-                        <Button justIcon round color="primary"> {/* Add onClick={handleSearch} */}
+
+                    <Link to="/search">
+                        <Button justIcon round color="github" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
                             <Search className={classes.searchIcon} />
                         </Button>
                     </Link>
@@ -99,23 +118,16 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to="profile/:ID">
-                        <Button
-                            /*
-                              href="#pablo"
-                              className={classes.navLink}
-                              onClick={e => e.preventDefault()}
-                              */
-                            color="primary"
-                        >
-                            <AccountCircle className={classes.icons} /> Profile
-                        </Button>
+                    <Link to={"/"+ window.localStorage.getItem("userType") +"/profile/" + window.localStorage.getItem("encryptedUserName")}>
+                            <Button justIcon round color="primary" onClick={handleSearch} color={"github"}> {/* Add onClick={handleSearch} */}
+                                <AccountCircle className={classes.icons} />
+                            </Button>
                     </Link>
                 </ListItem>
             </ListItem>
             <ListItem>
                 <Link to="/" className={classes.link}>
-                    <Button color="primary" onClick={handleSignOut}>
+                    <Button color='github' size="small" round onClick={handleSignOut} style={style.btn}>
                         Sign out
                     </Button>
                 </Link>

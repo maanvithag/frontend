@@ -1,38 +1,85 @@
-import React, {useState} from 'react';
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import InputAdornment from '@material-ui/core/InputAdornment';
 // @material-ui/core components
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
-// core components
-import Header from "components/Header/Header.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+// core components
+import Header from "components/Header/Header.js";
 import Parallax from "components/Parallax/Parallax.js";
-import NavPills from "components/NavPills/NavPills.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import SignedInHeaders from "views/SignedInHeader.js";
-
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const [editCompany, setEditCompany] = useState(true);
-    const [editPersonal, setEditPersonal] = useState(true);
+    const [editEmail, setEditEmail] = useState(true);
+    const [editAddress, setEditAddress] = useState(true);
+    const [editPhone, setEditPhone] = useState(true);
     const { ...rest } = props;
+    const [profile, setProfile] = useState({});
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
+
+    const [emailaddress, setEmailAddress] = useState(true)
+    const [phonenumber, setPhoneNumber] = useState(true)
+    const [address, setAddress] = useState(true)
+
+    const handleLoad = (event) => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        }).then(response => response.json())
+            .then(data => {
+                setProfile(data)
+                setEmailAddress("")
+                setPhoneNumber("")
+                setAddress("")
+            })
+    }
+    useEffect(() => {handleLoad()},[])
+
+    const handleEmailAddressChange = (event) => {
+        setEmailAddress(event.target.value)
+    }
+
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value)
+    }
+
+    const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value)
+    }
+
+    const saveUserInfoOnServer = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile/update', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+                emailaddress: emailaddress,
+                address: address,
+                phonenumber: phonenumber
+            })
+          }).then(response => response.json())
+    }
+
     return (
         <div>
             <Header
@@ -48,12 +95,15 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/insurance/:insuranceID">
-                                <Button color="primary">Return to my Dashboard</Button>
+                            <Link to="/insurance/dashboard">
+                                <Button 
+                                onClick={saveUserInfoOnServer}
+                                color="primary"
+                                >Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -61,98 +111,76 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Personal Information
-                                           </h4>
+                                        <h4 className={classes.cardTitleWhite}>Insurance: {profile.firstname} {profile.lastname}</h4>
                                     </CardHeader>
                                     <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Username"
+                                                    labelText={profile.username}
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editPersonal
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Email address"
+                                                    labelText={profile.email}
                                                     id="email-address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editPersonal
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="First Name"
-                                                    id="first-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: editPersonal
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Last Name"
-                                                    id="last-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: editPersonal
+                                                        onChange: handleEmailAddressChange,
+                                                        placeholder: profile.email,
+                                                        disabled: editEmail,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editEmail && (<i onClick={() => setEditEmail(false)} className={"fas fa-edit"}/>)}
+                                                                {editEmail ? "" : <i onClick={() => setEditEmail(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                    </CardFooter>
-                                </Card>
-                                <br></br>
-                                <Card>
-                                    <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Company Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditCompany(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
-                                    </CardHeader>
                                     <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Company Information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Company"
+                                                    labelText={profile.company}
                                                     id="company"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editCompany
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Phone Number"
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editCompany
+                                                        onChange: handlePhoneNumberChange,
+                                                        placeholder: profile.phonenumber,
+                                                        disabled: editPhone,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editPhone && (<i onClick={() => setEditPhone(false)} className={"fas fa-edit"}/>)}
+                                                                {editPhone ? "" : <i onClick={() => setEditPhone(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -160,21 +188,25 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
-                                                    labelText="Address"
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editCompany
+                                                        onChange: handleAddressChange,
+                                                        placeholder: profile.address,
+                                                        disabled: editAddress,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editAddress && (<i onClick={() => setEditAddress(false)} className={"fas fa-edit"}/>)}
+                                                                {editAddress ? "" : <i onClick={() => setEditAddress(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                        <Button color="primary" onClick={() => setEditCompany(true)}>Save</Button>
-                                    </CardFooter>
                                 </Card>
                             </GridItem>
                         </GridContainer>
@@ -184,4 +216,5 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+
 

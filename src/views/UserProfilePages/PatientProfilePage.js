@@ -1,48 +1,120 @@
-import React, {useState} from 'react';
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import InputAdornment from '@material-ui/core/InputAdornment';
 // @material-ui/core components
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-
-// core components
-import Header from "components/Header/Header.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+// core components
+import Header from "components/Header/Header.js";
 import Parallax from "components/Parallax/Parallax.js";
-import NavPills from "components/NavPills/NavPills.js";
-import RenderUser from "views/ProfilePage/RenderUser.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import SignedInHeaders from "views/SignedInHeader.js";
 
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
-import {Link} from "react-router-dom";
-
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
-    const [editGeneral, setEditGeneral] = useState(true);
-    const [editInsurance, setEditInsurance] = useState(true);
-    const [editEmergency, setEditEmergency] = useState(true);
-    const [editMedical, setEditMedical] = useState(true);
+    const [editEmergencyName, setEditEmergencyName] = useState(true);
+    const [editEmergencyNum, setEditEmergencyNum] = useState(true);
+    const [editHistory, setEditHistory] = useState(true);
+    const [editEmail, setEditEmail] = useState(true);
+    const [editPhone, setEditPhone] = useState(true);
+    const [editAddress, setEditAddress] = useState(true);
+    const [editIPCompany, setEditIPCompany] = useState(true);
+    const [editIPContact, setEditIPContact] = useState(true);
+    const [editMembershipID, setEditMembershipID] = useState(true);
+    const [editIPlan, setEditIPlan] = useState(true);
+    const [editDeductible, setEditDeductible] = useState(true);
+
+    const [profile, setProfile] = useState({})
+
+    const [emailaddress, setEmailAddress] = useState({})
+    const [phonenumber, setPhoneNumber] = useState({})
+    const [address, setAddress] = useState({})
+
+    const [emergencycontactnumber, setEmergencyContactNumber] = useState({})
+    const [emergencycontactname, setEmergencyContactName] = useState({})
+    const [medicalhistory, setMedicalHistory] = useState({})
+
+    const handleLoad = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        }).then(response => response.json())
+            .then(data => {
+                setProfile(data)
+                setEmailAddress("")
+                setAddress("")
+                setPhoneNumber("")
+                setEmergencyContactName("")
+                setEmergencyContactNumber("")
+                setMedicalHistory("")
+            })
+    };
+    useEffect(() => {handleLoad()},[])
+
+    const handleEmailAddressChange = (event) => {
+        setEmailAddress(event.target.value)
+    }
+
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value)
+    }
+
+    const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value)
+    }
+
+    const handleEmergencyContactNumberChange = (event) => {
+        setEmergencyContactNumber(event.target.value)
+    }
+
+    const handleEmergencyContactNameChange = (event) => {
+        setEmergencyContactName(event.target.value)
+    }
+
+    const handlMedicalHistoryChange = (event) => {
+        setMedicalHistory(event.target.value)
+    }
+
+    const saveUserInfoOnServer = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile/update', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+                emailaddress: emailaddress,
+                address: address,
+                phonenumber: phonenumber,
+                emergencycontactname: emergencycontactname,
+                emergencycontactnumber: emergencycontactnumber,
+                medicalhistory: medicalhistory
+            })
+          }).then(response => response.json())
+    }
+
+    const style = {
+        link: {
+            color: 'white'
+        },
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
+
     return (
         <div>
             <Header
@@ -58,12 +130,15 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/:patientID">
-                                <Button color="primary">Return to my Dashboard</Button>
+                            <Link to="/patient/dashboard">
+                                <Button 
+                                onClick = {saveUserInfoOnServer}
+                                color="primary"
+                                >Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -74,17 +149,14 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>General Information<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditGeneral(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
+                                        <h4 className={classes.cardTitleWhite}>Patient: {profile.firstname} {profile.lastname}</h4>
                                     </CardHeader>
                                     <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Username"
+                                                    labelText={profile.username}
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -96,13 +168,20 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Email address"
-                                                    id="email-address"
+                                                    id="emailaddress"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        onChange: handleEmailAddressChange,
+                                                        placeholder: profile.emailaddress,
+                                                        disabled: editEmail,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editEmail && (<i onClick={() => setEditEmail(false)} className={"fas fa-edit"}/>)}
+                                                                {editEmail ? "" : <i onClick={() => setEditEmail(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
@@ -110,8 +189,8 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="First Name"
-                                                    id="first-name"
+                                                    labelText={profile.firstname}
+                                                    id="firstname"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -122,8 +201,8 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Last Name"
-                                                    id="last-name"
+                                                    labelText={profile.lastname}
+                                                    id="lastname"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -136,168 +215,227 @@ export default function ProfilePage(props) {
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
-                                                    labelText="Address"
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        onChange: handleAddressChange,
+                                                        placeholder: profile.address,
+                                                        disabled: editAddress,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editAddress && (<i onClick={() => setEditAddress(false)} className={"fas fa-edit"}/>)}
+                                                                {editAddress ? "" : <i onClick={() => setEditAddress(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Phone Number"
-                                                    id="phone-number"
+                                                    labelText={profile.phonenumber}
+                                                    id="phonenumber"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        onChange: handlePhoneNumberChange,
+                                                        placeholder: profile.phonenumber,
+                                                        disabled: editPhone,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editPhone && (<i onClick={() => setEditPhone(false)} className={"fas fa-edit"}/>)}
+                                                                {editPhone ? "" : <i onClick={() => setEditPhone(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Date of Birth: MM/DD/YYYY"
+                                                    labelText={profile.dob}
                                                     id="dob"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editGeneral
+                                                        disabled: true
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                        <Button color="primary" onClick={() => setEditGeneral(true)}>Save</Button>
-                                    </CardFooter>
-                                </Card>
-                                <br></br>
-                                <Card>
-                                    <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Insurance Details<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditInsurance(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
-                                    </CardHeader>
                                     <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Emergency Contact</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Company"
-                                                    id="insurance-company"
+                                                    labelText={profile.emergencycontactname}
+                                                    id="emergencyname"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editInsurance
+                                                        onChange: handleEmergencyContactNameChange,
+                                                        placeholder: profile.emergencycontactname,
+                                                        disabled: editEmergencyName,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editEmergencyName && (<i onClick={() => setEditEmergencyName(false)} className={"fas fa-edit"}/>)}
+                                                                {editEmergencyName ? "" : <i onClick={() => setEditEmergencyName(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Provider"
-                                                    id="insurance-provider"
+                                                    labelText={profile.emergencycontactnumber}
+                                                    id="emergencyphone"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editInsurance
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Insurance Plan"
-                                                    id="insurance-plan"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: editInsurance
+                                                        onChange: handleEmergencyContactNumberChange,
+                                                        placeholder: profile.emergencycontactnumber,
+                                                        disabled: editEmergencyNum,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editEmergencyNum && (<i onClick={() => setEditEmergencyNum(false)} className={"fas fa-edit"}/>)}
+                                                                {editEmergencyNum ? "" : <i onClick={() => setEditEmergencyNum(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                        <Button color="primary" onClick={() => setEditInsurance(true)}>Save</Button>
-                                    </CardFooter>
-                                </Card>
-                                <br></br>
-                                <Card>
-                                    <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Emergency Contact<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditEmergency(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
-                                    </CardHeader>
                                     <CardBody>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Emergency Contact Name"
-                                                    id="emergency-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: editEmergency
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Emergency Phone Number"
-                                                    id="emergency-phone"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: editEmergency
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                    </CardBody>
-                                    <CardFooter>
-                                        <Button color="primary" onClick={() => setEditEmergency(true)}>Save</Button>
-                                    </CardFooter>
-                                </Card>
-                                <br></br>
-                                <Card>
-                                    <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Medical Details<Button color="#ffffff" simple sm style={{ margin: '0px'}} onClick={() => setEditMedical(false)}>
-                                            <i
-                                                className={"fas fa-edit"}
-                                            />
-                                        </Button></h4>
-                                    </CardHeader>
-                                    <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Medical Details</h5>
                                         <GridContainer>
                                             <CustomInput
-                                                labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
-                                                id="medical-info"
+                                                id="medicalinfo"
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
+                                                    onChange: handlMedicalHistoryChange,
+                                                    placeholder: profile.medicalhistory,
                                                     multiline: true,
                                                     rows: 5,
-                                                    disabled: editMedical
+                                                    disabled: editHistory,
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            {editHistory && (<i onClick={() => setEditHistory(false)} className={"fas fa-edit"}/>)}
+                                                            {editHistory ? "" : <i onClick={() => setEditHistory(true)} className="fas fa-save"></i>}
+                                                        </InputAdornment>
+                                                    )
                                                 }}
                                             />
                                         </GridContainer>
                                     </CardBody>
-                                    <CardFooter>
-                                        <Button color="primary" onClick={() => setEditMedical(true)}>Save</Button>
-                                    </CardFooter>
+                                    <CardHeader color="primary">
+                                        <h4 className={classes.cardTitleWhite}>Insurance Details </h4>
+                                        <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
+                                            <h7 style={style.link}> View Provider&nbsp;&nbsp;&nbsp;<i className={"fas fa-external-link-square-alt"}/> </h7>
+                                        </Link>
+                                    </CardHeader>
+                                    <CardBody>
+                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Insurance Details</h5>
+                                        <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText={profile.insurancecompany}
+                                                    id="insurancecompany"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editIPCompany,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editIPCompany && (<i onClick={() => setEditIPCompany(false)} className={"fas fa-edit"}/>)}
+                                                                {editIPCompany ? "" : <i onClick={() => setEditIPCompany(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText={profile.insuranceprovider}
+                                                    id="insuranceprovider"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editIPContact,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editIPContact && (<i onClick={() => setEditIPContact(false)} className={"fas fa-edit"}/>)}
+                                                                {editIPContact ? "" : <i onClick={() => setEditIPContact(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText={profile.insuranceplan}
+                                                    id="insuranceplan"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editIPlan,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editIPlan && (<i onClick={() => setEditIPlan(false)} className={"fas fa-edit"}/>)}
+                                                                {editIPlan ? "" : <i onClick={() => setEditIPlan(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <CustomInput
+                                                    labelText={profile.membershipid}
+                                                    id="membershipid"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editMembershipID,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editMembershipID && (<i onClick={() => setEditMembershipID(false)} className={"fas fa-edit"}/>)}
+                                                                {editMembershipID ? "" : <i onClick={() => setEditMembershipID(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={12}>
+                                                <CustomInput
+                                                    labelText={profile.deductible}
+                                                    id="deductible"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editDeductible,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editDeductible && (<i onClick={() => setEditDeductible(false)} className={"fas fa-edit"}/>)}
+                                                                {editDeductible ? "" : <i onClick={() => setEditDeductible(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                        </GridContainer>
+                                    </CardBody>
                                 </Card>
                             </GridItem>
                         </GridContainer>
@@ -307,4 +445,5 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+
 

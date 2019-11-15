@@ -1,54 +1,72 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
-import LocalOffer from "@material-ui/icons/LocalOffer";
 
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
-import NavPills from "components/NavPills/NavPills.js";
-import RenderUser from "views/ProfilePage/RenderUser.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
-import CancelAppointment from "views/BookAppointment/CancelAppointment.js";
 import Map from "views/Map/Map.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function SearchPage(props) {
   const classes = useStyles();
-  const tabClasses = useTabStyles();
   const { ...rest } = props;
-  const [searchResults, setSearchResults] = useState(
-    [
-      {username: "doctor1@gmail.com", name: "firstname1 + lastname1", specialization: "specialization 1", hospital: "hospital 1", address: "address 1", doctorURL: "link1"},
-      {username: "doctor2@gmail.com", name: "firstname2 + lastname2", specialization: "specialization 2", hospital: "hospital 2", address: "address 2", doctorURL: "link2"},
-      {username: "doctor3@gmail.com", name: "firstname3 + lastname3", specialization: "specialization 3", hospital: "hospital 3", address: "address 3", doctorURL: "link3"},
-      {username: "doctor4@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 4", hospital: "hospital 4", address: "address 4", doctorURL: "link4"},
-      {username: "doctor5@gmail.com", name: "firstname4 + lastname5", specialization: "specialization 5", hospital: "hospital 5", address: "address 5", doctorURL: "link5"}
-    ]);
+
+  const searchItem = window.localStorage.getItem("searchItem");
+  const searchUserType = window.localStorage.getItem("searchUserType");
+  const [searchResults, setSearchResults] = useState([]);
+  /* change for search */
+  const handleLoad = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search?query=' + localStorage.getItem("searchItem"), {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+        setSearchResults(data)
+    })
+  };
+  useEffect(() => {handleLoad()},[]);
+
+  function condHiding() {
+    if(window.localStorage.getItem("searchUserType")==="doctor") {
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  var caption;
+  if(searchUserType === "doctor"){
+    caption="doctors";
+  } else  caption="insurance providers";
+
+    const style = {
+        btn: {
+            color: 'white',
+            textTransform: 'capitalize',
+            fontSize: 'small'
+        },
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
+
   return (
     <div>
       <Header
@@ -60,38 +78,45 @@ export default function SearchPage(props) {
           height: 0,
           color: "white"
         }}
-        {...rest}
-      />
+        {...rest}/>
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div>
+      <div className={classNames(classes.main, classes.mainRaised)} color={"info"}>
+        <div style={style.bg}>
           <div className={classes.container}>
-            <GridContainer justify="space-around" direction="row">
-                <GridItem xs={5} sm={5} md={5} lg={5}>
-                <GridContainer>
-                    <GridItem xs={12} sm={12} md={12}>
-                    { searchResults.map((item, index) => (<Link to= {"/"}><Card style={{width: "25rem", borderColor: "primary"}}>
+            <GridContainer justify="space-around" direction="row" color={"info"}>
+                <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
+                <GridContainer color={"info"}>
+                  <GridItem xs={16} sm={16} md={16}>
+                    <h3>Searching for {searchItem} in {caption}</h3>
+                    { searchResults.map((item, index) => (
+                      <Card style={{width: "20rem", borderColor: "primary"}}>
                         <CardBody>
-                        <h3 className={classes.cardTitle}>{item.name}</h3>
-                        <h4>{item.specialization}</h4>
-                        <p>{item.hospital}</p>
-                        <p>{item.address}</p>
-                        <Link to= {"/patient/bookappointment"}>
-                          <Button color="primary">
-                            Book Appointment
-                          </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </Link>
-                        <Link to= {item.doctorURL}>
-                          <Button color="primary">
-                            View Profile
-                          </Button>
-                        </Link>
+                          <h3 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h3>
+                          <h4>{item.mSpecialization}</h4>
+                          <h4>{item.mCompany}</h4>
+                          <p>{item.mHospital}</p>
+                          <p>{item.mAddress}</p>
+                          <GridContainer justify="center">
+                            <GridItem xs={13} sm={12} md={6}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
+                              <Button fullWidth color="primary" style={style.btn}>
+                                  Book Appointment
+                              </Button></Link>) }
+                              </GridItem>
+                              <GridItem xs={13} sm={12} md={6}>
+                              <Link to= {window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType")+ "/" + btoa(item.mUserName)}>
+                              <Button fullWidth color="primary" style={style.btn}>
+                                View Profile
+                              </Button>
+                              </Link>
+                            </GridItem>
+                          </GridContainer>
                         </CardBody>
-                        </Card></Link>))}
-                    </GridItem>
+                    </Card>))}
+                  </GridItem>
                 </GridContainer>
                 </GridItem>
-                <GridItem xs={5} sm={5} md={5} lg={5}>
+                <GridItem xs={5} sm={5} md={5}>
+                  <br/><br/>
                   <Map />
                 </GridItem>
             </GridContainer>

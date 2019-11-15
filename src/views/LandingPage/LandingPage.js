@@ -46,7 +46,7 @@ export default function LandingPage(props) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>From Infinity and Beyond</h1>
               <h4>
-                Healthcare at your fingertips. Connect with your doctors and insurance, hassle-free.
+                Health care at your fingertips. Connect with your doctors and insurance, hassle-free.
               </h4>
               <br />
               <TypeSelect />

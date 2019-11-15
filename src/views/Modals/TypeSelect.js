@@ -109,11 +109,6 @@ export default function TypeSelect() {
                 </GridItem>
               </GridContainer>
             </div>
-            <CustomLinearProgress
-              variant="determinate"
-              color="primary"
-              value={50}
-            />
         </DialogContent>
       </Dialog>
     </div>
