@@ -18,6 +18,9 @@ import Parallax from "components/Parallax/Parallax.js";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import SignedInHeaders from "views/SignedInHeader.js";
+import {primaryColor} from "../../assets/jss/material-kit-react";
+import InputLabel from "@material-ui/core/InputLabel";
+import CardFooter from 'components/Card/CardFooter';
 
 const useStyles = makeStyles(styles);
 
@@ -111,26 +114,27 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Insurance: {profile.firstname} {profile.lastname}</h4>
+                                        <h2 className={classes.cardTitleWhite}>{profile.firstname} {profile.lastname}</h2>
                                     </CardHeader>
                                     <CardBody>
-                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Username</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.username}
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.username
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.email}
+                                                    labelText="Email Address"
                                                     id="email-address"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -148,24 +152,21 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
-                                        </GridContainer>
-                                    </CardBody>
-                                    <CardBody>
-                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Company Information</h5>
-                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Company</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.company}
                                                     id="company"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.company
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="phone-number"
                                                     formControlProps={{
@@ -184,9 +185,8 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
                                                     formControlProps={{

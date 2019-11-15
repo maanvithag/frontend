@@ -27,6 +27,7 @@ import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import StarRatings from 'react-star-ratings';
+import Map from "views/Map/Map.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
@@ -57,10 +58,10 @@ export default function ProfilePage(props) {
     const productClasses = useProductStyles();
     const [value, setValue] = React.useState('1');
     const [addreview, setAddReview] = useState({
-        rating: "",
-        review: "",
         isReviewAdded: false
     })
+    const [addreviewRating, setAddReviewRating] = useState();
+    const [addreviewReview, setAddReviewReview] = useState();
   
     const handleChange = event => {
       setValue(event.target.value);
@@ -88,8 +89,8 @@ export default function ProfilePage(props) {
             credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body: JSON.stringify({
-                rating: addreview.rating,
-                review: addreview.review,
+                rating: value,
+                review: event.review,
               })
         }).then(response => response.json())
         .then(data => {
@@ -97,9 +98,15 @@ export default function ProfilePage(props) {
         })
     }
     useEffect(() => {handleLoad()}, {})
-    
-    console.log(profile);
 
+    const handleAddReviewRating = (event) => {
+        setAddReviewRating(event.target.value)
+    }
+
+    const handleAddReviewReview = (event) => {
+        setAddReviewReview(event.target.value)
+    }
+    
     return (
         <div>
             <Header
@@ -182,13 +189,14 @@ export default function ProfilePage(props) {
                                 formControlProps={{
                                     fullWidth: true}}
                                 inputProps={{
+                                    onChange: handleAddReviewReview,
                                     multiline: true,
                                     rows: 5,}}/> <br></br> <br></br>
                                 <div className={productClasses.section} style={{padding: 0}}>
                                 Thank you for taking the time to review.
                                 </div> <br></br>
                                 <Link to="/dashboard2"> 
-                                    <Button color="primary" onClick={(event) => {setModal(false); handleAddReview();}}>
+                                    <Button color="primary" onClick={() => {setModal(false); handleAddReview({review: addreviewReview});}}>
                                     Submit Review
                                     </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </Link>
@@ -201,85 +209,76 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>{profile.name}</h4>
+                                        <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
-                                    <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Personal Information</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Education</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.name}
-                                                    id="first-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText={profile.education}
                                                     id="education"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.education
                                                       }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.hospital}
                                                     id="hospital"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.hospital
                                                       }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Specialization</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.specialization}
                                                     id="specialization"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.specialization
                                                       }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Address</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.address}
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.address
                                                       }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Contact Number</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.phonenumber}
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.phonenumber
                                                       }}
                                                 />
                                             </GridItem>
@@ -288,7 +287,6 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>About Me</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.biosummary}
                                                     id="doctor-bio"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -296,7 +294,8 @@ export default function ProfilePage(props) {
                                                     inputProps={{
                                                         multiline: true,
                                                         rows: 5,
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.biosummary
                                                     }}
                                                 />
                                             </GridItem>
@@ -328,6 +327,10 @@ export default function ProfilePage(props) {
                                         </Card>
                                     </GridItem>
                                 </GridContainer>
+                            </GridItem>
+                            <GridItem xs={5} sm={5} md={5}>
+                                <Map/>
+                                <br/><br/>
                             </GridItem>
                         </GridContainer>
                         <br></br><br></br>

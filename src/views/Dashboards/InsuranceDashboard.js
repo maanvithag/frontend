@@ -48,13 +48,15 @@ export default function ProfilePage(props) {
   const productClasses = useProductStyles();
   const [iplans, setIplans] = useState([]);
   const [patients, setPatients] = useState([]);
+
   const [addplan, setAddPlan] = useState({
-    name: "",
-    provider: "",
-    price: "",
-    details: "",
     isIplansUpdated: false
   })
+  const [addPlanName, setAddPlanName] = useState({});
+  const [addPlanProvider, setAddPlanProvider] = useState({});
+  const [addPlanPrice, setAddPlanPrice] = useState({});
+  const [addPlanDetails, setAddPlanDetails] = useState({});
+
   const [deleteplan, setDeletePlan] = useState({
     name: "",
     isIplansUpdated: false
@@ -93,10 +95,10 @@ export default function ProfilePage(props) {
       credentials: 'include',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       body: JSON.stringify({
-        name: addplan.name,
-        provider: addplan.provider,
-        price: addplan.price,
-        details: addplan.details
+        name: event.name,
+        provider: event.provider,
+        price: event.price,
+        details: event.details
       }) 
     }).then(response => response.json())
     .then(data => {
@@ -104,7 +106,21 @@ export default function ProfilePage(props) {
     })
   }
 
-  console.log(patients);
+  const handleAddPlanName = (event) => {
+    setAddPlanName(event.target.value)
+  }
+
+  const handleAddPlanProvider = (event) => {
+    setAddPlanProvider(event.target.value)
+  }
+
+  const handleAddPlanPrice = (event) => {
+    setAddPlanPrice(event.target.value)
+  }
+
+  const handleAddPlanDetails = (event) => {
+    setAddPlanDetails(event.target.value)
+  }
 
   return (
     <div>
@@ -168,29 +184,40 @@ export default function ProfilePage(props) {
                                 className={modalClasses.modalBody}>
                               <CustomInput
                                 labelText="Name"
-                                id="rating"
-                                formControlProps={{
-                                    fullWidth: true}}/>
-                              <CustomInput
-                                labelText="Provider"
-                                id="rating"
-                                formControlProps={{
-                                    fullWidth: true}}/>
-                              <CustomInput
-                                labelText="Price"
-                                id="rating"
-                                formControlProps={{
-                                    fullWidth: true}}/>
-                              <CustomInput
-                                labelText="Details of the Plan"
-                                id="medical-info"
+                                id="name"
                                 formControlProps={{
                                     fullWidth: true}}
                                 inputProps={{
-                                    multiline: true,
-                                    rows: 5,}}/> <br/> <br/>
+                                  onChange: handleAddPlanName
+                                }}/>
+                              <CustomInput
+                                labelText="Provider"
+                                id="provider"
+                                formControlProps={{
+                                    fullWidth: true}}
+                                inputProps={{
+                                  onChange: handleAddPlanProvider
+                                }}/>
+                              <CustomInput
+                                labelText="Price"
+                                id="price"
+                                formControlProps={{
+                                    fullWidth: true}}
+                                inputProps={{
+                                  onChange: handleAddPlanPrice
+                                }}/>
+                              <CustomInput
+                                labelText="Details of the Plan"
+                                id="details"
+                                formControlProps={{
+                                    fullWidth: true}}
+                                inputProps={{
+                                  onChange: handleAddPlanDetails,
+                                  multiline: true,
+                                  rows: 5,}}/> <br/> <br/>
                               <Link to="/insurance/dashboard"> 
-                                  <Button color="primary" onClick={(event) => {setAddModal(false);}}>
+                                  <Button color="primary" onClick={(event) => {setAddModal(false); 
+                                    handleAddPlan({name: addPlanName, provider: addPlanProvider, price: addPlanPrice, details: addPlanDetails});}}>
                                     Add Plan
                                   </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               </Link>
