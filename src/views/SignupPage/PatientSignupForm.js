@@ -3,8 +3,7 @@ import React from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
+
 // core components
 import Button from "components/CustomButtons/Button.js";
 import CardBody from "components/Card/CardBody.js";
@@ -76,6 +75,9 @@ export default class SignupButton extends React.Component {
 
   handleSubmit = () => {
     var targetUrl = window.localStorage.getItem("baseURL") + 'patient/signup';
+    window.localStorage.setItem("encryptedUserName", btoa(this.state.username));
+
+
 
     fetch(targetUrl, {
       method : 'post',

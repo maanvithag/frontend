@@ -27,11 +27,6 @@ class MFAForm extends React.Component {
     };
 
     handleSubmit = () => {
-        // TODO: Why did Jack add this line?
-        //event.preventDefault();
-
-        window.localStorage.setItem("isForgotPasswordFlow", "false");
-
         var targetUrl = window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/mfa';
     
         fetch(targetUrl, {
@@ -45,6 +40,8 @@ class MFAForm extends React.Component {
           .then(data => {
             if(data.isOtpAccurate) {
               if(window.localStorage.getItem("isForgotPasswordFlow") == "true") {
+                // Reset it back immediately
+                window.localStorage.setItem("isForgotPasswordFlow", "false");
                 this.props.history.push("forgotpassword");
               } else {
                   this.props.history.push("dashboard")
@@ -59,7 +56,7 @@ class MFAForm extends React.Component {
         return (
             <form>
                 <CardHeader color="primary">
-                    <h4>Enter OTP</h4>
+                    <h4>Check your Email for your Verification Code</h4>
                 </CardHeader>
                 <CardBody>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>

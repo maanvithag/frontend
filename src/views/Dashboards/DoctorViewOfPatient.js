@@ -1,11 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
@@ -13,28 +10,41 @@ import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
-import NavPills from "components/NavPills/NavPills.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
-import Table from "components/Table/Table.js";
 import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
-const useTabStyles = makeStyles(tabStyles);
 
 export default function ProfilePage(props) {
     const classes = useStyles();
-    const tabClasses = useTabStyles();
     const { ...rest } = props;
+    const [profile, setProfile] = useState({});
+
+    const patientusername = window.location.href.split('/')[5]
+
+    const handleLoad = (event) => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/patient/' + patientusername, {
+            method : 'post',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        }).then(response => response.json())
+        .then(data => {
+            setProfile(data)
+        })
+    }
+    useEffect(() => {handleLoad()}, {})
+    
+    console.log(profile);
+    
     return (
         <div>
             <Header
@@ -54,7 +64,7 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/doctor/:doctorID">
+                            <Link to="/doctor/dashboard">
                             <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
@@ -66,67 +76,14 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Patient Name</h4>
+                                    <h4 className={classes.cardTitleWhite}>{profile.name}</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Personal Information</InputLabel>
                                         <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Username"
-                                                    id="username"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Email address"
-                                                    id="email-address"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="First Name"
-                                                    id="first-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Last Name"
-                                                    id="last-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Address</InputLabel>
-                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <CustomInput
-                                                    labelText="Address"
+                                                    labelText={profile.address}
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -138,7 +95,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Phone Number"
+                                                    labelText={profile.phonenumber}
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -150,7 +107,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Date of Birth: MM/DD/YYYY"
+                                                    labelText={profile.dob}
                                                     id="dob"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -161,11 +118,11 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance</InputLabel>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance Details</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Company"
+                                                    labelText={profile.insurancecompany}
                                                     id="insurance-company"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -177,16 +134,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Insurance Provider"
-                                                    id="insurance-provider"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Insurance Plan"
+                                                    labelText={profile.insuranceplan}
                                                     id="insurance-plan"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -197,24 +145,12 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                         </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact</InputLabel>
+                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact Details</InputLabel>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <CustomInput
-                                                    labelText="Emergency Contact Name"
-                                                    id="emergency-name"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    labelText="Emergency Phone Number"
-                                                    id="emergency-phone"
+                                                    labelText={profile.emergencycontact}
+                                                    id="emergency-contact"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
@@ -228,7 +164,7 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>Medical History</InputLabel>
                                                 <CustomInput
-                                                    labelText="Medical History: please list any allergies, past surgeries, current medications, etc.."
+                                                    labelText={profile.medicalhistory}
                                                     id="medical-info"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -243,90 +179,6 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                     </CardBody>
                                 </Card>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={8} lg={6}>
-                                <NavPills
-                                    color="primary"
-                                    tabs={[
-                                        {
-                                            tabButton: "Upcoming appointments",
-                                            tabIcon: Dashboard,
-                                            tabContent: (
-                                                <GridContainer>
-                                                    <GridItem xs={12} sm={12} md={12}>
-                                                        <Card>
-                                                            <CardHeader color="primary">
-                                                                <h4 className={classes.cardTitleWhite}>Upcoming appointments</h4>
-                                                            </CardHeader>
-                                                            <CardBody>
-                                                                <Table
-                                                                    tableHeaderColor="primary"
-                                                                    tableHead={["Doctor", "Date", "Time"]}
-                                                                    tableData={[
-                                                                        ["Dakota Rice", "10/22/2018", "1pm-2pm"],
-                                                                        ["Minerva Hooper", "11/13/2018", "4pm-5pm"],
-                                                                    ]}
-                                                                />
-                                                            </CardBody>
-                                                        </Card>
-                                                    </GridItem>
-                                                </GridContainer>
-                                            )
-                                        },
-                                        {
-                                            tabButton: "Payments",
-                                            tabIcon: Schedule,
-                                            tabContent: (
-                                                <GridContainer>
-                                                    <GridItem xs={12} sm={12} md={12}>
-                                                        <Card>
-                                                            <CardHeader color="primary">
-                                                                <h4 className={classes.cardTitleWhite}>Bills</h4>
-                                                            </CardHeader>
-                                                            <CardBody>
-                                                                <Table
-                                                                    tableHeaderColor="primary"
-                                                                    tableHead={["Doctor", "Date", "Amount"]}
-                                                                    tableData={[
-                                                                        ["Dakota Rice", "10/22/2018", "$300"],
-                                                                        ["Minerva Hooper", "11/13/2018", "0"],
-                                                                    ]}
-                                                                />
-                                                            </CardBody>
-                                                        </Card>
-                                                    </GridItem>
-                                                </GridContainer>
-                                            )
-                                        },
-                                        {
-                                            tabButton: "Past appointments",
-                                            tabIcon: List,
-                                            tabContent: (
-                                                <GridContainer>
-                                                    <GridItem xs={12} sm={12} md={12}>
-                                                        <Card>
-                                                            <CardHeader color="primary">
-                                                                <h4 className={classes.cardTitleWhite}>Past appointments</h4>
-                                                            </CardHeader>
-                                                            <CardBody>
-                                                                <Table
-                                                                    tableHeaderColor="primary"
-                                                                    tableHead={["Doctor", "Date", "Time"]}
-                                                                    tableData={[
-                                                                        ["Dakota Rice", "10/22/2018", "Oud-Turnhout"],
-                                                                        ["Minerva Hooper", "11/13/2018", "Sinaai-Waas"],
-                                                                        ["Sage Rodriguez", "01/05/2019", "Baileux"],
-                                                                        ["Philip Chaney", "06/25/2019", "Overland Park"],
-                                                                    ]}
-                                                                />
-                                                            </CardBody>
-                                                        </Card>
-                                                    </GridItem>
-                                                </GridContainer>
-                                            )
-                                        }
-                                    ]}
-                                />
                             </GridItem>
                         </GridContainer>
                     </div>

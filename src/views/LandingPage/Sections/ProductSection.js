@@ -21,6 +21,14 @@ export default function ProductSection() {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
+          <h2 className={classes.title}>Featured Plans & Doctors</h2>
+          <h5 className={classes.description}>
+            TODO
+          </h5>
+        </GridItem>
+      </GridContainer>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>One-stop-shop for health care</h2>
           <h5 className={classes.description}>
             We provide a patient-centric application that allows you to make informed decisions 
@@ -30,17 +38,6 @@ export default function ProductSection() {
       </GridContainer>
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title="Free Chat"
-              description="Live-chat with your doctors regarding questions, appointments and more.
-              You can also live-chat with your healthcare representive to learn more about your insurance
-              and other questions."
-              icon={Chat}
-              iconColor="info"
-              vertical
-            />
-          </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Verified Doctors"
@@ -63,13 +60,16 @@ export default function ProductSection() {
               vertical
             />
           </GridItem>
-        </GridContainer>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8}>
-            <h2 className={classes.title}>Featured plans/doctors</h2>
-            <h5 className={classes.description}>
-              TODO
-            </h5>
+          <GridItem xs={12} sm={12} md={4}>
+            <InfoArea
+                title="Free Chat"
+                description="Live-chat with your doctors regarding questions, appointments and more.
+              You can also live-chat with your healthcare representive to learn more about your insurance
+              and other questions."
+                icon={Chat}
+                iconColor="info"
+                vertical
+            />
           </GridItem>
         </GridContainer>
       </div>
