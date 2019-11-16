@@ -87,10 +87,10 @@ function connectToChatkit(event) {
   });
 
   axios
-    .post('http://localhost:5200/users', { userId })
+    .post('https://infinitycare-frontend-server.herokuapp.com/users', { userId })
     .then(() => {
       const tokenProvider = new Chatkit.TokenProvider({
-        url: 'http://localhost:5200/authenticate',
+        url: 'https://infinitycare-frontend-server.herokuapp.com/authenticate',
       });
 
       const chatManager = new Chatkit.ChatManager({
