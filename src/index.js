@@ -28,6 +28,13 @@ import DoctorProfilePage from "./views/UserProfilePages/DoctorProfilePage";
 import InsuranceProfilePage from "./views/UserProfilePages/InsuranceProfilePage";
 import PatientProfilePage from "./views/UserProfilePages/PatientProfilePage";
 import SearchPage from "./views/Search/SearchPage";
+import ChatPage from "./views/Chat/ChatPage";
+import App from './views/Chat/App';
+
+import './views/Chat/chat.css';
+import * as serviceWorker from './views/Chat/serviceWorker';
+
+serviceWorker.unregister();
 
 var hist = createBrowserHistory();
 
@@ -75,6 +82,8 @@ ReactDOM.render(
       <Route path="/patient/bookappointment" exact component={BookAppointment} />
 
       <Route path="/search" exact component={SearchPage} />
+
+      <Route path="/chat" exact component={App}/>
 
       <Route path="/" component={LandingPage} />
     </Switch>
