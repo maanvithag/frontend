@@ -98,12 +98,12 @@ export default function SearchPage(props) {
                           <p>{item.mHospital}</p>
                           <p>{item.mAddress}</p>
                           <GridContainer justify="center">
-                            <GridItem xs={13} sm={12} md={7}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
+                            <GridItem xs={13} sm={12} md={6}>{ condHiding() && (<Link to= {"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
                                   Book Appointment
                               </Button></Link>) }
                               </GridItem>
-                              <GridItem xs={13} sm={12} md={5}>
+                              <GridItem xs={13} sm={12} md={6}>
                               <Link to= {window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType")+ "/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
                                 View Profile

@@ -90,7 +90,7 @@ export default function SignedInHeaders(props){
                 </div>
             </ListItem>
             <ListItem>
-                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:200}}>
+                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:300}}>
                     <CustomInput
                         id={"inputEntry"}
                         primary
@@ -98,7 +98,8 @@ export default function SignedInHeaders(props){
 
                         inputRootCustomClasses={classes.inputRootCustomClasses}
                         formControlProps={{
-                            className: classes.formControl
+                            className: classes.formControl,
+                            fullWidth: true
                         }}
                         inputProps={{
                             placeholder: "Search",
