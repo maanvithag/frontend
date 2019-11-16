@@ -52,13 +52,16 @@ export default function ProfilePage(props) {
   const [addplan, setAddPlan] = useState({
     isIplansUpdated: false
   })
-  const [addPlanName, setAddPlanName] = useState({});
-  const [addPlanProvider, setAddPlanProvider] = useState({});
-  const [addPlanPrice, setAddPlanPrice] = useState({});
-  const [addPlanDetails, setAddPlanDetails] = useState({});
+  const [addPlanName, setAddPlanName] = useState('');
+  const [addPlanProvider, setAddPlanProvider] = useState('');
+  const [addPlanPrice, setAddPlanPrice] = useState('');
+  const [addPlanDetails, setAddPlanDetails] = useState('');
 
   const [deleteplan, setDeletePlan] = useState({
     name: "",
+    provider: "",
+    price: "",
+    details: "",
     isIplansUpdated: false
   });
 
@@ -81,7 +84,10 @@ export default function ProfilePage(props) {
       credentials: 'include',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       body: JSON.stringify({
-        iplanname: deleteplan.name
+        price: deleteplan.price,
+        provider: deleteplan.provider,
+        details: deleteplan.details,
+        name: deleteplan.name
       }) 
     }).then(response => response.json())
     .then(data => {
@@ -95,10 +101,10 @@ export default function ProfilePage(props) {
       credentials: 'include',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       body: JSON.stringify({
-        name: event.name,
         provider: event.provider,
         price: event.price,
-        details: event.details
+        details: event.details,
+        name: event.name
       }) 
     }).then(response => response.json())
     .then(data => {
@@ -227,11 +233,12 @@ export default function ProfilePage(props) {
                           { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
                             <h4 className={classes.cardTitle}>{item.mName}</h4>
-                            <p>Price: {item.price}</p>
+                            <p>Deductible: {item.mPrice}</p>
                             <p>Details: {item.mDetails}</p>
                             {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/> */}
                             <div>
-                            <Button color="primary" onClick={(event) => {setDeleteModal(true); setDeletePlan({iplanname: item.mName});}}>
+                            <Button color="primary" onClick={(event) => {setDeleteModal(true); 
+                              setDeletePlan({name: item.mName, price: item.mPrice, provider: item.mProvider, details: item.mDetails});}}>
                               Delete
                             </Button>
                             <Dialog
@@ -270,10 +277,10 @@ export default function ProfilePage(props) {
                                 Are you sure you want to delete this plan?
                               </div> <br/>
                               <Link to="/insurance/dashboard"> 
-                                  <Button color="primary" onClick={(event) => {setDeleteModal(false); handleDeletePlan();}}>
+                                  <Button color="primary" onClick={(event) => {setDeleteModal(false); handleDeletePlan(); handleLoad();}}>
                                     Yes
                                   </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <Button color="primary" onClick={(event) => {setDeleteModal(false); handleLoad();}}>
+                                  <Button color="primary" onClick={(event) => {setDeleteModal(false);}}>
                                     No
                                   </Button>
                               </Link>

@@ -134,9 +134,6 @@ export default function ProfilePage(props) {
                                 Book Appointment
                                 </Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Link to="/chat">
-                            <Button>Chat with me!</Button>
-                            </Link>
                             {/* <AddDoctorReview/> */}
                             <div>
                             <Button color="primary" onClick={() => setModal(true)}>
@@ -181,11 +178,6 @@ export default function ProfilePage(props) {
                                 <FormControlLabel
                                     value="5" control={<Radio color="primary" />} label="5"/>
                                 </RadioGroup>
-                                <CustomInput
-                                labelText="Title"
-                                id="rating"
-                                formControlProps={{
-                                    fullWidth: true}}/>
                                 <CustomInput
                                 labelText="Please write your review here"
                                 id="medical-info"
