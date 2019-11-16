@@ -311,7 +311,12 @@ export default function ProfilePage(props) {
                                     <GridItem xs={12} sm={12} md={12}>
                                         <Card>
                                             <CardHeader color="primary">
-                                                <h4 className={classes.cardTitleWhite}>Average Rating: {rating}</h4>
+                                                <h4 className={classes.cardTitleWhite}>Average Rating: <StarRatings
+                                                        rating={rating}
+                                                        starDimension="30px"
+                                                        starSpacing="7px"
+                                                        starRatedColor="orange"
+                                                    /></h4>
                                             </CardHeader>
                                             <CardBody>
                                             {reviews.map((item, index) => (<Card style={{borderColor: "primary"}}>
