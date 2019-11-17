@@ -22,7 +22,7 @@ class LoginForm extends React.Component {
       password: "",
       successful: "",
       cardAnimaton: "cardHidden",
-      jsonResponse: "",
+      jsonResponse: ""
     };
     let currentURLPath = window.location.pathname;
     window.localStorage.setItem("userType", currentURLPath.substring(1, currentURLPath.indexOf("/signin")));
@@ -33,6 +33,11 @@ class LoginForm extends React.Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.responseFacebook = this.responseFacebook.bind(this);
+    this.verifyCaptcha = this.verifyCaptcha.bind(this)
+  }
+
+  verifyCaptcha = (value) => {
+    console.log(value)
   }
 
   responseFacebook = (response) => {
@@ -51,14 +56,6 @@ class LoginForm extends React.Component {
   };
 
   handleSubmit = () => {
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      isOtpSent: "",
-      isCredentialsAccurate: "",
-    };
-
     this.fireAndGetResponseInJSON();
   };
     
@@ -74,7 +71,6 @@ class LoginForm extends React.Component {
     }).then(response => response.json())
     .then(data => {
       if(data.isCredentialsAccurate) {
-        console.log(data.isOtpSent)
         this.props.history.push("mfa");
       } else {
         alert("Please enter correct credentials");
@@ -160,7 +156,7 @@ class LoginForm extends React.Component {
             <small style={{display: 'flex', justifyContent: 'center'}}>I agree to the Terms and Conditions &amp; Privacy Policy</small>
             <ReCAPTCHA
                 sitekey="6LeqvL4UAAAAAGSZCz_PjOT8nMVh2CDpx_GUGyXj"
-                onChange={this.onChange}
+                onChange={value => this.verifyCaptcha(value)}
             />
           </CardBody>
           <CardFooter style={{display: 'flex', justifyContent: 'center', margin: 0}}>
