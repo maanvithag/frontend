@@ -28,11 +28,12 @@ export default function SearchPage(props) {
   const searchItem = window.localStorage.getItem("searchItem");
   const searchUserType = window.localStorage.getItem("searchUserType");
   const [searchResults, setSearchResults] = useState([]);
+  const [cities, setCities] = useState([]);
 
-  /* change for search */
   // Until and unless the searchItem parameter is changed, the useEffect will not be executed. If this is removed, the useEffect will be called 
   // infinite number of times.
   useEffect(() => {
+    //Fetching the user data
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search?query=' + localStorage.getItem("searchItem"), {
       method : 'post',
       credentials: 'include',
@@ -41,6 +42,17 @@ export default function SearchPage(props) {
     .then(data => {
         setSearchResults(data)
     })
+
+    //Fetching the locations
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search/locations?query=' + localStorage.getItem("searchItem"), {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+    .then(data => {
+      setCities(data)
+    })
+
   }, [searchItem]);
 
   function condHiding() {
@@ -116,10 +128,14 @@ export default function SearchPage(props) {
                   </GridItem>
                 </GridContainer>
                 </GridItem>
-                <GridItem xs={5} sm={5} md={5}>
-                  <br/><br/>
-                  <Map />
-                </GridItem>
+                {cities.length > 0 ? (
+                    <GridItem xs={5} sm={5} md={5}>
+                    <br/><br/>
+                    <Map locations={cities}/>
+                  </GridItem>
+                    ): (
+                    <p/>
+                 )}
             </GridContainer>
           </div>
         </div>
