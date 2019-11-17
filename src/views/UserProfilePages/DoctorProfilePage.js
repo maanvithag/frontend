@@ -18,6 +18,8 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import InputAdornment from '@material-ui/core/InputAdornment';
+import {primaryColor} from "../../assets/jss/material-kit-react";
+import InputLabel from "@material-ui/core/InputLabel";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import tabStyles from "assets/jss/material-kit-react/views/dashboardStyle.js";
@@ -143,34 +145,34 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Doctor: {profile.firstname} {profile.lastname}</h4>
+                                        <h2 className={classes.cardTitleWhite}>{profile.firstname} {profile.lastname}</h2>
                                     </CardHeader>
                                     <CardBody>
-                                        <h5 style={{color:"#A126AC", mragin:'0px'}}>General information</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Username</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.username}
                                                     id="username"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        placeholder: "Username",
+                                                        placeholder: profile.username,
                                                         disabled: true
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
                                                 <CustomInput
-                                                    id="email-address"
-                                                    labelText={profile.email}
+                                                    id="emailaddress"
+                                                    labelText="Email Address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange:handleEmailAddressChange,
-                                                        placeholder: "Email Address",
+                                                        placeholder: profile.emailaddress,
                                                         disabled: editEmail,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -184,15 +186,15 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Education</InputLabel>
                                                 <CustomInput
                                                     id="education"
-                                                    labelText={profile.education}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange:handleEducationChange,
-                                                        placeholder: "Education",
+                                                        placeholder: profile.education,
                                                         disabled: editEducation,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -206,18 +208,17 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                     </CardBody>
                                     <CardBody>
-                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>Hospital</h5>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
                                                 <CustomInput
-                                                    id="hospital"
-                                                    labelText = {profile.hospital}
+                                                    id="education"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange:handleHospitalChange,
-                                                        placeholder: "Hospital",
+                                                        placeholder: profile.hospital,
                                                         disabled: editHospital,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -226,18 +227,19 @@ export default function ProfilePage(props) {
                                                             </InputAdornment>
                                                         )
                                                     }}
-                                                />{console.log(editHospital)}
+                                                /> 
+                                                {/* {console.log(editHospital)} */}
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Specialization</InputLabel>
                                                 <CustomInput
                                                     id="specialization"
-                                                    labelText={profile.specialization}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange:handleSpecializationChange,
-                                                        placeholder: "Specialization",
+                                                        placeholder: profile.specialization,
                                                         disabled: editSpecialization,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -249,15 +251,15 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
-                                                    labelText={profile.address}
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange:handleAddressChange,
-                                                        placeholder: "Address",
+                                                        placeholder: profile.address,
                                                         disabled: editAddress,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -271,17 +273,16 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                     </CardBody>
                                     <CardBody>
-                                    <h5 style={{color:"#A126AC", mragin:'0px'}}>About me</h5>
                                         <GridItem xs={12} sm={12} md={12}>
+                                            <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>About Me</InputLabel>
                                             <CustomInput
-                                                id="doctor-bio"
-                                                labelText={profile.biosummary}
+                                                id="biosummary"
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
                                                     onChange:handleSummaryChange,
-                                                    placeholder: "Bio summary",
+                                                    placeholder: profile.biosummary,
                                                     multiline: true,
                                                     rows: 5,
                                                     disabled: editBio,

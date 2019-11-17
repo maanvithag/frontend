@@ -118,6 +118,9 @@ export default function ProfilePage(props) {
                                 View Doctor
                               </Button>
                             </Link> 
+                            <Link to="/chat">
+                              <Button color="primary">Chat with me!</Button>
+                            </Link>
                             <div>
                             <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
                               Cancel Appointment

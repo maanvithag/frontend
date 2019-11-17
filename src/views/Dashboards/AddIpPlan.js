@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const useModalStyles = makeStyles(modalStyles);
 
-export default function AddIpPlan() {
+export default function AddIpPlan(props) {
   const [modal, setModal] = React.useState(false);
   const modalClasses = useModalStyles();
 

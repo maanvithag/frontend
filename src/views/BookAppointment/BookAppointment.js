@@ -46,7 +46,7 @@ export default function ProfilePage(props) {
     const { ...rest } = props;
     const [date, setDate] = useState(new Date());
     const [timeslots, setTimeslots] = useState([]);
-    const [ts, setTs] = useState("");
+    const [ts, setTs] = useState("Pick a time");
     const [createAppointment, setCreateAppointment] = useState({
         isAppointmentCreated: false
     })
@@ -128,6 +128,7 @@ export default function ProfilePage(props) {
                                             />  <br/>
                                             <h4> Please select a time: </h4>
                                             <CustomDropdown
+                                                buttonText={ts}
                                                 buttonProps={{
                                                     color: "primary"
                                                 }}

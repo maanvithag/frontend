@@ -72,9 +72,6 @@ export default function ProfilePage(props) {
       setCancelAppointment(data.isAppointmentCancelled)
     })
   }
-
-  console.log(appointments)
-
   
   return (
     <div>

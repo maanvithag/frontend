@@ -15,7 +15,9 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import Table from "components/Table/Table.js";
 import SignedInHeaders from "views/SignedInHeader.js";
-
+import {primaryColor} from "../../assets/jss/material-kit-react";
+import InputLabel from "@material-ui/core/InputLabel";
+import Map from "views/Map/Map.js";
 import CardBody from "components/Card/CardBody.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
@@ -41,9 +43,7 @@ export default function ProfilePage(props) {
         })
     }
     useEffect(() => {handleLoad()}, {})
-    
-    console.log(profile);
-    
+        
     return (
         <div>
             <Header
@@ -68,49 +68,65 @@ export default function ProfilePage(props) {
                             </Link>
                         </GridContainer>
                         <br></br>
-                        <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={6}>
+                        <GridContainer justify="left">
+                            <GridItem xs={5} sm={5} md={8}>
                                 <h2></h2>
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={8}>
+                            <GridItem xs={5} sm={5} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>{profile.name}</h4>
+                                        <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance Company</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.company}
                                                     id="company"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
+                                                    inputProps={{
+                                                        disabled: true,
+                                                        placeholder: profile.company
+                                                    }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Contact Number</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.phonenumber}
                                                     id="phone-number"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true,
+                                                        placeholder: profile.phonenumber
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Address</InputLabel>
                                                 <CustomInput
-                                                    labelText={profile.address}
                                                     id="address"
                                                     formControlProps={{
                                                         fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true,
+                                                        placeholder: profile.address
                                                     }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
                                 </Card>
+                            </GridItem>
+                            <GridItem xs={5} sm={5} md={5}>
+                                <Map/>
+                                <br/><br/>
                             </GridItem>
                         </GridContainer>
                     </div>
