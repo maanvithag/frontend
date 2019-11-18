@@ -64,7 +64,7 @@ export default function ProfilePage(props) {
             credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body: JSON.stringify({
-                date: date.toLocaleDateString
+                date: date.toString()
             })
         }).then(response => response.json())
         .then(data => {
@@ -80,16 +80,13 @@ export default function ProfilePage(props) {
             body: JSON.stringify({
                 doctorusername: doctorusername,
                 time: ts,
-                date: date.toLocaleDateString
+                date: date.toString()
             })
         }).then(response => response.json())
         .then(data => {
             setCreateAppointment(data.isAppointmentCreated)
         })
     }
-
-    console.log(ts)
-    
 
     return (
         <div>
@@ -109,9 +106,11 @@ export default function ProfilePage(props) {
                 <div>
                     <div className={classes.container}>
                         <br></br>
-                        <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                            <Button color="primary">Return to Dashboard</Button>
-                        </Link>
+                        <GridContainer justify="center">
+                            <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
+                                <Button color="primary">Return to Dashboard</Button>
+                            </Link>
+                        </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={8}>

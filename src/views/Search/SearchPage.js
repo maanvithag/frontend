@@ -138,7 +138,7 @@ export default function SearchPage(props) {
               {cities.length > 0 ? (
                 <GridItem xs={5} sm={5} md={5}>
                   <br /><br />
-                  <Map locations={cities} zoom={4} />
+                  <Map locations={cities} zoom={4}/>
                 </GridItem>
               ) : (
                   <p />

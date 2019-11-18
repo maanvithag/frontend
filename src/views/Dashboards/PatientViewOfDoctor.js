@@ -133,7 +133,6 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
                                 <Button color="primary">Return to Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -341,7 +340,7 @@ export default function ProfilePage(props) {
                             </GridItem>
                             <GridItem xs={5} sm={5} md={5}>
                                 {address.length > 0 ? (
-                                    <Map locations={address} zoom={10} />
+                                    <Map locations={address} zoom={4} />
                                 ) : (
                                         <p />
                                     )}
