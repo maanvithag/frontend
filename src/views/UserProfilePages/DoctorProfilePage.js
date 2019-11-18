@@ -227,7 +227,8 @@ export default function ProfilePage(props) {
                                                             </InputAdornment>
                                                         )
                                                     }}
-                                                />{console.log(editHospital)}
+                                                /> 
+                                                {/* {console.log(editHospital)} */}
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Specialization</InputLabel>

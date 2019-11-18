@@ -72,8 +72,8 @@ export default function TypeSelect() {
         >
             <div className={productClasses.section} style={{padding: 0}}>
               <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={8}>
-                  <h2 className={productClasses.title}>Are you a(n)...</h2>
+                  <GridItem xs={12} sm={12} md={10}>
+                  <h3 className={productClasses.title}>Select Account Type</h3>
                   </GridItem>
               </GridContainer>
               <GridContainer>

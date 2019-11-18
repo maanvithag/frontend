@@ -33,6 +33,7 @@ import App from './views/Chat/App';
 
 import './views/Chat/chat.css';
 import * as serviceWorker from './views/Chat/serviceWorker';
+import DoctorAndIPViewOfDoctor from "./views/Dashboards/DoctorAndIPViewOfDoctor";
 
 serviceWorker.unregister();
 
@@ -66,8 +67,14 @@ ReactDOM.render(
       <Route path="/patient/doctor/:doctorID" exact component={PatientViewOfDoctor} />
       <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
       <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
+
       <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
+      <Route path="/doctor/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
+      <Route path="/doctor/insurance/:insuranceID" exact component={PatientViewOfIP} />
+
+      <Route path="/insurance/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
       <Route path="/insurance/patient/:patientID" exact component={DoctorViewOfPatient} />
+      <Route path="/insurance/insurance/:insuranceID" exact component={PatientViewOfIP} />
 
       <Route path="/doctor/profile" exact component={DoctorProfilePage}/>
       <Route path="/patient/profile" exact component={PatientProfilePage}/>
@@ -83,7 +90,11 @@ ReactDOM.render(
 
       <Route path="/search" exact component={SearchPage} />
 
-      <Route path="/chat" exact component={App}/>
+      <Route path="/chat/:patientID/:doctorID" exact component={App}/>
+      <Route path="/chat/:doctorID" exact component={App}/>
+      <Route path="/chat/:doctorID/:patientID" exact component={App}/>
+      <Route path="/chat/:insuranceID" exact component={App}/>
+      <Route path="/chat/:insuranceID/:patientID" exact component={App}/>
 
       <Route path="/" component={LandingPage} />
     </Switch>
