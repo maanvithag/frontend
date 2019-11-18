@@ -100,11 +100,19 @@ export default function ProfilePage(props) {
 
     const handleAddReviewRating = (event) => {
         setAddReviewRating(event.target.value)
-    }
+    };
 
     const handleAddReviewReview = (event) => {
         setAddReviewReview(event.target.value)
-    }
+    };
+
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
 
     return (
         <div>
@@ -121,11 +129,12 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/dashboard">
+
+                            <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
                                 <Button color="primary">Return to Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Link to={"/patient/doctor/bookappointment/" + doctorusername}>
@@ -306,24 +315,24 @@ export default function ProfilePage(props) {
                                         <Card>
                                             <CardHeader color="primary">
                                                 <h4 className={classes.cardTitleWhite}>Average Rating: <StarRatings
-                                                        rating={rating}
-                                                        starDimension="30px"
-                                                        starSpacing="7px"
-                                                        starRatedColor="orange"
-                                                    /></h4>
+                                                    rating={rating}
+                                                    starDimension="30px"
+                                                    starSpacing="7px"
+                                                    starRatedColor="orange"
+                                                /></h4>
                                             </CardHeader>
                                             <CardBody>
-                                            {reviews.map((item, index) => (<Card style={{borderColor: "primary"}}>
-                                                <CardBody>
-                                                <StarRatings
-                                                        rating={item.rating}
-                                                        starDimension="20px"
-                                                        starSpacing="5px"
-                                                        starRatedColor="orange"
-                                                    />
-                                                    {/* <p>Rating: {item.rating}</p> }
-                                                    <p>Review: {item.review}</p>
-                                                </CardBody>
+                                                {reviews.map((item, index) => (<Card style={{ borderColor: "primary" }}>
+                                                    <CardBody>
+                                                        <StarRatings
+                                                            rating={item.rating}
+                                                            starDimension="20px"
+                                                            starSpacing="5px"
+                                                            starRatedColor="orange"
+                                                        />
+                                                        {/* <p>Rating: {item.rating}</p> }
+                                                        <p>Review: {item.review}</p>
+                                                    </CardBody>
                                                 </Card>))}
                                             </CardBody>
                                         </Card>
@@ -345,4 +354,3 @@ export default function ProfilePage(props) {
         </div>
     );
 }
-

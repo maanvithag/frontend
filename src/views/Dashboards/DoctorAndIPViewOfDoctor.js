@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
 import { makeStyles } from "@material-ui/core/styles";
-
+import Close from "@material-ui/icons/Close";
 // core components
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -17,11 +18,32 @@ import CardHeader from "components/Card/CardHeader.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import IconButton from "@material-ui/core/IconButton";
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import StarRatings from 'react-star-ratings';
+import Map from "views/Map/Map.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
-import {Link} from "react-router-dom";
-import Success from 'components/Typography/Success';
+import { useState, useEffect } from 'react';
+import AddDoctorReview from "views/Dashboards/AddDoctorReview.js";
+
+import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
+import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="down" ref={ref} {...props} />;
+});
+
+const useModalStyles = makeStyles(modalStyles);
+const useProductStyles = makeStyles(productStyles);
+
 
 const useStyles = makeStyles(styles);
 
@@ -29,18 +51,22 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const { ...rest } = props;
     const [profile, setProfile] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const [rating, setRating] = useState([]);
 
-    const patientusername = window.location.href.split('/')[5]
+    const doctorusername = window.location.href.split('/')[5]
 
     const handleLoad = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/patient/' + patientusername, {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/' + doctorusername, {
             method : 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
         }).then(response => response.json())
-        .then(data => {
-            setProfile(data)
-        })
+            .then(data => {
+                setProfile(data)
+                setReviews(data.reviews)
+                setRating(Math.round(data.totalrating * 10) / 10)
+            })
     };
     useEffect(() => {handleLoad()}, {});
 
@@ -51,7 +77,7 @@ export default function ProfilePage(props) {
             borderRadius: 5
         }
     };
-        
+
     return (
         <div>
             <Header
@@ -73,19 +99,59 @@ export default function ProfilePage(props) {
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
                                 <Button color="primary">Return to Dashboard</Button>
-                            </Link>
+                            </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={6}>
-                                <h2></h2>
-                            </GridItem>
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                    <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
+                                        <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
+                                        <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Education</InputLabel>
+                                                <CustomInput
+                                                    id="education"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true,
+                                                        placeholder: profile.education
+                                                    }}
+                                                />
+                                            </GridItem>
+                                        </GridContainer>
+                                        <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
+                                                <CustomInput
+                                                    id="hospital"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true,
+                                                        placeholder: profile.hospital
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Specialization</InputLabel>
+                                                <CustomInput
+                                                    id="specialization"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: true,
+                                                        placeholder: profile.specialization
+                                                    }}
+                                                />
+                                            </GridItem>
+                                        </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Address</InputLabel>
@@ -97,11 +163,11 @@ export default function ProfilePage(props) {
                                                     inputProps={{
                                                         disabled: true,
                                                         placeholder: profile.address
-                                                      }}
+                                                    }}
                                                 />
                                             </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Phone Number</InputLabel>
+                                            <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="phone-number"
                                                     formControlProps={{
@@ -110,79 +176,23 @@ export default function ProfilePage(props) {
                                                     inputProps={{
                                                         disabled: true,
                                                         placeholder: profile.phonenumber
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Date of Birth</InputLabel>
-                                                <CustomInput
-                                                    id="dob"
-                                                    formControlProps={{
-                                                        fullWidth: true
                                                     }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.dob
-                                                      }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance Company</InputLabel>
-                                                <CustomInput
-                                                    id="insurance-company"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.insurancecompany
-                                                      }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance Plan</InputLabel>
-                                                <CustomInput
-                                                    id="insurance-plan"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.insuranceplan
-                                                      }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact Details</InputLabel>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <CustomInput
-                                                    id="emergency-contact"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.emergencycontact
-                                                      }}
                                                 />
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '10px'}}>Medical History</InputLabel>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>About Me</InputLabel>
                                                 <CustomInput
-                                                    id="medical-info"
+                                                    id="doctor-bio"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        placeholder: profile.medicalhistory,
                                                         multiline: true,
                                                         rows: 5,
-                                                        disabled: true
+                                                        disabled: true,
+                                                        placeholder: profile.biosummary
                                                     }}
                                                 />
                                             </GridItem>
@@ -190,7 +200,12 @@ export default function ProfilePage(props) {
                                     </CardBody>
                                 </Card>
                             </GridItem>
+                            <GridItem xs={5} sm={5} md={5}>
+                                <Map/>
+                                <br/><br/>
+                            </GridItem>
                         </GridContainer>
+                        <br></br><br></br>
                     </div>
                 </div>
             </div>

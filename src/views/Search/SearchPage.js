@@ -56,12 +56,13 @@ export default function SearchPage(props) {
   }, [searchItem]);
 
   function condHiding() {
-    if (window.localStorage.getItem("searchUserType") === "doctor") {
+    if ((window.localStorage.getItem("searchUserType") === "doctor")
+        && (window.localStorage.getItem("userType") === "patient")) {
       return true;
     } else {
       return false;
     }
-  }
+  } //window.localStorage.getItem("userType")
 
   var caption;
   if (searchUserType === "doctor") {
@@ -96,6 +97,7 @@ export default function SearchPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)} color={"info"}>
         <div style={style.bg}>
           <div className={classes.container}>
+              <br></br>
             <GridContainer justify="space-around" direction="row" color={"info"}>
               <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
                 <Button color="primary">Return to Dashboard</Button>
