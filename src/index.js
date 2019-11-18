@@ -90,7 +90,11 @@ ReactDOM.render(
 
       <Route path="/search" exact component={SearchPage} />
 
-      <Route path="/chat" exact component={App}/>
+      <Route path="/chat/:patientID/:doctorID" exact component={App}/>
+      <Route path="/chat/:doctorID" exact component={App}/>
+      <Route path="/chat/:doctorID/:patientID" exact component={App}/>
+      <Route path="/chat/:insuranceID" exact component={App}/>
+      <Route path="/chat/:insuranceID/:patientID" exact component={App}/>
 
       <Route path="/" component={LandingPage} />
     </Switch>

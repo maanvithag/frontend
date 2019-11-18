@@ -126,7 +126,7 @@ export default function ProfilePage(props) {
                                 View Doctor
                               </Button>
                             </Link> 
-                            <Link to="/chat">
+                            <Link to={"/chat/" + "patient/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
                               <Button color="primary">Chat with me!</Button>
                             </Link>
                             <div>

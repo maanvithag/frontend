@@ -121,6 +121,9 @@ export default function ProfilePage(props) {
                                 View Patient's Profile
                               </Button>
                             </Link>
+                            <Link to={"/chat/" + "doctor/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
+                              <Button color="primary">Send me a text</Button>
+                            </Link>
                             <div>
                               <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
                                 Cancel Appointment

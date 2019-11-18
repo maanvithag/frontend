@@ -311,10 +311,14 @@ export default function ProfilePage(props) {
                           { patients.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
                             <h4 className={classes.cardTitle}>{item.name}</h4> 
+                            <p>Current Plan: {item.currentplan}</p>
                             <Link to= {"/insurance/patient/" + btoa(item.username)}>
                               <Button color="primary">
                                 View Patient
                               </Button>
+                              <Link to={"/chat/" + "insurance/" + item.name.split(' ')[0].toLowerCase() + item.name.split(' ')[1].toLowerCase()}>
+                                <Button color="primary">Send me a text</Button>
+                              </Link>
                             </Link>
                           </CardBody>
                         </Card>))}
