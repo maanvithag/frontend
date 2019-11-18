@@ -34,70 +34,73 @@ import App from './views/Chat/App';
 import './views/Chat/chat.css';
 import * as serviceWorker from './views/Chat/serviceWorker';
 import DoctorAndIPViewOfDoctor from "./views/Dashboards/DoctorAndIPViewOfDoctor";
+import PatientMedicalDetailsPage from "./views/UserProfilePages/PatientMedicalDetailsPage";
 
 serviceWorker.unregister();
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route path="/patient/doctor/bookappointment/:doctorID" exact component={BookAppointment} />
-      <Route path="/components" component={Components} />
+    <Router history={hist}>
+      <Switch>
+        <Route path="/patient/doctor/bookappointment/:doctorID" exact component={BookAppointment} />
+        <Route path="/components" component={Components} />
 
-      <Route path="/:userType/forgotpassword" exact component={ForgotPassword}/>
-      <Route path="/:userType/forgotpassword/email" exact component={EnterEmail}/>
+        <Route path="/:userType/forgotpassword" exact component={ForgotPassword}/>
+        <Route path="/:userType/forgotpassword/email" exact component={EnterEmail}/>
 
-      <Route path="/:userType/validateuser" component={ValidateUser}/>
-      
-      <Route path="/doctor/signup" component={DoctorSignup}/>
-      <Route path="/insurance/signup" exact component={InsuranceSignup}/>
-      <Route path="/patient/signup" exact component={PatientSignup}/>
+        <Route path="/:userType/validateuser" component={ValidateUser}/>
 
-      <Route path="/:userType/mfa" exact component={MFAPage}/>
+        <Route path="/doctor/signup" component={DoctorSignup}/>
+        <Route path="/insurance/signup" exact component={InsuranceSignup}/>
+        <Route path="/patient/signup" exact component={PatientSignup}/>
 
-      <Route path="/doctor/signin" exact component={Login}/>
-      <Route path="/patient/signin" exact component={Login}/>
-      <Route path="/insurance/signin" exact component={Login}/>
+        <Route path="/:userType/mfa" exact component={MFAPage}/>
 
-      <Route path="/insurance/dashboard" exact component={InsuranceDashboard} />
-      <Route path="/patient/dashboard" exact component={PatientDashboard} />
-      <Route path="/doctor/dashboard" exact component={DoctorDashboard} />
+        <Route path="/doctor/signin" exact component={Login}/>
+        <Route path="/patient/signin" exact component={Login}/>
+        <Route path="/insurance/signin" exact component={Login}/>
 
-      <Route path="/patient/doctor/:doctorID" exact component={PatientViewOfDoctor} />
-      <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
-      <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
+        <Route path="/insurance/dashboard" exact component={InsuranceDashboard} />
+        <Route path="/patient/dashboard" exact component={PatientDashboard} />
+        <Route path="/doctor/dashboard" exact component={DoctorDashboard} />
 
-      <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
-      <Route path="/doctor/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
-      <Route path="/doctor/insurance/:insuranceID" exact component={PatientViewOfIP} />
+        <Route path="/patient/doctor/:doctorID" exact component={PatientViewOfDoctor} />
+        <Route path="/patient/insurance/:insuranceID" exact component={PatientViewOfIP} />
+        <Route path="/patient/doctor/:doctorID/review" exact component={ReviewDoctor} />
 
-      <Route path="/insurance/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
-      <Route path="/insurance/patient/:patientID" exact component={DoctorViewOfPatient} />
-      <Route path="/insurance/insurance/:insuranceID" exact component={PatientViewOfIP} />
+        <Route path="/doctor/patient/:patientID" exact component={DoctorViewOfPatient} />
+        <Route path="/doctor/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
+        <Route path="/doctor/insurance/:insuranceID" exact component={PatientViewOfIP} />
 
-      <Route path="/doctor/profile" exact component={DoctorProfilePage}/>
-      <Route path="/patient/profile" exact component={PatientProfilePage}/>
-      <Route path="/insurance/profile" exact component={InsuranceProfilePage}/>
+        <Route path="/insurance/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
+        <Route path="/insurance/patient/:patientID" exact component={DoctorViewOfPatient} />
+        <Route path="/insurance/insurance/:insuranceID" exact component={PatientViewOfIP} />
 
-      <Route path="/dashboard1" exact component={InsuranceDashboard} />
-      <Route path="/dashboard2" exact component={PatientDashboard} />
-      <Route path="/dashboard3" exact component={DoctorDashboard} />
-      <Route path="/dashboardpd" exact component={PatientViewOfDoctor} />
-      <Route path="/dashboardrd" exact component={ReviewDoctor} />
-      <Route path="/dashboarddp" exact component={DoctorViewOfPatient} />
-      <Route path="/patient/bookappointment" exact component={BookAppointment} />
+        <Route path="/doctor/profile" exact component={DoctorProfilePage}/>
+        <Route path="/patient/profile" exact component={PatientProfilePage}/>
+        <Route path="/patient/medicalhistory" exact component={PatientMedicalDetailsPage}/>
+        <Route path="/insurance/profile" exact component={InsuranceProfilePage}/>
 
-      <Route path="/search" exact component={SearchPage} />
+        <Route path="/dashboard1" exact component={InsuranceDashboard} />
+        <Route path="/dashboard2" exact component={PatientDashboard} />
+        <Route path="/dashboard3" exact component={DoctorDashboard} />
+        <Route path="/dashboardpd" exact component={PatientViewOfDoctor} />
+        <Route path="/dashboardrd" exact component={ReviewDoctor} />
+        <Route path="/dashboarddp" exact component={DoctorViewOfPatient} />
+        <Route path="/patient/bookappointment" exact component={BookAppointment} />
 
-      <Route path="/chat/:patientID/:doctorID" exact component={App}/>
-      <Route path="/chat/:doctorID" exact component={App}/>
-      <Route path="/chat/:doctorID/:patientID" exact component={App}/>
-      <Route path="/chat/:insuranceID" exact component={App}/>
-      <Route path="/chat/:insuranceID/:patientID" exact component={App}/>
+        <Route path="/search" exact component={SearchPage} />
 
-      <Route path="/" component={LandingPage} />
-    </Switch>
-  </Router>,
-  document.getElementById("root")
+        <Route path="/chat/:patientID/:doctorID" exact component={App}/>
+        <Route path="/chat/:doctorID" exact component={App}/>
+        <Route path="/chat/:doctorID/:patientID" exact component={App}/>
+        <Route path="/chat/:insuranceID" exact component={App}/>
+        <Route path="/chat/:insuranceID/:patientID" exact component={App}/>
+
+        <Route path="/" component={LandingPage} />
+      </Switch>
+    </Router>,
+    document.getElementById("root")
 );
+

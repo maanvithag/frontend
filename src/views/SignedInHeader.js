@@ -1,7 +1,5 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -17,6 +15,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { Apps, CloudDownload } from "@material-ui/icons";
 import Search from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuIcon from '@material-ui/icons/Menu';
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -38,10 +37,14 @@ export default function SignedInHeaders(props){
 
     const inputLabel = React.useRef(null);
     const [keyword, setKeyword] = React.useState('doctor');
+    const [link, setLink] = React.useState("sk");
     const [labelWidth, setLabelWidth] = React.useState(0);
 
     const handleChange = event => {
         setKeyword(event.target.value);
+    };
+    const handleLinkChange = event => {
+        setLink(event.target.value);
     };
 
     const handleSearch = event => {
@@ -49,12 +52,21 @@ export default function SignedInHeaders(props){
         window.localStorage.setItem("searchUserType", document.getElementById('inputUserType').value);
     };
 
+    function hideMedicalDetails() {
+        if (window.localStorage.getItem("userType") === "patient") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const style = {
         btn: {
             color: 'white',
             fontSize: 'small',
-            margin: '-20px',
-            padding: '12px'
+            margin: '-10px',
+            padding: '12px',
+            width: '70px'
         },
         btnProfile: {
             color: 'white',
@@ -66,6 +78,14 @@ export default function SignedInHeaders(props){
         searchBar: {
             width: '100%',
             display: 'inline-block'
+        },
+        dropDown: {
+            color: 'black',
+            size: 'large',
+            borderColor: "red"
+        },
+        menu:{
+            fontSize:"large"
         }
     };
 
@@ -110,7 +130,7 @@ export default function SignedInHeaders(props){
                     />
 
                     <Link to="/search">
-                        <Button justIcon round color="github" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
+                        <Button justIcon round color="primary" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
                             <Search className={classes.searchIcon} />
                         </Button>
                     </Link>
@@ -118,19 +138,39 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
-                            <Button justIcon round color="primary" onClick={handleSearch} color={"github"}> {/* Add onClick={handleSearch} */}
-                                <AccountCircle className={classes.icons} />
-                            </Button>
+                    <Link to={"/"+ window.localStorage.getItem("userType") +"/chat"}>
+                        <Button justIcon color="primary" onClick={handleSearch} color={"primary"} style={style.btn}> {/* Add onClick={handleSearch} */}
+                            Chat
+                        </Button>
                     </Link>
                 </ListItem>
             </ListItem>
             <ListItem>
-                <Link to="/" className={classes.link}>
-                    <Button color='github' size="small" round onClick={handleSignOut} style={style.btn}>
-                        Sign out
-                    </Button>
-                </Link>
+                <div style={{width:70, fontSize:"smaller"}}>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id={"links"}
+                        labelWidth={labelWidth}
+                        style={style.dropDown}
+                        // might have to change this approach for showing default value
+                        value={link}
+                        defaultValue={"sk"}
+
+                    >
+
+                        <MenuItem value="sk" selected="selected"><MenuIcon className={classes.icons} style={style.menu}/></MenuItem>
+                        <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
+                            <MenuItem value={"profile"}>Profile</MenuItem>
+                        </Link>
+                        {hideMedicalDetails() && (<Link to="/patient/medicalhistory">
+                            <MenuItem value={"medicalHistory"}>Medical History</MenuItem>
+                        </Link>)}
+                        <Link to="/">
+                            <MenuItem value={"signOut"}>Sign Out</MenuItem>
+                        </Link>
+
+                    </Select>
+                </div>
             </ListItem>
         </List>
     );
@@ -148,3 +188,4 @@ function handleSignOut() {
 };
 
 // TODO onSearch() fetch request gets blocked by CORS. Figure our why!
+
