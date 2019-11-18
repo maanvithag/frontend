@@ -96,16 +96,24 @@ export default function ProfilePage(props) {
         .then(data => {
             setAddReview(data.isReviewAdded)
         })
-    }
+    };
     useEffect(() => {handleLoad()}, {})
 
     const handleAddReviewRating = (event) => {
         setAddReviewRating(event.target.value)
-    }
+    };
 
     const handleAddReviewReview = (event) => {
         setAddReviewReview(event.target.value)
-    }
+    };
+
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        }
+    };
     
     return (
         <div>
@@ -122,12 +130,12 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/dashboard">
-                            <Button color="primary">Return to Dashboard</Button>
+                            <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
+                                <Button color="primary">Return to Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Link to= {"/patient/doctor/bookappointment/" + doctorusername}>
                                 <Button color="primary">

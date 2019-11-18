@@ -75,8 +75,8 @@ export default function ProfilePage(props) {
       setIplans(data.IPlans)
       setPatients(data.Patients)
     })
-  }
-  useEffect(() => {handleLoad()},[])
+  };
+  useEffect(() => {handleLoad()},[]);
 
   const handleDeletePlan = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/editiplans/delete', {
@@ -128,6 +128,14 @@ export default function ProfilePage(props) {
     setAddPlanDetails(event.target.value)
   }
 
+  const style = {
+    bg: {
+      background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+      color: 'black',
+      borderRadius: 5
+    }
+  };
+
   return (
     <div>
       <Header
@@ -143,7 +151,7 @@ export default function ProfilePage(props) {
       />
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div>
+        <div style={style.bg}>
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} lg={6}>
