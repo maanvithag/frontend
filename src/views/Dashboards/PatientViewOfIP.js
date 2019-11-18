@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from 'react';
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import InputLabel from "@material-ui/core/InputLabel";
 // @material-ui/core components
 // @material-ui/icons
 import { makeStyles } from "@material-ui/core/styles";
-// core components
-import Header from "components/Header/Header.js";
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+// core components
+import Header from "components/Header/Header.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import Table from "components/Table/Table.js";
-import SignedInHeaders from "views/SignedInHeader.js";
-import {primaryColor} from "../../assets/jss/material-kit-react";
-import InputLabel from "@material-ui/core/InputLabel";
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import Map from "views/Map/Map.js";
-import CardBody from "components/Card/CardBody.js";
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import {Link} from "react-router-dom";
+import SignedInHeaders from "views/SignedInHeader.js";
+import { primaryColor } from "../../assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
@@ -29,21 +27,24 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const { ...rest } = props;
     const [profile, setProfile] = useState({})
+    const [address, setAddress] = useState([]);
 
     const ipusername = window.location.href.split('/')[5]
 
     const handleLoad = (event) => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/insurance/' + ipusername, {
-            method : 'post',
+            method: 'post',
             credentials: 'include',
-            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
-        .then(data => {
-            setProfile(data)
-        })
+            .then(data => {
+                address.push(data.address)
+                setAddress(address)
+                setProfile(data)
+            })
     }
-    useEffect(() => {handleLoad()}, {})
-        
+    useEffect(() => { handleLoad() }, {})
+
     return (
         <div>
             <Header
@@ -64,7 +65,7 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to="/patient/dashboard">
-                            <Button color="primary">Return to my Dashboard</Button>
+                                <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -80,7 +81,7 @@ export default function ProfilePage(props) {
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Insurance Company</InputLabel>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Insurance Company</InputLabel>
                                                 <CustomInput
                                                     id="company"
                                                     formControlProps={{
@@ -93,7 +94,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Contact Number</InputLabel>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Office Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="phone-number"
                                                     formControlProps={{
@@ -108,7 +109,7 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Address</InputLabel>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Office Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
                                                     formControlProps={{
@@ -125,8 +126,11 @@ export default function ProfilePage(props) {
                                 </Card>
                             </GridItem>
                             <GridItem xs={5} sm={5} md={5}>
-                                <Map/>
-                                <br/><br/>
+                                {address.length > 0 ? (
+                                    <Map locations={address} />
+                                ) : (
+                                        <p />
+                                    )}
                             </GridItem>
                         </GridContainer>
                     </div>

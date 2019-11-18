@@ -10,7 +10,7 @@ export default class SimpleMap extends React.Component {
       initialList: props.locations,
       coordinates: [],
       center: { lat: 39.1653, lng: -86.5264 },
-      zoom: 4,
+      zoom: props.zoom,
       summationOfLat: 0,
       summationOfLng: 0,
     };

@@ -105,46 +105,46 @@ export default function SearchPage(props) {
               <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
                 <GridContainer color={"info"}>
                   <GridItem xs={16} sm={16} md={16}>
-                  <h3>Searching for {searchItem} in {caption}</h3>
-                  {searchResults.map((item, index) => (
-                    <Card style={{ width: "20rem", borderColor: "primary" }}>
-                      <CardBody>
-                        <h3 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h3>
-                        <h4>{item.mSpecialization}</h4>
-                        <h4>{item.mCompany}</h4>
-                        <p>{item.mHospital}</p>
-                        <p>{item.mAddress}</p>
-                        <GridContainer justify="center">
-                          <GridItem xs={13} sm={12} md={7}>{condHiding() && (<Link to={"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
-                            <Button fullWidth color="primary" style={style.btn}>
-                              Book Appointment
-                              </Button></Link>)}
-                          </GridItem>
-                          <GridItem xs={13} sm={12} md={5}>
-                            <Link to={window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType") + "/" + btoa(item.mUserName)}>
+                    <h3>Searching for {searchItem} in {caption}</h3>
+                    {searchResults.map((item, index) => (
+                      <Card style={{ width: "20rem", borderColor: "primary" }}>
+                        <CardBody>
+                          <h3 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h3>
+                          <h4>{item.mSpecialization}</h4>
+                          <h4>{item.mCompany}</h4>
+                          <p>{item.mHospital}</p>
+                          <p>{item.mAddress}</p>
+                          <GridContainer justify="center">
+                            <GridItem xs={13} sm={12} md={7}>{condHiding() && (<Link to={"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
-                                View Profile
+                                Book Appointment
+                              </Button></Link>)}
+                            </GridItem>
+                            <GridItem xs={13} sm={12} md={5}>
+                              <Link to={window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType") + "/" + btoa(item.mUserName)}>
+                                <Button fullWidth color="primary" style={style.btn}>
+                                  View Profile
                               </Button>
-                            </Link>
-                          </GridItem>
-                        </GridContainer>
-                      </CardBody>
-                    </Card>))}
+                              </Link>
+                            </GridItem>
+                          </GridContainer>
+                        </CardBody>
+                      </Card>))}
                   </GridItem>
                 </GridContainer>
-                </GridItem>
-            {cities.length > 0 ? (
-              <GridItem xs={5} sm={5} md={5}>
-                <br /><br />
-                <Map locations={cities} />
               </GridItem>
-            ) : (
-                <p />
-              )}
+              {cities.length > 0 ? (
+                <GridItem xs={5} sm={5} md={5}>
+                  <br /><br />
+                  <Map locations={cities} zoom={4} />
+                </GridItem>
+              ) : (
+                  <p />
+                )}
             </GridContainer>
+          </div>
         </div>
       </div>
-    </div>
     </div >
   );
 }
