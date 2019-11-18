@@ -135,7 +135,7 @@ export default function ProfilePage(props) {
                             </GridItem>
                             <GridItem xs={5} sm={5} md={5}>
                                 {address.length > 0 ? (
-                                    <Map locations={address} />
+                                    <Map locations={address} zoom={4}/>
                                 ) : (
                                         <p />
                                     )}
