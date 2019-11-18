@@ -19,6 +19,9 @@ export default function ProductSection() {
   const classes = useStyles();
 
   const style = {
+    feat: {
+      marginTop: '-20px'
+    },
     name: {
       color: '#37474f',
       fontWeight: 'bold'
@@ -36,7 +39,7 @@ export default function ProductSection() {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={12}>
-          <h2 className={classes.title}>Featured Doctors</h2>
+          <h2 className={classes.title} style={style.feat}>Featured Doctors</h2>
           <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={4}>
             <h3 className={classes.description} style={style.name}>Kristen Nash</h3>
@@ -58,6 +61,8 @@ export default function ProductSection() {
       </GridContainer>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
+          <br></br><br></br>
+
           <h2 className={classes.title}>One-stop-shop for health care</h2>
           <h5 className={classes.description}>
             We provide a patient-centric application that allows you to make informed decisions 
