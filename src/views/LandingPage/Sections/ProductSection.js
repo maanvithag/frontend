@@ -17,14 +17,43 @@ const useStyles = makeStyles(styles);
 
 export default function ProductSection() {
   const classes = useStyles();
+
+  const style = {
+    name: {
+      color: '#37474f',
+      fontWeight: 'bold'
+    },
+    spec: {
+      color: '#37474f'
+    },
+    body: {
+      fontSize: '14px',
+      lineHeight: '175%'
+    }
+  };
+
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Featured Plans & Doctors</h2>
-          <h5 className={classes.description}>
-            TODO
-          </h5>
+        <GridItem xs={12} sm={12} md={12}>
+          <h2 className={classes.title}>Featured Doctors</h2>
+          <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={4}>
+            <h3 className={classes.description} style={style.name}>Kristen Nash</h3>
+            <h4 className={classes.description} style={style.spec}>Dermatologist</h4>
+            <h4 className={classes.description} style={style.body}>Dr. Nash is a trusted and reputable dermatologist caring for the Avon, IN community. She attended Ohio State University where he received her medical degree. Dr. Nash is a part of IU Health Dermatology. She is board certified in dermatology by the American Board of Dermatology. During her consultations, she fully explains patients’ conditions and helps them choose an appropriate treatment plan.</h4>
+          </GridItem>
+            <GridItem xs={12} sm={12} md={4}>
+              <h3 className={classes.description} style={style.name}>Jaime Moore</h3>
+              <h4 className={classes.description} style={style.spec}>Primary Care</h4>
+              <h4 className={classes.description} style={style.body}>Dr. Jaime Moore received her medical degree from Indiana University School of Medicine. Dr. Moore takes care of the Mooresville, IN community and is affiliated with Indiana University Health, West Hospital. Dr. Moore continued her training and completed residencies in internal medicine and pediatrics at Indiana University School of Medicine. </h4>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={4}>
+              <h3 className={classes.description} style={style.name}>Massimo Rossi</h3>
+              <h4 className={classes.description} style={style.spec}>Gastroenterologist</h4>
+              <h4 className={classes.description} style={style.body}> Dr. Rossi is a trusted and reliable gastroenterologist caring for the Martinsville, IN community. Dr. Rossi attended Case Western Reserve University, where he received his medical degree. He is a part of IU Health Physicians Digestive & Liver Disorders and is affiliated with Indiana University Hospital in IN. He is board certified in gastroenterology and internal medicine by the American Board of Internal Medicine. </h4>
+            </GridItem>
+          </GridContainer>
         </GridItem>
       </GridContainer>
       <GridContainer justify="center">
