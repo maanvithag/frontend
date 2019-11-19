@@ -49,6 +49,7 @@ export default function ProfilePage(props) {
     const { ...rest } = props;
     const [date, setDate] = useState(new Date());
     const [timeslots, setTimeslots] = useState([]);
+    const [keyword, setKeyword] = React.useState('none');
     const [ts, setTs] = useState("None");
     const [createAppointment, setCreateAppointment] = useState({
         isAppointmentCreated: false
@@ -132,9 +133,10 @@ export default function ProfilePage(props) {
                                                     labelId="select-timeslot"
                                                     id="select-timeslot"
                                                     onChange={handleChange}
+                                                    value={ts}
                                                     defaultValue={"None"}
                                                 >
-                                                    <MenuItem value=""> <em>None</em> </MenuItem>
+                                                    <MenuItem value="None"> <em>None</em> </MenuItem>
                                                     {timeslots.map((item, index) => (
                                                         <MenuItem value={item}>{item}</MenuItem>
                                                     ))}
