@@ -245,7 +245,7 @@ export default function ProfilePage(props) {
                           { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
                             <h4 className={classes.cardTitle}>{item.mName}</h4>
-                            <p>Deductible: {item.mPrice}</p>
+                            <p>Price: {item.mPrice}</p>
                             <p>Details: {item.mDetails}</p>
                             {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/> */}
                             <div>

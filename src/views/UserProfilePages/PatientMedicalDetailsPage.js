@@ -21,6 +21,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import SignedInHeaders from "views/SignedInHeader.js";
 import CardFooter from 'components/Card/CardFooter';
+import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage';
 
 const useStyles = makeStyles(styles);
 
@@ -35,15 +36,16 @@ export default function ProfilePage(props) {
     const [editAllergies, setEditAllergies] = useState(true);
     const [editBloodType, setEditBloodType] = useState(true);
 
-    const [profile, setProfile] = useState({})
+    const [medicalHistory, setMedicalHistory] = useState({})
+    const [bloodType, setBloodType] = useState("")
+    const [allergies, setAllergies] = useState("")
+    const [currentMedications, setCurrentMedications] = useState("")
+    const [vaccinations, setVaccinations] = useState("")
+    const [additionalDetails, setAdditionalDetails] = useState("")
 
-    const [emailaddress, setEmailAddress] = useState({})
-    const [phonenumber, setPhoneNumber] = useState({})
-    const [address, setAddress] = useState({})
-
-    const [emergencycontactnumber, setEmergencyContactNumber] = useState({})
-    const [emergencycontactname, setEmergencyContactName] = useState({})
-    const [medicalhistory, setMedicalHistory] = useState({})
+    const [emergencycontactnumber, setEmergencyContactNumber] = useState("")
+    const [emergencycontactname, setEmergencyContactName] = useState("")
+    
 
     const handleLoad = () => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
@@ -52,35 +54,25 @@ export default function ProfilePage(props) {
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
         }).then(response => response.json())
             .then(data => {
-                setProfile(data)
-                setEmailAddress("")
-                setAddress("")
-                setPhoneNumber("")
-                setEmergencyContactName("")
-                setEmergencyContactNumber("")
-                setMedicalHistory("")
-                setEditBloodType("")
-                setEditAllergies("")
-                setEditVax("")
-                setEditMeds("")
+                setMedicalHistory(data)
             })
     };
     useEffect(() => {handleLoad()},[])
 
-    const handleMedsChange = (event) => {
-        setEditMeds(event.target.value)
+    const handleCurrentMedicationsChange = (event) => {
+        setCurrentMedications(event.target.value)
     }
 
-    const handleVaxChange = (event) => {
-        setEditVax(event.target.value)
+    const handleVaccinationsChange = (event) => {
+        setVaccinations(event.target.value)
     }
 
     const handleAllergiesChange = (event) => {
-        setEditAllergies(event.target.value)
+        setAllergies(event.target.value)
     }
 
     const handleBloodTypeChange = (event) => {
-        setEditBloodType(event.target.value)
+        setBloodType(event.target.value)
     }
 
     const handleEmergencyContactNumberChange = (event) => {
@@ -91,8 +83,8 @@ export default function ProfilePage(props) {
         setEmergencyContactName(event.target.value)
     }
 
-    const handleMedicalHistoryChange = (event) => {
-        setMedicalHistory(event.target.value)
+    const handleAdditionalDetails = (event) => {
+        setAdditionalDetails(event.target.value)
     }
 
     const saveUserInfoOnServer = () => {
@@ -101,12 +93,13 @@ export default function ProfilePage(props) {
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
-                emailaddress: emailaddress,
-                address: address,
-                phonenumber: phonenumber,
+                bloodType: bloodType,
+                allergies: allergies,
+                currentMedications: currentMedications,
+                vaccinations: vaccinations,
+                medicalhistory: additionalDetails,
                 emergencycontactname: emergencycontactname,
                 emergencycontactnumber: emergencycontactnumber,
-                medicalhistory: medicalhistory
             })
         }).then(response => response.json())
     }
@@ -156,7 +149,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h3>{profile.firstname} {profile.lastname} </h3>
+                                        <h3>{medicalHistory.firstname} {medicalHistory.lastname} </h3>
                                         <h5 className={classes.cardTitleWhite}>Medical History</h5>
                                     </CardHeader>
                                     <CardBody>
@@ -170,7 +163,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         onChange: handleBloodTypeChange,
-                                                        placeholder: 'A+', //profile.emergencycontactname,
+                                                        placeholder: medicalHistory.bloodType, //profile.emergencycontactname,
                                                         disabled: editBloodType,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -190,7 +183,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         onChange: handleAllergiesChange,
-                                                        placeholder: 'Walnuts, Pecans', //profile.emergencycontactname,
+                                                        placeholder: medicalHistory.allergies, //profile.emergencycontactname,
                                                         disabled: editAllergies,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -211,8 +204,8 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        onChange: handleMedsChange,
-                                                        placeholder: 'Advil, Gabapentin', //profile.medicalhistory,
+                                                        onChange: handleCurrentMedicationsChange,
+                                                        placeholder: medicalHistory.currentMedications, //profile.medicalhistory,
                                                         multiline: true,
                                                         rows: 3,
                                                         disabled: editMeds,
@@ -235,8 +228,8 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        onChange: handleVaxChange,
-                                                        placeholder: 'Flu Vaccine',//profile.medicalhistory,
+                                                        onChange: handleVaccinationsChange,
+                                                        placeholder: medicalHistory.vaccinations,//profile.medicalhistory,
                                                         multiline: true,
                                                         rows: 3,
                                                         disabled: editVax,
@@ -259,8 +252,8 @@ export default function ProfilePage(props) {
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        onChange: handleMedicalHistoryChange,
-                                                        placeholder: profile.medicalhistory,
+                                                        onChange: handleAdditionalDetails,
+                                                        placeholder: medicalHistory.medicalhistory,
                                                         multiline: true,
                                                         rows: 3,
                                                         disabled: editHistory,
@@ -288,7 +281,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         onChange: handleEmergencyContactNameChange,
-                                                        placeholder: profile.emergencycontactname,
+                                                        placeholder: medicalHistory.emergencycontactname,
                                                         disabled: editEmergencyName,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -308,7 +301,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         onChange: handleEmergencyContactNumberChange,
-                                                        placeholder: profile.emergencycontactnumber,
+                                                        placeholder: medicalHistory.emergencycontactnumber,
                                                         disabled: editEmergencyNum,
                                                         endAdornment: (
                                                             <InputAdornment position="end">

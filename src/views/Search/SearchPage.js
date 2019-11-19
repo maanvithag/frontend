@@ -103,16 +103,17 @@ export default function SearchPage(props) {
                 <Button color="primary">Return to Dashboard</Button>
               </Link>
             </GridContainer>
+            <br/>
             <GridContainer justify="space-around" direction="row" color={"info"}>
               <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
                 <GridContainer color={"info"}>
                   <GridItem xs={16} sm={16} md={16}>
                     <h3>Searching for {searchItem} in {caption}</h3>
                     {searchResults.map((item, index) => (
-                      <Card style={{ width: "20rem", borderColor: "primary" }}>
+                      <Card style={{ width: "25rem", borderColor: "primary" }}>
                         <CardBody>
-                          <h3 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h3>
-                          <h4>{item.mSpecialization}</h4>
+                          <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
+                          <h5>{item.mSpecialization}</h5>
                           <h4>{item.mCompany}</h4>
                           <p>{item.mHospital}</p>
                           <p>{item.mAddress}</p>

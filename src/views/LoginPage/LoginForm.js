@@ -48,6 +48,24 @@ class LoginForm extends React.Component {
     this.setState({ username: response.email });
     this.setState({ password: "" });
     console.log(response);
+
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/signup', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
+    }).then(response => response.json())
+      .then(data => {
+        if (data.isNewUser) {
+          this.props.history.push("mfa");
+        } else {
+          this.fireAndGetResponseInJSON()
+        }
+      })
+
   };
 
   handleUsernameChange = event => {
@@ -77,7 +95,7 @@ class LoginForm extends React.Component {
         if (data.isCredentialsAccurate && this.state.captchavalue) {
           this.props.history.push("mfa");
         } else {
-          alert("Please enter correct credentials");
+          alert("The entered credentials are wrong or you've not verified that you're not a robot. Please check");
         }
       })
   }
