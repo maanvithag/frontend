@@ -57,15 +57,13 @@ export default function ProfilePage(props) {
     const doctorusername = window.location.href.split('/')[5]
 
     const handleLoad = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/' + doctorusername, {
+        fetch(window.localStorage.getItem("baseURL") + "patient" + '/doctor/' + doctorusername, {
             method : 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
         }).then(response => response.json())
             .then(data => {
                 setProfile(data)
-                setReviews(data.reviews)
-                setRating(Math.round(data.totalrating * 10) / 10)
             })
     };
     useEffect(() => {handleLoad()}, {});
@@ -200,10 +198,10 @@ export default function ProfilePage(props) {
                                     </CardBody>
                                 </Card>
                             </GridItem>
-                            <GridItem xs={5} sm={5} md={5}>
+                            {/* <GridItem xs={5} sm={5} md={5}>
                                 <Map/>
                                 <br/><br/>
-                            </GridItem>
+                            </GridItem> */}
                         </GridContainer>
                         <br></br><br></br>
                     </div>
