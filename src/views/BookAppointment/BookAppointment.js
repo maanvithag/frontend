@@ -24,6 +24,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
@@ -46,7 +49,7 @@ export default function ProfilePage(props) {
     const { ...rest } = props;
     const [date, setDate] = useState(new Date());
     const [timeslots, setTimeslots] = useState([]);
-    const [ts, setTs] = useState("Pick a time");
+    const [ts, setTs] = useState("None");
     const [createAppointment, setCreateAppointment] = useState({
         isAppointmentCreated: false
     })
@@ -54,17 +57,15 @@ export default function ProfilePage(props) {
         setTs(event.target.value);
     };
 
-    console.log(ts);
-
     const doctorusername = window.location.href.split('/')[6]
 
-    const handleTimeSlots = (event) => {
+    const handleTimeSlots = (dateObj) => {
         fetch(window.localStorage.getItem("baseURL") + '/doctor/time/' + doctorusername, {
             method : 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
             body: JSON.stringify({
-                date: date.toString()
+                date: dateObj.toLocaleDateString()
             })
         }).then(response => response.json())
         .then(data => {
@@ -80,7 +81,7 @@ export default function ProfilePage(props) {
             body: JSON.stringify({
                 doctorusername: doctorusername,
                 time: ts,
-                date: date.toString()
+                date: date.toLocaleDateString()
             })
         }).then(response => response.json())
         .then(data => {
@@ -122,19 +123,22 @@ export default function ProfilePage(props) {
                                         <GridContainer style={{ display: 'flex', flexDirection: 'row' }} justify="center">
                                             <GridItem xs={12} sm={12} md={6}>
                                             <Calendar
-                                                onChange={(date) => {setDate(date); handleTimeSlots();}}
+                                                onChange={(date) => {setDate(date); handleTimeSlots(date);}}
                                                 value={date}
                                             />  <br/>
-                                            <h4> Please select a time: </h4>
-                                            <CustomDropdown
-                                                buttonText={ts}
-                                                buttonProps={{
-                                                    color: "primary"
-                                                }}
-                                                value={ts}
-                                                onChange={handleChange}
-                                                dropdownList={timeslots}
-                                            /> <br/>
+                                            <h5> Time Selected: {ts}</h5>
+                                                {/* <InputLabel id="select-timeslot">Name</InputLabel> */}
+                                                <Select
+                                                    labelId="select-timeslot"
+                                                    id="select-timeslot"
+                                                    onChange={handleChange}
+                                                    defaultValue={"None"}
+                                                >
+                                                    <MenuItem value=""> <em>None</em> </MenuItem>
+                                                    {timeslots.map((item, index) => (
+                                                        <MenuItem value={item}>{item}</MenuItem>
+                                                    ))}
+                                                </Select><br />
                                             {/* <BookAppointment/> */}
                                             <div>
                                             <Button color="primary" onClick={(event) => {setModal(true); handleCreateAppointments();}}>
