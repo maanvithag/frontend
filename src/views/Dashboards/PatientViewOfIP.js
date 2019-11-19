@@ -32,7 +32,7 @@ export default function ProfilePage(props) {
     const ipusername = window.location.href.split('/')[5]
 
     const handleLoad = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/insurance/' + ipusername, {
+        fetch(window.localStorage.getItem("baseURL") + "patient" + '/insurance/' + ipusername, {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
