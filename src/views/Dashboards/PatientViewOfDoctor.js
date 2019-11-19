@@ -48,7 +48,7 @@ export default function ProfilePage(props) {
     const { ...rest } = props;
     const [profile, setProfile] = useState({});
     const [reviews, setReviews] = useState([]);
-    const [rating, setRating] = useState([]);
+    const [rating, setRating] = useState(5);
     const [modal, setModal] = React.useState(false);
     const modalClasses = useModalStyles();
     const productClasses = useProductStyles();
@@ -310,7 +310,7 @@ export default function ProfilePage(props) {
                             </GridItem>
                             <GridItem xs={12} sm={12} md={8}>
                                 <GridContainer>
-                                    {/* <GridItem xs={12} sm={12} md={12}>
+                                    <GridItem xs={12} sm={12} md={12}>
                                         <Card>
                                             <CardHeader color="primary">
                                                 <h4 className={classes.cardTitleWhite}>Average Rating: <StarRatings
@@ -329,13 +329,13 @@ export default function ProfilePage(props) {
                                                             starSpacing="5px"
                                                             starRatedColor="orange"
                                                         />
-                                                        {/* <p>Rating: {item.rating}</p> }
+                                                         <p>Rating: {item.rating}</p> 
                                                         <p>Review: {item.review}</p>
                                                     </CardBody>
                                                 </Card>))}
                                             </CardBody>
                                         </Card>
-                                    </GridItem> */}
+                                    </GridItem>
                                 </GridContainer>
                             </GridItem>
                             <GridItem xs={5} sm={5} md={5}>
