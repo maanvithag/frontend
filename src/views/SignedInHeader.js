@@ -129,7 +129,7 @@ export default function SignedInHeaders(props){
 
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-            <ListItem>
+            <ListItem style={{padding:"0px",marginTop:"10px"}}>
                 <div style={{width:70, fontSize:"smaller"}}>
                     <Select
                         labelId="demo-simple-select-outlined-label"
