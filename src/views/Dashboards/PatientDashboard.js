@@ -114,9 +114,9 @@ export default function ProfilePage(props) {
                     tabIcon: Dashboard,
                     tabContent: (
                       <GridContainer>
-                        <GridItem xs={20} sm={20} md={20}>
+                        <GridItem xs={20} sm={20} md={30}>
                         {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          { appointments.map((item, index) => (<Card style={{width: "30rem", borderColor: "primary"}}>
                           <CardBody>
                             <h4 className={classes.cardTitle}>{item.mDoctorName}</h4>
                             <p>Date: {item.mDisplayDate}</p>
