@@ -189,7 +189,7 @@ class App extends Component {
       .post('https://infinitycare-frontend-server.herokuapp.com/users', { userId })
       .then(() => {
         const tokenProvider = new Chatkit.TokenProvider({
-          url: 'https://infinitycare-frontend-server.herokuapp.com/authenticate',
+          url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/81ec1969-c0da-4b53-800b-26c5625c7974/token?user_id=' + userId,
         });
 
         const chatManager = new Chatkit.ChatManager({
