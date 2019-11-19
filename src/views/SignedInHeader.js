@@ -28,6 +28,12 @@ import Select from '@material-ui/core/Select';
 import {InputLabel} from "@material-ui/core";
 import {string} from "prop-types";
 
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
+
 const useStyles = makeStyles(styles);
 
 export default function SignedInHeaders(props){
@@ -80,9 +86,9 @@ export default function SignedInHeaders(props){
             display: 'inline-block'
         },
         dropDown: {
+            width: '0px',
             color: 'black',
-            size: 'large',
-            borderColor: "red"
+            backgroundColor: '#e0e0e0'
         },
         menu:{
             fontSize:"large"
@@ -91,6 +97,35 @@ export default function SignedInHeaders(props){
             color:'black'
         }
     };
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const handleToggle = () => {
+        setOpen(prevOpen => !prevOpen);
+    };
+
+    const handleClose = event => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    function handleListKeyDown(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        }
+    }
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
 
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -150,31 +185,39 @@ export default function SignedInHeaders(props){
                 </ListItem>
             </ListItem>
             <ListItem>
-                <div style={{width:70, fontSize:"smaller"}}>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id={"links"}
-                        labelWidth={labelWidth}
-                        style={style.dropDown}
-                        // might have to change this approach for showing default value
-                        value={link}
-                        defaultValue={"sk"}
-
-                    >
-
-                        <MenuItem value="sk" selected="selected"><MenuIcon className={classes.icons} style={style.menu}/></MenuItem>
-                        <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
-                            <MenuItem value={"profile"} style={style.mt}>Profile</MenuItem>
-                        </Link>
-                        {hideMedicalDetails() && (<Link to="/patient/medicalhistory">
-                            <MenuItem value={"medicalHistory"} style={style.mt}>Medical History</MenuItem>
-                        </Link>)}
-                        <Link to="/">
-                            <MenuItem value={"signOut"} style={style.mt}>Sign Out</MenuItem>
-                        </Link>
-
-                    </Select>
-                </div>
+                <Button
+                    ref={anchorRef}
+                    aria-controls="menu-list-grow"
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                    style={style.dropDown}
+                >
+                    <MenuIcon className={classes.icons} style={style.menu}/>
+                </Button>
+                <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
+                    {({ TransitionProps, placement }) => (
+                        <Grow
+                            {...TransitionProps}
+                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        >
+                            <Paper id="menu-list-grow">
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
+                                        <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
+                                            <MenuItem value={"profile"} style={style.mt}>Profile</MenuItem>
+                                        </Link>
+                                        {hideMedicalDetails() && (<Link to="/patient/medicalhistory">
+                                            <MenuItem value={"medicalHistory"} style={style.mt}>Medical History</MenuItem>
+                                        </Link>)}
+                                        <Link to="/">
+                                            <MenuItem value={"signOut"} style={style.mt}>Sign Out</MenuItem>
+                                        </Link>
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
             </ListItem>
         </List>
     );
