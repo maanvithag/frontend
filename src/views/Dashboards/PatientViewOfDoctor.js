@@ -83,7 +83,7 @@ export default function ProfilePage(props) {
     useEffect(() => { handleLoad() }, {})
 
     const handleAddReview = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/' + doctorusername, {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/addreviews', {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -200,11 +200,9 @@ export default function ProfilePage(props) {
                                         <div className={productClasses.section} style={{ padding: 0 }}>
                                             Thank you for taking the time to review.
                                 </div> <br></br>
-                                        <Link to="/dashboard2">
-                                            <Button color="primary" onClick={() => { setModal(false); handleAddReview({ review: addreviewReview }); }}>
+                                        <Button color="primary" onClick={() => { setModal(false); handleAddReview({ review: addreviewReview }); handleLoad();}}>
                                                 Submit Review
-                                    </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </Link>
+                                        </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </DialogContent>
                                 </Dialog>
                             </div>

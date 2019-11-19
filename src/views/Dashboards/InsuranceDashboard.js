@@ -65,6 +65,18 @@ export default function ProfilePage(props) {
     isIplansUpdated: false
   });
 
+  const handleUsername = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
+      method : 'post',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+    }).then(response => response.json())
+      .then(data => {
+        const chatusername = data.firstname.toLowerCase() + data.lastname.toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+      })
+  }
+
   const handleLoad = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/iplans', {
       method : 'post',
@@ -74,13 +86,9 @@ export default function ProfilePage(props) {
     .then(data => {
       setIplans(data.IPlans)
       setPatients(data.Patients)
-      if(data) {
-        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
-        window.localStorage.setItem("chatusername", chatusername);
-      }
     })
   };
-  useEffect(() => {handleLoad()},[]);
+  useEffect(() => {handleLoad(); handleUsername();},[]);
 
   const handleDeletePlan = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/editiplans/delete', {
