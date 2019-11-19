@@ -45,8 +45,11 @@ class App extends Component {
       secondUserId: '',
       usertype: '',
       doctorGroupId: '',
-      insuranceGroupId: ''
+      insuranceGroupId: '',
+      chatusers: [] // patientslist for doctor, doctorslist for patients, patientslist for insurance provider
     };
+
+    // console.log(window.localStorage.getItem("patientslist"));
 
     const usertype = window.localStorage.getItem("userType");
 
@@ -173,7 +176,6 @@ class App extends Component {
   };
 
   connectToChatkit() {
-
     const { userId, secondUserId } = this.state;
 
     if (userId === null || userId.trim() === '') {
@@ -255,26 +257,26 @@ class App extends Component {
   };
 
   sendDM(id) {
-    if (id != null) {
-      if (this.state.usertype == 'doctor') {
-        this.connectToRoom.call(this, 'f76d0379-f2da-41ec-8ecc-0fef534dc017');
+    if (this.state.usertype == 'doctor') {
+      this.connectToRoom.call(this, 'f76d0379-f2da-41ec-8ecc-0fef534dc017');
+      if (this.state.secondUserId) {
         this.connectToChatkitSecondUser(); 
         this.createPrivateRoom.call(this, id).then(room => {
         this.connectToRoom.call(this, room.id);
-      });
-      }
-      if (this.state.usertype == 'insurance') {
-        this.connectToRoom.call(this, '3dbc92f6-455e-41d1-9a88-ccefd888070e');
-        this.connectToChatkitSecondUser(); 
-        this.createPrivateRoom.call(this, id).then(room => {
-        this.connectToRoom.call(this, room.id);
-      });
-      }
+      })};
     }
-    else {
-      this.setState({
-        secondUserId: null
-      })
+    if (this.state.usertype == 'insurance') {
+      this.connectToRoom.call(this, '3dbc92f6-455e-41d1-9a88-ccefd888070e');
+      if(this.state.secondUserId) {
+        this.connectToChatkitSecondUser(); 
+        this.createPrivateRoom.call(this, id).then(room => {
+        this.connectToRoom.call(this, room.id);
+      })};
+    }
+    if(this.state.usertype == 'patient') {
+      this.state.rooms.map((item , index) => (
+        this.connectToRoom.call(this, item.id)
+      ))
     }
   }
 
@@ -292,7 +294,7 @@ class App extends Component {
       secondUserId,
       usertype,
       doctorGroupId,
-      insuranceGroupId
+      insuranceGroupId,
     } = this.state;
 
     return (

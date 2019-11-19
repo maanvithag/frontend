@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/img/logo.png"
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -50,6 +51,9 @@ export default function LandingPage(props) {
               </h4>
               <br />
               <TypeSelect />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <img width="300" height="300" resizeMode="contain" src={Logo} alt="Logo" />
             </GridItem>
           </GridContainer>
         </div>

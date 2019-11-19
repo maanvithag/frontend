@@ -27,9 +27,6 @@ const useStyles = makeStyles(styles);
 export default function ProfilePage(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [editEmergencyName, setEditEmergencyName] = useState(true);
-    const [editEmergencyNum, setEditEmergencyNum] = useState(true);
-    const [editHistory, setEditHistory] = useState(true);
     const [editEmail, setEditEmail] = useState(true);
     const [editPhone, setEditPhone] = useState(true);
     const [editAddress, setEditAddress] = useState(true);
@@ -77,19 +74,7 @@ export default function ProfilePage(props) {
 
     const handlePhoneNumberChange = (event) => {
         setPhoneNumber(event.target.value)
-    }
-
-    const handleEmergencyContactNumberChange = (event) => {
-        setEmergencyContactNumber(event.target.value)
-    }
-
-    const handleEmergencyContactNameChange = (event) => {
-        setEmergencyContactName(event.target.value)
-    }
-
-    const handlMedicalHistoryChange = (event) => {
-        setMedicalHistory(event.target.value)
-    }
+    };
 
     const saveUserInfoOnServer = () => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile/update', {
@@ -104,7 +89,7 @@ export default function ProfilePage(props) {
                 emergencycontactnumber: emergencycontactnumber,
                 medicalhistory: medicalhistory
             })
-          }).then(response => response.json())
+        }).then(response => response.json())
     }
 
     const style = {
@@ -138,9 +123,9 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to="/patient/dashboard">
-                                <Button 
-                                onClick = {saveUserInfoOnServer}
-                                color="primary"
+                                <Button
+                                    onClick = {saveUserInfoOnServer}
+                                    color="primary"
                                 >Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
@@ -276,77 +261,6 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                     </CardBody>
                                     <CardFooter><br/></CardFooter>
-                                    <CardHeader color="primary"><h5 className={classes.cardTitleWhite}>Emergency Contact</h5></CardHeader>
-                                    <CardBody>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact Name</InputLabel>
-                                                <CustomInput
-                                                    id="emergencycontactname"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        onChange: handleEmergencyContactNameChange,
-                                                        placeholder: profile.emergencycontactname,
-                                                        disabled: editEmergencyName,
-                                                        endAdornment: (
-                                                            <InputAdornment position="end">
-                                                                {editEmergencyName && (<i onClick={() => setEditEmergencyName(false)} className={"fas fa-edit"}/>)}
-                                                                {editEmergencyName ? "" : <i onClick={() => setEditEmergencyName(true)} className="fas fa-save"></i>}
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact Number</InputLabel>
-                                                <CustomInput
-                                                    id="emergencycontactnumber"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        onChange: handleEmergencyContactNumberChange,
-                                                        placeholder: profile.emergencycontactnumber,
-                                                        disabled: editEmergencyNum,
-                                                        endAdornment: (
-                                                            <InputAdornment position="end">
-                                                                {editEmergencyNum && (<i onClick={() => setEditEmergencyNum(false)} className={"fas fa-edit"}/>)}
-                                                                {editEmergencyNum ? "" : <i onClick={() => setEditEmergencyNum(true)} className="fas fa-save"></i>}
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                    </CardBody>
-                                    <CardFooter><br/></CardFooter>
-                                    <CardHeader color="primary"><h5 className={classes.cardTitleWhite}>Medical History</h5></CardHeader>
-                                    <CardBody>
-                                        <GridContainer>
-                                            <CustomInput
-                                                id="medicalhistory"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    onChange: handlMedicalHistoryChange,
-                                                    placeholder: profile.medicalhistory,
-                                                    multiline: true,
-                                                    rows: 5,
-                                                    disabled: editHistory,
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            {editHistory && (<i onClick={() => setEditHistory(false)} className={"fas fa-edit"}/>)}
-                                                            {editHistory ? "" : <i onClick={() => setEditHistory(true)} className="fas fa-save"></i>}
-                                                        </InputAdornment>
-                                                    )
-                                                }}
-                                            />
-                                        </GridContainer>
-                                    </CardBody>
-                                    <CardFooter><br/></CardFooter>
                                     <CardHeader color="primary">
                                         <h4 className={classes.cardTitleWhite}>Insurance Details </h4>
                                         <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
@@ -463,5 +377,6 @@ export default function ProfilePage(props) {
         </div>
     );
 }
+
 
 

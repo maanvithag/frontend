@@ -10,7 +10,7 @@ const RoomUsers = props => {
           <span className={`presence ${user.presence.state}`} />
           <span>{user.name}</span>
         </div>
-        {currentUser.id !== user.id ? (
+        {/* {currentUser.id !== user.id ? (
           <button
             onClick={() => sendDM(user.id)}
             title={`Send ${user.name} a direct message`}
@@ -18,7 +18,7 @@ const RoomUsers = props => {
           >
             +
           </button>
-        ) : null}
+        ) : null} */}
       </li>
     );
   });

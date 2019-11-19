@@ -114,9 +114,9 @@ export default function ProfilePage(props) {
                     tabIcon: Dashboard,
                     tabContent: (
                       <GridContainer>
-                        <GridItem xs={20} sm={20} md={20}>
+                        <GridItem xs={20} sm={20} md={30}>
                         {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          { appointments.map((item, index) => (<Card style={{width: "30rem", borderColor: "primary"}}>
                           <CardBody>
                             <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                             <p>Date: {item.mDisplayDate}</p>
@@ -190,7 +190,7 @@ export default function ProfilePage(props) {
                     tabIcon: List,
                     tabContent: (
                       <GridContainer>
-                        <GridItem xs={12} sm={12} md={12}>
+                        <GridItem xs={12} sm={12} md={20}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                         { pastAppointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>

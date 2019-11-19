@@ -1,7 +1,5 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -17,6 +15,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { Apps, CloudDownload } from "@material-ui/icons";
 import Search from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuIcon from '@material-ui/icons/Menu';
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -29,6 +28,12 @@ import Select from '@material-ui/core/Select';
 import {InputLabel} from "@material-ui/core";
 import {string} from "prop-types";
 
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
+
 const useStyles = makeStyles(styles);
 
 export default function SignedInHeaders(props){
@@ -38,10 +43,14 @@ export default function SignedInHeaders(props){
 
     const inputLabel = React.useRef(null);
     const [keyword, setKeyword] = React.useState('doctor');
+    const [link, setLink] = React.useState("sk");
     const [labelWidth, setLabelWidth] = React.useState(0);
 
     const handleChange = event => {
         setKeyword(event.target.value);
+    };
+    const handleLinkChange = event => {
+        setLink(event.target.value);
     };
 
     const handleSearch = event => {
@@ -49,12 +58,21 @@ export default function SignedInHeaders(props){
         window.localStorage.setItem("searchUserType", document.getElementById('inputUserType').value);
     };
 
+    function hideMedicalDetails() {
+        if (window.localStorage.getItem("userType") === "patient") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const style = {
         btn: {
             color: 'white',
             fontSize: 'small',
-            margin: '-20px',
-            padding: '12px'
+            margin: '-10px',
+            padding: '12px',
+            width: '70px'
         },
         btnProfile: {
             color: 'white',
@@ -66,8 +84,48 @@ export default function SignedInHeaders(props){
         searchBar: {
             width: '100%',
             display: 'inline-block'
+        },
+        dropDown: {
+            width: '0px',
+            color: 'black',
+            backgroundColor: '#e0e0e0'
+        },
+        menu:{
+            fontSize:"large"
+        },
+        mt:{
+            color:'black'
         }
     };
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const handleToggle = () => {
+        setOpen(prevOpen => !prevOpen);
+    };
+
+    const handleClose = event => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    function handleListKeyDown(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        }
+    }
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
 
     return (
         <List className={classes.list} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -90,7 +148,7 @@ export default function SignedInHeaders(props){
                 </div>
             </ListItem>
             <ListItem>
-                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:200}}>
+                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:300}}>
                     <CustomInput
                         id={"inputEntry"}
                         primary
@@ -98,7 +156,8 @@ export default function SignedInHeaders(props){
 
                         inputRootCustomClasses={classes.inputRootCustomClasses}
                         formControlProps={{
-                            className: classes.formControl
+                            className: classes.formControl,
+                            fullWidth: true
                         }}
                         inputProps={{
                             placeholder: "Search",
@@ -118,19 +177,47 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
-                            <Button justIcon round color="primary" onClick={handleSearch} color={"github"}> {/* Add onClick={handleSearch} */}
-                                <AccountCircle className={classes.icons} />
-                            </Button>
+                    <Link to={"/chat/"+ window.localStorage.getItem("chatusername")}>
+                        <Button justIcon color="github" round onClick={handleSearch} style={style.btn}> {/* Add onClick={handleSearch} */}
+                            Chat
+                        </Button>
                     </Link>
                 </ListItem>
             </ListItem>
             <ListItem>
-                <Link to="/" className={classes.link}>
-                    <Button color='github' size="small" round onClick={handleSignOut} style={style.btn}>
-                        Sign out
-                    </Button>
-                </Link>
+                <Button
+                    ref={anchorRef}
+                    aria-controls="menu-list-grow"
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                    style={style.dropDown}
+                >
+                    <MenuIcon className={classes.icons} style={style.menu}/>
+                </Button>
+                <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
+                    {({ TransitionProps, placement }) => (
+                        <Grow
+                            {...TransitionProps}
+                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        >
+                            <Paper id="menu-list-grow">
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
+                                        <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
+                                            <MenuItem value={"profile"} style={style.mt}>Profile</MenuItem>
+                                        </Link>
+                                        {hideMedicalDetails() && (<Link to="/patient/medicalhistory">
+                                            <MenuItem value={"medicalHistory"} style={style.mt}>Medical History</MenuItem>
+                                        </Link>)}
+                                        <Link to="/">
+                                            <MenuItem value={"signOut"} style={style.mt}>Sign Out</MenuItem>
+                                        </Link>
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
             </ListItem>
         </List>
     );
@@ -148,3 +235,4 @@ function handleSignOut() {
 };
 
 // TODO onSearch() fetch request gets blocked by CORS. Figure our why!
+
