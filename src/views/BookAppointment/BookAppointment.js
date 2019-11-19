@@ -127,7 +127,7 @@ export default function ProfilePage(props) {
                                                 onChange={(date) => {setDate(date); handleTimeSlots(date);}}
                                                 value={date}
                                             />  <br/>
-                                            <h5> Time Selected: {ts}</h5>
+                                            <h5> Please select time</h5>
                                                 {/* <InputLabel id="select-timeslot">Name</InputLabel> */}
                                                 <Select
                                                     labelId="select-timeslot"
