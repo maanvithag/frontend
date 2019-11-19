@@ -74,6 +74,10 @@ export default function ProfilePage(props) {
     .then(data => {
       setIplans(data.IPlans)
       setPatients(data.Patients)
+      if(data) {
+        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+      }
     })
   };
   useEffect(() => {handleLoad()},[]);
@@ -316,7 +320,7 @@ export default function ProfilePage(props) {
                               <Button color="primary">
                                 View Patient
                               </Button>
-                              <Link to={"/chat/" + "insurance/" + item.name.split(' ')[0].toLowerCase() + item.name.split(' ')[1].toLowerCase()}>
+                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.name.split(' ')[0].toLowerCase() + item.name.split(' ')[1].toLowerCase()}>
                                 <Button color="primary">Send me a text</Button>
                               </Link>
                             </Link>

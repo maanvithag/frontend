@@ -61,6 +61,10 @@ export default function ProfilePage(props) {
     .then(data => {
       setAppointments(data.CurrentAppointments)
       setPastAppointments(data.PastAppointments)
+      if(data) {
+        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+      }
     })
   }
   useEffect(() => {handleLoad()},[])
@@ -126,7 +130,7 @@ export default function ProfilePage(props) {
                                 View Doctor
                               </Button>
                             </Link> 
-                            <Link to={"/chat/" + "patient/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
+                            <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
                               <Button color="primary">Chat with me!</Button>
                             </Link>
                             <div>

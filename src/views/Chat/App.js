@@ -277,6 +277,11 @@ class App extends Component {
       this.state.rooms.map((item , index) => (
         this.connectToRoom.call(this, item.id)
       ))
+      if(this.state.secondUserId) {
+        this.connectToChatkitSecondUser(); 
+        this.createPrivateRoom.call(this, id).then(room => {
+        this.connectToRoom.call(this, room.id);
+      })};
     }
   }
 
