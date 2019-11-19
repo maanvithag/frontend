@@ -142,7 +142,7 @@ export default function SignedInHeaders(props){
             </ListItem>
             <ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to={"/"+ window.localStorage.getItem("userType") +"/chat"}>
+                    <Link to={"/chat/"+ window.localStorage.getItem("chatusername")}>
                         <Button justIcon color="github" round onClick={handleSearch} style={style.btn}> {/* Add onClick={handleSearch} */}
                             Chat
                         </Button>

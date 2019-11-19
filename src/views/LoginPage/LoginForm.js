@@ -22,7 +22,8 @@ class LoginForm extends React.Component {
       password: "",
       successful: "",
       cardAnimaton: "cardHidden",
-      jsonResponse: ""
+      jsonResponse: "",
+      captchavalue: null
     };
     let currentURLPath = window.location.pathname;
     window.localStorage.setItem("userType", currentURLPath.substring(1, currentURLPath.indexOf("/signin")));
@@ -37,6 +38,9 @@ class LoginForm extends React.Component {
   }
 
   verifyCaptcha = (value) => {
+    this.setState({
+      captchavalue: value
+    })
     console.log(value)
   }
 
@@ -70,7 +74,7 @@ class LoginForm extends React.Component {
       })
     }).then(response => response.json())
       .then(data => {
-        if (data.isCredentialsAccurate) {
+        if (data.isCredentialsAccurate && this.state.captchavalue) {
           this.props.history.push("mfa");
         } else {
           alert("Please enter correct credentials");
