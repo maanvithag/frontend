@@ -86,6 +86,9 @@ export default function SignedInHeaders(props){
         },
         menu:{
             fontSize:"large"
+        },
+        mt:{
+            color:'black'
         }
     };
 
@@ -131,7 +134,7 @@ export default function SignedInHeaders(props){
                     />
 
                     <Link to="/search">
-                        <Button justIcon round color="primary" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
+                        <Button justIcon round color="github" onClick={handleSearch}> {/* Add onClick={handleSearch} */}
                             <Search className={classes.searchIcon} />
                         </Button>
                     </Link>
@@ -140,7 +143,7 @@ export default function SignedInHeaders(props){
             <ListItem>
                 <ListItem className={classes.listItem}>
                     <Link to={"/"+ window.localStorage.getItem("userType") +"/chat"}>
-                        <Button justIcon color="primary" onClick={handleSearch} color={"primary"} style={style.btn}> {/* Add onClick={handleSearch} */}
+                        <Button justIcon color="github" round onClick={handleSearch} style={style.btn}> {/* Add onClick={handleSearch} */}
                             Chat
                         </Button>
                     </Link>
@@ -161,13 +164,13 @@ export default function SignedInHeaders(props){
 
                         <MenuItem value="sk" selected="selected"><MenuIcon className={classes.icons} style={style.menu}/></MenuItem>
                         <Link to={"/"+ window.localStorage.getItem("userType") +"/profile"}>
-                            <MenuItem value={"profile"}>Profile</MenuItem>
+                            <MenuItem value={"profile"} style={style.mt}>Profile</MenuItem>
                         </Link>
                         {hideMedicalDetails() && (<Link to="/patient/medicalhistory">
-                            <MenuItem value={"medicalHistory"}>Medical History</MenuItem>
+                            <MenuItem value={"medicalHistory"} style={style.mt}>Medical History</MenuItem>
                         </Link>)}
                         <Link to="/">
-                            <MenuItem value={"signOut"}>Sign Out</MenuItem>
+                            <MenuItem value={"signOut"} style={style.mt}>Sign Out</MenuItem>
                         </Link>
 
                     </Select>

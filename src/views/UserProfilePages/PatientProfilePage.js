@@ -127,12 +127,6 @@ export default function ProfilePage(props) {
                                     onClick = {saveUserInfoOnServer}
                                     color="primary"
                                 >Return to my Dashboard</Button>
-                            </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Link to="/patient/medicalhistory">
-                                <Button
-                                    onClick = {saveUserInfoOnServer}
-                                    color="primary"
-                                >Medical History</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
