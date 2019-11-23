@@ -32,13 +32,17 @@ export default class SimpleMap extends React.Component {
         method: 'get'
       }).then(response => response.json())
         .then(data => {
+          console.log(data)
           this.setState({summationOfLat: this.state.summationOfLat + data.results[0].geometry.location.lat})
           this.setState({summationOfLng: this.state.summationOfLng + data.results[0].geometry.location.lng})
 
           // this.setState({center: {lat: (this.state.summationOfLat)/(this.state.initialList.length), 
           //   lng: (this.state.summationOfLng)/(this.state.initialList.length)}})
 
-          this.state.coordinates.push(data.results[0].geometry.location)
+          var latitude = data.results[0].geometry.location.lat
+          var longitude = data.results[0].geometry.location.lng
+          var locationData = {lat: latitude, lng: longitude, name: data.results[0].formatted_address}
+          this.state.coordinates.push(locationData)
           this.setState({ coordinates: this.state.coordinates })
           //this.setState({center: {lat: latitude/this.state.coordinates.length, lng: longitude/this.state.coordinates.length}})
         })
@@ -58,7 +62,7 @@ export default class SimpleMap extends React.Component {
             <Marker
               lat={item.lat}
               lng={item.lng}
-              name={item.name}
+              subtitle={item.name}
               color='blue' />
           ))}
         </GoogleMapReact>
