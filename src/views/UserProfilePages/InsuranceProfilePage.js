@@ -134,8 +134,7 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
                                                 <CustomInput
-                                                    labelText="Email Address"
-                                                    id="email-address"
+                                                    id="emailaddress"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}

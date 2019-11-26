@@ -166,13 +166,12 @@ export default function ProfilePage(props) {
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
                                                 <CustomInput
                                                     id="emailaddress"
-                                                    labelText="Email Address"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange:handleEmailAddressChange,
-                                                        placeholder: profile.emailaddress,
+                                                        placeholder: profile.email,
                                                         disabled: editEmail,
                                                         endAdornment: (
                                                             <InputAdornment position="end">

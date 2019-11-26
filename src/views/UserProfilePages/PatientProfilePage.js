@@ -157,14 +157,13 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
                                                 <CustomInput
-                                                    labelText="Email Address"
-                                                    id="float"
+                                                    id="emailaddress"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
                                                         onChange: handleEmailAddressChange,
-                                                        placeholder: profile.username, // For now, it's just the same as username
+                                                        placeholder: profile.email, // For now, it's just the same as username
                                                         disabled: editEmail,
                                                         endAdornment: (
                                                             <InputAdornment position="end">
@@ -330,6 +329,7 @@ export default function ProfilePage(props) {
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Membership ID</InputLabel>
                                                 <CustomInput
                                                     labelText="Membership ID"
+                                                    // FIXME: Remove the above mentioned labelText when emitting values.
                                                     id="membershipid"
                                                     formControlProps={{
                                                         fullWidth: true

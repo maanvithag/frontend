@@ -83,7 +83,7 @@ export default function ProfilePage(props) {
     useEffect(() => { handleLoad() }, {})
 
     const handleAddReview = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/addreviews', {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/doctor/' + doctorusername + '/addreviews', {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
