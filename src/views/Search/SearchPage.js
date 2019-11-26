@@ -78,6 +78,9 @@ export default function SearchPage(props) {
       background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
       color: 'black',
       borderRadius: 5
+    },
+    altTextColor:{
+      color: '#904199'
     }
   };
 
@@ -97,23 +100,17 @@ export default function SearchPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)} color={"info"}>
         <div style={style.bg}>
           <div className={classes.container}>
-              <br></br>
-            <GridContainer justify="space-around" direction="row" color={"info"}>
-              <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                <Button color="primary">Return to Dashboard</Button>
-              </Link>
-            </GridContainer>
             <br/>
             <GridContainer justify="space-around" direction="row" color={"info"}>
               <GridItem xs={5} sm={5} md={5} lg={5} color={"info"}>
                 <GridContainer color={"info"}>
                   <GridItem xs={16} sm={16} md={16}>
-                    <h3>Searching for {searchItem} in {caption}</h3>
+                    <h3>Searching for <span style={style.altTextColor}>{searchItem}</span> in <span style={style.altTextColor}>{caption}</span></h3>
                     {searchResults.map((item, index) => (
                       <Card style={{ width: "25rem", borderColor: "primary" }}>
                         <CardBody>
                           <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
-                          <h5>{item.mSpecialization}</h5>
+                          <h5 style={style.altTextColor}>{item.mSpecialization}</h5>
                           <h4>{item.mCompany}</h4>
                           <p>{item.mHospital}</p>
                           <p>{item.mAddress}</p>
@@ -138,13 +135,21 @@ export default function SearchPage(props) {
               </GridItem>
               {cities.length > 0 ? (
                 <GridItem xs={5} sm={5} md={5}>
+
+                    <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
+                      <Button color="primary">Return to Dashboard</Button>
+                    </Link>
+
                   <br /><br />
                   <Map locations={cities} zoom={4}/>
                 </GridItem>
               ) : (
-                  <p />
+                  <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
+                    <Button color="primary">Return to Dashboard</Button>
+                  </Link>
                 )}
             </GridContainer>
+            <br/>
           </div>
         </div>
       </div>
