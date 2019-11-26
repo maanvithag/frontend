@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
       })
     }).then(response => response.json())
       .then(data => {
-        if (data.isNewUser) {
+        if (data.isNewUser && this.state.captchavalue) {
           this.props.history.push("mfa");
         } else {
           this.fireAndGetResponseInJSON()
