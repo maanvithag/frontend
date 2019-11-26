@@ -48,6 +48,22 @@ class LoginForm extends React.Component {
     this.setState({ username: response.email });
     this.setState({ password: "" });
     console.log(response);
+    
+    var firstName = ""
+    var lastName = ""
+    if(response.name !== null) {
+      var name = ""
+      name = response.name.split(" ");
+      if (name.length === 1) {
+        firstName = name[0]
+      } else {
+        for(let i = 0; i < name.length - 1; i++) {
+          firstName = firstName + name[i]
+        }
+        lastName = name[name.length - 1]
+      }
+      console.log("ABC")
+    }
 
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/signup', {
       method: 'POST',
@@ -55,7 +71,9 @@ class LoginForm extends React.Component {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         username: this.state.username,
-        password: this.state.password
+        password: this.state.password,
+        firstName: firstName,
+        lastName: lastName,
       })
     }).then(response => response.json())
       .then(data => {
