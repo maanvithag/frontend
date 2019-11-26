@@ -58,8 +58,9 @@ class LoginForm extends React.Component {
         firstName = name[0]
       } else {
         for(let i = 0; i < name.length - 1; i++) {
-          firstName = firstName + name[i]
+          firstName = firstName + name[i] + " "
         }
+        firstName = firstName.substring(0, firstName.length - 1);
         lastName = name[name.length - 1]
       }
     }
