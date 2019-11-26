@@ -62,7 +62,6 @@ class LoginForm extends React.Component {
         }
         lastName = name[name.length - 1]
       }
-      console.log("ABC")
     }
 
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/signup', {
