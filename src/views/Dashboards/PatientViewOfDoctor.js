@@ -32,6 +32,8 @@ import Map from "views/Map/Map.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import { primaryColor } from "../../assets/jss/material-kit-react";
 import StarRatings from 'react-star-ratings';
+import Rater from 'react-rater'
+import 'react-rater/lib/react-rater.css'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -63,6 +65,11 @@ export default function ProfilePage(props) {
     const handleChange = event => {
         setValue(event.target.value);
     };
+
+    function handleStarRatingChange(rating) {
+        console.log(rating.rating)
+        setValue(rating.rating.toString());
+    }
 
     const doctorusername = window.location.href.split('/')[5]
 
@@ -113,6 +120,18 @@ export default function ProfilePage(props) {
             borderRadius: 5
         }
     };
+
+    const Star = ({ willBeActive, isActive, style }) => {
+        const fill = isActive ? '#fc6' : willBeActive ? '#ffdd99' : '#e3e3e3'
+        return (
+            <svg viewBox="0 0 19.481 19.481" width="36" height="36" style={style}>
+                <path
+                    fill={fill}
+                    d="m10.201,.758l2.478,5.865 6.344,.545c0.44,0.038 0.619,0.587 0.285,0.876l-4.812,4.169 1.442,6.202c0.1,0.431-0.367,0.77-0.745,0.541l-5.452-3.288-5.452,3.288c-0.379,0.228-0.845-0.111-0.745-0.541l1.442-6.202-4.813-4.17c-0.334-0.289-0.156-0.838 0.285-0.876l6.344-.545 2.478-5.864c0.172-0.408 0.749-0.408 0.921,0z"
+                />
+            </svg>
+        )
+    }
 
     return (
         <div>
@@ -174,18 +193,11 @@ export default function ProfilePage(props) {
                                     <DialogContent
                                         id="modal-slide-description"
                                         className={modalClasses.modalBody}>
-                                        <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
-                                            <FormControlLabel
-                                                value="1" control={<Radio color="primary" />} label="1" />
-                                            <FormControlLabel
-                                                value="2" control={<Radio color="primary" />} label="2" />
-                                            <FormControlLabel
-                                                value="3" control={<Radio color="primary" />} label="3" />
-                                            <FormControlLabel
-                                                value="4" control={<Radio color="primary" />} label="4" />
-                                            <FormControlLabel
-                                                value="5" control={<Radio color="primary" />} label="5" />
-                                        </RadioGroup>
+                                        <Rater total={5}
+                                            onRate={handleStarRatingChange}
+                                        >
+                                            <Star style={{ transform: `scale(${style.x})` }} />
+                                        </Rater>
                                         <CustomInput
                                             labelText="Please write your review here"
                                             id="medical-info"
@@ -200,8 +212,8 @@ export default function ProfilePage(props) {
                                         <div className={productClasses.section} style={{ padding: 0 }}>
                                             Thank you for taking the time to review.
                                 </div> <br></br>
-                                        <Button color="primary" onClick={() => { setModal(false); handleAddReview({ review: addreviewReview }); handleLoad();}}>
-                                                Submit Review
+                                        <Button color="primary" onClick={() => { setModal(false); handleAddReview({ review: addreviewReview }); handleLoad(); }}>
+                                            Submit Review
                                         </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </DialogContent>
                                 </Dialog>
@@ -327,7 +339,7 @@ export default function ProfilePage(props) {
                                                             starSpacing="5px"
                                                             starRatedColor="orange"
                                                         />
-                                                         <p>Rating: {item.rating}</p> 
+                                                        <p>Rating: {item.rating}</p>
                                                         <p>Review: {item.review}</p>
                                                     </CardBody>
                                                 </Card>))}
