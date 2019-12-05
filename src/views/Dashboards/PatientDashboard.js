@@ -88,6 +88,17 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        cancelBtn:{
+        },
+        viewBtn:{
+            marginRight: '10px',
+            paddingLeft: '35px',
+            paddingRight: '35px'
+        },
+        chatBtn:{
+            paddingLeft: '35px',
+            paddingRight: '35px'
         }
     };
 
@@ -126,15 +137,15 @@ export default function ProfilePage(props) {
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
                             <Link to= {"/patient/doctor/" + item.mEncodedDoctorUserName}>
-                              <Button color="primary">
+                              <Button color="primary" style={style.viewBtn}>
                                 View Doctor
                               </Button>
-                            </Link> 
+                            </Link>
                             <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                              <Button color="primary">Chat with me!</Button>
+                              <Button color="primary" style={style.chatBtn}>Chat with me</Button>
                             </Link>
                             <div>
-                            <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
+                            <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}} style={style.cancelBtn}>
                               Cancel Appointment
                             </Button>
                             <Dialog

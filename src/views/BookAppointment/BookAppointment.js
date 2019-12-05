@@ -88,7 +88,7 @@ export default function ProfilePage(props) {
         .then(data => {
             setCreateAppointment(data.isAppointmentCreated)
         })
-    }
+    };
 
     return (
         <div>
@@ -168,7 +168,7 @@ export default function ProfilePage(props) {
                                                     onClick={() => setModal(false)}>
                                                     <Close className={modalClasses.modalClose} />
                                                 </IconButton>
-                                                <h4 className={modalClasses.modalTitle}>Appointment Confirmation</h4>
+                                                    <h3 className={modalClasses.modalTitle}><b>Appointment Confirmation</b></h3>
                                                 </DialogTitle>
                                                 <DialogContent
                                                 id="modal-slide-description"
@@ -176,11 +176,14 @@ export default function ProfilePage(props) {
                                                 <div className={productClasses.section} style={{padding: 0}}>
                                                 Your appointment is confirmed. Please check your email for an confirmation receipt.
                                                 </div>
-                                                <Link to="/patient/dashboard">
+                                                    <br />
+                                                    <GridContainer justify="center">
+                                                    <Link to="/patient/dashboard">
                                                     <Button color="primary">
                                                     Okay
                                                     </Button>
                                                 </Link>
+                                                    </GridContainer>
                                                 </DialogContent>
                                             </Dialog>
                                             </div>

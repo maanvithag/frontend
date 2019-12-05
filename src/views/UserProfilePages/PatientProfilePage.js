@@ -35,6 +35,10 @@ export default function ProfilePage(props) {
     const [editMembershipID, setEditMembershipID] = useState(true);
     const [editIPlan, setEditIPlan] = useState(true);
     const [editDeductible, setEditDeductible] = useState(true);
+    const [editPremium, setEditPremium] = useState(true);
+    const [editCopayment, setEditCopayment] = useState(true);
+    const [editOutOfPocketLimit, setEditOutOfPocketLimit] = useState(true);
+
 
     const [profile, setProfile] = useState({})
 
@@ -261,7 +265,7 @@ export default function ProfilePage(props) {
                                     </CardBody>
                                     <CardFooter><br/></CardFooter>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Insurance Details </h4>
+                                        <h4 className={classes.cardTitleWhite}>Insurance Plan Details </h4>
                                         <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
                                             <h7 style={style.link}> View Provider&nbsp;&nbsp;&nbsp;<i className={"fas fa-external-link-square-alt"}/> </h7>
                                         </Link>
@@ -316,40 +320,26 @@ export default function ProfilePage(props) {
                                                     inputProps={{
                                                         disabled: editIPlan,
                                                         placeholder: profile.insuranceplan
-                                                        // endAdornment: (
-                                                        //     <InputAdornment position="end">
-                                                        //         {editIPlan && (<i onClick={() => setEditIPlan(false)} className={"fas fa-edit"}/>)}
-                                                        //         {editIPlan ? "" : <i onClick={() => setEditIPlan(true)} className="fas fa-save"></i>}
-                                                        //     </InputAdornment>
-                                                        // )
                                                     }}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Membership ID</InputLabel>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Monthly Premium</InputLabel>
                                                 <CustomInput
-                                                    labelText="Membership ID"
                                                     // FIXME: Remove the above mentioned labelText when emitting values.
-                                                    id="membershipid"
+                                                    id="premium"
                                                     formControlProps={{
                                                         fullWidth: true
                                                     }}
                                                     inputProps={{
-                                                        disabled: editMembershipID,
-                                                        placeholder: profile.membershipID
-                                                        // endAdornment: (
-                                                        //     <InputAdornment position="end">
-                                                        //         {editMembershipID && (<i onClick={() => setEditMembershipID(false)} className={"fas fa-edit"}/>)}
-                                                        //         {editMembershipID ? "" : <i onClick={() => setEditMembershipID(true)} className="fas fa-save"></i>}
-                                                        //     </InputAdornment>
-                                                        // )
+                                                        disabled: editPremium,
+                                                        placeholder: profile.premium
                                                     }}
                                                 />
                                             </GridItem>
-                                            <GridItem xs={12} sm={12} md={12}>
+                                            <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Deductible</InputLabel>
                                                 <CustomInput
-                                                    labelText="Deductible"
                                                     id="deductible"
                                                     formControlProps={{
                                                         fullWidth: true
@@ -357,12 +347,32 @@ export default function ProfilePage(props) {
                                                     inputProps={{
                                                         disabled: editDeductible,
                                                         placeholder: profile.deductible,
-                                                        // endAdornment: (
-                                                        //     <InputAdornment position="end">
-                                                        //         {editDeductible && (<i onClick={() => setEditDeductible(false)} className={"fas fa-edit"}/>)}
-                                                        //         {editDeductible ? "" : <i onClick={() => setEditDeductible(true)} className="fas fa-save"></i>}
-                                                        //     </InputAdornment>
-                                                        // )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Co-Payments</InputLabel>
+                                                <CustomInput
+                                                    id="copayment"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editCopayment,
+                                                        placeholder: profile.copayment,
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Out-of-Pocket Limit</InputLabel>
+                                                <CustomInput
+                                                    id="outofpocketlimit"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        disabled: editOutOfPocketLimit,
+                                                        placeholder: profile.outofpocketlimit,
                                                     }}
                                                 />
                                             </GridItem>
