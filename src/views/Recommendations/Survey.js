@@ -22,6 +22,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
+import Logo2 from "../../assets/img/logo2.png";
 
 const useStyles = makeStyles(styles);
 
@@ -114,7 +115,7 @@ export default function Survey(props) {
         <div>
             <Header
                 color="white"
-                brand="InfinityCare"
+                brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
                 rightLinks={<SignedInHeaders />}
                 fixed
                 changeColorOnScroll={{

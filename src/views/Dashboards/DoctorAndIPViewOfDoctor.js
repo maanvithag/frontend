@@ -36,6 +36,7 @@ import AddDoctorReview from "views/Dashboards/AddDoctorReview.js";
 
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import Logo2 from "../../assets/img/logo2.png";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -80,7 +81,7 @@ export default function ProfilePage(props) {
         <div>
             <Header
                 color="white"
-                brand="InfinityCare"
+                brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
                 rightLinks={<SignedInHeaders />}
                 fixed
                 changeColorOnScroll={{

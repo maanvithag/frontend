@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import Map from "views/Map/Map.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import { primaryColor } from "../../assets/jss/material-kit-react";
+import Logo2 from "../../assets/img/logo2.png";
 
 const useStyles = makeStyles(styles);
 
@@ -57,7 +58,7 @@ export default function ProfilePage(props) {
         <div>
             <Header
                 color="white"
-                brand="InfinityCare"
+                brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
                 rightLinks={<SignedInHeaders />}
                 fixed
                 changeColorOnScroll={{

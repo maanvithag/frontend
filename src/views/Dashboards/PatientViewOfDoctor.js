@@ -34,6 +34,7 @@ import { primaryColor } from "../../assets/jss/material-kit-react";
 import StarRatings from 'react-star-ratings';
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
+import Logo2 from "../../assets/img/logo2.png";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -137,7 +138,7 @@ export default function ProfilePage(props) {
         <div>
             <Header
                 color="white"
-                brand="InfinityCare"
+                brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
                 rightLinks={<SignedInHeaders />}
                 fixed
                 changeColorOnScroll={{
