@@ -158,9 +158,9 @@ export default function SurveyResults(props) {
                 <div style={style.bg}>
                     <div className={classes.container}>
                         <GridContainer justify="space-around" direction="row" color={"info"}>
-                            <GridItem xs={10} sm={10} md={10} lg={10} color={"info"}>
-                                <GridContainer color={"info"}>
-                                    <GridItem xs={16} sm={16} md={16}>
+                            <GridItem xs={8} sm={8} md={8} lg={8} color={"info"}>
+                                <GridContainer color={"info"} justify="center">
+                                    <GridItem xs={15} sm={15} md={15}>
                                         <br />
                                         <GridContainer justify="center">
                                             <Link to="/patient/dashboard">
@@ -169,10 +169,11 @@ export default function SurveyResults(props) {
                                                 >Return to my Dashboard</Button>
                                             </Link>
                                         </GridContainer>
-                                        <h2><b> Here's our recommended plan for you! </b></h2>
+                                        <h2><b> Here is our recommended plan for you! </b></h2>
                                         <h5>We've included other recommendations below it as well to provide you with a variety of options.</h5>
+                                        <GridContainer justify="center">
                                         {searchResults.map((item, index) => (
-                                            <Card style={{ width: "35rem", borderColor: "primary" }}>
+                                            <Card style={{ width: "38rem", borderColor: "primary" }}>
                                                 {index===0 && (<div style={style.suggestedPlan}>
                                                     <CardBody style={style.suggestedPlan}>
                                                         <GridContainer>
@@ -328,6 +329,7 @@ export default function SurveyResults(props) {
                                                 </div>)}
 
                                             </Card>))}
+                                        </GridContainer>
                                     </GridItem>
                                 </GridContainer>
                             </GridItem>

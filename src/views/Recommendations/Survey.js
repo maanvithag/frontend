@@ -39,7 +39,6 @@ export default function Survey(props) {
                 setIncomeValue("");
                 setRoutineValue("");
                 setSpecializedValue("");
-                setBirthValue("");
                 setConditionValue("")
             })
     };
@@ -48,7 +47,6 @@ export default function Survey(props) {
     const handleIncomeChange = (event) => { setIncomeValue(event.target.value); };
     const handleRoutineChange = (event) => { setRoutineValue(event.target.value); };
     const handleSpecializedChange = (event) => { setSpecializedValue(event.target.value); };
-    const handleBirthChange = (event) => { setBirthValue(event.target.value); };
     const handleConditionChange = (event) => { setConditionValue(event.target.value); };
 
     const saveUserInfoOnServer = () => {
@@ -60,7 +58,6 @@ export default function Survey(props) {
                 incomeValue: incomeValue,
                 routineValue: routineValue,
                 specializedValue: specializedValue,
-                birthValue: birthValue,
                 conditionValue: conditionValue
             })
         }).then(response => response.json())
@@ -69,7 +66,6 @@ export default function Survey(props) {
     const [incomeValue, setIncomeValue] = React.useState('');
     const [routineValue, setRoutineValue] = React.useState('');
     const [specializedValue, setSpecializedValue] = React.useState('');
-    const [birthValue, setBirthValue] = React.useState('');
     const [conditionValue, setConditionValue] = React.useState('');
 
 
@@ -183,21 +179,6 @@ export default function Survey(props) {
                                                     <FormControlLabel value="0" style={style.radio} control={<Radio />} label="Yes" />
                                                     <FormControlLabel value="4" style={style.radio} control={<Radio />} label="No" />
                                                 </RadioGroup>
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={style.textBox}>Enter your birth date.</InputLabel>
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={3}>
-                                                <CustomInput
-                                                    id="birth"
-                                                    formControlProps={{
-                                                        fullWidth: false
-                                                    }}
-                                                    inputProps={{
-                                                        onChange:handleBirthChange,
-                                                        placeholder: "MM/DD/YYYY",
-                                                    }}
-                                                />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={style.q}>Do you have one of the following conditions that would make you need to see the doctor more regularly?</InputLabel>
