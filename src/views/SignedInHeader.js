@@ -185,7 +185,7 @@ export default function SignedInHeaders(props){
 
             {hideMedicalDetails() && (<ListItem>
                 <ListItem className={classes.listItem}>
-                    <Link to={"/survey"}>
+                    <Link to={"survey"}>
                         <Button justIcon color="github" round onClick={handleSearch} style={style.recbtn}> {/* Add onClick={handleSearch} */}
                             Plan Finder
                         </Button>

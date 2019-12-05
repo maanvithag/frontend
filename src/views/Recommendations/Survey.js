@@ -211,7 +211,7 @@ export default function Survey(props) {
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer justify="center">
-                                            <Link to="/survey/results">
+                                            <Link to="survey/results">
                                                 <Button
                                                     style={style.submitBtn}
                                                     onClick = {saveUserInfoOnServer}
