@@ -97,7 +97,7 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">Return to Dashboard</Button>
+                                <Button color="primary">Return to my Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </GridContainer>
                         <br></br>

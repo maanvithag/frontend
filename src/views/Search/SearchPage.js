@@ -138,7 +138,7 @@ export default function SearchPage(props) {
                 <GridItem xs={5} sm={5} md={5}>
 
                     <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                      <Button color="primary">Return to Dashboard</Button>
+                      <Button color="primary">Return to my Dashboard</Button>
                     </Link>
 
                   <br /><br />
@@ -146,7 +146,7 @@ export default function SearchPage(props) {
                 </GridItem>
               ) : (
                   <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                    <Button color="primary">Return to Dashboard</Button>
+                    <Button color="primary">Return to my Dashboard</Button>
                   </Link>
                 )}
             </GridContainer>
