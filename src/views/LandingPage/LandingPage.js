@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/img/logo.png"
+import Logo2 from "../../assets/img/logo2.png"
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -32,7 +34,7 @@ export default function LandingPage(props) {
       <Header
         color="white"
         routes={dashboardRoutes}
-        brand="InfinityCare"
+        brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
         rightLinks={<HeaderLinks />}
         fixed
         /*changeColorOnScroll={{
@@ -41,7 +43,7 @@ export default function LandingPage(props) {
         }}*/
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+        <Parallax filter image={require("assets/img/landing-bg.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>

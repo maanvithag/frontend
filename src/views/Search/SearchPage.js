@@ -18,6 +18,7 @@ import Map from "views/Map/Map.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { Link } from "react-router-dom";
+import Logo2 from "../../assets/img/logo2.png";
 
 const useStyles = makeStyles(styles);
 
@@ -88,7 +89,7 @@ export default function SearchPage(props) {
     <div>
       <Header
         color="white"
-        brand="InfinityCare"
+        brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
         rightLinks={<SignedInHeaders />}
         fixed
         changeColorOnScroll={{
@@ -137,7 +138,7 @@ export default function SearchPage(props) {
                 <GridItem xs={5} sm={5} md={5}>
 
                     <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                      <Button color="primary">Return to Dashboard</Button>
+                      <Button color="primary">Return to my Dashboard</Button>
                     </Link>
 
                   <br /><br />
@@ -145,7 +146,7 @@ export default function SearchPage(props) {
                 </GridItem>
               ) : (
                   <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                    <Button color="primary">Return to Dashboard</Button>
+                    <Button color="primary">Return to my Dashboard</Button>
                   </Link>
                 )}
             </GridContainer>

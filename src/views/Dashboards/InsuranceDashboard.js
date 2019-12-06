@@ -34,6 +34,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import {primaryColor} from "../../assets/jss/material-kit-react";
 import InputLabel from "@material-ui/core/InputLabel";
+import Logo2 from "../../assets/img/logo2.png";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -59,7 +60,6 @@ export default function ProfilePage(props) {
     isIplansUpdated: false
   });
   const [addPlanName, setAddPlanName] = useState('');
-  const [addPlanCompany, setAddPlanCompany] = useState('');
   const [addPlanPremium, setAddPlanPremium] = useState('');
   const [addPlanDeductible, setAddPlanDeductible] = useState('');
   const [addPlanCopayment, setAddPlanCopayment] = useState('');
@@ -131,7 +131,6 @@ export default function ProfilePage(props) {
       credentials: 'include',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
       body: JSON.stringify({
-        company: event.company,
         premium: event.premium,
         deductible: event.deductible,
         copayment: event.copayment,
@@ -151,10 +150,6 @@ export default function ProfilePage(props) {
 
   const handleAddPlanName = (event) => {
     setAddPlanName(event.target.value)
-  };
-
-  const handleAddPlanCompany = (event) => {
-    setAddPlanCompany(event.target.value)
   };
 
   const handleAddPlanPremium = (event) => {
@@ -191,7 +186,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color="white"
-        brand="InfinityCare"
+        brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
         rightLinks={<SignedInHeaders />}
         fixed
         changeColorOnScroll={{
@@ -259,15 +254,23 @@ export default function ProfilePage(props) {
                                         onChange: handleAddPlanName
                                       }}/>
                                   </GridItem>
-                                  <GridItem xs={12} sm={12} md={12}>
-                                    <CustomInput
-                                        labelText="Company"
-                                        id="company"
-                                        formControlProps={{
-                                            fullWidth: true}}
-                                        inputProps={{
-                                            onChange: handleAddPlanCompany
-                                        }}/>
+                                  <GridItem xs={12} sm={12} md={6}>
+                                    <InputLabel style={style.drop}>Insurance Plan Type</InputLabel>
+                                    <Select
+                                        labelId="level"
+                                        id="level"
+                                        value={addPlanLevel}
+                                        onChange={handleAddPlanLevel}
+                                        defaultValue={"bronze"}
+
+                                        // might have to change this approach for showing default value
+
+                                    >
+                                      <MenuItem value={"bronze"}>Bronze</MenuItem>
+                                      <MenuItem value={"silver"}>Silver</MenuItem>
+                                      <MenuItem value={"gold"}>Gold</MenuItem>
+                                      <MenuItem value={"platinum"}>Platinum</MenuItem>
+                                    </Select>
                                   </GridItem>
                                 <GridItem xs={12} sm={12} md={6}>
                                 <CustomInput
@@ -311,30 +314,12 @@ export default function ProfilePage(props) {
                                       onChange: handleAddPlanOutOfPocketLimit
                                     }}/>
                                   </GridItem>
-                                  <GridItem xs={12} sm={12} md={6}>
-                                    <InputLabel style={style.drop}>Insurance Plan Type</InputLabel>
-                                    <Select
-                                        labelId="level"
-                                        id="level"
-                                        value={addPlanLevel}
-                                        onChange={handleAddPlanLevel}
-                                        defaultValue={"bronze"}
-
-                                        // might have to change this approach for showing default value
-
-                                    >
-                                      <MenuItem value={"bronze"}>Bronze</MenuItem>
-                                      <MenuItem value={"silver"}>Silver</MenuItem>
-                                      <MenuItem value={"gold"}>Gold</MenuItem>
-                                      <MenuItem value={"platinum"}>Platinum</MenuItem>
-                                    </Select>
-                                  </GridItem>
                                 </GridContainer>
                                   <br/>
                                 <GridContainer justify="center">
                               <Link to="/insurance/dashboard"> 
                                   <Button color="primary" onClick={(event) => {setAddModal(false); 
-                                    handleAddPlan({name: addPlanName, company: addPlanCompany, premium: addPlanPremium, outofpocketlimit: addPlanOutOfPocketLimit, deductible: addPlanDeductible, copayment: addPlanCopayment, level: addPlanLevel});}}>
+                                    handleAddPlan({name: addPlanName, premium: addPlanPremium, outofpocketlimit: addPlanOutOfPocketLimit, deductible: addPlanDeductible, copayment: addPlanCopayment, level: addPlanLevel});}}>
                                     Add Insurance Plan
                                   </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               </Link>
