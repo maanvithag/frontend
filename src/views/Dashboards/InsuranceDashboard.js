@@ -55,17 +55,13 @@ export default function ProfilePage(props) {
   const [patients, setPatients] = useState([]);
   const [profile, setProfile] = useState({});
 
-
-  const [addplan, setAddPlan] = useState({
-    isIplansUpdated: false
-  });
+  const [updatedPlanName, setUpdatedPlanName] = useState('')
   const [addPlanName, setAddPlanName] = useState('');
   const [addPlanPremium, setAddPlanPremium] = useState('');
   const [addPlanDeductible, setAddPlanDeductible] = useState('');
   const [addPlanCopayment, setAddPlanCopayment] = useState('');
   const [addPlanOutOfPocketLimit, setAddPlanOutOfPocketLimit] = useState('');
   const [addPlanLevel, setAddPlanLevel] = useState("bronze");
-
 
   const [deleteplan, setDeletePlan] = useState({
     name: "",
@@ -90,7 +86,7 @@ export default function ProfilePage(props) {
       })
   }
 
-  const handleLoad = (event) => {
+  const handleLoad = () => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/iplans', {
       method : 'post',
       credentials: 'include',
@@ -102,8 +98,7 @@ export default function ProfilePage(props) {
       setPatients(data.Patients)
     })
   };
-
-  useEffect(() => {handleLoad(); handleUsername();},[]);
+  useEffect(() => {handleLoad(); handleUsername();},[updatedPlanName]);
 
   const handleDeletePlan = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/editiplans/delete', {
@@ -121,7 +116,7 @@ export default function ProfilePage(props) {
       }) 
     }).then(response => response.json())
     .then(data => {
-      setDeletePlan(data.isIplansUpdated)
+      setUpdatedPlanName(data.planName)
     })
   };
 
@@ -140,7 +135,7 @@ export default function ProfilePage(props) {
       }) 
     }).then(response => response.json())
     .then(data => {
-      setAddPlan(data.isIplansUpdated)
+      setUpdatedPlanName(data.planName)
     })
   };
 
