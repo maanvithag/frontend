@@ -67,7 +67,7 @@ export default function ProfilePage(props) {
       }
     })
   }
-  useEffect(() => {handleLoad()},[])
+  useEffect(() => {handleLoad()},[cancelAppointment])
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {
