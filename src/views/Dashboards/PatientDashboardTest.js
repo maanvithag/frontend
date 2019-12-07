@@ -55,22 +55,7 @@ export default function ProfilePage(props) {
     isAppointmentCancelled: false
   })
 
-  const handleLoad = (event) => {
-    fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/getappointments', {
-      method : 'post',
-      credentials: 'include',
-      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-    }).then(response => response.json())
-    .then(data => {
-      setAppointments(data.CurrentAppointments)
-      setPastAppointments(data.PastAppointments)
-      if(data) {
-        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
-        window.localStorage.setItem("chatusername", chatusername);
-      }
-    })
-  }
-  useEffect(() => {handleLoad()},[cancelAppointment])
+  
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {
@@ -131,106 +116,21 @@ export default function ProfilePage(props) {
                     tabName: "Upcoming appointments",
                     tabIcon: Dashboard,
                     tabContent: (
-                      <GridContainer>
-                        <GridItem xs={20} sm={20} md={30}>
-                        {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { appointments.map((item, index) => (<Card style={{width: "25rem", borderColor: "primary"}}>
-                          <CardBody>
-                            <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
-                            <p>Date: {item.mDisplayDate}</p>
-                            <p>Time: {item.mDisplayTime}</p>
-                            <Link to= {"/patient/doctor/" + item.mEncodedDoctorUserName}>
-                              <Button color="primary" style={style.viewBtn}>
-                                View Doctor
-                              </Button>
-                            </Link>
-                            <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                              <Button color="primary" style={style.chatBtn}>Chat with me</Button>
-                            </Link>
-                            <div>
-                            <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}} style={style.cancelBtn}>
-                              Cancel Appointment
-                            </Button>
-                            <Dialog
-                              modalClasses={{
-                                root: modalClasses.center,
-                                paper: modalClasses.modal
-                              }}
-                              open={modal}
-                              TransitionComponent={Transition}
-                              keepMounted
-                              onClose={() => setModal(false)}
-                              aria-labelledby="modal-slide-title"
-                              aria-describedby="modal-slide-description"
-                            >
-                              <DialogTitle
-                                id="classic-modal-slide-title"
-                                disableTypography
-                                className={modalClasses.modalHeader}
-                              >
-                                <IconButton
-                                  className={modalClasses.modalCloseButton}
-                                  key="close"
-                                  aria-label="Close"
-                                  color="inherit"
-                                  onClick={() => setModal(false)}
-                                >
-                                  <Close className={modalClasses.modalClose} />
-                                </IconButton>
-                                <h3 className={modalClasses.modalTitle}>Cancel Appointment</h3>
-                              </DialogTitle>
-                              <DialogContent
-                                id="modal-slide-description"
-                                className={modalClasses.modalBody}
-                              >
-                                  <div className={productClasses.section} style={{padding: 0}}>
-                                    Are you sure you want to cancel this appointment?
-                                  </div> <br/>
-                                  <Link to="/patient/dashboard"> 
-                                      <Button color="primary" onClick={(event) => {setModal(false); handleCancelAppointments(); handleLoad();}}>
-                                        Yes
-                                      </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <Button color="primary" onClick={() => setModal(false)}>
-                                        No
-                                      </Button>
-                                  </Link>
-                              </DialogContent>
-                            </Dialog>
-                          </div>
-                          </CardBody>
-                        </Card>))}
-                        </GridItem>
-                      </GridContainer>
+                      <p>testing</p>
                     )
                   },
                   {
                     tabName: "Past appointments",
                     tabIcon: List,
                     tabContent: (
-                      <GridContainer>
-                        <GridItem xs={20} sm={20} md={30}>
-                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                        { pastAppointments.map((item, index) => (<Card style={{width: "25rem", borderColor: "primary"}}>
-                          <CardBody>
-                            <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
-                            <p>Date: {item.mDisplayDate}</p>
-                            <p>Time: {item.mDisplayTime}</p>
-                            <Link to= {"/patient/doctor/" + item.mEncodedDoctorUserName}>
-                              <Button color="primary">
-                                View Doctor
-                              </Button>
-                            </Link>
-                          </CardBody>
-                        </Card>))}
-                        </GridItem>
-                      </GridContainer>
+                        <p>testing</p>
                     )
                   },
                   {
                     tabName: "Billing",
                     tabIcon: Payment,
                     tabContent: (
-                      <CustomTabs
+                        <CustomTabs
                             headerColor="info"
                             tabs={[
                             {
