@@ -104,6 +104,11 @@ export default function SurveyResults(props) {
         }
     } //window.localStorage.getItem("userType")
 
+    function setPlanName(planInfo) {
+        console.log(planInfo)
+        window.localStorage.setItem("insurancePlan", planInfo.mName)
+    }
+
     var caption;
     if (searchUserType === "doctor") {
         caption = "doctors";
@@ -214,7 +219,7 @@ export default function SurveyResults(props) {
                                                             </GridItem>
                                                             <GridItem xs={13} sm={12} md={3}>
                                                                 <Link to={"/patient/survey/results/viewplan"}>
-                                                                    <Button color="primary" style={style.viewBtn}>View this Plan</Button>
+                                                                    <Button color="primary" style={style.viewBtn} onClick={(item) => setPlanName()}>View this Plan</Button>
                                                                 </Link>
                                                             </GridItem>
                                                             <GridItem xs={13} sm={12} md={3}>
