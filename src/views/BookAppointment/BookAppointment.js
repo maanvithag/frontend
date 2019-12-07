@@ -91,6 +91,27 @@ export default function ProfilePage(props) {
         })
     };
 
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        },
+        drop: {
+            marginTop: '20px',
+            marginBottom: '10px'
+        },
+        pushOff:{
+            marginTop: '30px',
+            marginRight: '30px',
+            marginBottom: '10px'
+
+        },
+        calendar:{
+            marginTop: '30px'
+        }
+    };
+
     return (
         <div>
             <Header
@@ -106,7 +127,7 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
@@ -119,16 +140,18 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Book your appointment</h4>
+                                        <h4 className={classes.cardTitleWhite}>Book Your Appointment</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer style={{ display: 'flex', flexDirection: 'row' }} justify="center">
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <GridContainer justify="center">
+                                                    <p>&nbsp;</p>
                                             <Calendar
                                                 onChange={(date) => {setDate(date); handleTimeSlots(date);}}
                                                 value={date}
                                             />  <br/>
-                                            <h5> Please select time</h5>
+                                            <h5 style={style.pushOff}> Please select a time</h5>
                                                 {/* <InputLabel id="select-timeslot">Name</InputLabel> */}
                                                 <Select
                                                     labelId="select-timeslot"
@@ -136,17 +159,18 @@ export default function ProfilePage(props) {
                                                     onChange={handleChange}
                                                     value={ts}
                                                     defaultValue={"None"}
+                                                    style={style.drop}
                                                 >
                                                     <MenuItem value="None"> <em>None</em> </MenuItem>
                                                     {timeslots.map((item, index) => (
                                                         <MenuItem value={item}>{item}</MenuItem>
                                                     ))}
                                                 </Select><br />
-                                            {/* <BookAppointment/> */}
-                                            <div>
                                             <Button color="primary" onClick={(event) => {setModal(true); handleCreateAppointments();}}>
                                                 Book Appointment
                                             </Button>
+                                                </GridContainer>
+                                                <div>
                                             <Dialog
                                                 modalClasses={{
                                                 root: modalClasses.center,

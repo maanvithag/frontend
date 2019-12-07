@@ -114,14 +114,23 @@ export default function SurveyResults(props) {
             textTransform: 'initial',
             fontSize: 'small',
             marginTop: '20px',
-            width: '285px'
+            marginLeft: '-40px',
+            width: '180px'
         },
         selectBtn: {
             color: 'white',
             textTransform: 'initial',
             fontSize: 'small',
             marginTop: '20px',
-            width: '185px'
+            width: '150px'
+        },
+        viewBtn: {
+            color: 'white',
+            textTransform: 'initial',
+            fontSize: 'small',
+            marginTop: '20px',
+            marginLeft: '-30px',
+            width: '150px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -198,12 +207,17 @@ export default function SurveyResults(props) {
                                                             </GridItem>
                                                         </GridContainer>
                                                         <GridContainer justify="center">
-                                                            <GridItem xs={13} sm={12} md={7}>
+                                                            <GridItem xs={13} sm={12} md={4}>
                                                                 <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
-                                                                    <Button color="primary" style={style.chatBtn}> Chat with an Insurance Provider</Button>
+                                                                    <Button color="primary" style={style.chatBtn}> Chat with a Provider</Button>
                                                                 </Link>
                                                             </GridItem>
-                                                            <GridItem xs={13} sm={12} md={5}>
+                                                            <GridItem xs={13} sm={12} md={3}>
+                                                                <Link to={"/patient/survey/results/viewplan"}>
+                                                                    <Button color="primary" style={style.viewBtn}>View this Plan</Button>
+                                                                </Link>
+                                                            </GridItem>
+                                                            <GridItem xs={13} sm={12} md={3}>
                                                                 <Button color="primary" style={style.selectBtn} onClick={(event) => {setModal(true); handlePlanSelection();}}>
                                                                     Select Plan
                                                                 </Button>
@@ -275,12 +289,17 @@ export default function SurveyResults(props) {
                                                                 </GridItem>
                                                             </GridContainer>
                                                             <GridContainer justify="center">
-                                                                <GridItem xs={13} sm={12} md={7}>
+                                                                <GridItem xs={13} sm={12} md={4}>
                                                                     <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
-                                                                        <Button color="primary" style={style.chatBtn}> Chat with an Insurance Provider</Button>
+                                                                        <Button color="primary" style={style.chatBtn}> Chat with a Provider</Button>
                                                                     </Link>
                                                                 </GridItem>
-                                                                <GridItem xs={13} sm={12} md={5}>
+                                                                    <GridItem xs={13} sm={12} md={3}>
+                                                                        <Link to={"/patient/survey/results/viewplan"}>
+                                                                            <Button color="primary" style={style.viewBtn}>View this Plan</Button>
+                                                                        </Link>
+                                                                    </GridItem>
+                                                                <GridItem xs={13} sm={12} md={3}>
                                                                     <Button color="primary" style={style.selectBtn} onClick={(event) => {setModal(true); handlePlanSelection();}}>
                                                                         Select Plan
                                                                     </Button>
