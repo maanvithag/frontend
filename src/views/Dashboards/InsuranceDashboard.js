@@ -35,6 +35,7 @@ import Select from "@material-ui/core/Select";
 import {primaryColor} from "../../assets/jss/material-kit-react";
 import InputLabel from "@material-ui/core/InputLabel";
 import Logo2 from "../../assets/img/logo2.png";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
