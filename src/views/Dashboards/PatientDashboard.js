@@ -30,6 +30,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import {Create, Payment} from "@material-ui/icons";
+import Logo2 from "../../assets/img/logo2.png";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -67,7 +68,7 @@ export default function ProfilePage(props) {
       }
     })
   }
-  useEffect(() => {handleLoad()},[])
+  useEffect(() => {handleLoad()},[cancelAppointment])
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {
@@ -88,6 +89,17 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        cancelBtn:{
+        },
+        viewBtn:{
+            marginRight: '10px',
+            paddingLeft: '35px',
+            paddingRight: '35px'
+        },
+        chatBtn:{
+            paddingLeft: '35px',
+            paddingRight: '35px'
         }
     };
 
@@ -95,7 +107,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color="white"
-        brand="InfinityCare"
+        brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
         rightLinks={<SignedInHeaders />}
         fixed
         changeColorOnScroll={{
@@ -126,15 +138,15 @@ export default function ProfilePage(props) {
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
                             <Link to= {"/patient/doctor/" + item.mEncodedDoctorUserName}>
-                              <Button color="primary">
+                              <Button color="primary" style={style.viewBtn}>
                                 View Doctor
                               </Button>
-                            </Link> 
+                            </Link>
                             <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                              <Button color="primary">Chat with me!</Button>
+                              <Button color="primary" style={style.chatBtn}>Chat with me</Button>
                             </Link>
                             <div>
-                            <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
+                            <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}} style={style.cancelBtn}>
                               Cancel Appointment
                             </Button>
                             <Dialog

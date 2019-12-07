@@ -74,6 +74,13 @@ export default function SignedInHeaders(props){
             padding: '12px',
             width: '70px'
         },
+        recbtn: {
+            color: 'white',
+            fontSize: 'small',
+            margin: '-10px',
+            padding: '12px',
+            width: '120px'
+        },
         btnProfile: {
             color: 'white',
             fontSize: 'small',
@@ -175,6 +182,16 @@ export default function SignedInHeaders(props){
                     </Link>
                 </div>
             </ListItem>
+
+            {hideMedicalDetails() && (<ListItem>
+                <ListItem className={classes.listItem}>
+                    <Link to={"/patient/survey"}>
+                        <Button justIcon color="github" round onClick={handleSearch} style={style.recbtn}> {/* Add onClick={handleSearch} */}
+                            Plan Finder
+                        </Button>
+                    </Link>
+                </ListItem>
+            </ListItem>)}
             <ListItem>
                 <ListItem className={classes.listItem}>
                     <Link to={"/chat/"+ window.localStorage.getItem("chatusername")}>

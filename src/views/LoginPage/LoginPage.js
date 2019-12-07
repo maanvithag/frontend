@@ -14,6 +14,7 @@ import LoginForm from 'views/LoginPage/LoginForm.js';
 import loginStyles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
+import Logo2 from "../../assets/img/logo2.png";
 
 const useLoginStyles = makeStyles(loginStyles);
 
@@ -29,7 +30,7 @@ export default function LoginPage(props) {
       <Header
         absolute
         color="white"
-        brand="InfinityCare"
+        brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
         rightLinks={<HeaderLinks />}
         {...rest}
       />

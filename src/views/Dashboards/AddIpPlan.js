@@ -86,7 +86,7 @@ export default function AddIpPlan(props) {
           }}
         />
         <CustomInput
-          labelText="Price"
+          labelText="Premium"
           id="rating"
           formControlProps={{
               fullWidth: true

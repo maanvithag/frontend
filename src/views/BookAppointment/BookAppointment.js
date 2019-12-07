@@ -31,6 +31,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import Logo2 from "../../assets/img/logo2.png";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -88,13 +89,34 @@ export default function ProfilePage(props) {
         .then(data => {
             setCreateAppointment(data.isAppointmentCreated)
         })
-    }
+    };
+
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        },
+        drop: {
+            marginTop: '20px',
+            marginBottom: '10px'
+        },
+        pushOff:{
+            marginTop: '30px',
+            marginRight: '30px',
+            marginBottom: '10px'
+
+        },
+        calendar:{
+            marginTop: '30px'
+        }
+    };
 
     return (
         <div>
             <Header
                 color="white"
-                brand="InfinityCare"
+                brand={ <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />}
                 rightLinks={<SignedInHeaders />}
                 fixed
                 changeColorOnScroll={{
@@ -105,12 +127,12 @@ export default function ProfilePage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <div>
+                <div style={style.bg}>
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">Return to Dashboard</Button>
+                                <Button color="primary">Return to my Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -118,16 +140,18 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h4 className={classes.cardTitleWhite}>Book your appointment</h4>
+                                        <h4 className={classes.cardTitleWhite}>Book Your Appointment</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer style={{ display: 'flex', flexDirection: 'row' }} justify="center">
                                             <GridItem xs={12} sm={12} md={6}>
+                                                <GridContainer justify="center">
+                                                    <p>&nbsp;</p>
                                             <Calendar
                                                 onChange={(date) => {setDate(date); handleTimeSlots(date);}}
                                                 value={date}
                                             />  <br/>
-                                            <h5> Please select time</h5>
+                                            <h5 style={style.pushOff}> Please select a time</h5>
                                                 {/* <InputLabel id="select-timeslot">Name</InputLabel> */}
                                                 <Select
                                                     labelId="select-timeslot"
@@ -135,17 +159,18 @@ export default function ProfilePage(props) {
                                                     onChange={handleChange}
                                                     value={ts}
                                                     defaultValue={"None"}
+                                                    style={style.drop}
                                                 >
                                                     <MenuItem value="None"> <em>None</em> </MenuItem>
                                                     {timeslots.map((item, index) => (
                                                         <MenuItem value={item}>{item}</MenuItem>
                                                     ))}
                                                 </Select><br />
-                                            {/* <BookAppointment/> */}
-                                            <div>
                                             <Button color="primary" onClick={(event) => {setModal(true); handleCreateAppointments();}}>
                                                 Book Appointment
                                             </Button>
+                                                </GridContainer>
+                                                <div>
                                             <Dialog
                                                 modalClasses={{
                                                 root: modalClasses.center,
@@ -168,7 +193,7 @@ export default function ProfilePage(props) {
                                                     onClick={() => setModal(false)}>
                                                     <Close className={modalClasses.modalClose} />
                                                 </IconButton>
-                                                <h4 className={modalClasses.modalTitle}>Appointment Confirmation</h4>
+                                                    <h3 className={modalClasses.modalTitle}><b>Appointment Confirmation</b></h3>
                                                 </DialogTitle>
                                                 <DialogContent
                                                 id="modal-slide-description"
@@ -176,11 +201,14 @@ export default function ProfilePage(props) {
                                                 <div className={productClasses.section} style={{padding: 0}}>
                                                 Your appointment is confirmed. Please check your email for an confirmation receipt.
                                                 </div>
-                                                <Link to="/patient/dashboard">
+                                                    <br />
+                                                    <GridContainer justify="center">
+                                                    <Link to="/patient/dashboard">
                                                     <Button color="primary">
                                                     Okay
                                                     </Button>
                                                 </Link>
+                                                    </GridContainer>
                                                 </DialogContent>
                                             </Dialog>
                                             </div>
