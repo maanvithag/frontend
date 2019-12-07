@@ -50,9 +50,10 @@ export default function ViewPlan(props) {
     const searchUserType = window.localStorage.getItem("searchUserType");
     const [searchResults, setSearchResults] = useState([]);
     const [cities, setCities] = useState([]);
+    const [planInfo, setPlanInfo] = useState({})
 
     const handlePlanSelection = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + '/survey/results', {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/survey/results', {
             method : 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/json', Accept: 'application/json'},
@@ -73,30 +74,17 @@ export default function ViewPlan(props) {
             })
     };
 
-    // Until and unless the searchItem parameter is changed, the useEffect will not be executed. If this is removed, the useEffect will be called
-    // infinite number of times.
-    useEffect(() => {
-        //Fetching the user data
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search?query=' + localStorage.getItem("searchItem"), {
+    const handleLoad = () => {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/plan/' + btoa(window.localStorage.getItem("insurancePlan")), {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
             .then(data => {
-                setSearchResults(data)
+                setPlanInfo(data.information)
             })
-
-        //Fetching the locations
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("searchUserType") + '/search/locations?query=' + localStorage.getItem("searchItem"), {
-            method: 'post',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        }).then(response => response.json())
-            .then(data => {
-                setCities(data)
-            })
-
-    }, [searchItem]);
+    }
+    useEffect(() => { handleLoad() }, {})
 
     function description() {
         if (1===1){//(item.mLevel === "bronze") {
@@ -179,19 +167,19 @@ export default function ViewPlan(props) {
                                                 >Return to my Dashboard</Button>
                                             </Link>
                                         </GridContainer>
-                                        <GridContainer justify="center"><h2><b>{item.mName}</b></h2></GridContainer>
+                                        <GridContainer justify="center"><h2><b>{planInfo.mName}</b></h2></GridContainer>
                                         <GridContainer justify="center">
-                                            <h3 style={style.altTextColor}>Provided by <b>{item.mCompany}</b></h3>
+                                            <h3 style={style.altTextColor}>Provided by <b>{planInfo.mCompany}</b></h3>
                                         </GridContainer>
                                         <div>
                                             <br />
-                                        <p style={style.para}> The {item.mName} provided by {item.mCompany} is {item.mCompany}’s {item.mLevel} plan. {description()} </p>
+                                        <p style={style.para}> The {planInfo.mName} provided by {planInfo.mCompany} is {planInfo.mCompany}’s {planInfo.mLevel} plan. {description()} </p>
                                         <p style={style.para}> Here are some statistics about our plan: </p>
                                             <List>
-                                                <ListItem style={style.para}> <b>Monthly premium</b>: {item.mPremium}/month</ListItem>
-                                                <ListItem style={style.para}> <b>Deductible</b>: {item.mDeductible}</ListItem>
-                                                <ListItem style={style.para}> <b>Co-Payments</b>: {item.mCopayment} </ListItem>
-                                                <ListItem style={style.para}> <b>Out-of-Pocket Limit</b>:{item.mOutOfPocketLimit}</ListItem>
+                                                <ListItem style={style.para}> <b>Monthly premium</b>: {planInfo.mPremium}/month</ListItem>
+                                                <ListItem style={style.para}> <b>Deductible</b>: {planInfo.mDeductible}</ListItem>
+                                                <ListItem style={style.para}> <b>Co-Payments</b>: {planInfo.mCopayment} </ListItem>
+                                                <ListItem style={style.para}> <b>Out-of-Pocket Limit</b>:{planInfo.mOutOfPocketLimit}</ListItem>
                                             </List>
                                         <p style={style.para}> If you would like to hear more information about this plan, we recommend
                                             talking to one of our insurance providers using the button below. </p>
