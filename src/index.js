@@ -37,7 +37,7 @@ import DoctorAndIPViewOfDoctor from "./views/Dashboards/DoctorAndIPViewOfDoctor"
 import PatientMedicalDetailsPage from "./views/UserProfilePages/PatientMedicalDetailsPage";
 import Survey from "./views/Recommendations/Survey";
 import SurveyResults from "./views/Recommendations/SurveyResults";
-import ViewPlan from "./views/Recommendations/ViewPlan";
+{/*import ViewPlan from "./views/Recommendations/ViewPlan";*/}
 
 serviceWorker.unregister();
 
@@ -96,7 +96,7 @@ ReactDOM.render(
         <Route path="/search" exact component={SearchPage} />
         <Route path="/patient/survey" exact component={Survey} />
         <Route path="/patient/survey/results" exact component={SurveyResults} />
-        <Route path="/patient/survey/results/viewplan" exact component={ViewPlan} />
+        {/*<Route path="/patient/survey/results/viewplan" exact component={ViewPlan} />*/}
 
         <Route path="/chat/:patientID/:doctorID" exact component={App}/>
         <Route path="/chat/:doctorID" exact component={App}/>
