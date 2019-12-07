@@ -31,6 +31,8 @@ import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import {Create, Payment} from "@material-ui/icons";
 import Logo2 from "../../assets/img/logo2.png";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -115,18 +117,18 @@ export default function ProfilePage(props) {
           color: "white"
         }}
         {...rest}
-      />
+      /> 
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div style={style.bg}>
           <div className={classes.container}>
             <GridContainer justify="space-around">
-              <GridItem xs={5} sm={5} md={5} lg={5}>
-              <NavPills
-                color="primary"
+              <GridItem xs={5} sm={10} md={15} lg={20}>
+              <CustomTabs
+                headerColor="primary"
                 tabs={[
                   {
-                    tabButton: "Upcoming appointments",
+                    tabName: "Upcoming appointments",
                     tabIcon: Dashboard,
                     tabContent: (
                       <GridContainer>
@@ -202,7 +204,7 @@ export default function ProfilePage(props) {
                     )
                   },
                   {
-                    tabButton: "Past appointments",
+                    tabName: "Past appointments",
                     tabIcon: List,
                     tabContent: (
                       <GridContainer>
@@ -225,7 +227,7 @@ export default function ProfilePage(props) {
                     )
                   },
                   {
-                    tabButton: "Billing",
+                    tabName: "Billing",
                     tabIcon: Payment,
                     tabContent: (
                       <GridContainer>

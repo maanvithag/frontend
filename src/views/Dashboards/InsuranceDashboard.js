@@ -195,12 +195,12 @@ export default function ProfilePage(props) {
         <div style={style.bg}>
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} lg={6}>
+            <GridItem xs={5} sm={10} md={15} lg={20}>
               <NavPills
-                color="primary"
+                headerColor="primary"
                 tabs={[
                   {
-                    tabButton: "IP plans",
+                    tabName: "IP plans",
                     tabIcon: Dashboard,
                     tabContent: (
                       <GridContainer justify="center">
@@ -388,7 +388,7 @@ export default function ProfilePage(props) {
                     )
                   },
                   {
-                    tabButton: "Patients",
+                    tabName: "Patients",
                     tabIcon: List,
                     tabContent: (
                       <GridContainer>
