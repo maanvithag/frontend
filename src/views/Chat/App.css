@@ -18,10 +18,10 @@ html {
   }
   
   .App {
-    width: 100vw;
-    height: 100vh;
+    width: 97vw;
+    height: 97vh;
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 1fr 4fr;
   }
   
   .right-sidebar {
@@ -30,6 +30,8 @@ html {
   
   .left-sidebar {
     border-right: 1px solid #ccc;
+    /* height: 90vh; */
+    height: 100%;
   }
   
   .user-profile {
@@ -116,7 +118,7 @@ html {
   .chat-screen {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
   }
   
   .chat-header {
@@ -168,11 +170,12 @@ html {
   
   .message-form, .message-input {
     width: 100%;
+    font-size: 15px;
     margin-bottom: 0;
   }
   
   input[type="text"].message-input {
-    height: 50px;
+    height: 80px;
     border: none;
     padding-left: 20px;
   }
@@ -232,4 +235,3 @@ html {
     color: #5C8436;
     background-color: #222;
   }
-  

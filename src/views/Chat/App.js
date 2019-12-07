@@ -15,7 +15,6 @@ import GridContainer from "components/Grid/GridContainer.js";
 import './App.css';
 
 const useStyles = makeStyles(styles);
-// const classes = useStyles();
 
 const style = {
   link: {
@@ -304,19 +303,7 @@ class App extends Component {
 
     return (
       <div>
-        <Header
-          color="white"
-          brand="InfinityCare"
-          rightLinks={<SignedInHeaders />}
-          fixed
-          changeColorOnScroll={{
-              height: 0,
-              color: "white"
-          }}
-        />
       {/* <Parallax small filter image={require("assets/img/profile-bg.jpg")} /> */}
-      <br/> <br/> <br/> <br/>
-        <div>
           <div style={style.bg}>
             <div>
               <br></br>
@@ -340,7 +327,11 @@ class App extends Component {
                   </aside>
                   <section className="chat-screen">
                     <header className="chat-header">
-                      {currentRoom ? <h3>{roomName}</h3> : null}
+                      {currentRoom ? 
+                        <div>
+                        <h3>{roomName} <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> </h3> 
+                        </div>
+                      : null}
                     </header>
                     <ul className="chat-messages">
                       <ChatSession messages={messages} />
@@ -358,15 +349,6 @@ class App extends Component {
                       </form>
                     </footer>
                   </section>
-                  <aside className="sidebar right-sidebar">
-                    {currentRoom ? (
-                      <RoomUsers
-                        currentUser={currentUser}
-                        sendDM={this.sendDM}
-                        roomUsers={roomUsers}
-                      />
-                    ) : null}
-                  </aside>
                   {showLogin ? (
                     this.handleState()
                   ) : null}
@@ -374,8 +356,7 @@ class App extends Component {
               </GridContainer>
             </div>
           </div>
-        </div>
-      </div>
+    </div>
     )
   }
 }

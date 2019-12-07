@@ -3,23 +3,31 @@ import Proptypes from 'prop-types';
 
 const RoomUsers = props => {
   const { roomUsers, sendDM, currentUser } = props;
-  const users = roomUsers.map(user => {
+  const roomusers = roomUsers.filter(i => i.id !== currentUser.id)
+  const users = roomusers.map(user => {
+    const userId = user.id;
+    // console.log(user.presenceStore);
+    // console.log(user.presenceStore[userId]);
     return (
-      <li className="room-member" key={user.id}>
-        <div>
-          <span className={`presence ${user.presence.state}`} />
-          <span>{user.name}</span>
-        </div>
-        {/* {currentUser.id !== user.id ? (
-          <button
-            onClick={() => sendDM(user.id)}
-            title={`Send ${user.name} a direct message`}
-            className="send-dm"
-          >
-            +
-          </button>
-        ) : null} */}
-      </li>
+      <div>
+        <span className={`presence ${user.presenceStore[userId]}`}/>
+      </div>
+      // <li className="room-member" key={user.id}>
+      //   <div>
+      //     {/* <span className={`presence ${user.presence.state}`} /> */}
+      //     <span className={`presence ${user.presenceStore[userId]}`}/>
+      //     <span>{user.name}</span>
+      //   </div>
+      //   {/* {currentUser.id !== user.id ? (
+      //     <button
+      //       onClick={() => sendDM(user.id)}
+      //       title={`Send ${user.name} a direct message`}
+      //       className="send-dm"
+      //     >
+      //       +
+      //     </button>
+      //   ) : null} */}
+      // </li>
     );
   });
 
