@@ -87,7 +87,7 @@ export default function ProfilePage(props) {
         chatBtn:{
             paddingLeft: '35px',
             paddingRight: '35px'
-        }
+        },
     };
 
   return (
@@ -132,7 +132,7 @@ export default function ProfilePage(props) {
                     tabIcon: Payment,
                     tabContent: (
                         <NavPills
-                            color="warning"
+                            color="github"
                             tabs={[
                             {
                                 tabButton: "Unpaid",
