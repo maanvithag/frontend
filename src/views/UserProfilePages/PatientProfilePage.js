@@ -334,7 +334,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         disabled: editPremium,
-                                                        placeholder: profile.premium
+                                                        placeholder: "$" + profile.premium + ".00"
                                                     }}
                                                 />
                                             </GridItem>
@@ -347,7 +347,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         disabled: editDeductible,
-                                                        placeholder: profile.deductible,
+                                                        placeholder: "$" + profile.deductible  + ".00",
                                                     }}
                                                 />
                                             </GridItem>
@@ -360,7 +360,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         disabled: editCopayment,
-                                                        placeholder: profile.copayment,
+                                                        placeholder: "$" + profile.copayment + ".00",
                                                     }}
                                                 />
                                             </GridItem>
@@ -373,7 +373,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         disabled: editOutOfPocketLimit,
-                                                        placeholder: profile.outofpocketlimit,
+                                                        placeholder: "$" + profile.outofpocketlimit + ".00",
                                                     }}
                                                 />
                                             </GridItem>
