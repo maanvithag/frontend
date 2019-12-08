@@ -25,6 +25,7 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Logo2 from "../../assets/img/logo2.png";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -105,7 +106,7 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={5} sm={10} md={15} lg={20}>
-              <NavPills
+              <CustomTabs
                 headerColor="primary"
                 tabs={[
                   {
