@@ -239,7 +239,7 @@ export default function ProfilePage(props) {
                                     <div>
                                     <p>Total amount due out of pocket: $xxx</p>
                                     <p>Total amount due covered by insurance: $xxx</p>
-                                    <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                    <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
                                         <CardBody>
                                         <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
                                         <h5 style={style.altTextColor}>Reason</h5>
@@ -263,7 +263,7 @@ export default function ProfilePage(props) {
                                   <div>
                                   <p>Total amount paid out of pocket: $xxx</p>
                                   <p>Total amount paid covered by insurance: $xxx</p>
-                                  <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                  <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
                                       <CardBody>
                                       <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
                                       <h5 style={style.altTextColor}>Reason</h5>

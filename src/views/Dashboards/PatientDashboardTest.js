@@ -110,6 +110,7 @@ export default function ProfilePage(props) {
             <GridContainer justify="space-around">
               <GridItem xs={5} sm={10} md={15} lg={20}>
               <CustomTabs
+                style={{background: "#C0C0C0"}}
                 headerColor="primary"
                 tabs={[
                   {
@@ -139,7 +140,7 @@ export default function ProfilePage(props) {
                                     <div>
                                     <p>Total amount due out of pocket: $xxx</p>
                                     <p>Total amount due covered by insurance: $xxx</p>
-                                    <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                    <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
                                         <CardBody>
                                         <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
                                         <h5 style={style.altTextColor}>Reason</h5>
@@ -163,7 +164,7 @@ export default function ProfilePage(props) {
                                   <div>
                                   <p>Total amount paid out of pocket: $xxx</p>
                                   <p>Total amount paid covered by insurance: $xxx</p>
-                                  <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                  <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
                                       <CardBody>
                                       <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
                                       <h5 style={style.altTextColor}>Reason</h5>
