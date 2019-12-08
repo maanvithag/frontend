@@ -148,7 +148,7 @@ export default function ViewPlan(props) {
                                             <Link to="/patient/dashboard">
                                                 <Button
                                                     color="primary"
-                                                >Return to my Dashboard</Button>
+                                                >My Dashboard</Button>
                                             </Link>
                                         </GridContainer>
                                         <GridContainer justify="center"><h2><b>{planInfo.mName}</b></h2></GridContainer>
