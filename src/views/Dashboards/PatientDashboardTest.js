@@ -130,51 +130,49 @@ export default function ProfilePage(props) {
                     tabName: "Billing",
                     tabIcon: Payment,
                     tabContent: (
-                        <CustomTabs
-                            headerColor="info"
+                        <NavPills
+                            color="warning"
                             tabs={[
                             {
-                                tabName: "Unpaid",
-                                tabIcon: Dashboard,
+                                tabButton: "Unpaid",
                                 tabContent: (
                                     <div>
-                                        <p>Total amount due out of pocket: $xxx</p>
-                                        <p>Total amount due covered by insurance: $xxx</p>
-                                        <Card style={{ width: "25rem", borderColor: "primary" }}>
-                                            <CardBody>
-                                            <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
-                                            <h5 style={style.altTextColor}>Reason</h5>
-                                            <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                                                <h5>Co-pay: $</h5>
-                                                <Button color="primary" style={style.btn}>
-                                                    Pay
-                                                </Button>
-                                            </div>
-                                            <Button fullWidth color="primary" style={style.btn}>
-                                                Claim
+                                    <p>Total amount due out of pocket: $xxx</p>
+                                    <p>Total amount due covered by insurance: $xxx</p>
+                                    <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                        <CardBody>
+                                        <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
+                                        <h5 style={style.altTextColor}>Reason</h5>
+                                        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                                            <h5>Co-pay: $</h5>
+                                            <Button color="primary" style={style.btn}>
+                                                Pay
                                             </Button>
-                                            </CardBody>
-                                        </Card>
-                                    </div>
+                                        </div>
+                                        <Button fullWidth color="primary" style={style.btn}>
+                                            Claim
+                                        </Button>
+                                        </CardBody>
+                                    </Card>
+                                </div>
                                 )
                             },
                             {
-                                tabName: "Paid",
-                                tabIcon: List,
+                                tabButton: "Paid",
                                 tabContent: (
-                                    <div>
-                                        <p>Total amount paid out of pocket: $xxx</p>
-                                        <p>Total amount paid covered by insurance: $xxx</p>
-                                        <Card style={{ width: "25rem", borderColor: "primary" }}>
-                                            <CardBody>
-                                            <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
-                                            <h5 style={style.altTextColor}>Reason</h5>
-                                            <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                                                <h5>Co-pay: $</h5>
-                                            </div>
-                                            </CardBody>
-                                        </Card>
-                                    </div>
+                                  <div>
+                                  <p>Total amount paid out of pocket: $xxx</p>
+                                  <p>Total amount paid covered by insurance: $xxx</p>
+                                  <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                      <CardBody>
+                                      <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
+                                      <h5 style={style.altTextColor}>Reason</h5>
+                                      <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                                          <h5>Co-pay: $</h5>
+                                      </div>
+                                      </CardBody>
+                                  </Card>
+                              </div>
                                 )
                             }
                           ]}
