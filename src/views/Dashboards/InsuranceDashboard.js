@@ -417,44 +417,19 @@ export default function ProfilePage(props) {
                     tabName: "Claims",
                     tabIcon: List,
                     tabContent: (
-                      <NavPills
-                            color="github"
-                            tabs={[
-                            {
-                                tabButton: "New",
-                                tabContent: (
-                                    <div>
-                                        <p>Total of claims that needs approval:</p>
-                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
-                                            <CardBody>
-                                            <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
-                                            <h5 style={style.altTextColor}>Reason</h5>
-                                            <h5 style={style.altTextColor}>Claim amount</h5>
-                                            <Button fullWidth color="primary" style={style.btn}>
-                                               Approve
-                                            </Button>
-                                            </CardBody>
-                                        </Card>
-                                    </div>
-                                )
-                            },
-                            {
-                                tabButton: "Approved",
-                                tabContent: (
-                                  <div>
-                                    <p>Total of claims that were approved:</p>
-                                    <Card style={{ width: "40rem", borderColor: "primary" }}>
-                                        <CardBody>
-                                        <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
-                                        <h5 style={style.altTextColor}>Reason</h5>
-                                        <h5 style={style.altTextColor}>Claim amount</h5>
-                                        </CardBody>
-                                    </Card>
-                                  </div>
-                                )
-                            }
-                          ]}
-                        />
+                      <div>
+                        <p>Total of claims that needs approval:</p>
+                        <Card style={{ width: "40rem", borderColor: "primary" }}>
+                            <CardBody>
+                            <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
+                            <h5 style={style.altTextColor}>Reason</h5>
+                            <h5 style={style.altTextColor}>Claim amount</h5>
+                            <Button fullWidth color="primary" style={style.btn}>
+                                Approve
+                            </Button>
+                            </CardBody>
+                        </Card>
+                    </div>
                     )
                   }
                 ]}
