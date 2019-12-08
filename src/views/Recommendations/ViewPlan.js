@@ -92,14 +92,14 @@ export default function ViewPlan(props) {
             textTransform: 'initial',
             fontSize: 'small',
             width: '190px',
-            marginLeft: '190px'
+            marginLeft: '130px'
         },
         selectBtn: {
             color: 'white',
             textTransform: 'initial',
             fontSize: 'small',
             width: '150px',
-            marginLeft: '25px'
+            marginLeft: '35px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -160,10 +160,10 @@ export default function ViewPlan(props) {
                                         <p style={style.para}> The {planInfo.mName} provided by {planInfo.mProvider} is {planInfo.mProvider}’s {planInfo.level} plan. {description()} </p>
                                         <p style={style.para}> Here are some statistics about our plan: </p>
                                             <List>
-                                                <ListItem style={style.para}> <b>Monthly premium</b>: {planInfo.premium}/month</ListItem>
-                                                <ListItem style={style.para}> <b>Deductible</b>: {planInfo.deductible}</ListItem>
-                                                <ListItem style={style.para}> <b>Co-Payments</b>: {planInfo.coPayment} </ListItem>
-                                                <ListItem style={style.para}> <b>Out-of-Pocket Limit</b>:{planInfo.annualOutOfPocketLimit}</ListItem>
+                                                <ListItem style={style.para}> <b>Monthly premium</b>: ${planInfo.premium}.00</ListItem>
+                                                <ListItem style={style.para}> <b>Annual Deductible</b>: ${planInfo.deductible}.00</ListItem>
+                                                <ListItem style={style.para}> <b>Co-Payments</b>: ${planInfo.coPayment} .00 per visit</ListItem>
+                                                <ListItem style={style.para}> <b>Annual Out-of-Pocket Limit</b>: ${planInfo.annualOutOfPocketLimit}.00</ListItem>
                                             </List>
                                         <p style={style.para}> If you would like to hear more information about this plan, we recommend
                                             talking to one of our insurance providers using the button below. </p>
