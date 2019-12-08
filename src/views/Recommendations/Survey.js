@@ -30,45 +30,43 @@ export default function Survey(props) {
     const classes = useStyles();
     const { ...rest } = props;
 
-    const handleLoad = () => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
-            method : 'post',
-            credentials: 'include',
-            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-        }).then(response => response.json())
-            .then(data => {
-                setIncomeValue("");
-                setRoutineValue("");
-                setSpecializedValue("");
-                setConditionValue("")
-            })
+    const [incomeValue, setIncomeValue] = React.useState(0);
+    const [routineValue, setRoutineValue] = React.useState(0);
+    const [specializedValue, setSpecializedValue] = React.useState(0);
+    const [conditionValue, setConditionValue] = React.useState(0);
+
+    const handleIncomeChange = (event) => {
+        console.log("Income: " + event.target.value)
+        setIncomeValue(event.target.value); 
     };
-    useEffect(() => {handleLoad()},[]);
+    const handleRoutineChange = (event) => {
+        console.log("RoutineCare: " + event.target.value)
+        setRoutineValue(event.target.value); 
+    };
+    const handleSpecializedChange = (event) => {
+        console.log("SpecializedCare: " + event.target.value)
+        setSpecializedValue(event.target.value); 
+    };
+    const handleConditionChange = (event) => {
+        console.log("Diseases: " + event.target.value)
+        setConditionValue(event.target.value); 
+    };
 
-    const handleIncomeChange = (event) => { setIncomeValue(event.target.value); };
-    const handleRoutineChange = (event) => { setRoutineValue(event.target.value); };
-    const handleSpecializedChange = (event) => { setSpecializedValue(event.target.value); };
-    const handleConditionChange = (event) => { setConditionValue(event.target.value); };
-
-    const saveUserInfoOnServer = () => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile/update', {
+    const saveInfoOnserver = () => {
+        console.log("Final Value: " + (parseInt(routineValue) + parseInt(specializedValue) + parseInt(conditionValue)))
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/survey', {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
-                incomeValue: incomeValue,
-                routineValue: routineValue,
-                specializedValue: specializedValue,
-                conditionValue: conditionValue
+                incomeValue: incomeValue.toString(),
+                finalWeight: (parseInt(routineValue) + parseInt(specializedValue) + parseInt(conditionValue)).toString()
             })
         }).then(response => response.json())
+        .then(data => {
+            console.log(data)
+          })
     };
-
-    const [incomeValue, setIncomeValue] = React.useState('');
-    const [routineValue, setRoutineValue] = React.useState('');
-    const [specializedValue, setSpecializedValue] = React.useState('');
-    const [conditionValue, setConditionValue] = React.useState('');
-
 
     const style = {
         link: {
@@ -132,9 +130,8 @@ export default function Survey(props) {
                         <GridContainer justify="center">
                             <Link to="/patient/dashboard">
                                 <Button
-                                    onClick = {saveUserInfoOnServer}
                                     color="primary"
-                                >Return to my Dashboard</Button>
+                                >My Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>
@@ -153,42 +150,43 @@ export default function Survey(props) {
                                                 <InputLabel style={style.bold}>Take this survey to get personalized insurance plan recommendations.</InputLabel>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={style.q}>What is your annual household income?</InputLabel>
+                                                <InputLabel style={style.bold}>What is your annual household income?</InputLabel>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <RadioGroup aria-label="income" name="income" value={incomeValue} onChange={handleIncomeChange}>
                                                     <FormControlLabel value="0" style={style.radio} control={<Radio />} label="$0-16,000" />
-                                                    <FormControlLabel value="2" style={style.radio} control={<Radio />} label="$16,001-30,000" />
-                                                    <FormControlLabel value="3" style={style.radio} control={<Radio />} label="$30,001-47,000" />
-                                                    <FormControlLabel value="4" style={style.radio} control={<Radio />} label="$47,001+" />
+                                                    <FormControlLabel value="1" style={style.radio} control={<Radio />} label="$16,001-30,000" />
+                                                    <FormControlLabel value="2" style={style.radio} control={<Radio />} label="$30,001-47,000" />
+                                                    <FormControlLabel value="3" style={style.radio} control={<Radio />} label="$47,001+" />
                                                 </RadioGroup>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={style.q}>Do you opt for a lot of routine care?</InputLabel>
+                                                <InputLabel style={style.bold}>Do you opt for a lot of routine care?</InputLabel>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <RadioGroup aria-label="routine" name="routine" value={routineValue} onChange={handleRoutineChange}>
-                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="Yes" />
-                                                    <FormControlLabel value="4" style={style.radio} control={<Radio />} label="No" />
+                                                    <FormControlLabel value="1" style={style.radio} control={<Radio />} label="Yes" />
+                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="No" />
                                                 </RadioGroup>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={style.q}>Do you opt for a lot of specialized care?</InputLabel>
+                                                <InputLabel style={style.bold}>Do you opt for a lot of specialized care?</InputLabel>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <RadioGroup aria-label="specialized" name="specialized" value={specializedValue} onChange={handleSpecializedChange}>
-                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="Yes" />
-                                                    <FormControlLabel value="4" style={style.radio} control={<Radio />} label="No" />
+                                                    <FormControlLabel value="1" style={style.radio} control={<Radio />} label="Yes" />
+                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="No" />
                                                 </RadioGroup>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={style.q}>Do you have one of the following conditions that would make you need to see the doctor more regularly?</InputLabel>
+                                                <InputLabel style={style.bold}>Do you have one of the following conditions that would make you need to see the doctor more regularly?</InputLabel>
+                                                <br/>
                                                 <InputLabel style={style.subQ}>Cancer, Cirrhosis, Type I Diabetes, Kidney/Renal Failure, Heart Disease, HIV, Bipolar Disorder, Severe Depression, Erythematous, Muscular Dystrophy, Schizophrenia, Systemic Lupus, or Transplant History</InputLabel>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <RadioGroup aria-label="condition" name="condition" value={conditionValue} onChange={handleConditionChange}>
-                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="Yes" />
-                                                    <FormControlLabel value="4" style={style.radio} control={<Radio />} label="No" />
+                                                    <FormControlLabel value="2" style={style.radio} control={<Radio />} label="Yes" />
+                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="No" />
                                                 </RadioGroup>
                                             </GridItem>
                                         </GridContainer>
@@ -196,7 +194,7 @@ export default function Survey(props) {
                                             <Link to="survey/results">
                                                 <Button
                                                     style={style.submitBtn}
-                                                    onClick = {saveUserInfoOnServer}
+                                                    onClick = {saveInfoOnserver}
                                                     color="primary"
                                                 >Show me my plans</Button>
                                             </Link>

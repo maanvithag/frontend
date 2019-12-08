@@ -46,45 +46,33 @@ export default function ViewPlan(props) {
     const [modal, setModal] = React.useState(false);
     const productClasses = useProductStyles();
     const modalClasses = useModalStyles();
-    const searchItem = window.localStorage.getItem("searchItem");
-    const searchUserType = window.localStorage.getItem("searchUserType");
-    const [searchResults, setSearchResults] = useState([]);
-    const [cities, setCities] = useState([]);
     const [planInfo, setPlanInfo] = useState({})
 
-    const handlePlanSelection = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/survey/results', {
-            method : 'post',
-            credentials: 'include',
-            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-            body: JSON.stringify({
-                // TODO-Not sure how to send data to back end
-                //name: name,
-                //premium: premium,
-                //provider: provider,
-                //outofpocketlimit: outofpocketlimit,
-                //copayment: copayment,
-                //deductible: deductible,
-                //level: level
-            })
-        }).then(response => response.json())
-            .then(data => {
-                // note - I kept this from the book appointment handle function to try to figure out how to handle the data
-                // setCreateAppointment(data.isAppointmentCreated)
-            })
-    };
-
     const handleLoad = () => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/plan/' + btoa(window.localStorage.getItem("insurancePlan")), {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/insuranceplan/' + btoa(window.localStorage.getItem("insurancePlan")), {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
             .then(data => {
-                setPlanInfo(data.information)
+                setPlanInfo(data)
             })
     }
     useEffect(() => { handleLoad() }, {})
+
+    function handlePlanSelection(plan) {
+        fetch(window.localStorage.getItem("baseURL") + 'patient/insuranceplan', {
+            method: 'post',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+                planName: plan
+            })
+        }).then(response => response.json())
+            .then(data => {
+                //
+            })
+    };
 
     function description() {
         if (1===1){//(item.mLevel === "bronze") {
@@ -98,10 +86,6 @@ export default function ViewPlan(props) {
         }
     }
 
-    var caption;
-    if (searchUserType === "doctor") {
-        caption = "doctors";
-    } else caption = "insurance providers";
     const style = {
         chatBtn: {
             color: 'white',
@@ -169,30 +153,44 @@ export default function ViewPlan(props) {
                                         </GridContainer>
                                         <GridContainer justify="center"><h2><b>{planInfo.mName}</b></h2></GridContainer>
                                         <GridContainer justify="center">
-                                            <h3 style={style.altTextColor}>Provided by <b>{planInfo.mCompany}</b></h3>
+                                            <h3 style={style.altTextColor}>Provided by <b>{planInfo.mProvider}</b></h3>
                                         </GridContainer>
                                         <div>
                                             <br />
-                                        <p style={style.para}> The {planInfo.mName} provided by {planInfo.mCompany} is {planInfo.mCompany}’s {planInfo.mLevel} plan. {description()} </p>
+                                        <p style={style.para}> The {planInfo.mName} provided by {planInfo.mProvider} is {planInfo.mProvider}’s {planInfo.level} plan. {description()} </p>
                                         <p style={style.para}> Here are some statistics about our plan: </p>
                                             <List>
-                                                <ListItem style={style.para}> <b>Monthly premium</b>: {planInfo.mPremium}/month</ListItem>
-                                                <ListItem style={style.para}> <b>Deductible</b>: {planInfo.mDeductible}</ListItem>
-                                                <ListItem style={style.para}> <b>Co-Payments</b>: {planInfo.mCopayment} </ListItem>
-                                                <ListItem style={style.para}> <b>Out-of-Pocket Limit</b>:{planInfo.mOutOfPocketLimit}</ListItem>
+                                                <ListItem style={style.para}> <b>Monthly premium</b>: {planInfo.premium}/month</ListItem>
+                                                <ListItem style={style.para}> <b>Deductible</b>: {planInfo.deductible}</ListItem>
+                                                <ListItem style={style.para}> <b>Co-Payments</b>: {planInfo.coPayment} </ListItem>
+                                                <ListItem style={style.para}> <b>Out-of-Pocket Limit</b>:{planInfo.annualOutOfPocketLimit}</ListItem>
                                             </List>
                                         <p style={style.para}> If you would like to hear more information about this plan, we recommend
                                             talking to one of our insurance providers using the button below. </p>
                                         </div>
                                         <br />
                                         <GridContainer justify="center">
+                                        {Object.keys(planInfo).length === 0 && planInfo.constructor === Object ? (
                                             <GridItem xs={13} sm={12} md={6}>
-                                                <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + "insurancename"}> {/* TODO - add insurance name */}
+                                                <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/thisneverexecutes"}>
                                                     <Button color="primary" style={style.chatBtn}> Chat with a Provider</Button>
                                                 </Link>
                                             </GridItem>
+                                        ) : (
+                                                <GridItem xs={13} sm={12} md={6}>
+                                                    <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + planInfo.firstNameOfCreator.toLowerCase() + planInfo.lastNameOfCreator.toLowerCase()}>
+                                                        <Button color="primary" style={style.chatBtn}> Chat with a Provider</Button>
+                                                    </Link>
+                                                </GridItem>
+                                            )}
+
+                                            {/* <GridItem xs={13} sm={12} md={6}>
+                                                <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + planInfo.firstNameOfCreator.toLowerCase() + planInfo.lastNameOfCreator.toLowerCase()}> {/* TODO - add insurance name }
+                                                    <Button color="primary" style={style.chatBtn}> Chat with a Provider</Button>
+                                                </Link>
+                                            </GridItem> */}
                                             <GridItem xs={13} sm={12} md={6}>
-                                                <Button color="primary" style={style.selectBtn} onClick={(event) => {setModal(true); handlePlanSelection();}}>
+                                                <Button color="primary" style={style.selectBtn} value={planInfo.mName} onClick={(event) => {setModal(true); handlePlanSelection(planInfo.mName);}}>
                                                     Select Plan
                                                 </Button>
                                                 <Dialog
