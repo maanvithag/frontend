@@ -85,22 +85,22 @@ export default function SurveyResults(props) {
             fontSize: 'small',
             marginTop: '20px',
             marginLeft: '-40px',
-            width: '180px'
+            width: '220px'
         },
         selectBtn: {
             color: 'white',
             textTransform: 'initial',
             fontSize: 'small',
             marginTop: '20px',
-            width: '150px'
+            width: '190px'
         },
         viewBtn: {
             color: 'white',
             textTransform: 'initial',
             fontSize: 'small',
             marginTop: '20px',
-            marginLeft: '-30px',
-            width: '150px'
+            marginLeft: '-38px',
+            width: '190px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -138,7 +138,7 @@ export default function SurveyResults(props) {
                 <div style={style.bg}>
                     <div className={classes.container}>
                         <GridContainer justify="space-around" direction="row" color={"info"}>
-                            <GridItem xs={8} sm={8} md={8} lg={8} color={"info"}>
+                            <GridItem xs={10} sm={10} md={10} lg={10} color={"info"}>
                                 <GridContainer color={"info"} justify="center">
                                     <GridItem xs={15} sm={15} md={15}>
                                         <br />
@@ -149,11 +149,13 @@ export default function SurveyResults(props) {
                                                 >My Dashboard</Button>
                                             </Link>
                                         </GridContainer>
+                                        <GridContainer justify="center">
                                         <h2><b> Here is our recommended plan for you! </b></h2>
                                         <h5>We've included other recommendations below it as well to provide you with a variety of options.</h5>
+                                        </GridContainer>
                                         <GridContainer justify="center">
                                             {insurancePlans.map((item, index) => (
-                                                <Card style={{ width: "38rem", borderColor: "primary" }}>
+                                                <Card style={{ width: "50rem", borderColor: "primary" }}>
                                                     {index === 0 && (<div style={style.suggestedPlan}>
                                                         <CardBody style={style.suggestedPlan}>
                                                             <GridContainer>
@@ -164,16 +166,16 @@ export default function SurveyResults(props) {
                                                                     <h5 style={style.altTextColor}><span style={style.bold}>Provided by </span><b>{item.mProvider}</b></h5>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Monthly Premium: {item.premium} </p>
+                                                                    <p> <b>Monthly Premium: </b>${item.premium}.00 </p>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Deductible: {item.deductible} </p>
+                                                                    <p> <b>Deductible:</b> ${item.deductible}.00 </p>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Co-Payments: {item.coPayment} </p>
+                                                                    <p> <b>Co-Payments: </b>${item.coPayment}.00</p>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Out-of-Pocket Limit: {item.annualOutOfPocketLimit} </p>
+                                                                    <p> <b>Out-of-Pocket Limit: </b>${item.annualOutOfPocketLimit}.00 </p>
                                                                 </GridItem>
                                                             </GridContainer>
                                                             <GridContainer justify="center">
@@ -247,16 +249,16 @@ export default function SurveyResults(props) {
                                                                     <h5 style={style.altTextColor}><span style={style.bold}>Provided by </span><b>{item.mProvider}</b></h5>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Monthly Premium: {item.premium} </p>
+                                                                    <p> <b>Monthly Premium: </b>${item.premium}.00 </p>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Deductible: {item.deductible} </p>
+                                                                    <p> <b>Deductible: </b>${item.deductible}.00 </p>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Co-Payments: {item.coPayment} </p>
+                                                                    <p> <b>Co-Payments: </b>${item.coPayment}.00 </p>
                                                                 </GridItem>
                                                                 <GridItem xs={12} sm={12} md={6}>
-                                                                    <p> Out-of-Pocket Limit: {item.annualOutOfPocketLimit} </p>
+                                                                    <p> <b>Out-of-Pocket Limit: </b>${item.annualOutOfPocketLimit}.00 </p>
                                                                 </GridItem>
                                                             </GridContainer>
                                                             <GridContainer justify="center">

@@ -30,10 +30,12 @@ export default function Survey(props) {
     const classes = useStyles();
     const { ...rest } = props;
 
-    const [incomeValue, setIncomeValue] = React.useState(0);
-    const [routineValue, setRoutineValue] = React.useState(0);
-    const [specializedValue, setSpecializedValue] = React.useState(0);
-    const [conditionValue, setConditionValue] = React.useState(0);
+    {/* set initial values to a number not 0-10 to see if user changes the weights*/}
+
+    const [incomeValue, setIncomeValue] = React.useState(99);
+    const [routineValue, setRoutineValue] = React.useState(99);
+    const [specializedValue, setSpecializedValue] = React.useState(99);
+    const [conditionValue, setConditionValue] = React.useState(99);
 
     const handleIncomeChange = (event) => {
         console.log("Income: " + event.target.value)
@@ -85,7 +87,7 @@ export default function Survey(props) {
         q:{
             color:'#424242',
             marginTop: '30px',
-            marginBottom: '10px',
+            marginBottom: '20px',
             lineHeight: '120%'
         },
         subQ:{
@@ -108,6 +110,14 @@ export default function Survey(props) {
             marginBottom: '20px'
         }
     };
+
+    function disableBtn() {
+        if(routineValue==99 || incomeValue==99 || specializedValue==99 || conditionValue==99){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     return (
         <div>
@@ -136,11 +146,12 @@ export default function Survey(props) {
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={6}>
+                            <GridItem xs={10} sm={10} md={10}>
                                 <h2></h2>
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={8}>
-                                <Card>
+                            <GridItem xs={15} sm={15} md={15}>
+                                <GridContainer justify="center">
+                                <Card style={{ width: "50rem", borderColor: "primary" }}>
                                     <CardHeader color="primary">
                                         <h3 className={classes.cardTitleWhite} style={style.center}>Find the Perfect Insurance Plan for You</h3>
                                     </CardHeader>
@@ -154,9 +165,9 @@ export default function Survey(props) {
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <RadioGroup aria-label="income" name="income" value={incomeValue} onChange={handleIncomeChange}>
-                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="$0-16,000" />
-                                                    <FormControlLabel value="1" style={style.radio} control={<Radio />} label="$16,001-30,000" />
-                                                    <FormControlLabel value="2" style={style.radio} control={<Radio />} label="$30,001-47,000" />
+                                                    <FormControlLabel value="0" style={style.radio} control={<Radio />} label="$0 - 16,000" />
+                                                    <FormControlLabel value="1" style={style.radio} control={<Radio />} label="$16,001 - 30,000" />
+                                                    <FormControlLabel value="2" style={style.radio} control={<Radio />} label="$30,001 - 47,000" />
                                                     <FormControlLabel value="3" style={style.radio} control={<Radio />} label="$47,001+" />
                                                 </RadioGroup>
                                             </GridItem>
@@ -191,16 +202,17 @@ export default function Survey(props) {
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer justify="center">
-                                            <Link to="survey/results">
                                                 <Button
                                                     style={style.submitBtn}
                                                     onClick = {saveInfoOnserver}
                                                     color="primary"
+                                                    disabled={disableBtn()}
+                                                    component={Link} to="survey/results"
                                                 >Show me my plans</Button>
-                                            </Link>
                                         </GridContainer>
                                     </CardBody>
                                 </Card>
+                                </GridContainer>
                             </GridItem>
                         </GridContainer>
                     </div>
