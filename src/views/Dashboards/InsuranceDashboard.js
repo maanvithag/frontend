@@ -326,10 +326,10 @@ export default function ProfilePage(props) {
                           { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
                             <h4 className={classes.cardTitle}>{item.mName}</h4>
-                            <p>Monthly Premium: {item.mPremium}/month</p>
-                            <p>Deductible: {item.mDeductible}</p>
-                            <p>Co-Payment: {item.mCopayment}</p>
-                            <p>Annual Out-of-Pocket Limit: {item.mOutOfPocketLimit}</p>
+                            <p>Monthly Premium: {item.premium}/month</p>
+                            <p>Deductible: {item.deductible}</p>
+                            <p>Co-Payment: {item.coPayment}</p>
+                            <p>Annual Out-of-Pocket Limit: {item.annualOutOfPocketLimit}</p>
                             {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/> */}
                             <div>
                             <Button color="primary" onClick={(event) => {setDeleteModal(true); 
