@@ -417,16 +417,15 @@ export default function ProfilePage(props) {
                     tabName: "Claims",
                     tabIcon: List,
                     tabContent: (
-                      <CustomTabs
-                            headerColor="info"
+                      <NavPills
+                            color="github"
                             tabs={[
                             {
-                                tabName: "New",
-                                tabIcon: Dashboard,
+                                tabButton: "New",
                                 tabContent: (
                                     <div>
                                         <p>Total of claims that needs approval:</p>
-                                        <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
                                             <CardBody>
                                             <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
                                             <h5 style={style.altTextColor}>Reason</h5>
@@ -440,12 +439,11 @@ export default function ProfilePage(props) {
                                 )
                             },
                             {
-                                tabName: "Approved",
-                                tabIcon: List,
+                                tabButton: "Approved",
                                 tabContent: (
                                   <div>
                                     <p>Total of claims that were approved:</p>
-                                    <Card style={{ width: "25rem", borderColor: "primary" }}>
+                                    <Card style={{ width: "40rem", borderColor: "primary" }}>
                                         <CardBody>
                                         <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
                                         <h5 style={style.altTextColor}>Reason</h5>
