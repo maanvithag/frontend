@@ -4,17 +4,12 @@ import ChatSession from './ChatSession';
 import RoomUsers from './RoomUsers';
 import Chatkit from '@pusher/chatkit-client';
 import axios from 'axios';
-import SignedInHeaders from "views/SignedInHeader.js";
-import Header from "components/Header/Header.js";
-import Parallax from "components/Parallax/Parallax.js";
-import classNames from "classnames";
-import { makeStyles } from "@material-ui/core/styles";
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import GridContainer from "components/Grid/GridContainer.js";
+import Logo2 from "../../assets/img/logo2.png";
+import Button from "components/CustomButtons/Button.js";
+import { Link } from "react-router-dom";
 
 import './App.css';
-
-const useStyles = makeStyles(styles);
 
 const style = {
   link: {
@@ -303,10 +298,15 @@ class App extends Component {
 
     return (
       <div>
-      {/* <Parallax small filter image={require("assets/img/profile-bg.jpg")} /> */}
+          <div class="chatpage-header">
+            <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />
+            <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
+              <Button color="github" align="right">My Dashboard</Button> 
+              {/* <button type="button" class="btn btn-default">Right</button> */}
+            </Link>
+          </div>
           <div style={style.bg}>
             <div>
-              <br></br>
               <GridContainer justify="center">
                 <div className="App">
                   <aside className="sidebar left-sidebar">
@@ -329,7 +329,7 @@ class App extends Component {
                     <header className="chat-header">
                       {currentRoom ? 
                         <div>
-                        <h3>{roomName} <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> </h3> 
+                        <h2 class="headertekst">{roomName} <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> </h2> 
                         </div>
                       : null}
                     </header>
