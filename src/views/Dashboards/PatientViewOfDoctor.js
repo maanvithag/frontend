@@ -63,6 +63,23 @@ export default function ProfilePage(props) {
     const [addreviewReview, setAddReviewReview] = useState();
     const [address, setAddress] = useState([]);
 
+    // Profile pictures
+    const MassimoRossi = require('../../assets/img/profilepic-02.png');
+    const SamanthaJoson = require('../../assets/img/profilepic-06.png');
+    const PrestonLannister = require('../../assets/img/profilepic-05.png');
+    const JaimeMoore = require('../../assets/img/profilepic-03.png');
+    const VivekBandaru = require('../../assets/img/profilepic-17.png');
+    const KristenNash = require('../../assets/img/profilepic-01.png');
+
+    const profiles = {
+    'Massimo Rossi': MassimoRossi,
+    'Samantha Joson': SamanthaJoson,
+    'Preston Lannister': PrestonLannister,
+    'Jaime Moore': JaimeMoore,
+    'Vivek Bandaru': VivekBandaru,
+    'Kristen Nash': KristenNash
+  }
+
     const handleChange = event => {
         setValue(event.target.value);
     };
@@ -229,6 +246,9 @@ export default function ProfilePage(props) {
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
+                                            </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Education</InputLabel>
                                                 <CustomInput

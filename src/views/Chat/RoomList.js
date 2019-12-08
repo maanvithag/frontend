@@ -7,8 +7,7 @@ const RoomList = props => {
   const { rooms, currentRoom, connectToRoom, currentUser } = props;
   const roomList = rooms.map(room => {
     // const roomIcon = !room.isPrivate ? '🌐' : '🔒';
-    const roomIcon = !room.isPrivate ? <span role="img" aria-label="busts in silhouette">👤</span> : <span role="img" aria-label="bust in silhouette">👤</span>;
-    const isRoomActive = room.id === currentRoom.id ? 'active' : '';
+    const roomIcon = !room.isPrivate ? <span role="img" aria-label="busts in silhouette">👥</span> : <span role="img" aria-label="bust in silhouette">👤</span>;    const isRoomActive = room.id === currentRoom.id ? 'active' : '';
 
     return (
       <li

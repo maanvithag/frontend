@@ -123,7 +123,7 @@ export default function ProfilePage(props) {
         <div style={style.bg}>
           <div className={classes.container}>
             <GridContainer justify="space-around">
-              <GridItem xs={5} sm={10} md={15} lg={20}>
+              <GridItem xs={5} sm={10} md={15} lg={20}> <br/>
               <CustomTabs
                 headerColor="primary"
                 tabs={[
@@ -133,7 +133,6 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={20} sm={20} md={30}>
-                        {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { appointments.map((item, index) => (<Card style={{width: "25rem", borderColor: "primary"}}>
                           <CardBody>
                             <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
@@ -237,9 +236,9 @@ export default function ProfilePage(props) {
                                 tabButton: "Unpaid",
                                 tabContent: (
                                     <div>
-                                    <p>Total amount due out of pocket: $xxx</p>
-                                    <p>Total amount due covered by insurance: $xxx</p>
-                                    <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
+                                    <h5>Total amount due out of pocket: $xxx</h5>
+                                    <h5>Total amount due covered by insurance: $xxx</h5>
+                                    <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary", align: "center" }}>
                                         <CardBody>
                                         <h3 className={classes.cardTitle}><b>Doctor name</b></h3>
                                         <h5 style={style.altTextColor}>Reason</h5>
@@ -261,8 +260,8 @@ export default function ProfilePage(props) {
                                 tabButton: "Paid",
                                 tabContent: (
                                   <div>
-                                  <p>Total amount paid out of pocket: $xxx</p>
-                                  <p>Total amount paid covered by insurance: $xxx</p>
+                                  <h5>Total amount paid out of pocket: $xxx</h5>
+                                  <h5>Total amount paid covered by insurance: $xxx</h5>
                                   <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
                                       <CardBody>
                                       <h3 className={classes.cardTitle}><b>Doctor name</b></h3>

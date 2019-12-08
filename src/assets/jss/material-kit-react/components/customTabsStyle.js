@@ -1,6 +1,6 @@
 const customTabsStyle = {
   cardTitle: {
-    float: "left",
+    float: "center",
     padding: "10px 10px 10px 0px",
     lineHeight: "24px"
   },

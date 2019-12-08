@@ -30,6 +30,27 @@ export default function ProfilePage(props) {
     const [profile, setProfile] = useState({})
     const [address, setAddress] = useState([]);
 
+    // Profile pictures
+    const KaylaRamsey = require('../../assets/img/profilepic-11.png');
+    const SoniaPratt = require('../../assets/img/profilepic-08.png');
+    const TyeAlbarn = require('../../assets/img/profilepic-07.png');
+    const VivekShresta = require('../../assets/img/profilepic-09.png');
+    const DouglasRiley = require('../../assets/img/profilepic-13.png');
+    const IshaqDunkley = require('../../assets/img/profilepic-10.png');
+    const JenniferRoland = require('../../assets/img/profilepic-15.png');
+    const ZackGainsbourg = require('../../assets/img/profilepic-14.png');
+
+    const profiles = {
+    'Kayla Ramsey': KaylaRamsey,
+    'Sonia Pratt': SoniaPratt,
+    'Tye Albarn': TyeAlbarn,
+    'Vivek Shresta': VivekShresta,
+    'Douglas Riley': DouglasRiley,
+    'Ishaq Dunkley': IshaqDunkley,
+    'Jennifer Roland': JenniferRoland,
+    'Zack Gainsbourg': ZackGainsbourg
+    }
+
     const ipusername = window.location.href.split('/')[5]
 
     const handleLoad = (event) => {
@@ -78,17 +99,20 @@ export default function ProfilePage(props) {
                             </Link>
                         </GridContainer>
                         <br></br>
-                        <GridContainer justify="left">
+                        <GridContainer justify="center">
                             <GridItem xs={5} sm={5} md={8}>
                                 <h2></h2>
                             </GridItem>
-                            <GridItem xs={5} sm={5} md={8}>
+                            <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
                                         <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
+                                            </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Insurance Company</InputLabel>
                                                 <CustomInput

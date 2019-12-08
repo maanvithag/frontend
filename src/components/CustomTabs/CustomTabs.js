@@ -37,6 +37,7 @@ export default function CustomTabs(props) {
         <Tabs
           value={value}
           onChange={handleChange}
+          variant="fullWidth"
           classes={{
             root: classes.tabsRoot,
             indicator: classes.displayNone
