@@ -19,6 +19,7 @@ import Map from "views/Map/Map.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { Link } from "react-router-dom";
 import Logo2 from "../../assets/img/logo2.png";
+import PrestonLannister from "../../assets/img/profilepic-01.png"
 
 const useStyles = makeStyles(styles);
 
@@ -30,6 +31,10 @@ export default function SearchPage(props) {
   const searchUserType = window.localStorage.getItem("searchUserType");
   const [searchResults, setSearchResults] = useState([]);
   const [cities, setCities] = useState([]);
+  const image = require('../../assets/img/profilepic-01.png');
+  const profiles = {
+    'PrestonLannister': image
+  }
 
   // Until and unless the searchItem parameter is changed, the useEffect will not be executed. If this is removed, the useEffect will be called 
   // infinite number of times.
@@ -110,11 +115,16 @@ export default function SearchPage(props) {
                     {searchResults.map((item, index) => (
                       <Card style={{ width: "25rem", borderColor: "primary" }}>
                         <CardBody>
-                          <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
-                          <h5 style={style.altTextColor}>{item.mSpecialization}</h5>
-                          <h4>{item.mCompany}</h4>
-                          <p>{item.mHospital}</p>
-                          <p>{item.mAddress}</p>
+                          <GridContainer>
+                            <GridItem>
+                            <img align="right" width="120" height="120" resizeMode="contain" src={profiles[item.mFirstName+item.mLastName]} alt="Profile1" />
+                            <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
+                            <h5 style={style.altTextColor}>{item.mSpecialization}</h5>
+                            <h4>{item.mCompany}</h4>
+                            <p>{item.mHospital}</p>
+                            <p>{item.mAddress}</p>
+                            </GridItem>
+                          </GridContainer>
                           <GridContainer justify="center">
                             <GridItem xs={13} sm={12} md={7}>{condHiding() && (<Link to={"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>

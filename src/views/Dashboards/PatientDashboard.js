@@ -122,6 +122,7 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div style={style.bg}>
           <div className={classes.container}>
+            <br/>
             <GridContainer justify="space-around">
               <GridItem xs={5} sm={10} md={15} lg={20}>
               <CustomTabs

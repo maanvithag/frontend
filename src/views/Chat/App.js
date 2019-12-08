@@ -301,7 +301,7 @@ class App extends Component {
           <div class="chatpage-header">
             <img width="240" height="40" resizeMode="contain" src={Logo2} alt="Logo2" />
             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-              <Button color="github" align="right">My Dashboard</Button> 
+              <Button color="github" align="right" class="chatpage-button">My Dashboard</Button> 
               {/* <button type="button" class="btn btn-default">Right</button> */}
             </Link>
           </div>
