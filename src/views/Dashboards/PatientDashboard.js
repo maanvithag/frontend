@@ -259,66 +259,41 @@ export default function ProfilePage(props) {
                       )
                     },
                     {
-                      tabName: "Billing",
+                      tabName: "Unpaid Bills",
                       tabIcon: Payment,
                       tabContent: (
-                        <NavPills
-                          color="warning"
-                          tabs={[
-                            {
-                              tabButton: "Unpaid",
-                              tabContent: (
-                                <div>
-                                  <h5>Total amount paid out of pocket: ${totalOutOfPocketAmount}</h5>
-                                  <h5>Total amount covered by insurance: ${totalAmountCoveredByInsurance}</h5>
-                                  <h5>Total amount yet to be covered by insurance: ${totalInProcessAmountByInsurance}</h5>
-                                  <h5>Total amount denied by insurance: ${totalAmountDeniedByInsurance}</h5>
-                                  {billsToBePaid.map((item, index) => (
-                                    <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary", align: "center" }}>
-                                      <CardBody>
-                                        <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
-                                        <h5 style={style.altTextColor}>Reason for visit: {item.reason}</h5>
-                                        <h5>Date: {item.displayDate}</h5>
-                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                          <h5>Co-pay: ${item.amountToBePaid}</h5>
-                                          <Button color="primary" style={style.btn} value={item.appointmentId} onClick={() => handleBillPayment(item.appointmentId)}>
-                                            Pay
-                                          </Button>
-                                        </div>
-                                        <Button fullWidth color="primary" style={style.btn}>
-                                          Claim
-                                        </Button>
-                                      </CardBody>
-                                    </Card>
-                                  ))}
-                                </div>
-                              )
-                            },
-                            {
-                              tabButton: "Paid",
-                              tabContent: (
-                                <div>
-                                  <h5>Total amount paid out of pocket: ${totalOutOfPocketAmount}</h5>
-                                  <h5>Total amount covered by insurance: ${totalAmountCoveredByInsurance}</h5>
-                                  <h5>Total amount yet to be covered by insurance: ${totalInProcessAmountByInsurance}</h5>
-                                  <h5>Total amount denied by insurance: ${totalAmountDeniedByInsurance}</h5>
-                                  {billsToBePaid.map((item, index) => (
-                                    <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary" }}>
-                                      <CardBody>
-                                        <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
-                                        <h5 style={style.altTextColor}>Reason: {item.reason}</h5>
-                                        <h5>Date: {item.displayDate}</h5>
-                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                          <h5>Co-pay: ${item.amountToBePaid}</h5>
-                                        </div>
-                                      </CardBody>
-                                    </Card>
-                                  ))}
-                                </div>
-                              )
-                            }
-                          ]}
-                        />
+                        (
+                          <div>
+                            <GridContainer>
+                              <GridItem xs={12} sm={12} md={6} align="left">
+                              <h5 align="center"><b>Total amount paid out of pocket: ${totalOutOfPocketAmount}</b></h5>
+                              <h5 align="center"><b>Total amount covered by insurance: ${totalAmountCoveredByInsurance}</b></h5>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
+                              <h5 align="center"><b>Total amount yet to be covered by insurance: ${totalInProcessAmountByInsurance}</b></h5>
+                              <h5 align="center"><b>Total amount denied by insurance: ${totalAmountDeniedByInsurance}</b></h5>
+                              </GridItem>
+                            </GridContainer>
+                            {billsToBePaid.map((item, index) => (
+                              <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary", align: "center" }}>
+                                <CardBody>
+                                  <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
+                                  <h5 style={style.altTextColor}>Reason for visit: {item.reason}</h5>
+                                  <h5>Date: {item.displayDate}</h5>
+                                  <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                                    <h5>Co-pay: ${item.amountToBePaid}</h5>
+                                    <Button color="primary" style={style.btn} value={item.appointmentId} onClick={() => handleBillPayment(item.appointmentId)}>
+                                      Pay
+                                    </Button>
+                                  </div>
+                                  <Button fullWidth color="primary" style={style.btn}>
+                                    Claim
+                                  </Button>
+                                </CardBody>
+                              </Card>
+                            ))}
+                          </div>
+                        )
                       )
                     },
                   ]}
