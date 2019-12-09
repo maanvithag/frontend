@@ -107,7 +107,7 @@ export default function ProfilePage(props) {
                                 <Button 
                                 onClick={saveUserInfoOnServer}
                                 color="primary"
-                                >Return to my Dashboard</Button>
+                                >My Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>

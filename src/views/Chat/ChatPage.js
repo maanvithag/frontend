@@ -59,7 +59,7 @@ export default function ProfilePage(props) {
                             <Link to="/insurance/dashboard">
                                 <Button 
                                 color="primary"
-                                >Return to my Dashboard</Button>
+                                >My Dashboard</Button>
                             </Link>
                         </GridContainer>
                         <br></br>

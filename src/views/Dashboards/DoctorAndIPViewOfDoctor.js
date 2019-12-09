@@ -19,32 +19,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import Slide from "@material-ui/core/Slide";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import IconButton from "@material-ui/core/IconButton";
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import StarRatings from 'react-star-ratings';
-import Map from "views/Map/Map.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import {primaryColor} from "../../assets/jss/material-kit-react";
 import { useState, useEffect } from 'react';
-import AddDoctorReview from "views/Dashboards/AddDoctorReview.js";
 
-import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
-import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Logo2 from "../../assets/img/logo2.png";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="down" ref={ref} {...props} />;
-});
-
-const useModalStyles = makeStyles(modalStyles);
-const useProductStyles = makeStyles(productStyles);
-
 
 const useStyles = makeStyles(styles);
 
@@ -52,8 +32,23 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const { ...rest } = props;
     const [profile, setProfile] = useState({});
-    const [reviews, setReviews] = useState([]);
-    const [rating, setRating] = useState([]);
+
+    // Profile pictures
+    const MassimoRossi = require('../../assets/img/profilepic-02.png');
+    const SamanthaJoson = require('../../assets/img/profilepic-06.png');
+    const PrestonLannister = require('../../assets/img/profilepic-05.png');
+    const JaimeMoore = require('../../assets/img/profilepic-03.png');
+    const VivekBandaru = require('../../assets/img/profilepic-17.png');
+    const KristenNash = require('../../assets/img/profilepic-01.png');
+
+    const profiles = {
+    'Massimo Rossi': MassimoRossi,
+    'Samantha Joson': SamanthaJoson,
+    'Preston Lannister': PrestonLannister,
+    'Jaime Moore': JaimeMoore,
+    'Vivek Bandaru': VivekBandaru,
+    'Kristen Nash': KristenNash
+    }
 
     const doctorusername = window.location.href.split('/')[5]
 
@@ -97,7 +92,7 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">Return to my Dashboard</Button>
+                                <Button color="primary">My Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </GridContainer>
                         <br></br>
@@ -109,6 +104,9 @@ export default function ProfilePage(props) {
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
+                                            </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Education</InputLabel>
                                                 <CustomInput

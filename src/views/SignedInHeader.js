@@ -7,26 +7,18 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
-import TypeSelect from "views/Modals/TypeSelect.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
 import Search from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from '@material-ui/icons/Menu';
 
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
-import {primaryColor} from "../assets/jss/material-kit-react";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {InputLabel} from "@material-ui/core";
-import {string} from "prop-types";
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -38,8 +30,6 @@ const useStyles = makeStyles(styles);
 
 export default function SignedInHeaders(props){
     const classes = useStyles();
-    const [value, setValue] = React.useState('name');
-
 
     const inputLabel = React.useRef(null);
     const [keyword, setKeyword] = React.useState('doctor');
@@ -90,7 +80,9 @@ export default function SignedInHeaders(props){
         },
         searchBar: {
             width: '100%',
-            display: 'inline-block'
+            display: 'inline-block',
+            marginLeft: '40px',
+            padding: '15px'
         },
         dropDown: {
             width: '0px',
@@ -102,6 +94,10 @@ export default function SignedInHeaders(props){
         },
         mt:{
             color:'black'
+        },
+        space:{
+            marginLeft:'0px',
+            marginRight:'-10px'
         }
     };
     const [open, setOpen] = React.useState(false);
@@ -145,7 +141,6 @@ export default function SignedInHeaders(props){
                         onChange={handleChange}
                         labelWidth={labelWidth}
                         defaultValue={"doctor"}
-
                         // might have to change this approach for showing default value
 
                     >
@@ -154,6 +149,7 @@ export default function SignedInHeaders(props){
                     </Select>
                 </div>
             </ListItem>
+            <ListItem style={style.space}></ListItem>
             <ListItem>
                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width:300}}>
                     <CustomInput

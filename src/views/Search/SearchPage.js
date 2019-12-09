@@ -31,6 +31,39 @@ export default function SearchPage(props) {
   const [searchResults, setSearchResults] = useState([]);
   const [cities, setCities] = useState([]);
 
+  // Profile pictures
+  const MassimoRossi = require('../../assets/img/profilepic-02.png');
+  const SamanthaJoson = require('../../assets/img/profilepic-06.png');
+  const PrestonLannister = require('../../assets/img/profilepic-05.png');
+  const JaimeMoore = require('../../assets/img/profilepic-03.png');
+  const VivekBandaru = require('../../assets/img/profilepic-17.png');
+  const KaylaRamsey = require('../../assets/img/profilepic-11.png');
+  const SoniaPratt = require('../../assets/img/profilepic-08.png');
+  const TyeAlbarn = require('../../assets/img/profilepic-07.png');
+  const VivekShresta = require('../../assets/img/profilepic-09.png');
+  const DouglasRiley = require('../../assets/img/profilepic-13.png');
+  const IshaqDunkley = require('../../assets/img/profilepic-10.png');
+  const JenniferRoland = require('../../assets/img/profilepic-15.png');
+  const ZackGainsbourg = require('../../assets/img/profilepic-14.png');
+  const KristenNash = require('../../assets/img/profilepic-01.png');
+
+  const profiles = {
+    'MassimoRossi': MassimoRossi,
+    'SamanthaJoson': SamanthaJoson,
+    'PrestonLannister': PrestonLannister,
+    'JaimeMoore': JaimeMoore,
+    'VivekBandaru': VivekBandaru,
+    'KaylaRamsey': KaylaRamsey,
+    'SoniaPratt': SoniaPratt,
+    'TyeAlbarn': TyeAlbarn,
+    'VivekShresta': VivekShresta,
+    'DouglasRiley': DouglasRiley,
+    'IshaqDunkley': IshaqDunkley,
+    'JenniferRoland': JenniferRoland,
+    'ZackGainsbourg': ZackGainsbourg,
+    'KristenNash': KristenNash
+  }
+
   // Until and unless the searchItem parameter is changed, the useEffect will not be executed. If this is removed, the useEffect will be called 
   // infinite number of times.
   useEffect(() => {
@@ -110,11 +143,16 @@ export default function SearchPage(props) {
                     {searchResults.map((item, index) => (
                       <Card style={{ width: "25rem", borderColor: "primary" }}>
                         <CardBody>
-                          <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
-                          <h5 style={style.altTextColor}>{item.mSpecialization}</h5>
-                          <h4>{item.mCompany}</h4>
-                          <p>{item.mHospital}</p>
-                          <p>{item.mAddress}</p>
+                          <GridContainer>
+                            <GridItem>
+                            <img align="right" width="120" height="120" resizeMode="contain" src={profiles[item.mFirstName+item.mLastName]} alt="Profile1" />
+                            <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
+                            <h5 style={style.altTextColor}>{item.mSpecialization}</h5>
+                            <h4>{item.mCompany}</h4>
+                            <p>{item.mHospital}</p>
+                            <p>{item.mAddress}</p>
+                            </GridItem>
+                          </GridContainer>
                           <GridContainer justify="center">
                             <GridItem xs={13} sm={12} md={7}>{condHiding() && (<Link to={"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
@@ -138,7 +176,7 @@ export default function SearchPage(props) {
                 <GridItem xs={5} sm={5} md={5}>
 
                     <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                      <Button color="primary">Return to my Dashboard</Button>
+                      <Button color="primary">My Dashboard</Button>
                     </Link>
 
                   <br /><br />
@@ -146,7 +184,7 @@ export default function SearchPage(props) {
                 </GridItem>
               ) : (
                   <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                    <Button color="primary">Return to my Dashboard</Button>
+                    <Button color="primary">My Dashboard</Button>
                   </Link>
                 )}
             </GridContainer>
