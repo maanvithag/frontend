@@ -161,7 +161,7 @@ export default function ProfilePage(props) {
                         <GridContainer>
                           <GridItem xs={20} sm={20} md={30}>
                             {appointments.map((item, index) => (
-                              <Card style={{ width: "25rem", borderColor: "primary" }}>
+                              <Card style={{ width: "40rem", borderColor: "primary" }}>
                                 <CardBody>
                                   <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                                   <p>Date: {item.mDisplayDate}</p>
@@ -238,7 +238,7 @@ export default function ProfilePage(props) {
                         <GridContainer>
                           <GridItem xs={20} sm={20} md={30}>
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                            {pastAppointments.map((item, index) => (<Card style={{ width: "25rem", borderColor: "primary" }}>
+                            {pastAppointments.map((item, index) => (<Card style={{ width: "40rem", borderColor: "primary" }}>
                               <CardBody>
                                 <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                                 <p>Date: {item.mDisplayDate}</p>
