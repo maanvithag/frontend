@@ -87,7 +87,7 @@ export default function SearchPage(props) {
         setCities(data)
       })
 
-  }, [searchItem]);
+  }, [searchItem, searchUserType]);
 
   function condHiding() {
     if ((window.localStorage.getItem("searchUserType") === "doctor")
