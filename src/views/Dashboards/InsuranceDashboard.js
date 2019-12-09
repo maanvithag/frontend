@@ -394,16 +394,15 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                           { patients.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h4 className={classes.cardTitle}>{item.name}</h4> 
-                            <p>Current Plan: {item.currentplan}</p>
-                            <Link to= {"/insurance/patient/" + btoa(item.username)}>
+                            <h4 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h4> 
+                            <p>Current Plan: {item.mInsurancePlan}</p>
+                            <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
                               <Button color="primary">
                                 View Patient
                               </Button>
-                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.name.split(' ')[0].toLowerCase() + item.name.split(' ')[1].toLowerCase()}>
+                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
                                 <Button color="primary">Send me a text</Button>
                               </Link>
                             </Link>

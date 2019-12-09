@@ -273,7 +273,7 @@ export default function SurveyResults(props) {
                                                                     </Link>
                                                                 </GridItem>
                                                                 <GridItem xs={13} sm={12} md={3}>
-                                                                    <Button color="primary" style={style.selectBtn} onClick={(event) => { setModal(true); handlePlanSelection(); }}>
+                                                                    <Button color="primary" style={style.selectBtn} value={item.mName} onClick={() => { setModal(true); handlePlanSelection(item.mName); }}>
                                                                         Select Plan
                                                                     </Button>
                                                                     <Dialog

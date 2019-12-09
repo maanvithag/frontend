@@ -123,11 +123,13 @@ export default function ProfilePage(props) {
     };
 
     function handlePlanSelection(plan) {
+        console.log(JSON.stringify(profile))
         fetch(window.localStorage.getItem("baseURL") + 'patient/insuranceplan', {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
+                insuranceProviderUserName: profile.insuranceProviderUserName,
                 planName: plan
             })
         }).then(response => response.json())
