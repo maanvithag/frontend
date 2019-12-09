@@ -197,7 +197,7 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
             <GridItem xs={5} sm={10} md={15} lg={20}>
-              <NavPills
+              <CustomTabs
                 headerColor="primary"
                 tabs={[
                   {
