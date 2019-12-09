@@ -56,7 +56,7 @@ export default function ProfilePage(props) {
     .then(data => {
       setAppointments(data.CurrentAppointments)
       setPastAppointments(data.PastAppointments)
-      if(data) {
+      if(Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
         const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
         window.localStorage.setItem("chatusername", chatusername);
       }
