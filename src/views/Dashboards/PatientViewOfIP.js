@@ -178,18 +178,27 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
                                             </GridItem>
+                                            <GridItem xs={6} sm={6} md={56}>
+                                                {address.length > 0 ? (
+                                                    <Map locations={address} zoom={4}/>
+                                                ) : (
+                                                    <p />
+                                                )}
+                                            </GridItem>
+                                        </GridContainer>
+                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Insurance Company</InputLabel>
-                                                <CustomInput
-                                                    id="company"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.company
-                                                    }}
-                                                />
+                                                    <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Insurance Company</InputLabel>
+                                                    <CustomInput
+                                                        id="company"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.company
+                                                        }}
+                                                    />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Office Contact Number</InputLabel>
@@ -319,13 +328,6 @@ export default function ProfilePage(props) {
                                         </CardBody>
                                     </div>
                                 </Card>
-                            </GridItem>
-                            <GridItem xs={5} sm={5} md={5}>
-                                {address.length > 0 ? (
-                                    <Map locations={address} zoom={4}/>
-                                ) : (
-                                    <p />
-                                )}
                             </GridItem>
                         </GridContainer>
                     </div>

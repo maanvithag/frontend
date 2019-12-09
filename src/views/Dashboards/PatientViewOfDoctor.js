@@ -249,7 +249,16 @@ export default function ProfilePage(props) {
                                             <GridItem xs={12} sm={12} md={6}>
                                                 <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
                                             </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
+                                            <GridItem xs={6} sm={6} md={6}>
+                                                {address.length > 0 ? (
+                                                    <Map locations={address} zoom={4} />
+                                                ) : (
+                                                        <p />
+                                                    )}
+                                            </GridItem>
+                                        </GridContainer>
+                                        <GridContainer>
+                                        <GridItem xs={12} sm={12} md={6}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Education</InputLabel>
                                                 <CustomInput
                                                     id="education"
@@ -262,9 +271,9 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
-                                        </GridContainer>
+                                            </GridContainer>
                                         <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
+                                            <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Hospital</InputLabel>
                                                 <CustomInput
                                                     id="hospital"
@@ -368,13 +377,6 @@ export default function ProfilePage(props) {
                                         </Card>
                                     </GridItem>
                                 </GridContainer>
-                            </GridItem>
-                            <GridItem xs={5} sm={5} md={5}>
-                                {address.length > 0 ? (
-                                    <Map locations={address} zoom={4} />
-                                ) : (
-                                        <p />
-                                    )}
                             </GridItem>
                         </GridContainer>
                         <br></br><br></br>
