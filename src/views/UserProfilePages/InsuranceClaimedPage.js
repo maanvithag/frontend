@@ -14,69 +14,36 @@ import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import SignedInHeaders from "views/SignedInHeader.js";
-import Close from "@material-ui/icons/Close";
-
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { Link } from "react-router-dom";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import IconButton from "@material-ui/core/IconButton";
-import DialogContent from "@material-ui/core/DialogContent";
-
-import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
-import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
-import Slide from "@material-ui/core/Slide";
 import Logo2 from "../../assets/img/logo2.png";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="down" ref={ref} {...props} />;
-});
-
 const useStyles = makeStyles(styles);
-const useModalStyles = makeStyles(modalStyles);
-const useProductStyles = makeStyles(productStyles);
 
 export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [modal, setModal] = React.useState(false);
-    const productClasses = useProductStyles();
-    const modalClasses = useModalStyles();
-    const [insurancePlans, setInsurancePlans] = useState([]);
+    const [insurancePlans, setInsurancePlans] = useState([
+        {name: "patient 1", reason: "reason 1", amount: "amount 1", status: "some status 1"},
+        {name: "patient 2", reason: "reason 2", amount: "amount 2", status: "some status 2"},
+        {name: "patient 3", reason: "reason 3", amount: "amount 3", status: "some status 3"},
+        {name: "patient 4", reason: "reason 4", amount: "amount 4", status: "some status 4"},
+        {name: "patient 5", reason: "reason 5", amount: "amount 5", status: "some status 5"}
+    ]);
 
     const handleLoad = () => {
-        fetch(window.localStorage.getItem("baseURL") + 'patient/survey/results', {
+        fetch(window.localStorage.getItem("baseURL") + 'insurance/claims', {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({
-
-            })
         }).then(response => response.json())
             .then(data => {
-                setInsurancePlans(data)
+                console.log(data);
+                // setInsurancePlans(data)
             })
     }
     useEffect(() => { handleLoad() }, {})
-
-    function handlePlanSelection(plan) {
-        fetch(window.localStorage.getItem("baseURL") + 'patient/insuranceplan', {
-            method: 'post',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({
-                planName: plan
-            })
-        }).then(response => response.json())
-            .then(data => {
-                //
-            })
-    };
-
-    function setPlanName(plan) {
-        window.localStorage.setItem("insurancePlan", plan)
-    }
 
     const style = {
         chatBtn: {
@@ -143,23 +110,39 @@ export default function SurveyResults(props) {
                                     <GridItem xs={15} sm={15} md={15}>
                                         <br />
                                         <GridContainer justify="center">
-                                            <Link to="/patient/dashboard">
+                                            <Link to="/insurance/dashboard">
                                                 <Button
                                                     color="primary"
                                                 >My Dashboard</Button>
                                             </Link>
                                         </GridContainer>
                                         <GridContainer justify="center">
-                                        <h2><b>Total of claims that were approved:</b></h2>
+                                        <h2><b>Distribution of Claims</b></h2><br/>
                                         </GridContainer>
                                         <GridContainer justify="center">
+                                        <h3>Approved: In Progress: Denied:</h3>
+                                        {insurancePlans.map((item, index) => (
                                         <Card style={{ width: "40rem", borderColor: "primary" }}>
                                             <CardBody>
-                                                <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
-                                                <h5 style={style.altTextColor}>Reason</h5>
-                                                <h5 style={style.altTextColor}>Claim amount</h5>
+                                                <GridContainer>
+                                                <GridItem xs={12} sm={12} md={6}>
+                                                <h3 className={classes.cardTitle}><b>{item.name}</b></h3>
+                                                </GridItem>
+                                                <GridItem align="right" xs={5} sm={5} md={1}>
+                                                {/* <Link to= {"/insurance/patient/" + btoa(item.username)}>  */}
+                                                    <Button color="primary" align="right">
+                                                        View Patient
+                                                    </Button>
+                                                {/* </Link> */}
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6} align="left">
+                                                    <h5 style={style.altTextColor}>Reason: {item.reason}</h5>
+                                                    <h5 style={style.altTextColor}>Claim amount: {item.amount}</h5>
+                                                    <h5 style={style.altTextColor}>Claim Status: {item.status}</h5>
+                                                </GridItem>
+                                                </GridContainer>
                                             </CardBody>
-                                        </Card>
+                                        </Card>))}
                                         </GridContainer>
                                     </GridItem>
                                 </GridContainer>
