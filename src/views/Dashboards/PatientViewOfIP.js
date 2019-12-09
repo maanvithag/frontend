@@ -82,6 +82,7 @@ export default function ProfilePage(props) {
                 address.push(data.address)
                 setAddress(address)
                 setProfile(data)
+                setInsurancePlans(data.insurancePlans)
             })
     }
     useEffect(() => { handleLoad() }, {})
@@ -170,7 +171,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
+                                        <h2 className={classes.cardTitleWhite}>{profile.firstName + " " + profile.lastName}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -230,43 +231,43 @@ export default function ProfilePage(props) {
                                         </CardHeader>
                                         <CardBody>
                                             <GridContainer justify="center">
-                                                {/*{insurancePlans.map((item, index) => (*/}
+                                                {insurancePlans.map((item, index) => (
                                                 <Card style={{ width: "50rem", borderColor: "primary" }}>
                                                     <CardBody>
                                                         <GridContainer>
                                                             <GridItem xs={12} sm={12} md={12}>
-                                                                <h3 className={classes.cardTitle}><b>item.mName}</b></h3>
+                                                                <h3 className={classes.cardTitle}><b>{item.mName}</b></h3>
                                                             </GridItem>
                                                             <GridItem xs={12} sm={12} md={12}>
-                                                                <h5 style={style.altTextColor}><span style={style.bold}>Provided by </span><b>item.mProvider}</b></h5>
+                                                                <h5 style={style.altTextColor}><span style={style.bold}>Provided by </span><b>{item.mProvider}</b></h5>
                                                             </GridItem>
                                                             <GridItem xs={12} sm={12} md={6}>
-                                                                <p> <b>Monthly Premium: </b>$item.premium}.00 </p>
+                                                                <p> <b>Monthly Premium: </b>${item.premium}.00 </p>
                                                             </GridItem>
                                                             <GridItem xs={12} sm={12} md={6}>
-                                                                <p> <b>Deductible:</b> $item.deductible}.00 </p>
+                                                                <p> <b>Deductible:</b> ${item.deductible}.00 </p>
                                                             </GridItem>
                                                             <GridItem xs={12} sm={12} md={6}>
-                                                                <p> <b>Co-Payments: </b>$item.coPayment}.00</p>
+                                                                <p> <b>Co-Payments: </b>${item.coPayment}.00</p>
                                                             </GridItem>
                                                             <GridItem xs={12} sm={12} md={6}>
-                                                                <p> <b>Out-of-Pocket Limit: </b>$item.annualOutOfPocketLimit}.00 </p>
+                                                                <p> <b>Out-of-Pocket Limit: </b>${item.annualOutOfPocketLimit}.00 </p>
                                                             </GridItem>
                                                         </GridContainer>
                                                         <GridContainer justify="center">
-                                                            <GridItem xs={13} sm={12} md={4}>
-                                                                {/*<Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.firstNameOfCreator.toLowerCase() + item.lastNameOfCreator.toLowerCase()}>*/}
-                                                                <Button color="primary" style={style.chatBtn}> Chat with Me</Button>
-                                                                {/*</Link>*/}
-                                                            </GridItem>
+                                                                <GridItem xs={13} sm={12} md={4}>
+                                                                    <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + profile.firstName.toLowerCase() + profile.lastName.toLowerCase()}>
+                                                                        <Button color="primary" style={style.chatBtn}> Chat with Me</Button>
+                                                                    </Link>
+                                                                </GridItem>
                                                             <GridItem xs={13} sm={12} md={3}>
                                                                 <Link to={"/patient/survey/results/viewplan"}>
                                                                     <Button color="primary" style={style.viewBtn}>View this Plan</Button>{/*<Button color="primary" style={style.viewBtn} value={item.mName} onClick={() => setPlanName(item.mName)}>View this Plan</Button>*/}
                                                                 </Link>
                                                             </GridItem>
                                                             <GridItem xs={13} sm={12} md={3}>
-                                                                <Button color="primary" style={style.selectBtn}>
-                                                                    {/*<Button color="primary" style={style.selectBtn} value={item.mName} onClick={() => { setModal(true); handlePlanSelection(item.mName); }}>*/}
+                                                                {/* <Button color="primary" style={style.selectBtn}> */}
+                                                                <Button color="primary" style={style.selectBtn} value={item.mName} onClick={() => { setModal(true); handlePlanSelection(item.mName); }}>
                                                                     Select Plan
                                                                 </Button>
                                                                 <Dialog
@@ -313,7 +314,7 @@ export default function ProfilePage(props) {
                                                             </GridItem>
                                                         </GridContainer>
                                                     </CardBody>
-                                                </Card>{/*))}*/}
+                                                </Card>))}
                                             </GridContainer>
                                         </CardBody>
                                     </div>
