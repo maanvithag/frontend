@@ -38,6 +38,7 @@ import Survey from "./views/Recommendations/Survey";
 import SurveyResults from "./views/Recommendations/SurveyResults";
 import PatientDashboardTest from "views/Dashboards/PatientDashboardTest";
 import ViewPlan from "./views/Recommendations/ViewPlan";
+import ClaimPage from "./views/UserProfilePages/InsuranceClaimedPage";
 
 serviceWorker.unregister();
 
@@ -79,6 +80,7 @@ ReactDOM.render(
         <Route path="/insurance/doctor/:doctorID" exact component={DoctorAndIPViewOfDoctor} />
         <Route path="/insurance/patient/:patientID" exact component={DoctorViewOfPatient} />
         <Route path="/insurance/insurance/:insuranceID" exact component={PatientViewOfIP} />
+        <Route path="/insurance/claimshistory" exact component={ClaimPage}/>
 
         <Route path="/doctor/profile" exact component={DoctorProfilePage}/>
         <Route path="/patient/profile" exact component={PatientProfilePage}/>
