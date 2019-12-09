@@ -5,8 +5,7 @@ import { format } from 'date-fns';
 const ChatSession = props => {
   const { messages } = props;
   return messages.map(message => {
-    const time = format(new Date(`${message.updatedAt}`), 'HH:mm');
-
+    const time = format(new Date(`${message.updatedAt}`), 'dd-MM-yyyy HH:mm');
     return (
       <li className="message" key={message.id}>
         <div>

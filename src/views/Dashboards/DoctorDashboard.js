@@ -57,10 +57,12 @@ export default function ProfilePage(props) {
     .then(data => {
       setAppointments(data.CurrentAppointments)
       setPastAppointments(data.PastAppointments)
-      if(Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
-        const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
-        window.localStorage.setItem("chatusername", chatusername);
-      }
+      const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
+      window.localStorage.setItem("chatusername", chatusername);
+      // if(Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
+      //   const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
+      //   window.localStorage.setItem("chatusername", chatusername);
+      // }
     })
   }
   useEffect(() => {handleLoad()},[])
@@ -103,7 +105,7 @@ export default function ProfilePage(props) {
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div style={style.bg}>
-          <div className={classes.container}>
+          <div className={classes.container}> <br/>
             <GridContainer justify="center">
               <GridItem xs={5} sm={10} md={15} lg={20}>
               <CustomTabs
@@ -198,11 +200,14 @@ export default function ProfilePage(props) {
                             <h4 className={classes.cardTitle}>{item.mPatientName}</h4>
                             <p>Date: {item.mDisplayDate}</p>
                             <p>Time: {item.mDisplayTime}</p>
-                              <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
-                              <Button color="primary">
-                                View Patient's Profile
-                              </Button>
-                              </Link>
+                            <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
+                            <Button color="primary">
+                              View Patient's Profile
+                            </Button>
+                            </Link>
+                            <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
+                              <Button color="primary">Send me a text</Button>
+                            </Link>
                             </CardBody>
                           </Card>))}
                         </GridItem>

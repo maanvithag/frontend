@@ -75,10 +75,12 @@ export default function ProfilePage(props) {
         setTotalAmountCoveredByInsurance(data.totalAmountCoveredByInsurance)
         setTotalInProcessAmountByInsurance(data.totalInProcessAmountByInsurance)
         setTotalAmountDeniedByInsurance(data.totalAmountDeniedByInsurance)
-        if (Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
-          const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
-          window.localStorage.setItem("chatusername", chatusername);
-        }
+        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+        // if (Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
+        //   const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+        //   window.localStorage.setItem("chatusername", chatusername);
+        // }
       })
   }
   useEffect(() => { handleLoad() }, [cancelAppointment, isBillPaid])
@@ -245,7 +247,10 @@ export default function ProfilePage(props) {
                                 <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                   <Button color="primary">
                                     View Doctor
-                              </Button>
+                                  </Button>
+                                </Link> &nbsp;&nbsp;
+                                <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
+                                    <Button color="primary" style={style.chatBtn}>Chat with me</Button>
                                 </Link>
                               </CardBody>
                             </Card>))}

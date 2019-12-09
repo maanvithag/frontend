@@ -39,6 +39,7 @@ export default function ProfilePage(props) {
     const [editEmail, setEditEmail] = useState(true);
     const [editAddress, setEditAddress] = useState(true);
     const [editSpecialization, setEditSpecialization] = useState(true);
+    const [editConsultation, setEditConsultation] = useState(true);
 
     const style = {
         bg: {
@@ -50,8 +51,11 @@ export default function ProfilePage(props) {
 
     const [profile, setProfile] = useState({})
 
+    console.log(profile);
+
     const [emailaddress, setEmailAddress] = useState({})
     const [education, setEducation] = useState({})
+    const [consultation, setConsultation] = useState({})
     
     const [hospital, setHospital] = useState({})
     const [specialization, setSpecialization] = useState({})
@@ -69,8 +73,8 @@ export default function ProfilePage(props) {
                 setProfile(data)
                 setEmailAddress("")
                 setEducation("")
+                setConsultation("")
                 setHospital("")
-                setSpecialization("")
                 setSpecialization("")
                 setAddress("")
                 setSummary("")
@@ -83,6 +87,9 @@ export default function ProfilePage(props) {
     }
     const handleEducationChange = (event) => {
         setEducation(event.target.value)
+    }
+    const handleConsultationChange = (event) => {
+        setConsultation(event.target.value)
     }
 
     const handleHospitalChange = (event) => {
@@ -108,6 +115,7 @@ export default function ProfilePage(props) {
                 emailaddress: emailaddress,
                 address: address,
                 education: education,
+                consultation: consultation,
                 hospital: hospital,
                 specialization: specialization,
                 biosummary: summary
@@ -200,6 +208,26 @@ export default function ProfilePage(props) {
                                                             <InputAdornment position="end">
                                                                 {editEducation && (<i onClick={() => setEditEducation(false)} className={"fas fa-edit"}/>)}
                                                                 {editEducation ? "" : <i onClick={() => setEditEducation(true)} className="fas fa-save"></i>}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                />
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Consultation Fee</InputLabel>
+                                                <CustomInput
+                                                    id="consultationfee"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        onChange:handleConsultationChange,
+                                                        placeholder: profile.consultation,
+                                                        disabled: editConsultation,
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {editConsultation && (<i onClick={() => setEditConsultation(false)} className={"fas fa-edit"}/>)}
+                                                                {editConsultation ? "" : <i onClick={() => setEditConsultation(true)} className="fas fa-save"></i>}
                                                             </InputAdornment>
                                                         )
                                                     }}

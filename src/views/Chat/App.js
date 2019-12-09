@@ -8,6 +8,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Logo2 from "../../assets/img/logo2.png";
 import Button from "components/CustomButtons/Button.js";
 import { Link } from "react-router-dom";
+import TypingIndicator from './TypingIndicator'
 
 import './App.css';
 
@@ -40,10 +41,9 @@ class App extends Component {
       usertype: '',
       doctorGroupId: '',
       insuranceGroupId: '',
+      usersWhoAreTyping: [],
       chatusers: [] // patientslist for doctor, doctorslist for patients, patientslist for insurance provider
     };
-
-    // console.log(window.localStorage.getItem("patientslist"));
 
     const usertype = window.localStorage.getItem("userType");
 
@@ -61,6 +61,13 @@ class App extends Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.sendDM = this.sendDM.bind(this);
     this.handleState = this.handleState.bind(this);
+    this.sendTypingEvent = this.sendTypingEvent.bind(this);
+  }
+
+  sendTypingEvent() {
+    this.state.currentUser
+      .isTypingIn({ roomId: this.state.currentRoom.id })
+      .catch(error => console.error('error', error))
   }
 
   sendMessage(event) {
@@ -108,12 +115,23 @@ class App extends Component {
               messages: [...this.state.messages, message],
             });
           },
+          onUserStartedTyping: user => {
+            this.setState({
+              usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
+            })
+          },
+          onUserStoppedTyping: user => {
+            this.setState({
+              usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                username => username !== user.name
+              ),
+            })
+          },
           onPresenceChanged: () => {
             const { currentRoom } = this.state;
             this.setState({
               roomUsers: currentRoom.users.sort(a => {
                 if (a.presence.state === 'online') return -1;
-
                 return 1;
               }),
             });
@@ -252,7 +270,7 @@ class App extends Component {
 
   sendDM(id) {
     if (this.state.usertype == 'doctor') {
-      this.connectToRoom.call(this, 'f76d0379-f2da-41ec-8ecc-0fef534dc017');
+      this.connectToRoom.call(this, 'eec15766-ea99-4c5c-9e5b-e9646e9f90b4');
       if (this.state.secondUserId) {
         this.connectToChatkitSecondUser(); 
         this.createPrivateRoom.call(this, id).then(room => {
@@ -268,9 +286,7 @@ class App extends Component {
       })};
     }
     if(this.state.usertype == 'patient') {
-      this.state.rooms.map((item , index) => (
-        this.connectToRoom.call(this, item.id)
-      ))
+      this.connectToRoom.call(this, this.state.rooms[0]['id']);
       if(this.state.secondUserId) {
         this.connectToChatkitSecondUser(); 
         this.createPrivateRoom.call(this, id).then(room => {
@@ -329,12 +345,12 @@ class App extends Component {
                       {currentRoom ? 
                         <div>
                         <h2 class="headertekst">{roomName} <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> </h2>
-                        {/* <h3>{roomName} <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> </h3>  */}
                         </div>
                       : null}
                     </header>
                     <ul className="chat-messages">
                       <ChatSession messages={messages} />
+                      <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
                     </ul>
                     <footer className="chat-footer">
                       <form onSubmit={this.sendMessage} className="message-form">
@@ -344,7 +360,8 @@ class App extends Component {
                           name="newMessage"
                           className="message-input"
                           placeholder="Type your message and hit ENTER to send"
-                          onChange={this.handleInput}
+                          onInput={this.handleInput}
+                          onChange={this.TypingIndicator}
                         />
                       </form>
                     </footer>
