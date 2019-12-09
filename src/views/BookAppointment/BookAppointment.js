@@ -27,6 +27,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
@@ -52,6 +53,7 @@ export default function ProfilePage(props) {
     const [timeslots, setTimeslots] = useState([]);
     const [keyword, setKeyword] = React.useState('none');
     const [ts, setTs] = useState("None");
+    const [reason, setReason] = useState("")
     const [createAppointment, setCreateAppointment] = useState({
         isAppointmentCreated: false
     })
@@ -75,7 +77,7 @@ export default function ProfilePage(props) {
         })
     }
 
-    const handleCreateAppointments = (event) => {
+    const handleCreateAppointments = () => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/createappointments', {
             method : 'post',
             credentials: 'include',
@@ -83,13 +85,18 @@ export default function ProfilePage(props) {
             body: JSON.stringify({
                 doctorusername: doctorusername,
                 time: ts,
-                date: date.toLocaleDateString()
+                date: date.toLocaleDateString(),
+                reason: reason
             })
         }).then(response => response.json())
         .then(data => {
             setCreateAppointment(data.isAppointmentCreated)
         })
     };
+
+    function handleReasonChange(event) {
+        setReason(event.target.value)
+    }
 
     const style = {
         bg: {
@@ -153,19 +160,29 @@ export default function ProfilePage(props) {
                                             />  <br/>
                                             <h5 style={style.pushOff}> Please select a time</h5>
                                                 {/* <InputLabel id="select-timeslot">Name</InputLabel> */}
-                                                <Select
-                                                    labelId="select-timeslot"
-                                                    id="select-timeslot"
-                                                    onChange={handleChange}
-                                                    value={ts}
-                                                    defaultValue={"None"}
-                                                    style={style.drop}
-                                                >
-                                                    <MenuItem value="None"> <em>None</em> </MenuItem>
-                                                    {timeslots.map((item, index) => (
-                                                        <MenuItem value={item}>{item}</MenuItem>
-                                                    ))}
-                                                </Select><br />
+                                                    <Select
+                                                        labelId="select-timeslot"
+                                                        id="select-timeslot"
+                                                        onChange={handleChange}
+                                                        value={ts}
+                                                        defaultValue={"None"}
+                                                        style={style.drop}
+                                                    >
+                                                        <MenuItem value="None"> <em>None</em> </MenuItem>
+                                                        {timeslots.map((item, index) => (
+                                                            <MenuItem value={item}>{item}</MenuItem>
+                                                        ))}
+                                                    </Select><br />
+                                                    <CustomInput
+                                                        id="reason"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            onChange: handleReasonChange,
+                                                            placeholder: "Enter reason for vist",
+                                                        }}
+                                                    />
                                             <Button color="primary" onClick={(event) => {setModal(true); handleCreateAppointments();}}>
                                                 Book Appointment
                                             </Button>
