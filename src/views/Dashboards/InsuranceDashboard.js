@@ -193,7 +193,7 @@ export default function ProfilePage(props) {
       />
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div style={style.bg}>
+        <div style={style.bg}> <br/>
           <div className={classes.container}>
             <GridContainer justify="center">
             <GridItem xs={5} sm={10} md={15} lg={20}>
@@ -394,18 +394,29 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          { patients.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
+                          { patients.map((item, index) => (<Card style={{width: "40rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h4> 
-                            <p>Current Plan: {item.mInsurancePlan}</p>
-                            <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
-                              <Button color="primary">
-                                View Patient
-                              </Button>
+                            <GridContainer>
+                            <GridItem xs={20} sm={20} md={6}>
+                              <h4 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h4> 
+                            </GridItem>
+                            <GridItem xs={0} sm={1} md={1}>
+                              <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
+                                <Button color="primary">
+                                  View Patient
+                                </Button>
+                              </Link> 
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={6} align="left">
+                              <h6>Current Plan: {item.mInsurancePlan}</h6>
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={6}>
                               <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
-                                <Button color="primary">Send me a text</Button>
+                                <Button color="primary">Send a Text</Button>
                               </Link>
-                            </Link>
+                            </GridItem>
+                            </GridContainer>
                           </CardBody>
                         </Card>))}
                         </GridItem>
@@ -417,7 +428,7 @@ export default function ProfilePage(props) {
                     tabIcon: List,
                     tabContent: (
                       <div>
-                        <p>Total of claims that needs approval:</p>
+                        <h3><b>Total of claims that needs approval:</b></h3>
                         <Card style={{ width: "40rem", borderColor: "primary" }}>
                             <CardBody>
                             <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
@@ -425,6 +436,9 @@ export default function ProfilePage(props) {
                             <h5 style={style.altTextColor}>Claim amount</h5>
                             <Button fullWidth color="primary" style={style.btn}>
                                 Approve
+                            </Button> 
+                            <Button fullWidth color="primary" style={style.btn}>
+                                Deny
                             </Button>
                             </CardBody>
                         </Card>

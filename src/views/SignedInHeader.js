@@ -56,6 +56,15 @@ export default function SignedInHeaders(props){
         }
     }
 
+    function hideClaimsHistory() {
+        if (window.localStorage.getItem("userType") == "insurance") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     const style = {
         btn: {
             color: 'white',
@@ -221,6 +230,9 @@ export default function SignedInHeaders(props){
                                         </Link>
                                         {hideMedicalDetails() && (<Link to="/patient/medicalhistory">
                                             <MenuItem value={"medicalHistory"} style={style.mt}>Medical History</MenuItem>
+                                        </Link>)}
+                                        {hideClaimsHistory() && (<Link to="/insurance/claimshistory">
+                                            <MenuItem value={"medicalHistory"} style={style.mt}>Claims History</MenuItem>
                                         </Link>)}
                                         <Link to="/">
                                             <MenuItem value={"signOut"} style={style.mt}>Sign Out</MenuItem>
