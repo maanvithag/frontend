@@ -55,7 +55,7 @@ export default function ProfilePage(props) {
             color: '#904199'
         },
         title:{
-            fontSize: '40px',
+            fontSize: '35px',
             fontWeight: '400',
         }
     };
