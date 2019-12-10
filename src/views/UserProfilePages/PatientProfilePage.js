@@ -99,7 +99,9 @@ export default function ProfilePage(props) {
 
     const style = {
         link: {
-            color: 'white'
+            color: 'white',
+            marginTop: '-10px',
+            fontSize: '18px',
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -112,6 +114,19 @@ export default function ProfilePage(props) {
             marginTop: '30px',
             marginBottom: '-15px',
             color: '#904199'
+        },
+        title:{
+            fontSize: '35px',
+            fontWeight: '400',
+        },
+        altTitle:{
+            fontSize: '30px',
+            fontWeight: '400',
+        },
+        subtitle:{
+            marginTop: '-10px',
+            fontSize: '20px',
+            color:'white'
         }
     };
 
@@ -149,7 +164,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.firstname} {profile.lastname}</h2>
+                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.firstname} {profile.lastname}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -273,7 +288,7 @@ export default function ProfilePage(props) {
                                     </CardBody>
                                     <CardFooter><br/></CardFooter>
                                     <CardHeader color="primary">
-                                        <h3 className={classes.cardTitleWhite}>Insurance Plan Details </h3>
+                                        <h3 className={classes.cardTitleWhite} style={style.altTitle}>Insurance Plan Details </h3>
                                         <Link to= {"/patient/insurance/" + btoa(profile.insuranceprovider)}>
                                             <h7 style={style.link}> View Provider&nbsp;&nbsp;&nbsp;<i className={"fas fa-external-link-square-alt"}/> </h7>
                                         </Link>

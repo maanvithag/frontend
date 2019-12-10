@@ -53,6 +53,10 @@ export default function ProfilePage(props) {
             marginTop: '30px',
             marginBottom: '-15px',
             color: '#904199'
+        },
+        title:{
+            fontSize: '40px',
+            fontWeight: '400',
         }
     };
 
@@ -161,7 +165,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.firstname} {profile.lastname}</h2>
+                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.firstname} {profile.lastname}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
