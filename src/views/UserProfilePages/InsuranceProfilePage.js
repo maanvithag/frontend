@@ -37,6 +37,13 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        label:{
+            fontSize: '18px',
+            fontWeight: '425',
+            marginTop: '30px',
+            marginBottom: '-15px',
+            color: '#904199'
         }
     };
 
@@ -120,7 +127,7 @@ export default function ProfilePage(props) {
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Username</InputLabel>
+                                                <InputLabel style={style.label}>Username</InputLabel>
                                                 <CustomInput
                                                     id="username"
                                                     formControlProps={{
@@ -133,7 +140,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
+                                                <InputLabel style={style.label}>Email Address</InputLabel>
                                                 <CustomInput
                                                     id="emailaddress"
                                                     formControlProps={{
@@ -153,7 +160,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Company</InputLabel>
+                                                <InputLabel style={style.label}>Company</InputLabel>
                                                 <CustomInput
                                                     id="company"
                                                     formControlProps={{
@@ -166,7 +173,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Contact Number</InputLabel>
+                                                <InputLabel style={style.label}>Office Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="phone-number"
                                                     formControlProps={{
@@ -186,7 +193,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Address</InputLabel>
+                                                <InputLabel style={style.label}>Office Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
                                                     formControlProps={{
