@@ -288,18 +288,11 @@ export default function ProfilePage(props) {
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                             {pastAppointments.map((item, index) => (<Card style={{ width: "40rem", borderColor: "primary" }}>
                               <CardBody>
-<<<<<<< HEAD
-                                <h2 className={classes.cardTitle}><b>{item.mDoctorName}</b></h2>
-                                <h4>Date: {item.mDisplayDate}</h4>
-                                <h4>Time: {item.mDisplayTime}</h4>
-                                <h4>Reason for Visit: {item.reason}</h4>
-=======
                                 <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                 <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                                 <p>Date: {item.mDisplayDate}</p>
                                 <p>Time: {item.mDisplayTime}</p>
                                 <p>Reason for Visit: {item.reason}</p>
->>>>>>> 659dd6a1d398dc6f8303da52df96951dba6ec43b
                                 <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                   <Button color="primary">
                                     View Doctor
