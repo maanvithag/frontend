@@ -189,18 +189,18 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">My Dashboard</Button>
+                                <Button color="primary"><h6><b>My Dashboard</b></h6></Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Link to={"/patient/doctor/bookappointment/" + doctorusername}>
                                 <Button color="primary">
-                                    Book Appointment
+                                    <h6><b>Book Appointment</b></h6>
                                 </Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             {/* <AddDoctorReview/> */}
                             <div>
                                 <Button color="primary" onClick={() => setModal(true)}>
-                                    Leave a Review
-                            </Button>
+                                    <h6><b>Leave a Review</b></h6>
+                                </Button>
                                 <Dialog
                                     modalClasses={{
                                         root: modalClasses.center,
@@ -369,12 +369,12 @@ export default function ProfilePage(props) {
                                     <GridItem xs={12} sm={12} md={12}>
                                         <Card>
                                             <CardHeader color="primary">
-                                                <h4 className={classes.cardTitleWhite}>Average Rating: <StarRatings
+                                                <h3 className={classes.cardTitleWhite}><b>Average Rating: <StarRatings
                                                     rating={rating}
                                                     starDimension="30px"
                                                     starSpacing="7px"
                                                     starRatedColor="orange"
-                                                /></h4>
+                                                /></b></h3>
                                             </CardHeader>
                                             <CardBody>
                                                 {reviews.map((item, index) => (<Card style={{ borderColor: "primary" }}>

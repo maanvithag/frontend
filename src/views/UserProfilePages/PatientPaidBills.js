@@ -24,12 +24,12 @@ const useStyles = makeStyles(styles);
 export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [insurancePlans, setInsurancePlans] = useState([
-        {name: "doctor 1", reason: "reason 1", date: "date 1", amount: "amount 1", status: "some status 1"},
-        {name: "doctor 2", reason: "reason 2", date: "date 2", amount: "amount 2", status: "some status 2"},
-        {name: "doctor 3", reason: "reason 3", date: "date 3", amount: "amount 3", status: "some status 3"},
-        {name: "doctor 4", reason: "reason 4", date: "date 4", amount: "amount 4", status: "some status 4"},
-        {name: "doctor 5", reason: "reason 5", date: "date 5", amount: "amount 5", status: "some status 5"}
+    const [billsPaid, setBillsPaid] = useState([
+        {mDoctorName: "doctor 1", mReason: "reason 1", mDisplayDate: "date 1", mAmountToBePaid: "amount 1", mDoctorUsername: "link 1"},
+        {mDoctorName: "doctor 2", mReason: "reason 2", mDisplayDate: "date 2", mAmountToBePaid: "amount 2", mDoctorUsername: "link 2"},
+        {mDoctorName: "doctor 3", mReason: "reason 3", mDisplayDate: "date 3", mAmountToBePaid: "amount 3", mDoctorUsername: "link 3"},
+        {mDoctorName: "doctor 4", mReason: "reason 4", mDisplayDate: "date 4", mAmountToBePaid: "amount 4", mDoctorUsername: "link 4"},
+        {mDoctorName: "doctor 5", mReason: "reason 5", mDisplayDate: "date 5", mAmountToBePaid: "amount 5", mDoctorUsername: "link 5"}
     ]);
     const [appointments, setAppointments] = useState([]);
     const [pastAppointments, setPastAppointments] = useState([]);
@@ -47,16 +47,17 @@ export default function SurveyResults(props) {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
           .then(data => {
-            setAppointments(data.CurrentAppointments)
-            setPastAppointments(data.PastAppointments)
-            setBillsToBePaid(data.billsToBePaid)
-            setTotalOutOfPocketAmount(data.totalOutOfPocketAmount)
-            setTotalAmountCoveredByInsurance(data.totalAmountCoveredByInsurance)
-            setTotalInProcessAmountByInsurance(data.totalInProcessAmountByInsurance)
-            setTotalAmountDeniedByInsurance(data.totalAmountDeniedByInsurance)
+            // setAppointments(data.CurrentAppointments)
+            // setPastAppointments(data.PastAppointments)
+            // setBillsToBePaid(data.billsToBePaid)
+            // setTotalOutOfPocketAmount(data.totalOutOfPocketAmount)
+            // setTotalAmountCoveredByInsurance(data.totalAmountCoveredByInsurance)
+            // setTotalInProcessAmountByInsurance(data.totalInProcessAmountByInsurance)
+            // setTotalAmountDeniedByInsurance(data.totalAmountDeniedByInsurance)
+            // setBillsPaid(data.billsPaid)
           })
       }
-      useEffect(() => { handleLoad() }, [isBillPaid])
+    useEffect(() => { handleLoad() }, [isBillPaid])
 
     const style = {
         chatBtn: {
@@ -133,16 +134,30 @@ export default function SurveyResults(props) {
                                         <h2><b>Payment History</b></h2><br/>
                                         </GridContainer>
                                         <GridContainer justify="center">
-                                        {billsToBePaid.map((item, index) => (
-                                        <Card style={{ background: "#F8F8F8", width: "35rem", borderColor: "primary" }}>
-                                        <CardBody>
-                                            <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
-                                            <h5 style={style.altTextColor}>Reason: {item.reason}</h5>
-                                            <h5>Date: {item.displayDate}</h5>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                            <h5>Co-pay: ${item.amountToBePaid}</h5>
-                                            </div>
-                                        </CardBody>
+                                        {billsPaid.map((item, index) => (
+                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
+                                            <CardBody>
+                                                <GridContainer>
+                                                <GridItem xs={12} sm={12} md={6}>
+                                                <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
+                                                </GridItem>
+                                                <GridItem align="right" xs={5} sm={5} md={1}>
+                                                <Link to= {"/patient/doctor/" + btoa(item.mDoctorUsername)}> 
+                                                    <Button color="primary" align="right">
+                                                        View Doctor
+                                                    </Button>
+                                                </Link>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6} align="left">
+                                                    <h4><b>Appointment Date: </b>{item.mDisplayDate}</h4>
+                                                    <h4><b>Reason for visit: </b>{item.mReason}</h4>
+                                                    
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6} align="right">
+                                                    <h4><b>Amount for visit: </b>{item.mAmountToBePaid}</h4>
+                                                </GridItem>
+                                                </GridContainer>
+                                            </CardBody>
                                         </Card>))}
                                         </GridContainer>
                                     </GridItem>

@@ -153,12 +153,16 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/doctor/dashboard">
+                        <GridItem xs={12} sm={12} md={7}>
+                            <Link to={"/doctor/dashboard"}>
                                 <Button 
-                                onClick={saveUserInfoOnServer}
-                                color="primary"
-                                >My Dashboard</Button>
+                                onClick = {saveUserInfoOnServer}
+                                fullWidth 
+                                color="primary" 
+                                style={style.btn}
+                                ><b>My Dashboard</b></Button>
                             </Link>
+                            </GridItem>
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">

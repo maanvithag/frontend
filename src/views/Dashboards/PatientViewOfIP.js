@@ -179,12 +179,11 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
+                            <GridItem xs={12} sm={12} md={7}>
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">My Dashboard</Button>
+                                <Button fullWidth color="primary" style={style.btn}><b>My Dashboard</b></Button>
                             </Link>
-                        </GridContainer>
-                        <br></br>
-                        <GridContainer justify="center">
+                            </GridItem>
                             <GridItem xs={5} sm={5} md={8}>
                                 <h2></h2>
                             </GridItem>
@@ -261,7 +260,7 @@ export default function ProfilePage(props) {
                                 <Card>
                                     <div style={style.plansBg}>
                                         <CardHeader color="primary">
-                                            <h2 className={classes.cardTitleWhite}>Plans Provided</h2>
+                                            <h2 className={classes.cardTitleWhite}><b>Plans Provided</b></h2>
                                         </CardHeader>
                                         <CardBody>
                                             <GridContainer justify="center">
