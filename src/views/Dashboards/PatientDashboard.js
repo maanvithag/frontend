@@ -196,7 +196,7 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div style={style.bg}>
           <div className={classes.container}>
-            <GridContainer justify="space-around">
+            <GridContainer justify="center">
               <GridItem xs={5} sm={10} md={15} lg={20}> <br />
                 <CustomTabs
                   headerColor="primary"
@@ -205,8 +205,9 @@ export default function ProfilePage(props) {
                       tabName: "Upcoming appointments",
                       tabIcon: Dashboard,
                       tabContent: (
-                        <GridContainer>
-                          <GridItem xs={20} sm={20} md={30}>
+                        <GridContainer justify="center">
+                        <GridContainer justify="center">
+                          <GridItem xs={20} sm={20} md={30} justify="center">
                             {appointments.map((item, index) => (
                               <Card style={{ background: "#F8F8F8", width: "40rem", borderColor: "primary" }}>
                                 <CardBody>
@@ -277,13 +278,15 @@ export default function ProfilePage(props) {
                               </Card>))}
                           </GridItem>
                         </GridContainer>
+                        </GridContainer>
                       )
                     },
                     {
                       tabName: "Past appointments",
                       tabIcon: List,
                       tabContent: (
-                        <GridContainer>
+                        <GridContainer justify="center">
+                        <GridContainer justify="center">
                           <GridItem xs={20} sm={20} md={30}>
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                             {pastAppointments.map((item, index) => (<Card style={{ background: "#F8F8F8", width: "40rem", borderColor: "primary" }}>
@@ -304,6 +307,7 @@ export default function ProfilePage(props) {
                               </CardBody>
                             </Card>))}
                           </GridItem>
+                        </GridContainer>
                         </GridContainer>
                       )
                     },
@@ -444,9 +448,6 @@ export default function ProfilePage(props) {
                                           </DialogContent>
                                       </Dialog>
                                   </div>
-                                  <Button fullWidth color="primary" style={style.btn}>
-                                    Claim
-                                  </Button>
                                 </CardBody>
                               </Card>
                             ))}
