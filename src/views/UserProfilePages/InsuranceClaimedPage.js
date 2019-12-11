@@ -18,6 +18,10 @@ import SignedInHeaders from "views/SignedInHeader.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { Link } from "react-router-dom";
 import Logo2 from "../../assets/img/logo2.png";
+import CustomTabs from "../../components/CustomTabs/CustomTabs";
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 const useStyles = makeStyles(styles);
 
@@ -25,19 +29,20 @@ export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
     const [approvedBills, setApprovedBills] = useState([
-        {mPatientName: "patient 1", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
-        {mPatientName: "patient 2", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
-        {mPatientName: "patient 3", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"},
-        {mPatientName: "patient 4", mReason: "reason 4", mAmountToBePaid: "amount 4", mPatientUsername: "link 4", mDoctorName: "doctor 4"},
-        {mPatientName: "patient 5", mReason: "reason 5", mAmountToBePaid: "amount 5", mPatientUsername: "link 5", mDoctorName: "doctor 5"}
+        {mPatientName: "Jack", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
+        {mPatientName: "Vivek", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
+        {mPatientName: "Maanvitha", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"},
+        {mPatientName: "Zijin", mReason: "reason 4", mAmountToBePaid: "amount 4", mPatientUsername: "link 4", mDoctorName: "doctor 4"}
     ]);
 
+    const [inProgressBills, setInProgressBills] = useState([
+        {mPatientName: "John", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
+        {mPatientName: "Adeel", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"}
+    ]);
     const [deniedBills, setDeniedBills] = useState([
-        {mPatientName: "patient 1", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
-        {mPatientName: "patient 2", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
-        {mPatientName: "patient 3", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"},
-        {mPatientName: "patient 4", mReason: "reason 4", mAmountToBePaid: "amount 4", mPatientUsername: "link 4", mDoctorName: "doctor 4"},
-        {mPatientName: "patient 5", mReason: "reason 5", mAmountToBePaid: "amount 5", mPatientUsername: "link 5", mDoctorName: "doctor 5"}
+        {mPatientName: "Max", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
+        {mPatientName: "Alice", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
+        {mPatientName: "Sydney", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"}
     ]);
 
     const handleLoad = () => {
@@ -50,6 +55,7 @@ export default function SurveyResults(props) {
                 console.log(data);
                 // setApprovedBills(data.approvedBills);
                 // setDeniedBills(data.deniedBills);
+                // setInProgressBills(data.inProgressBills)
             })
     }
     useEffect(() => { handleLoad() }, {})
@@ -63,20 +69,14 @@ export default function SurveyResults(props) {
             marginLeft: '-40px',
             width: '220px'
         },
-        selectBtn: {
-            color: 'white',
-            textTransform: 'initial',
-            fontSize: 'small',
-            marginTop: '20px',
-            width: '190px'
+        subtitle:{
+            marginTop: '0px',
+            marginBottom: '30px',
+            fontSize: '18px'
         },
         viewBtn: {
-            color: 'white',
-            textTransform: 'initial',
-            fontSize: 'small',
             marginTop: '20px',
-            marginLeft: '-38px',
-            width: '190px'
+            marginLeft: '-40px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -86,7 +86,8 @@ export default function SurveyResults(props) {
         altTextColor: {
             color: '#904199',
             marginTop: '-5px',
-            marginBottom: '15px'
+            marginBottom: '15px',
+            fontWeight: '500'
         },
         suggestedPlan: {
             background: '#f9dbff',
@@ -94,6 +95,13 @@ export default function SurveyResults(props) {
         },
         bold: {
             fontWeight: 'bolder'
+        },
+        name:{
+            fontWeight: 'bolder',
+            fontSize: '30px'
+        },
+        card:{
+            marginBottom: '-5px',
         }
     };
 
@@ -127,67 +135,136 @@ export default function SurveyResults(props) {
                                         </GridContainer>
                                         <GridContainer justify="center">
                                             <GridItem align="center">
-                                            <h2><b>Distribution of Claims</b></h2>
+                                            <h1><b>Distribution of Claims</b></h1>
                                             </GridItem>
                                             <GridItem align="center">
-                                                <h3><b>Number of Claims Approved: </b>{approvedBills.length}</h3>
-                                                <h3><b>Number of Claims Denied: </b>{deniedBills.length}</h3>
+                                                <h3 style={style.subtitle}>Number of Claims Approved: <b>{approvedBills.length}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number of Claims In Progress: <b>{inProgressBills.length}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number of Claims Denied: <b>{deniedBills.length}</b></h3>
                                             </GridItem>
                                         </GridContainer>
-                                        <GridContainer justify="center">
-                                        {approvedBills.map((item, index) => (
-                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
-                                            <CardBody>
-                                                <GridContainer>
-                                                <GridItem xs={12} sm={12} md={6}>
-                                                <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
-                                                </GridItem>
-                                                <GridItem align="right" xs={5} sm={5} md={1}>
-                                                <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}> 
-                                                    <Button color="primary" align="right">
-                                                        View Patient
-                                                    </Button>
-                                                </Link>
-                                                </GridItem>
-                                                <GridItem xs={12} sm={12} md={6} align="left">
-                                                    <h4><b>Doctor: </b>{item.mDoctorName}</h4>
-                                                    <h4><b>Reason for visit: </b>{item.mReason}</h4>
-                                                    
-                                                </GridItem>
-                                                <GridItem xs={12} sm={12} md={6} align="right">
-                                                    <h4><b>Amount for visit: </b>{item.mAmountToBePaid}</h4>
-                                                    <h4 style={style.altTextColor}><b>Claim Status: </b>APPROVED</h4>
-                                                </GridItem>
-                                                </GridContainer>
-                                            </CardBody>
-                                        </Card>))}
-                                        {deniedBills.map((item, index) => (
-                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
-                                            <CardBody>
-                                                <GridContainer>
-                                                <GridItem xs={12} sm={12} md={6}>
-                                                <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
-                                                </GridItem>
-                                                <GridItem align="right" xs={5} sm={5} md={1}>
-                                                <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}> 
-                                                    <Button color="primary" align="right">
-                                                        View Patient
-                                                    </Button>
-                                                </Link>
-                                                </GridItem>
-                                                <GridItem xs={12} sm={12} md={6} align="left">
-                                                    <h4><b>Doctor: </b>{item.mDoctorName}</h4>
-                                                    <h4><b>Reason for visit: </b>{item.mReason}</h4>
-                                                </GridItem>
-                                                <GridItem xs={12} sm={12} md={6} align="right">
-                                                    <h4><b>Amount for vist: </b>{item.mAmountToBePaid}</h4>
-                                                    <h4 style={style.altTextColor}><b>Claim Status: </b>DENIED</h4>
-                                                </GridItem>
-                                                </GridContainer>
-                                            </CardBody>
-                                        </Card>))}
-                                        </GridContainer>
                                     </GridItem>
+                                </GridContainer>
+                                <GridContainer color={"info"} justify="center">
+                                <GridItem xs={20} sm={20} md={20}>
+                                <GridContainer>
+                                    <CustomTabs
+                                        headerColor="primary"
+                                        tabs={[
+                                            {
+                                                tabName: "Approved",
+                                                tabIcon: CheckIcon,
+                                                tabContent: (
+                                                    <GridContainer>
+                                                        <GridContainer justify="center">
+                                                            {approvedBills.map((item, index) => (
+                                                                <GridContainer justify="center">
+                                                                    <GridContainer justify="center">
+                                                                        <Card style={style.card}>
+                                                                            <div style={{ width: "50rem", borderColor: "primary" }}>
+                                                                                <CardBody>
+                                                                                    <GridContainer>
+                                                                                        <GridItem xs={12} sm={12} md={10}>
+                                                                                            <h3 className={classes.cardTitle} style={style.name}><b>{item.mPatientName}</b></h3>
+                                                                                            <h5> <span style={style.altTextColor}>Doctor: </span>{item.mDoctorName}</h5>
+                                                                                            <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
+                                                                                            <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                            <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
+                                                                                        </GridItem>
+
+                                                                                        <GridItem xs={12} sm={12} md={2}>
+                                                                                            <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
+                                                                                            <Button color="primary" style={style.viewBtn}>
+                                                                                                View Patient
+                                                                                            </Button>
+                                                                                            </Link>
+                                                                                        </GridItem>
+                                                                                    </GridContainer>
+                                                                                </CardBody>
+                                                                            </div>
+                                                                        </Card>
+                                                                    </GridContainer>
+                                                                </GridContainer>
+                                                            ))}
+                                                            <GridItem>&nbsp;</GridItem>
+                                                        </GridContainer>
+                                                    </GridContainer>
+                                                )},
+                                            {
+                                                tabName: "In Progress",
+                                                tabIcon: MoreHorizIcon,
+                                                tabContent: (
+                                                    <GridContainer justify="center">
+                                                        {inProgressBills.map((item, index) => (
+                                                            <GridContainer justify="center">
+                                                                <GridContainer justify="center">
+                                                                    <Card style={style.card}>
+                                                                        <div style={{ width: "50rem", borderColor: "primary" }}>
+                                                                            <CardBody>
+                                                                                <GridContainer>
+                                                                                    <GridItem xs={12} sm={12} md={10}>
+                                                                                        <h3 className={classes.cardTitle} style={style.name}><b>{item.mPatientName}</b></h3>
+                                                                                        <h5> <span style={style.altTextColor}>Doctor: </span>{item.mDoctorName}</h5>
+                                                                                        <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
+                                                                                        <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                        <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
+                                                                                    </GridItem>
+
+                                                                                    <GridItem xs={12} sm={12} md={2}>
+                                                                                        <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
+                                                                                            <Button color="primary" style={style.viewBtn}>
+                                                                                                View Patient
+                                                                                            </Button>
+                                                                                        </Link>
+                                                                                    </GridItem>
+                                                                                </GridContainer>
+                                                                            </CardBody>
+                                                                        </div>
+                                                                    </Card>
+                                                                </GridContainer>
+                                                            </GridContainer>
+                                                        ))}
+                                                        <GridItem>&nbsp;</GridItem>
+                                                    </GridContainer>
+                                                )},
+                                            {
+                                                tabName: "Denied",
+                                                tabIcon: CloseIcon,
+                                                tabContent: (
+                                                    <GridContainer justify="center">
+                                                        {deniedBills.map((item, index) => (
+                                                            <GridContainer justify="center">
+                                                                <GridContainer justify="center">
+                                                                    <Card style={style.card}>
+                                                                        <div style={{ width: "50rem", borderColor: "primary" }}>
+                                                                            <CardBody>
+                                                                                <GridContainer>
+                                                                                    <GridItem xs={12} sm={12} md={10}>
+                                                                                        <h3 className={classes.cardTitle} style={style.name}><b>{item.mPatientName}</b></h3>
+                                                                                        <h5> <span style={style.altTextColor}>Doctor: </span>{item.mDoctorName}</h5>
+                                                                                        <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
+                                                                                        <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                        <h5> <span style={style.altTextColor}>Claim Status: </span><b>Denied</b></h5>
+                                                                                    </GridItem>
+
+                                                                                    <GridItem xs={12} sm={12} md={2}>
+                                                                                        <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
+                                                                                            <Button color="primary" style={style.viewBtn}>
+                                                                                                View Patient
+                                                                                            </Button>
+                                                                                        </Link>
+                                                                                    </GridItem>
+                                                                                </GridContainer>
+                                                                            </CardBody>
+                                                                        </div>
+                                                                    </Card>
+                                                                </GridContainer>
+                                                            </GridContainer>
+                                                        ))}
+                                                        <GridItem>&nbsp;</GridItem>
+                                                    </GridContainer>
+                                                )},
+                                        ]}/>
+                                </GridContainer>
+                                </GridItem>
                                 </GridContainer>
                             </GridItem>
                         </GridContainer>
