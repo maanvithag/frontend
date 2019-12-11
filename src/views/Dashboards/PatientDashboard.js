@@ -209,7 +209,7 @@ export default function ProfilePage(props) {
                         <GridContainer justify="center">
                           <GridItem xs={20} sm={20} md={30} justify="center">
                             {appointments.map((item, index) => (
-                              <Card style={{ background: "#F8F8F8", width: "40rem", borderColor: "primary" }}>
+                              <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                                 <CardBody>
                                   <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                   <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
@@ -289,7 +289,7 @@ export default function ProfilePage(props) {
                         <GridContainer justify="center">
                           <GridItem xs={20} sm={20} md={30}>
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                            {pastAppointments.map((item, index) => (<Card style={{ background: "#F8F8F8", width: "40rem", borderColor: "primary" }}>
+                            {pastAppointments.map((item, index) => (<Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                               <CardBody>
                                 <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                 <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
