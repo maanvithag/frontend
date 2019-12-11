@@ -159,9 +159,9 @@ export default function ProfilePage(props) {
                       tabIcon: Dashboard,
                       tabContent: (
                         <GridContainer>
-                          <GridItem xs={20} sm={20} md={30}>
+                          <GridItem xs={20} sm={20} md={30} style={{ display: "flex" }}>
                             {appointments.map((item, index) => (
-                              <Card style={{ width: "40rem", borderColor: "primary" }}>
+                              <Card style={{ width: "40rem", borderColor: "primary", justifyContent: "center", flexDirection: "row" }}>
                                 <CardBody>
                                   <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                                   <p>Date: {item.mDisplayDate}</p>
@@ -240,10 +240,10 @@ export default function ProfilePage(props) {
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                             {pastAppointments.map((item, index) => (<Card style={{ width: "40rem", borderColor: "primary" }}>
                               <CardBody>
-                                <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
-                                <p>Date: {item.mDisplayDate}</p>
-                                <p>Time: {item.mDisplayTime}</p>
-                                <p>Reason for Visit: {item.reason}</p>
+                                <h2 className={classes.cardTitle}><b>{item.mDoctorName}</b></h2>
+                                <h4>Date: {item.mDisplayDate}</h4>
+                                <h4>Time: {item.mDisplayTime}</h4>
+                                <h4>Reason for Visit: {item.reason}</h4>
                                 <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                   <Button color="primary">
                                     View Doctor
