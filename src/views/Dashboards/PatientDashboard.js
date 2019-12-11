@@ -33,6 +33,8 @@ import { Create, Payment } from "@material-ui/icons";
 import Logo2 from "../../assets/img/logo2.png";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
+import CustomInput from "../../components/CustomInput/CustomInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -112,6 +114,24 @@ export default function ProfilePage(props) {
       setIsBillPaid(response)
     })
   }
+
+  function hide(plan){
+      if (plan===""){ return false;}
+      else{return true;}
+  }
+
+    const [creditcardnumber, setCCN] = useState('');
+    const [expiry, setExpiry] = useState('');
+    const [cvv, setCVV] = useState('');
+    const [billingaddress, setBillingAddress] = useState('');
+    const [cardname, setCardName] = useState('');
+
+    const handleCCN = event => { setCCN(event.target.value); };
+    const handleExpiry = event => { setExpiry(event.target.value); };
+    const handleCardName = event => { setCardName(event.target.value); };
+    const handleBillingAddress = event => { setBillingAddress(event.target.value); };
+    const handleCVV = event => { setCVV(event.target.value); };
+
 
   const style = {
     bg: {
@@ -205,7 +225,7 @@ export default function ProfilePage(props) {
                                         >
                                           <Close className={modalClasses.modalClose} />
                                         </IconButton>
-                                        <h3 className={modalClasses.modalTitle}>Cancel Appointment</h3>
+                                          <h3 className={modalClasses.modalTitle}><b>Cancel Appointment</b></h3>
                                       </DialogTitle>
                                       <DialogContent
                                         id="modal-slide-description"
@@ -264,14 +284,14 @@ export default function ProfilePage(props) {
                       tabContent: (
                         (
                           <div>
-                            <GridContainer>
+                            <GridContainer align="left">
                               <GridItem xs={12} sm={12} md={6} align="left">
-                              <h5 align="center"><b>Total amount paid out of pocket: ${totalOutOfPocketAmount}</b></h5>
-                              <h5 align="center"><b>Total amount covered by insurance: ${totalAmountCoveredByInsurance}</b></h5>
+                              <h5 align="center">Total amount to be paid out of pocket: <b>${totalOutOfPocketAmount}</b></h5>
+                              <h5 align="center">Total amount covered by insurance: <b>${totalAmountCoveredByInsurance}</b></h5>
                               </GridItem>
                               <GridItem xs={12} sm={12} md={6}>
-                              <h5 align="center"><b>Total amount yet to be covered by insurance: ${totalInProcessAmountByInsurance}</b></h5>
-                              <h5 align="center"><b>Total amount denied by insurance: ${totalAmountDeniedByInsurance}</b></h5>
+                              <h5 align="center">Total amount yet to be covered by insurance: <b>${totalInProcessAmountByInsurance}</b></h5>
+                              <h5 align="center">Total amount denied by insurance: <b>${totalAmountDeniedByInsurance}</b></h5>
                               </GridItem>
                             </GridContainer>
                             {billsToBePaid.map((item, index) => (
@@ -282,9 +302,118 @@ export default function ProfilePage(props) {
                                   <h5>Date: {item.displayDate}</h5>
                                   <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                                     <h5>Co-pay: ${item.amountToBePaid}</h5>
-                                    <Button color="primary" style={style.btn} value={item.appointmentId} onClick={() => handleBillPayment(item.appointmentId)}>
+                                    <Button color="primary" style={style.btn} value={item.appointmentId} onClick={(event) => { setModal(true);}}>
                                       Pay
                                     </Button>
+                                      <Dialog
+                                          modalClasses={{
+                                              root: modalClasses.center,
+                                              paper: modalClasses.modal
+                                          }}
+                                          open={modal}
+                                          TransitionComponent={Transition}
+                                          keepMounted
+                                          onClose={() => setModal(false)}
+                                          aria-labelledby="modal-slide-title"
+                                          aria-describedby="modal-slide-description"
+                                      >
+                                          <DialogTitle
+                                              id="classic-modal-slide-title"
+                                              disableTypography
+                                              className={modalClasses.modalHeader}
+                                          >
+                                              <IconButton
+                                                  className={modalClasses.modalCloseButton}
+                                                  key="close"
+                                                  aria-label="Close"
+                                                  color="inherit"
+                                                  onClick={() => setModal(false)}
+                                              >
+                                                  <Close className={modalClasses.modalClose} />
+                                              </IconButton>
+                                              <h3 className={modalClasses.modalTitle}><b>Pay Your Bill</b></h3>
+                                          </DialogTitle>
+                                          <DialogContent
+                                              id="modal-slide-description"
+                                              className={modalClasses.modalBody}
+                                          >
+                                              <GridContainer alignItems={"center"}>
+                                                  <GridItem xs={12} sm={12} md={12}>
+                                                      <CustomInput
+                                                          labelText="Credit Card Number"
+                                                          id="creditcardnumber"
+                                                          formControlProps={{
+                                                              fullWidth: true}}
+                                                          inputProps={{
+                                                              onChange: handleCCN,
+                                                              endAdornment: (
+                                                                  <InputAdornment position="end">
+                                                                      <i className={"fas fa-credit-card"}/>
+                                                                  </InputAdornment>
+                                                              )
+                                                          }}/>
+                                                  </GridItem>
+                                                  <GridItem xs={12} sm={12} md={6}>
+                                                      <CustomInput
+                                                          labelText="Expiration Date"
+                                                          id="expiry"
+                                                          formControlProps={{
+                                                              fullWidth: true}}
+                                                          inputProps={{
+                                                              onChange: handleExpiry
+                                                          }}/>
+                                                  </GridItem>
+                                                  <GridItem xs={12} sm={12} md={6}>
+                                                      <CustomInput
+                                                          labelText="CVV Number"
+                                                          id="cvv"
+                                                          formControlProps={{
+                                                              fullWidth: true}}
+                                                          inputProps={{
+                                                              onChange: handleCVV
+                                                          }}/>
+                                                  </GridItem>
+                                                  <GridItem xs={12} sm={12} md={12}>
+                                                      <CustomInput
+                                                          labelText="Name on the Card"
+                                                          id="cardname"
+                                                          formControlProps={{
+                                                              fullWidth: true}}
+                                                          inputProps={{
+                                                              onChange: handleCardName,
+                                                          }}/>
+                                                  </GridItem>
+                                                  <GridItem xs={12} sm={12} md={12}>
+                                                      <CustomInput
+                                                          labelText="Billing Address"
+                                                          id="billingaddress"
+                                                          formControlProps={{
+                                                              fullWidth: true}}
+                                                          inputProps={{
+                                                              onChange: handleBillingAddress
+                                                          }}/>
+                                                  </GridItem>
+                                                  <br />
+                                              </GridContainer>
+                                                  <GridContainer>
+                                                      <GridItem xs={12} sm={12} md={3}/>
+                                                      <GridItem xs={12} sm={12} md={3}>
+                                                      <Link to="/patient/dashboard">
+                                                          <Button color="primary" onClick={() => handleBillPayment(item.appointmentId)}>
+                                                              Pay
+                                                          </Button>
+                                                      </Link>
+                                                      </GridItem>
+                                                      <GridItem xs={12} sm={12} md={3}>
+                                                      <Link to="/patient/dashboard">
+                                                             <Button color="primary" onClick={() => setModal(false)}>
+                                                                    Cancel
+                                                             </Button>
+                                                      </Link>
+                                                  </GridItem>
+                                              </GridContainer>
+                                          </DialogContent>
+                                      </Dialog>
                                   </div>
                                   <Button fullWidth color="primary" style={style.btn}>
                                     Claim
