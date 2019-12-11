@@ -63,7 +63,11 @@ export default function ProfilePage(props) {
   const [addPlanCopayment, setAddPlanCopayment] = useState('');
   const [addPlanOutOfPocketLimit, setAddPlanOutOfPocketLimit] = useState('');
   const [addPlanLevel, setAddPlanLevel] = useState("bronze");
-  const [chatUserName, setChatUserName] = useState("")
+  const [chatUserName, setChatUserName] = useState("");
+  const [billsToBePaid, setBillsToBePaid] = useState([]);
+  const [numberOfClaimsDenied, setNumberOfClaimsDenied] = useState("");
+  const [numberOfClaimsApproved, setNumberOfClaimsApproved] = useState("");
+  const [numberOfClaimsInProcess, setNumberOfClaimsInProcess] = useState("");
 
   const [deleteplan, setDeletePlan] = useState({
     name: "",
@@ -76,6 +80,34 @@ export default function ProfilePage(props) {
     isIplansUpdated: false
   });
 
+  const handleClaims = () => {
+    fetch(window.localStorage.getItem("baseURL") + 'insurance/claims', {
+      method: 'post',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    }).then(response => response.json())
+      .then(data => {
+          console.log(data);
+          setBillsToBePaid(data.billsToBePaid);
+          // setApprovedBills(data.approvedBills);
+          // setDeniedBills(data.deniedBills);
+      })
+  }
+
+  const handleEditClaims = (event) => {
+    fetch(window.localStorage.getItem("baseURL") + 'insurance/editclaims/' + event.billStatus, {
+      method: 'post',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        id: event.id
+      })
+    }).then(response => response.json())
+      .then(data => {
+          console.log(data);
+      })
+  }
+
   const handleUsername = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/profile', {
       method : 'post',
@@ -83,7 +115,6 @@ export default function ProfilePage(props) {
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     }).then(response => response.json())
       .then(data => {
-        console.log(data);
         const chatusername = data.firstname.toLowerCase() + data.lastname.toLowerCase();
         window.localStorage.setItem("chatusername", chatusername);
         setChatUserName(window.localStorage.getItem("chatusername"))
@@ -102,7 +133,7 @@ export default function ProfilePage(props) {
       setPatients(data.Patients)
     })
   };
-  useEffect(() => {handleLoad(); handleUsername();},[updatedPlanName, chatUserName]);
+  useEffect(() => {handleLoad(); handleUsername(); handleClaims();},[updatedPlanName, chatUserName]);
 
   const handleDeletePlan = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/editiplans/delete', {
@@ -375,7 +406,7 @@ export default function ProfilePage(props) {
                                 Are you sure you want to delete this plan?
                               </div> <br/>
                               <Link to="/insurance/dashboard"> 
-                                  <Button color="primary" onClick={(event) => {setDeleteModal(false); handleDeletePlan(); handleLoad();}}>
+                                  <Button color="primary" onClick={(event) => {setDeleteModal(false); handleDeletePlan(); handleLoad(); handleClaims();}}>
                                     Yes
                                   </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                   <Button color="primary" onClick={(event) => {setDeleteModal(false);}}>
@@ -431,25 +462,58 @@ export default function ProfilePage(props) {
                     tabIcon: List,
                     tabContent: (
                       <div>
-                        <h3><b>Total of claims that needs approval:</b></h3>
-                        <Card style={{ width: "40rem", borderColor: "primary" }}>
-                            <CardBody>
-                            <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
-                            <h5 style={style.altTextColor}>Reason</h5>
-                            <h5 style={style.altTextColor}>Claim amount</h5>
-                            <div>
-                            <Button fullWidth color="primary" style={style.btn}>
-                                Approve
-                            </Button> 
-                            <Button fullWidth color="primary" style={style.btn}>
-                                Deny
-                            </Button>
-                            </div> 
-                            </CardBody>
-                        </Card>
+                        <h3 align="center"><b>Total of claims that needs approval: {billsToBePaid.length}</b></h3>
+                        {billsToBePaid.map((item, index) => (
+                          <GridContainer justify="center">
+                            <GridContainer justify="center">
+                              <Card style={style.card}>
+                                <div style={{ width: "50rem", borderColor: "primary" }}>
+                                  <CardBody>
+                                    <GridContainer>
+                                      <GridItem xs={12} sm={12} md={10}>
+                                        <h3 className={classes.cardTitle} style={style.name}><b>{item.patientName}</b></h3>
+                                        <h5> <span style={style.altTextColor}>Doctor: </span>{item.doctorName}</h5>
+                                        <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                        <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
+                                        <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
+                                      </GridItem>
+                                      <GridItem xs={12} sm={12} md={2}>
+                                        <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
+                                        <Button color="primary" style={style.viewBtn}>
+                                            View Patient
+                                        </Button>
+                                        </Link>
+                                        <Button color="primary" style={style.viewBtn} onClick={() => {handleEditClaims({id: item.appointmentId, billStatus: "approved"});}}>
+                                            Approve
+                                        </Button>
+                                        <Button color="primary" style={style.viewBtn}>
+                                            Deny
+                                        </Button>
+                                      </GridItem>
+                                    </GridContainer>
+                                  </CardBody>
+                                </div>
+                              </Card>
+                            </GridContainer>
+                          </GridContainer>
+                      ))}
                     </div>
                     )
-                  }
+                  },
+                  // {
+                  //   tabName: "Statistics",
+                  //   tabIcon: PieChartIcon,
+                  //   tabContent: (
+                  //     <GridContainer>
+                  //       <GridItem xs={12} sm={12} md={5} align="left">
+                  //       <PieChart colors={["#9C27B0", "#333333"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
+                  //       </GridItem>
+                  //       <GridItem xs={12} sm={12} md={5} align="right">
+                  //       <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
+                  //       </GridItem>
+                  //     </GridContainer>
+                  //   )
+                  // }
                 ]}
               />
             </GridItem>

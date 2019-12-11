@@ -326,7 +326,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                     inputProps={{
                                                         disabled: editIPContact,
-                                                        placeholder: profile.insuranceprovider
+                                                        placeholder: profile.insuranceprovidername
                                                         // endAdornment: (
                                                         //     <InputAdornment position="end">
                                                         //         {editIPContact && (<i onClick={() => setEditIPContact(false)} className={"fas fa-edit"}/>)}

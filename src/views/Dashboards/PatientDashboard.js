@@ -37,7 +37,7 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { LineChart, PieChart } from 'react-chartkick'
-// import 'chart.js'
+import 'chart.js'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
