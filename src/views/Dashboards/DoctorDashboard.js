@@ -118,12 +118,13 @@ export default function ProfilePage(props) {
                       <GridContainer>
                         <GridItem xs={20} sm={20} md={30}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { appointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          { appointments.map((item, index) => (<Card style={{width: "40rem", borderColor: "primary"}}>
                             <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mPatientName}</h4>
-                            <p>Date: {item.mDisplayDate}</p>
-                            <p>Time: {item.mDisplayTime}</p>
+                            <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
+                            <h5>Date: {item.mDisplayDate}</h5>
+                            <h5>Time: {item.mDisplayTime}</h5>
                               {/* <CancelAppointment/> */}
+                            <div>
                             <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
                               <Button color="primary">
                                 View Patient's Profile
@@ -132,7 +133,6 @@ export default function ProfilePage(props) {
                             <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
                               <Button color="primary">Send me a text</Button>
                             </Link>
-                            <div>
                               <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
                                 Cancel Appointment
                               </Button>
@@ -195,11 +195,12 @@ export default function ProfilePage(props) {
                       <GridContainer>
                         <GridItem GridItem xs={20} sm={20} md={30}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { pastAppointments.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          { pastAppointments.map((item, index) => (<Card style={{width: "40rem", borderColor: "primary"}}>
                             <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mPatientName}</h4>
-                            <p>Date: {item.mDisplayDate}</p>
-                            <p>Time: {item.mDisplayTime}</p>
+                            <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
+                            <h5>Date: {item.mDisplayDate}</h5>
+                            <h5>Time: {item.mDisplayTime}</h5>
+                            <div>
                             <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
                             <Button color="primary">
                               View Patient's Profile
@@ -208,6 +209,7 @@ export default function ProfilePage(props) {
                             <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
                               <Button color="primary">Send me a text</Button>
                             </Link>
+                            </div>
                             </CardBody>
                           </Card>))}
                         </GridItem>
