@@ -24,12 +24,20 @@ const useStyles = makeStyles(styles);
 export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [insurancePlans, setInsurancePlans] = useState([
-        {name: "patient 1", reason: "reason 1", amount: "amount 1", status: "some status 1"},
-        {name: "patient 2", reason: "reason 2", amount: "amount 2", status: "some status 2"},
-        {name: "patient 3", reason: "reason 3", amount: "amount 3", status: "some status 3"},
-        {name: "patient 4", reason: "reason 4", amount: "amount 4", status: "some status 4"},
-        {name: "patient 5", reason: "reason 5", amount: "amount 5", status: "some status 5"}
+    const [approvedBills, setApprovedBills] = useState([
+        {mPatientName: "patient 1", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
+        {mPatientName: "patient 2", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
+        {mPatientName: "patient 3", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"},
+        {mPatientName: "patient 4", mReason: "reason 4", mAmountToBePaid: "amount 4", mPatientUsername: "link 4", mDoctorName: "doctor 4"},
+        {mPatientName: "patient 5", mReason: "reason 5", mAmountToBePaid: "amount 5", mPatientUsername: "link 5", mDoctorName: "doctor 5"}
+    ]);
+
+    const [deniedBills, setDeniedBills] = useState([
+        {mPatientName: "patient 1", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
+        {mPatientName: "patient 2", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
+        {mPatientName: "patient 3", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"},
+        {mPatientName: "patient 4", mReason: "reason 4", mAmountToBePaid: "amount 4", mPatientUsername: "link 4", mDoctorName: "doctor 4"},
+        {mPatientName: "patient 5", mReason: "reason 5", mAmountToBePaid: "amount 5", mPatientUsername: "link 5", mDoctorName: "doctor 5"}
     ]);
 
     const handleLoad = () => {
@@ -40,7 +48,8 @@ export default function SurveyResults(props) {
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                // setInsurancePlans(data)
+                // setApprovedBills(data.approvedBills);
+                // setDeniedBills(data.deniedBills);
             })
     }
     useEffect(() => { handleLoad() }, {})
@@ -117,28 +126,62 @@ export default function SurveyResults(props) {
                                             </Link>
                                         </GridContainer>
                                         <GridContainer justify="center">
-                                        <h2><b>Distribution of Claims</b></h2><br/>
+                                            <GridItem align="center">
+                                            <h2><b>Distribution of Claims</b></h2>
+                                            </GridItem>
+                                            <GridItem align="center">
+                                                <h3><b>Number of Claims Approved: </b>{approvedBills.length}</h3>
+                                                <h3><b>Number of Claims Denied: </b>{deniedBills.length}</h3>
+                                            </GridItem>
                                         </GridContainer>
                                         <GridContainer justify="center">
-                                        <h3>Approved: In Progress: Denied:</h3>
-                                        {insurancePlans.map((item, index) => (
+                                        {approvedBills.map((item, index) => (
                                         <Card style={{ width: "40rem", borderColor: "primary" }}>
                                             <CardBody>
                                                 <GridContainer>
                                                 <GridItem xs={12} sm={12} md={6}>
-                                                <h3 className={classes.cardTitle}><b>{item.name}</b></h3>
+                                                <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
                                                 </GridItem>
                                                 <GridItem align="right" xs={5} sm={5} md={1}>
-                                                {/* <Link to= {"/insurance/patient/" + btoa(item.username)}>  */}
+                                                <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}> 
                                                     <Button color="primary" align="right">
                                                         View Patient
                                                     </Button>
-                                                {/* </Link> */}
+                                                </Link>
                                                 </GridItem>
                                                 <GridItem xs={12} sm={12} md={6} align="left">
-                                                    <h5 style={style.altTextColor}>Reason: {item.reason}</h5>
-                                                    <h5 style={style.altTextColor}>Claim amount: {item.amount}</h5>
-                                                    <h5 style={style.altTextColor}>Claim Status: {item.status}</h5>
+                                                    <h4><b>Doctor: </b>{item.mDoctorName}</h4>
+                                                    <h4><b>Reason for visit: </b>{item.mReason}</h4>
+                                                    
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6} align="right">
+                                                    <h4><b>Amount for visit: </b>{item.mAmountToBePaid}</h4>
+                                                    <h4 style={style.altTextColor}><b>Claim Status: </b>APPROVED</h4>
+                                                </GridItem>
+                                                </GridContainer>
+                                            </CardBody>
+                                        </Card>))}
+                                        {deniedBills.map((item, index) => (
+                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
+                                            <CardBody>
+                                                <GridContainer>
+                                                <GridItem xs={12} sm={12} md={6}>
+                                                <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
+                                                </GridItem>
+                                                <GridItem align="right" xs={5} sm={5} md={1}>
+                                                <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}> 
+                                                    <Button color="primary" align="right">
+                                                        View Patient
+                                                    </Button>
+                                                </Link>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6} align="left">
+                                                    <h4><b>Doctor: </b>{item.mDoctorName}</h4>
+                                                    <h4><b>Reason for visit: </b>{item.mReason}</h4>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6} align="right">
+                                                    <h4><b>Amount for vist: </b>{item.mAmountToBePaid}</h4>
+                                                    <h4 style={style.altTextColor}><b>Claim Status: </b>DENIED</h4>
                                                 </GridItem>
                                                 </GridContainer>
                                             </CardBody>
