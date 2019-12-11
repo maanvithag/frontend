@@ -268,6 +268,13 @@ export default function ProfilePage(props) {
                                                 <GridItem xs={12} sm={12} md={6}>
                                                     <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" style={style.img}/>
                                                 </GridItem>
+                                                <GridItem xs={6} sm={6} md={6} style={{ height: "150px" }}>
+                                                    {address.length > 0 ? (
+                                                        <Map locations={address} zoom={4} />
+                                                    ) : (
+                                                        <p />
+                                                    )}
+                                                </GridItem>
                                                 <GridItem xs={12} sm={12} md={12} style={style.space}> &nbsp; </GridItem>
 
                                                 <GridItem xs={12} sm={12} md={12}>
@@ -310,14 +317,6 @@ export default function ProfilePage(props) {
                                                     />
                                                 </GridItem>
                                             </GridItem>
-                                            <GridItem xs={6} sm={6} md={6}>
-                                                {address.length > 0 ? (
-                                                    <Map locations={address} zoom={4} />
-                                                ) : (
-                                                    <p />
-                                                )}
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={12}>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={style.label}>Address</InputLabel>
                                                 <CustomInput
@@ -358,7 +357,6 @@ export default function ProfilePage(props) {
                                                         placeholder: profile.biosummary
                                                     }}
                                                 />
-                                            </GridItem>
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
