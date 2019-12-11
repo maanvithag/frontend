@@ -80,7 +80,7 @@ export default function ProfilePage(props) {
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div style={style.bg}>
-                    <div className={classes.container}>
+                    <div className={classes.container}> <br/>
                         <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={7}>
                                 <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>

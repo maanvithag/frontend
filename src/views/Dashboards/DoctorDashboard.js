@@ -41,6 +41,7 @@ export default function ProfilePage(props) {
   const [modal, setModal] = React.useState(false);
   const modalClasses = useModalStyles();
   const productClasses = useProductStyles();
+  const [chatUserName, setChatUserName] = useState("")
   const [appointments, setAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
   const [cancelAppointment, setCancelAppointment] = useState({
@@ -57,15 +58,14 @@ export default function ProfilePage(props) {
     .then(data => {
       setAppointments(data.CurrentAppointments)
       setPastAppointments(data.PastAppointments)
-      const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
-      window.localStorage.setItem("chatusername", chatusername);
-      // if(Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
-      //   const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
-      //   window.localStorage.setItem("chatusername", chatusername);
-      // }
+      if(data.CurrentAppointments.length !== 0){
+        const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+        setChatUserName(window.localStorage.getItem("chatusername"))
+      }
     })
   }
-  useEffect(() => {handleLoad()},[])
+  useEffect(() => {handleLoad()},[chatUserName])
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {

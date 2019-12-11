@@ -55,6 +55,7 @@ export default function ProfilePage(props) {
   const { ...rest } = props;
   const [appointments, setAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
+  const [chatUserName, setChatUserName] = useState("")
   const [billsToBePaid, setBillsToBePaid] = useState([]);
   const [isBillPaid, setIsBillPaid] = useState("");
   const [outOfPocketAmountSpent, setOutOfPocketAmountSpent] = useState("");
@@ -69,6 +70,23 @@ export default function ProfilePage(props) {
     isAppointmentCancelled: false
   })
 
+  // Profile pictures
+  const MassimoRossi = require('../../assets/img/profilepic-02.png');
+  const SamanthaJoson = require('../../assets/img/profilepic-06.png');
+  const PrestonLannister = require('../../assets/img/profilepic-05.png');
+  const JaimeMoore = require('../../assets/img/profilepic-03.png');
+  const VivekBandaru = require('../../assets/img/profilepic-17.png');
+  const KristenNash = require('../../assets/img/profilepic-01.png');
+
+  const profiles = {
+  'Massimo Rossi': MassimoRossi,
+  'Samantha Joson': SamanthaJoson,
+  'Preston Lannister': PrestonLannister,
+  'Jaime Moore': JaimeMoore,
+  'Vivek Bandaru': VivekBandaru,
+  'Kristen Nash': KristenNash
+  }
+  
   const handleLoad = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/getappointments', {
       method: 'post',
@@ -87,15 +105,14 @@ export default function ProfilePage(props) {
         setTotalInProcessAmountByInsurance(data.totalInProcessAmountByInsurance)
         setTotalAmountDeniedByInsurance(data.totalAmountDeniedByInsurance)
         setTotalAmountCoveredByPatient(data.totalAmountCoveredByPatient)
-        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
-        window.localStorage.setItem("chatusername", chatusername);
-        // if (Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
-        //   const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
-        //   window.localStorage.setItem("chatusername", chatusername);
-        // }
+        if(data.CurrentAppointments.length !== 0){
+          const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+          window.localStorage.setItem("chatusername", chatusername);
+          setChatUserName(window.localStorage.getItem("chatusername"))
+        }
       })
   }
-  useEffect(() => { handleLoad() }, [cancelAppointment, isBillPaid])
+  useEffect(() => { handleLoad() }, [cancelAppointment, isBillPaid, chatUserName])
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {
@@ -193,6 +210,7 @@ export default function ProfilePage(props) {
                             {appointments.map((item, index) => (
                               <Card style={{ width: "40rem", borderColor: "primary" }}>
                                 <CardBody>
+                                  <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                   <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                                   <p>Date: {item.mDisplayDate}</p>
                                   <p>Time: {item.mDisplayTime}</p>
@@ -270,6 +288,7 @@ export default function ProfilePage(props) {
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                             {pastAppointments.map((item, index) => (<Card style={{ width: "40rem", borderColor: "primary" }}>
                               <CardBody>
+                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                 <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
                                 <p>Date: {item.mDisplayDate}</p>
                                 <p>Time: {item.mDisplayTime}</p>
