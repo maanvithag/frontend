@@ -37,7 +37,7 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { LineChart, PieChart } from 'react-chartkick'
-import 'chart.js'
+// import 'chart.js'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -211,19 +211,19 @@ export default function ProfilePage(props) {
                               <Card style={{ width: "40rem", borderColor: "primary", justifyContent: "center", flexDirection: "row" }}>
                                 <CardBody>
                                   <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
-                                  <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
-                                  <p>Date: {item.mDisplayDate}</p>
-                                  <p>Time: {item.mDisplayTime}</p>
-                                  <p>Reason for Visit: {item.reason}</p>
+                                  <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
+                                  <h5>Date: {item.mDisplayDate}</h5>
+                                  <h5>Time: {item.mDisplayTime}</h5>
+                                  <h5>Reason for Visit: {item.reason}</h5>
+                                  <div>
                                   <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                     <Button color="primary" style={style.viewBtn}>
                                       View Doctor
                                     </Button>
                                   </Link>
                                   <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                                    <Button color="primary" style={style.chatBtn}>Chat with me</Button>
+                                    <Button color="primary" style={style.viewBtn}>Chat with me</Button>
                                   </Link>
-                                  <div>
                                     <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({ id: item.id }); }} style={style.cancelBtn}>
                                       Cancel Appointment
                                     </Button>
@@ -289,17 +289,17 @@ export default function ProfilePage(props) {
                             {pastAppointments.map((item, index) => (<Card style={{ width: "40rem", borderColor: "primary" }}>
                               <CardBody>
                                 <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
-                                <h5 className={classes.cardTitle}><b>{item.mDoctorName}</b></h5>
-                                <p>Date: {item.mDisplayDate}</p>
-                                <p>Time: {item.mDisplayTime}</p>
-                                <p>Reason for Visit: {item.reason}</p>
+                                <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
+                                <h5>Date: {item.mDisplayDate}</h5>
+                                <h5>Time: {item.mDisplayTime}</h5>
+                                <h5>Reason for Visit: {item.reason}</h5>
                                 <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                   <Button color="primary">
                                     View Doctor
                                   </Button>
                                 </Link> &nbsp;&nbsp;
                                 <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                                    <Button color="primary" style={style.chatBtn}>Chat with me</Button>
+                                    <Button color="primary" style={style.viewBtn}>Chat with me</Button>
                                 </Link>
                               </CardBody>
                             </Card>))}

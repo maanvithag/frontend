@@ -117,7 +117,76 @@ export default function ProfilePage(props) {
                     tabName: "Upcoming appointments",
                     tabIcon: Dashboard,
                     tabContent: (
-                      <p>testing</p>
+                      <GridContainer style={{ display: "flex" }}>
+                          <GridItem xs={20} sm={20} md={30} style={{ justifyContent: "center" }}>
+                              <Card style={{ width: "40rem", borderColor: "primary", flexDirection: "row" }}>
+                                <CardBody>
+                                  <h3 ><b>NAME</b></h3>
+                                  <p>Date: </p>
+                                  <h5>Time: </h5>
+                                  <p>Reason for Visit:</p>
+                                  <div>
+                                  <Link to={"/patient/doctor/"} >
+                                    <Button color="primary" style={style.chatBtn}>
+                                      View Doctor
+                                    </Button>
+                                  </Link>
+                                  <Link to={"/chat/"}>
+                                    <Button color="primary" style={style.chatBtn}>Chat with me</Button>
+                                  </Link>
+                                    <Button color="primary">
+                                      Cancel Appointment
+                                    </Button>
+                                    <Dialog
+                                      modalClasses={{
+                                        root: modalClasses.center,
+                                        paper: modalClasses.modal
+                                      }}
+                                      open={modal}
+                                      TransitionComponent={Transition}
+                                      keepMounted
+                                      onClose={() => setModal(false)}
+                                      aria-labelledby="modal-slide-title"
+                                      aria-describedby="modal-slide-description"
+                                    >
+                                      <DialogTitle
+                                        id="classic-modal-slide-title"
+                                        disableTypography
+                                        className={modalClasses.modalHeader}
+                                      >
+                                        <IconButton
+                                          className={modalClasses.modalCloseButton}
+                                          key="close"
+                                          aria-label="Close"
+                                          color="inherit"
+                                          onClick={() => setModal(false)}
+                                        >
+                                          <Close className={modalClasses.modalClose} />
+                                        </IconButton>
+                                          <h3 className={modalClasses.modalTitle}><b>Cancel Appointment</b></h3>
+                                      </DialogTitle>
+                                      <DialogContent
+                                        id="modal-slide-description"
+                                        className={modalClasses.modalBody}
+                                      >
+                                        <div className={productClasses.section} style={{ padding: 0 }}>
+                                          Are you sure you want to cancel this appointment?
+                                        </div> <br />
+                                        <Link to="/patient/dashboard">
+                                          <Button color="primary">
+                                            Yes
+                                      </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <Button color="primary" onClick={() => setModal(false)}>
+                                            No
+                                      </Button>
+                                        </Link>
+                                      </DialogContent>
+                                    </Dialog>
+                                  </div>
+                                </CardBody>
+                              </Card>
+                          </GridItem>
+                        </GridContainer>
                     )
                   },
                   {
