@@ -37,6 +37,17 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        label:{
+            fontSize: '18px',
+            fontWeight: '425',
+            marginTop: '30px',
+            marginBottom: '-15px',
+            color: '#904199'
+        },
+        title:{
+            fontSize: '35px',
+            fontWeight: '400',
         }
     };
 
@@ -103,24 +114,28 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/insurance/dashboard">
+                            <GridItem xs={12} sm={12} md={7}>
+                            <Link to={"/insurance/dashboard"}>
                                 <Button 
-                                onClick={saveUserInfoOnServer}
-                                color="primary"
-                                >My Dashboard</Button>
+                                onClick = {saveUserInfoOnServer}
+                                fullWidth 
+                                color="primary" 
+                                style={style.btn}
+                                ><b>My Dashboard</b></Button>
                             </Link>
+                            </GridItem>
                         </GridContainer>
                         <br></br>
                         <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.firstname} {profile.lastname}</h2>
+                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.firstname} {profile.lastname}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Username</InputLabel>
+                                                <InputLabel style={style.label}>Username</InputLabel>
                                                 <CustomInput
                                                     id="username"
                                                     formControlProps={{
@@ -133,7 +148,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Email Address</InputLabel>
+                                                <InputLabel style={style.label}>Email Address</InputLabel>
                                                 <CustomInput
                                                     id="emailaddress"
                                                     formControlProps={{
@@ -153,7 +168,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Company</InputLabel>
+                                                <InputLabel style={style.label}>Company</InputLabel>
                                                 <CustomInput
                                                     id="company"
                                                     formControlProps={{
@@ -166,7 +181,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Contact Number</InputLabel>
+                                                <InputLabel style={style.label}>Office Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="phone-number"
                                                     formControlProps={{
@@ -186,7 +201,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Office Address</InputLabel>
+                                                <InputLabel style={style.label}>Office Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
                                                     formControlProps={{

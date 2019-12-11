@@ -113,6 +113,25 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        label:{
+            fontSize: '18px',
+            fontWeight: '425',
+            marginTop: '30px',
+            marginBottom: '-15px',
+            color: '#904199'
+        },
+        title:{
+            fontSize: '35px',
+            fontWeight: '400',
+        },
+        altTitle:{
+            fontSize: '30px',
+            fontWeight: '400',
+        },
+        subtitle:{
+            marginTop: '-10px',
+            fontSize: '20px'
         }
     };
 
@@ -135,14 +154,17 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <Link to="/patient/dashboard">
-                                <Button
+                            <GridItem xs={12} sm={12} md={7}>
+                                <Link to={"/patient/dashboard"}>
+                                    <Button 
                                     onClick = {saveUserInfoOnServer}
-                                    color="primary"
-                                >My Dashboard</Button>
-                            </Link>
+                                    fullWidth 
+                                    color="primary" 
+                                    style={style.btn}
+                                    ><b>My Dashboard</b></Button>
+                                </Link>
+                            </GridItem>
                         </GridContainer>
-                        <br></br>
                         <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={6}>
                                 <h2></h2>
@@ -150,13 +172,13 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h3>{medicalHistory.firstname} {medicalHistory.lastname} </h3>
-                                        <h5 className={classes.cardTitleWhite}>Medical History</h5>
+                                        <h2 style={style.title}>{medicalHistory.firstname} {medicalHistory.lastname}</h2>
+                                        <h4 className={classes.cardTitleWhite} style={style.subtitle}>Medical History</h4>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={3}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Blood Type</InputLabel>
+                                                <InputLabel style={style.label}>Blood Type</InputLabel>
                                                 <CustomInput
                                                     id="bloodtype"
                                                     formControlProps={{
@@ -176,7 +198,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={9}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Allergies</InputLabel>
+                                                <InputLabel style={style.label}>Allergies</InputLabel>
                                                 <CustomInput
                                                     id="allergies"
                                                     formControlProps={{
@@ -198,7 +220,7 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Current Medications</InputLabel>
+                                                <InputLabel style={style.label}>Current Medications</InputLabel>
                                                 <CustomInput
                                                     id="meds"
                                                     formControlProps={{
@@ -222,7 +244,7 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Vaccinations</InputLabel>
+                                                <InputLabel style={style.label}>Vaccinations</InputLabel>
                                                 <CustomInput
                                                     id="vax"
                                                     formControlProps={{
@@ -246,7 +268,7 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Additional Details</InputLabel>
+                                                <InputLabel style={style.label}>Additional Details</InputLabel>
                                                 <CustomInput
                                                     id="medicalhistory"
                                                     formControlProps={{
@@ -270,11 +292,11 @@ export default function ProfilePage(props) {
                                         </GridContainer>
                                     </CardBody>
                                     <CardFooter><br/></CardFooter>
-                                    <CardHeader color="primary"><h5 className={classes.cardTitleWhite}>Emergency Contact</h5></CardHeader>
+                                    <CardHeader color="primary"><h3 className={classes.cardTitleWhite} style={style.altTitle}>Emergency Contact</h3></CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact Name</InputLabel>
+                                                <InputLabel style={style.label}>Emergency Contact Name</InputLabel>
                                                 <CustomInput
                                                     id="emergencycontactname"
                                                     formControlProps={{
@@ -294,7 +316,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Emergency Contact Number</InputLabel>
+                                                <InputLabel style={style.label}>Emergency Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="emergencycontactnumber"
                                                     formControlProps={{

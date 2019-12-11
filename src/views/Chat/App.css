@@ -115,9 +115,9 @@ html {
   
   .presence {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #ccc;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(53, 52, 52);
     margin-right: 10px;
     border-radius: 50%;
   }

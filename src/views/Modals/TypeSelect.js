@@ -100,7 +100,7 @@ export default function TypeSelect() {
                 <GridItem xs={12} sm={12} md={4}>
                   <Link to={"insurance/signin"}>
                     <InfoArea
-                    title="Insurance Company"
+                    title="Insurance Provider"
                     icon={Note}
                     iconColor="warning"
                     vertical

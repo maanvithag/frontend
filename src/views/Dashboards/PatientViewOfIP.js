@@ -119,15 +119,35 @@ export default function ProfilePage(props) {
             marginTop: '20px',
             marginLeft: '-45px',
             width: '190px'
+        },
+        label:{
+            fontSize: '18px',
+            fontWeight: '425',
+            marginTop: '30px',
+            marginBottom: '-15px',
+            color: '#904199'
+        },
+        space:{
+            marginTop:'170px'
+        },
+        img:{
+            marginLeft:'65px',
+            marginTop: '20px'
+        },
+        title:{
+            fontSize: '35px',
+            fontWeight: '400',
         }
     };
 
     function handlePlanSelection(plan) {
+        console.log(JSON.stringify(profile))
         fetch(window.localStorage.getItem("baseURL") + 'patient/insuranceplan', {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
+                insuranceProviderUserName: profile.insuranceProviderUserName,
                 planName: plan
             })
         }).then(response => response.json())
@@ -159,36 +179,29 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
+                            <GridItem xs={12} sm={12} md={7}>
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">My Dashboard</Button>
+                                <Button fullWidth color="primary" style={style.btn}><b>My Dashboard</b></Button>
                             </Link>
-                        </GridContainer>
-                        <br></br>
-                        <GridContainer justify="center">
+                            </GridItem>
                             <GridItem xs={5} sm={5} md={8}>
                                 <h2></h2>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.firstName + " " + profile.lastName}</h2>
+                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.firstName + " " + profile.lastName}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
-                                            </GridItem>
-                                            <GridItem xs={6} sm={6} md={56}>
-                                                {address.length > 0 ? (
-                                                    <Map locations={address} zoom={4}/>
-                                                ) : (
-                                                    <p />
-                                                )}
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                    <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Insurance Company</InputLabel>
+                                                <GridItem xs={12} sm={12} md={6}>
+
+                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" style={style.img}/>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12} style={style.space}> &nbsp; </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Insurance Company</InputLabel>
                                                     <CustomInput
                                                         id="company"
                                                         formControlProps={{
@@ -196,37 +209,48 @@ export default function ProfilePage(props) {
                                                         }}
                                                         inputProps={{
                                                             disabled: true,
-                                                            placeholder: profile.company
+                                                            placeholder: profile.company,
+                                                            multiline: true
                                                         }}
                                                     />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Office Contact Number</InputLabel>
-                                                <CustomInput
-                                                    id="phone-number"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.phonenumber
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Office Address</InputLabel>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Office Contact Number</InputLabel>
+                                                    <CustomInput
+                                                        id="phone-number"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.phonenumber,
+                                                            multiline: true
+                                                        }}
+                                                    />
+                                                </GridItem>
+
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                <InputLabel style={style.label}>Office Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
                                                     formControlProps={{
-                                                        fullWidth: true
+                                                        fullWidth: true,
+                                                        multiline: true
                                                     }}
                                                     inputProps={{
                                                         disabled: true,
-                                                        placeholder: profile.address
+                                                        placeholder: profile.address,
+                                                        multiline: true
                                                     }}
                                                 />
+                                            </GridItem>
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={6}>
+                                                {address.length > 0 ? (
+                                                    <Map locations={address} zoom={4}/>
+                                                ) : (
+                                                    <p />
+                                                )}
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
@@ -236,7 +260,7 @@ export default function ProfilePage(props) {
                                 <Card>
                                     <div style={style.plansBg}>
                                         <CardHeader color="primary">
-                                            <h2 className={classes.cardTitleWhite}>Plans Provided</h2>
+                                            <h2 className={classes.cardTitleWhite}><b>Plans Provided</b></h2>
                                         </CardHeader>
                                         <CardBody>
                                             <GridContainer justify="center">

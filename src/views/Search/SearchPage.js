@@ -106,7 +106,15 @@ export default function SearchPage(props) {
     btn: {
       color: 'white',
       textTransform: 'capitalize',
-      fontSize: 'small'
+      fontSize: 'small',
+      width: '170px'
+    },
+    btn2: {
+      color: 'white',
+      textTransform: 'capitalize',
+      fontSize: 'small',
+      width: '150px',
+      marginLeft: '-30px'
     },
     bg: {
       background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -114,7 +122,12 @@ export default function SearchPage(props) {
       borderRadius: 5
     },
     altTextColor:{
-      color: '#904199'
+      color: '#904199',
+      fontWeight: '400',
+      marginTop: '-5px'
+    },
+    img:{
+      marginTop:'20px'
     }
   };
 
@@ -145,10 +158,10 @@ export default function SearchPage(props) {
                         <CardBody>
                           <GridContainer>
                             <GridItem>
-                            <img align="right" width="120" height="120" resizeMode="contain" src={profiles[item.mFirstName+item.mLastName]} alt="Profile1" />
+                            <img align="right" width="120" height="120" resizeMode="contain" src={profiles[item.mFirstName+item.mLastName]} alt="Profile1" style={style.img}/>
                             <h3 className={classes.cardTitle}><b>{item.mFirstName} {item.mLastName}</b></h3>
                             <h5 style={style.altTextColor}>{item.mSpecialization}</h5>
-                            <h4>{item.mCompany}</h4>
+                              <h5 style={style.altTextColor}>{item.mCompany}</h5>
                             <p>{item.mHospital}</p>
                             <p>{item.mAddress}</p>
                             </GridItem>
@@ -157,11 +170,15 @@ export default function SearchPage(props) {
                             <GridItem xs={13} sm={12} md={7}>{condHiding() && (<Link to={"/patient/doctor/bookappointment/" + btoa(item.mUserName)}>
                               <Button fullWidth color="primary" style={style.btn}>
                                 Book Appointment
+                              </Button></Link>)}{!condHiding() && (<Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
+
+                            <Button fullWidth color="primary" style={style.btn}>
+                                Chat with Me
                               </Button></Link>)}
                             </GridItem>
                             <GridItem xs={13} sm={12} md={5}>
                               <Link to={window.localStorage.getItem("userType") + "/" + window.localStorage.getItem("searchUserType") + "/" + btoa(item.mUserName)}>
-                                <Button fullWidth color="primary" style={style.btn}>
+                                <Button fullWidth color="primary" style={style.btn2}>
                                   View Profile
                               </Button>
                               </Link>

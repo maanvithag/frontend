@@ -342,9 +342,14 @@ class App extends Component {
                   </aside>
                   <section className="chat-screen">
                     <header className="chat-header">
-                      {currentRoom ? 
+                      {currentRoom && currentRoom.isPrivate ? 
                         <div>
-                        <h2 class="headertekst">{roomName} <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> </h2>
+                        <h2 class="headertekst"> <span className={`presence ${roomUsers[0].presenceStore[roomUsers[1].id]}`}/> {roomName}</h2>
+                        </div>
+                      : null}
+                      {currentRoom && !currentRoom.isPrivate ? 
+                        <div>
+                        <h2 class="headertekst">{roomName}</h2>
                         </div>
                       : null}
                     </header>

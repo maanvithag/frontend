@@ -63,6 +63,7 @@ export default function ProfilePage(props) {
   const [addPlanCopayment, setAddPlanCopayment] = useState('');
   const [addPlanOutOfPocketLimit, setAddPlanOutOfPocketLimit] = useState('');
   const [addPlanLevel, setAddPlanLevel] = useState("bronze");
+  const [chatUserName, setChatUserName] = useState("")
 
   const [deleteplan, setDeletePlan] = useState({
     name: "",
@@ -82,8 +83,10 @@ export default function ProfilePage(props) {
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     }).then(response => response.json())
       .then(data => {
+        console.log(data);
         const chatusername = data.firstname.toLowerCase() + data.lastname.toLowerCase();
         window.localStorage.setItem("chatusername", chatusername);
+        setChatUserName(window.localStorage.getItem("chatusername"))
       })
   }
 
@@ -99,7 +102,7 @@ export default function ProfilePage(props) {
       setPatients(data.Patients)
     })
   };
-  useEffect(() => {handleLoad(); handleUsername();},[updatedPlanName]);
+  useEffect(() => {handleLoad(); handleUsername();},[updatedPlanName, chatUserName]);
 
   const handleDeletePlan = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/editiplans/delete', {
@@ -399,20 +402,20 @@ export default function ProfilePage(props) {
                           <CardBody>
                             <GridContainer>
                             <GridItem xs={20} sm={20} md={6}>
-                              <h4 className={classes.cardTitle}><b>{item.name}</b></h4> 
+                              <h4 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h4> 
                             </GridItem>
                             <GridItem xs={0} sm={1} md={1}>
-                              <Link to= {"/insurance/patient/" + btoa(item.username)}>
+                              <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
                                 <Button color="primary">
                                   View Patient
                                 </Button>
                               </Link> 
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6} align="left">
-                              <h6>Current Plan: {item.currentplan}</h6>
+                              <h6>Current Plan: {item.mInsurancePlan}</h6>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6}>
-                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.name.split(' ')[0].toLowerCase() + item.name.split(' ')[1].toLowerCase()}>
+                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
                                 <Button color="primary">Send a Text</Button>
                               </Link>
                             </GridItem>

@@ -136,16 +136,17 @@ export default function Survey(props) {
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div style={style.bg}>
                     <div className={classes.container}>
-                        <br></br>
+                        <br/>
                         <GridContainer justify="center">
-                            <Link to="/patient/dashboard">
-                                <Button
-                                    color="primary"
-                                >My Dashboard</Button>
+                            <GridItem xs={12} sm={12} md={8}>
+                            <Link to={"/patient/dashboard"}>
+                                <Button 
+                                fullWidth 
+                                color="primary" 
+                                style={style.btn}
+                                ><b>My Dashboard</b></Button>
                             </Link>
-                        </GridContainer>
-                        <br></br>
-                        <GridContainer justify="center">
+                            </GridItem>
                             <GridItem xs={10} sm={10} md={10}>
                                 <h2></h2>
                             </GridItem>

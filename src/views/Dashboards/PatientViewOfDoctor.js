@@ -136,6 +136,24 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        label:{
+            fontSize: '18px',
+            fontWeight: '425',
+            marginTop: '30px',
+            marginBottom: '-15px',
+            color: '#904199'
+        },
+        space:{
+            marginTop:'170px'
+        },
+        img:{
+            marginLeft:'65px',
+            marginTop: '20px'
+        },
+        title:{
+            fontSize: '35px',
+            fontWeight: '400',
         }
     };
 
@@ -171,18 +189,18 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary">My Dashboard</Button>
+                                <Button color="primary"><h6><b>My Dashboard</b></h6></Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Link to={"/patient/doctor/bookappointment/" + doctorusername}>
                                 <Button color="primary">
-                                    Book Appointment
+                                    <h6><b>Book Appointment</b></h6>
                                 </Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             {/* <AddDoctorReview/> */}
                             <div>
                                 <Button color="primary" onClick={() => setModal(true)}>
-                                    Leave a Review
-                            </Button>
+                                    <h6><b>Leave a Review</b></h6>
+                                </Button>
                                 <Dialog
                                     modalClasses={{
                                         root: modalClasses.center,
@@ -242,67 +260,66 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
+                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
+                                                <GridItem xs={12} sm={12} md={6}>
+                                                    <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" style={style.img}/>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12} style={style.space}> &nbsp; </GridItem>
+
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Education</InputLabel>
+                                                    <CustomInput
+                                                        id="education"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.education
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Hospital</InputLabel>
+                                                    <CustomInput
+                                                        id="hospital"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.hospital
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Specialization</InputLabel>
+                                                    <CustomInput
+                                                        id="specialization"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.specialization
+                                                        }}
+                                                    />
+                                                </GridItem>
                                             </GridItem>
                                             <GridItem xs={6} sm={6} md={6}>
                                                 {address.length > 0 ? (
                                                     <Map locations={address} zoom={4} />
                                                 ) : (
-                                                        <p />
-                                                    )}
+                                                    <p />
+                                                )}
                                             </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                        <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Education</InputLabel>
-                                                <CustomInput
-                                                    id="education"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.education
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            </GridContainer>
-                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Hospital</InputLabel>
-                                                <CustomInput
-                                                    id="hospital"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.hospital
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Specialization</InputLabel>
-                                                <CustomInput
-                                                    id="specialization"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.specialization
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Address</InputLabel>
+                                                <InputLabel style={style.label}>Address</InputLabel>
                                                 <CustomInput
                                                     id="address"
                                                     formControlProps={{
@@ -315,7 +332,7 @@ export default function ProfilePage(props) {
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>Contact Number</InputLabel>
+                                                <InputLabel style={style.label}>Contact Number</InputLabel>
                                                 <CustomInput
                                                     id="phone-number"
                                                     formControlProps={{
@@ -327,10 +344,8 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px' }}>About Me</InputLabel>
+                                                <InputLabel style={style.label}>About Me</InputLabel>
                                                 <CustomInput
                                                     id="doctor-bio"
                                                     formControlProps={{
@@ -344,6 +359,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
+                                            </GridItem>
                                         </GridContainer>
                                     </CardBody>
                                 </Card>
@@ -353,12 +369,12 @@ export default function ProfilePage(props) {
                                     <GridItem xs={12} sm={12} md={12}>
                                         <Card>
                                             <CardHeader color="primary">
-                                                <h4 className={classes.cardTitleWhite}>Average Rating: <StarRatings
+                                                <h3 className={classes.cardTitleWhite}><b>Average Rating: <StarRatings
                                                     rating={rating}
                                                     starDimension="30px"
                                                     starSpacing="7px"
                                                     starRatedColor="orange"
-                                                /></h4>
+                                                /></b></h3>
                                             </CardHeader>
                                             <CardBody>
                                                 {reviews.map((item, index) => (<Card style={{ borderColor: "primary" }}>
