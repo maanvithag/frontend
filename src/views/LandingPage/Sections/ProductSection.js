@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Chat from "@material-ui/icons/Chat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
+import DescriptionIcon from '@material-ui/icons/Description';
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -33,6 +35,9 @@ export default function ProductSection() {
     },
     spec: {
       color: '#37474f'
+    },
+    space: {
+      marginTop: '20px'
     },
     body: {
       fontSize: '14px',
@@ -72,15 +77,25 @@ export default function ProductSection() {
         <GridItem xs={12} sm={12} md={8}>
           <br></br><br></br>
 
-          <h2 className={classes.title}>One-stop-shop for health care</h2>
+          <h2 className={classes.title}>One-Stop-Shop for Health Care</h2>
           <h5 className={classes.description}>
             We provide a patient-centric application that allows you to make informed decisions 
             regarding your health in the comfort of your own home. Some of our features include:
           </h5>
         </GridItem>
       </GridContainer>
-      <div>
+      <div style={style.space}>
         <GridContainer>
+          <GridItem xs={12} sm={12} md={4}>
+            <InfoArea
+                title="Personalized Plan Recommendations"
+                description="With our personalized plan finder feature, patients can find the perfect plan that suits their needs.
+                By completing our survey, InfinityCare can help provide the most cost-efficient plan for your needs."
+                icon={DescriptionIcon}
+                iconColor="info"
+                vertical
+            />
+          </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Verified Doctors"
@@ -101,17 +116,6 @@ export default function ProductSection() {
               icon={Fingerprint}
               iconColor="danger"
               vertical
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-                title="Free Chat"
-                description="Live-chat with your doctors regarding questions, appointments and more.
-              You can also live-chat with your healthcare representive to learn more about your insurance
-              and other questions."
-                icon={Chat}
-                iconColor="info"
-                vertical
             />
           </GridItem>
         </GridContainer>
