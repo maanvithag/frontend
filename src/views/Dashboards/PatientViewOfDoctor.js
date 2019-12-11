@@ -189,18 +189,18 @@ export default function ProfilePage(props) {
                         <br></br>
                         <GridContainer justify="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button color="primary"><h6><b>My Dashboard</b></h6></Button>
+                                <Button color="primary">My Dashboard</Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Link to={"/patient/doctor/bookappointment/" + doctorusername}>
                                 <Button color="primary">
-                                    <h6><b>Book Appointment</b></h6>
+                                    Book Appointment
                                 </Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             {/* <AddDoctorReview/> */}
                             <div>
                                 <Button color="primary" onClick={() => setModal(true)}>
-                                    <h6><b>Leave a Review</b></h6>
-                                </Button>
+                                    Leave a Review
+                            </Button>
                                 <Dialog
                                     modalClasses={{
                                         root: modalClasses.center,
@@ -268,13 +268,6 @@ export default function ProfilePage(props) {
                                                 <GridItem xs={12} sm={12} md={6}>
                                                     <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" style={style.img}/>
                                                 </GridItem>
-                                                <GridItem xs={6} sm={6} md={6} style={{ height: "150px" }}>
-                                                    {address.length > 0 ? (
-                                                        <Map locations={address} zoom={4} />
-                                                    ) : (
-                                                        <p />
-                                                    )}
-                                                </GridItem>
                                                 <GridItem xs={12} sm={12} md={12} style={style.space}> &nbsp; </GridItem>
 
                                                 <GridItem xs={12} sm={12} md={12}>
@@ -317,6 +310,14 @@ export default function ProfilePage(props) {
                                                     />
                                                 </GridItem>
                                             </GridItem>
+                                            <GridItem xs={6} sm={6} md={6}>
+                                                {address.length > 0 ? (
+                                                    <Map locations={address} zoom={4} />
+                                                ) : (
+                                                    <p />
+                                                )}
+                                            </GridItem>
+                                            <GridItem xs={12} sm={12} md={12}>
                                             <GridItem xs={12} sm={12} md={12}>
                                                 <InputLabel style={style.label}>Address</InputLabel>
                                                 <CustomInput
@@ -358,6 +359,7 @@ export default function ProfilePage(props) {
                                                     }}
                                                 />
                                             </GridItem>
+                                            </GridItem>
                                         </GridContainer>
                                     </CardBody>
                                 </Card>
@@ -367,12 +369,12 @@ export default function ProfilePage(props) {
                                     <GridItem xs={12} sm={12} md={12}>
                                         <Card>
                                             <CardHeader color="primary">
-                                                <h3 className={classes.cardTitleWhite}><b>Average Rating: <StarRatings
+                                                <h4 className={classes.cardTitleWhite}>Average Rating: <StarRatings
                                                     rating={rating}
                                                     starDimension="30px"
                                                     starSpacing="7px"
                                                     starRatedColor="orange"
-                                                /></b></h3>
+                                                /></h4>
                                             </CardHeader>
                                             <CardBody>
                                                 {reviews.map((item, index) => (<Card style={{ borderColor: "primary" }}>
