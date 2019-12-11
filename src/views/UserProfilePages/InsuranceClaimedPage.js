@@ -53,9 +53,8 @@ export default function SurveyResults(props) {
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                // setApprovedBills(data.approvedBills);
+                setApprovedBills(data.approvedBills);
                 // setDeniedBills(data.deniedBills);
-                // setInProgressBills(data.inProgressBills)
             })
     }
     useEffect(() => { handleLoad() }, {})
@@ -163,15 +162,15 @@ export default function SurveyResults(props) {
                                                                                 <CardBody>
                                                                                     <GridContainer>
                                                                                         <GridItem xs={12} sm={12} md={10}>
-                                                                                            <h3 className={classes.cardTitle} style={style.name}><b>{item.mPatientName}</b></h3>
-                                                                                            <h5> <span style={style.altTextColor}>Doctor: </span>{item.mDoctorName}</h5>
-                                                                                            <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
-                                                                                            <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                            <h3 className={classes.cardTitle} style={style.name}><b>{item.patientName}</b></h3>
+                                                                                            <h5> <span style={style.altTextColor}>Doctor: </span>{item.doctorName}</h5>
+                                                                                            <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                                                                            <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
                                                                                             <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
                                                                                         </GridItem>
 
                                                                                         <GridItem xs={12} sm={12} md={2}>
-                                                                                            <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
+                                                                                            <Link to= {"/insurance/patient/" + btoa(item.patientUsername)}>
                                                                                             <Button color="primary" style={style.viewBtn}>
                                                                                                 View Patient
                                                                                             </Button>
@@ -186,43 +185,6 @@ export default function SurveyResults(props) {
                                                             ))}
                                                             <GridItem>&nbsp;</GridItem>
                                                         </GridContainer>
-                                                    </GridContainer>
-                                                )},
-                                            {
-                                                tabName: "In Progress",
-                                                tabIcon: MoreHorizIcon,
-                                                tabContent: (
-                                                    <GridContainer justify="center">
-                                                        {inProgressBills.map((item, index) => (
-                                                            <GridContainer justify="center">
-                                                                <GridContainer justify="center">
-                                                                    <Card style={style.card}>
-                                                                        <div style={{ width: "50rem", borderColor: "primary" }}>
-                                                                            <CardBody>
-                                                                                <GridContainer>
-                                                                                    <GridItem xs={12} sm={12} md={10}>
-                                                                                        <h3 className={classes.cardTitle} style={style.name}><b>{item.mPatientName}</b></h3>
-                                                                                        <h5> <span style={style.altTextColor}>Doctor: </span>{item.mDoctorName}</h5>
-                                                                                        <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
-                                                                                        <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
-                                                                                        <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
-                                                                                    </GridItem>
-
-                                                                                    <GridItem xs={12} sm={12} md={2}>
-                                                                                        <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
-                                                                                            <Button color="primary" style={style.viewBtn}>
-                                                                                                View Patient
-                                                                                            </Button>
-                                                                                        </Link>
-                                                                                    </GridItem>
-                                                                                </GridContainer>
-                                                                            </CardBody>
-                                                                        </div>
-                                                                    </Card>
-                                                                </GridContainer>
-                                                            </GridContainer>
-                                                        ))}
-                                                        <GridItem>&nbsp;</GridItem>
                                                     </GridContainer>
                                                 )},
                                             {
@@ -261,7 +223,7 @@ export default function SurveyResults(props) {
                                                         ))}
                                                         <GridItem>&nbsp;</GridItem>
                                                     </GridContainer>
-                                                )},
+                                                )}
                                         ]}/>
                                 </GridContainer>
                                 </GridItem>
