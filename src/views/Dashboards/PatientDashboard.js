@@ -50,6 +50,16 @@ export default function ProfilePage(props) {
   const { ...rest } = props;
   const [appointments, setAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
+<<<<<<< Updated upstream
+=======
+  const [billsToBePaid, setBillsToBePaid] = useState([])
+  const [isBillPaid, setIsBillPaid] = useState("")
+  const [totalOutOfPocketAmount, setTotalOutOfPocketAmount] = useState("")
+  const [totalAmountCoveredByInsurance, setTotalAmountCoveredByInsurance] = useState("")
+  const [totalInProcessAmountByInsurance, setTotalInProcessAmountByInsurance] = useState("")
+  const [totalAmountDeniedByInsurance, setTotalAmountDeniedByInsurance] = useState("")
+  const [chatUserName, setChatUserName] = useState("")
+>>>>>>> Stashed changes
   const [cancelAppointment, setCancelAppointment] = useState({
     id: 0,
     isAppointmentCancelled: false
@@ -61,6 +71,7 @@ export default function ProfilePage(props) {
       credentials: 'include',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     }).then(response => response.json())
+<<<<<<< Updated upstream
     .then(data => {
       setAppointments(data.CurrentAppointments)
       setPastAppointments(data.PastAppointments)
@@ -71,6 +82,27 @@ export default function ProfilePage(props) {
     })
   }
   useEffect(() => {handleLoad()},[cancelAppointment])
+=======
+      .then(data => {
+        setAppointments(data.CurrentAppointments)
+        setPastAppointments(data.PastAppointments)
+        setBillsToBePaid(data.billsToBePaid)
+        setTotalOutOfPocketAmount(data.totalOutOfPocketAmount)
+        setTotalAmountCoveredByInsurance(data.totalAmountCoveredByInsurance)
+        setTotalInProcessAmountByInsurance(data.totalInProcessAmountByInsurance)
+        setTotalAmountDeniedByInsurance(data.totalAmountDeniedByInsurance)
+        console.log("Checking chat username: " + data.CurrentAppointments[0].mPatientName)
+        const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+        setChatUserName(window.localStorage.getItem("chatusername"))
+        // if (Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
+        //   const chatusername = data.CurrentAppointments[0].mPatientName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mPatientName.split(' ')[1].toLowerCase();
+        //   window.localStorage.setItem("chatusername", chatusername);
+        // }
+      })
+  }
+  useEffect(() => { handleLoad() }, [cancelAppointment, isBillPaid, chatUserName])
+>>>>>>> Stashed changes
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {

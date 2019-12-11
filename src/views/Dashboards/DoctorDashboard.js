@@ -42,6 +42,7 @@ export default function ProfilePage(props) {
   const productClasses = useProductStyles();
   const [appointments, setAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
+  const [chatUserName, setChatUserName] = useState("")
   const [cancelAppointment, setCancelAppointment] = useState({
     id: 0,
     isAppointmentCancelled: false
@@ -56,13 +57,26 @@ export default function ProfilePage(props) {
     .then(data => {
       setAppointments(data.CurrentAppointments)
       setPastAppointments(data.PastAppointments)
+<<<<<<< Updated upstream
       if(data) {
         const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
         window.localStorage.setItem("chatusername", chatusername);
       }
+=======
+      if(data.CurrentAppointments.length !== 0){
+        console.log("Chatusername in doctordashboard: " + data.CurrentAppointments[0].mDoctorName)
+        const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
+        window.localStorage.setItem("chatusername", chatusername);
+        setChatUserName(window.localStorage.getItem("chatusername"))
+      }
+      // if(Object.keys(data.CurrentAppointments).length === 0 && data.CurrentAppointments.constructor === Object) {
+      //   const chatusername = data.CurrentAppointments[0].mDoctorName.split(' ')[0].toLowerCase() + data.CurrentAppointments[0].mDoctorName.split(' ')[1].toLowerCase();
+      //   window.localStorage.setItem("chatusername", chatusername);
+      // }
+>>>>>>> Stashed changes
     })
   }
-  useEffect(() => {handleLoad()},[])
+  useEffect(() => {handleLoad()},[chatUserName])
 
   const handleCancelAppointments = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/cancelappointments', {
