@@ -46,7 +46,7 @@ export default function SurveyResults(props) {
     ]);
 
     const handleLoad = () => {
-        fetch(window.localStorage.getItem("baseURL") + 'insurance/claims', {
+        fetch(window.localStorage.getItem("baseURL") + 'patient/claims', {
             method: 'post',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -55,7 +55,7 @@ export default function SurveyResults(props) {
                 console.log(data);
                 // setApprovedBills(data.approvedBills);
                 // setDeniedBills(data.deniedBills);
-                // setInProgressBills(data.inProgressBills)
+                setInProgressBills(data.inProcessClaims);
             })
     }
     useEffect(() => { handleLoad() }, {})
@@ -201,15 +201,15 @@ export default function SurveyResults(props) {
                                                                                     <CardBody>
                                                                                         <GridContainer>
                                                                                             <GridItem xs={12} sm={12} md={10}>
-                                                                                                <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.mDoctorName}</b></h3>
-                                                                                                <h5> <span style={style.altTextColor}>Date: </span>{item.mDate}</h5>
-                                                                                                <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
-                                                                                                <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                                <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.doctorName}</b></h3>
+                                                                                                <h5> <span style={style.altTextColor}>Date: </span>{item.displayDate}</h5>
+                                                                                                <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                                                                                <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
                                                                                                 <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
                                                                                             </GridItem>
 
                                                                                             <GridItem xs={12} sm={12} md={2}>
-                                                                                                <Link to= {"/insurance/patient/" + btoa(item.mDoctorUsername)}>
+                                                                                                <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
                                                                                                     <Button color="primary" style={style.viewBtn}>
                                                                                                         View Doctor Profile
                                                                                                     </Button>
