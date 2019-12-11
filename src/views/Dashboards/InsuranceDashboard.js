@@ -82,6 +82,7 @@ export default function ProfilePage(props) {
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     }).then(response => response.json())
       .then(data => {
+        console.log(data);
         const chatusername = data.firstname.toLowerCase() + data.lastname.toLowerCase();
         window.localStorage.setItem("chatusername", chatusername);
       })
@@ -412,9 +413,9 @@ export default function ProfilePage(props) {
                               <h6>Current Plan: {item.mInsurancePlan}</h6>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6}>
-                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
+                              {/* <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
                                 <Button color="primary">Send a Text</Button>
-                              </Link>
+                              </Link> */}
                             </GridItem>
                             </GridContainer>
                           </CardBody>
