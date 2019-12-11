@@ -326,13 +326,13 @@ export default function ProfilePage(props) {
                               </DialogContent>
                             </Dialog>
                           </div>
-                          { iplans.map((item, index) => (<Card style={{width: "20rem", borderColor: "primary"}}>
+                          { iplans.map((item, index) => (<Card style={{width: "40rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h4 className={classes.cardTitle}>{item.mName}</h4>
-                            <p>Monthly Premium: {item.premium}/month</p>
-                            <p>Deductible: {item.deductible}</p>
-                            <p>Co-Payment: {item.coPayment}</p>
-                            <p>Annual Out-of-Pocket Limit: {item.annualOutOfPocketLimit}</p>
+                            <h3 className={classes.cardTitle}>{item.mName}</h3>
+                            <h5>Monthly Premium: {item.premium}/month</h5>
+                            <h5>Deductible: {item.deductible}</h5>
+                            <h5>Co-Payment: {item.coPayment}</h5>
+                            <h5>Annual Out-of-Pocket Limit: {item.annualOutOfPocketLimit}</h5>
                             {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/> */}
                             <div>
                             <Button color="primary" onClick={(event) => {setDeleteModal(true); 
@@ -402,7 +402,7 @@ export default function ProfilePage(props) {
                           <CardBody>
                             <GridContainer>
                             <GridItem xs={20} sm={20} md={6}>
-                              <h4 className={classes.cardTitle}>{item.mFirstName} {item.mLastName}</h4> 
+                              <h3 className={classes.cardTitle}><b> {item.mFirstName} {item.mLastName} </b></h3> 
                             </GridItem>
                             <GridItem xs={0} sm={1} md={1}>
                               <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
@@ -437,12 +437,14 @@ export default function ProfilePage(props) {
                             <h3 className={classes.cardTitle}><b>Patient Name</b></h3>
                             <h5 style={style.altTextColor}>Reason</h5>
                             <h5 style={style.altTextColor}>Claim amount</h5>
+                            <div>
                             <Button fullWidth color="primary" style={style.btn}>
                                 Approve
                             </Button> 
                             <Button fullWidth color="primary" style={style.btn}>
                                 Deny
                             </Button>
+                            </div> 
                             </CardBody>
                         </Card>
                     </div>
