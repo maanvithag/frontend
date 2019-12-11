@@ -237,6 +237,9 @@ export default function SignedInHeaders(props){
                                         {hideClaimsHistory() && (<Link to="/insurance/claimshistory">
                                             <MenuItem value={"claimshistory"} style={style.mt}>Claims History</MenuItem>
                                         </Link>)}
+                                        {hideMedicalDetails() && (<Link to="/patient/claimshistory">
+                                            <MenuItem value={"claimshistory"} style={style.mt}>Claims History</MenuItem>
+                                        </Link>)}
                                         <Link to="/">
                                             <MenuItem value={"signOut"} style={style.mt}>Sign Out</MenuItem>
                                         </Link>
