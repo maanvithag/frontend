@@ -206,9 +206,9 @@ export default function ProfilePage(props) {
                       tabIcon: Dashboard,
                       tabContent: (
                         <GridContainer>
-                          <GridItem xs={20} sm={20} md={30} style={{ display: "flex" }}>
+                          <GridItem xs={20} sm={20} md={30}>
                             {appointments.map((item, index) => (
-                              <Card style={{ width: "40rem", borderColor: "primary", justifyContent: "center", flexDirection: "row" }}>
+                              <Card style={{ width: "40rem", borderColor: "primary" }}>
                                 <CardBody>
                                   <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                   <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
