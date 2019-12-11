@@ -32,6 +32,7 @@ export default function ProfilePage(props) {
     const classes = useStyles();
     const { ...rest } = props;
     const [profile, setProfile] = useState({});
+    const [address, setAddress] = useState([]);
 
     // Profile pictures
     const MassimoRossi = require('../../assets/img/profilepic-02.png');
@@ -60,6 +61,7 @@ export default function ProfilePage(props) {
         }).then(response => response.json())
             .then(data => {
                 setProfile(data)
+
             })
     };
     useEffect(() => {handleLoad()}, {});
@@ -69,6 +71,24 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        label:{
+            fontSize: '18px',
+            fontWeight: '425',
+            marginTop: '30px',
+            marginBottom: '-15px',
+            color: '#904199'
+        },
+        space:{
+            marginTop:'0px'
+        },
+        img:{
+            marginLeft:'65px',
+            marginTop: '20px'
+        },
+        title:{
+            fontSize: '35px',
+            fontWeight: '400',
         }
     };
 
@@ -100,98 +120,107 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite}>{profile.name}</h2>
+                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" />
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Education</InputLabel>
+                                                    <CustomInput
+                                                        id="education"
+                                                        formControlProps={{
+                                                            fullWidth: true,
+                                                            multiline:true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.education,
+                                                            multiline:true
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Hospital</InputLabel>
+                                                    <CustomInput
+                                                        id="hospital"
+                                                        formControlProps={{
+                                                            fullWidth: true,
+                                                            multiline:true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.hospital,
+                                                            multiline:true
+                                                        }}
+                                                    />
+                                                </GridItem>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Education</InputLabel>
-                                                <CustomInput
-                                                    id="education"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.education
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Hospital</InputLabel>
-                                                <CustomInput
-                                                    id="hospital"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.hospital
-                                                    }}
-                                                />
-                                            </GridItem>
-                                            <GridItem xs={12} sm={12} md={6}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Specialization</InputLabel>
-                                                <CustomInput
-                                                    id="specialization"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.specialization
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Address</InputLabel>
-                                                <CustomInput
-                                                    id="address"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.address
-                                                    }}
-                                                />
+                                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[profile.name]} alt="Profile1" style={style.img}/>
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>Contact Number</InputLabel>
-                                                <CustomInput
-                                                    id="phone-number"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        disabled: true,
-                                                        placeholder: profile.phonenumber
-                                                    }}
-                                                />
-                                            </GridItem>
-                                        </GridContainer>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <InputLabel style={{ color: primaryColor, marginTop: '30px'}}>About Me</InputLabel>
-                                                <CustomInput
-                                                    id="doctor-bio"
-                                                    formControlProps={{
-                                                        fullWidth: true
-                                                    }}
-                                                    inputProps={{
-                                                        multiline: true,
-                                                        rows: 5,
-                                                        disabled: true,
-                                                        placeholder: profile.biosummary
-                                                    }}
-                                                />
+
+
+
+
+                                                <GridItem xs={12} sm={12} md={12} style={style.space}> &nbsp; </GridItem>
+
+
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Specialization</InputLabel>
+                                                    <CustomInput
+                                                        id="specialization"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.specialization
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Address</InputLabel>
+                                                    <CustomInput
+                                                        id="address"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.address
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>Contact Number</InputLabel>
+                                                    <CustomInput
+                                                        id="phone-number"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            disabled: true,
+                                                            placeholder: profile.phonenumber
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <InputLabel style={style.label}>About Me</InputLabel>
+                                                    <CustomInput
+                                                        id="doctor-bio"
+                                                        formControlProps={{
+                                                            fullWidth: true
+                                                        }}
+                                                        inputProps={{
+                                                            multiline: true,
+                                                            rows: 5,
+                                                            disabled: true,
+                                                            placeholder: profile.biosummary
+                                                        }}
+                                                    />
+                                                </GridItem>
                                             </GridItem>
                                         </GridContainer>
                                     </CardBody>
