@@ -260,7 +260,7 @@ export default function ProfilePage(props) {
                             <GridItem xs={12} sm={12} md={8}>
                                 <Card>
                                     <CardHeader color="primary">
-                                        <h2 className={classes.cardTitleWhite} style={style.title}>{profile.name}</h2>
+                                        <h2 className={classes.cardTitleWhite} align = "center" style={style.title}>{profile.name}</h2>
                                     </CardHeader>
                                     <CardBody>
                                         <GridContainer>
@@ -312,7 +312,7 @@ export default function ProfilePage(props) {
                                             </GridItem>
                                             <GridItem xs={6} sm={6} md={6}>
                                                 {address.length > 0 ? (
-                                                    <Map locations={address} zoom={4} />
+                                                    <Map locations={address} zoom={8} />
                                                 ) : (
                                                     <p />
                                                 )}
