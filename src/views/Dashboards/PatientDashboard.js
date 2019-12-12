@@ -176,6 +176,9 @@ export default function ProfilePage(props) {
     chatBtn: {
       paddingLeft: '35px',
       paddingRight: '35px'
+    },
+    img: {
+      paddingRight: "20px"
     }
   };
 
@@ -212,10 +215,11 @@ export default function ProfilePage(props) {
                               <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                                 <CardBody>
                                   <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
+                                  <div>
                                   <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
-                                  <h5>Date: {item.mDisplayDate}</h5>
-                                  <h5>Time: {item.mDisplayTime}</h5>
-                                  <h5>Reason for Visit: {item.reason}</h5>
+                                  <h6><b>Date:</b>{item.mDisplayDate}</h6>
+                                  <h6><b>Time:</b> {item.mDisplayTime}</h6>
+                                  <h6><b>Reason for Visit:</b> {item.reason}</h6>
                                   <div>
                                   <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                     <Button color="primary" style={style.viewBtn}>
@@ -274,6 +278,7 @@ export default function ProfilePage(props) {
                                       </DialogContent>
                                     </Dialog>
                                   </div>
+                                  </div>
                                 </CardBody>
                               </Card>))}
                           </GridItem>
@@ -291,11 +296,12 @@ export default function ProfilePage(props) {
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                             {pastAppointments.map((item, index) => (<Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                               <CardBody>
-                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
+                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1"/>
+                                <div style={{ marginLeft: "10px" }}>
                                 <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
-                                <h5>Date: {item.mDisplayDate}</h5>
-                                <h5>Time: {item.mDisplayTime}</h5>
-                                <h5>Reason for Visit: {item.reason}</h5>
+                                <h5><b>Date:</b> {item.mDisplayDate}</h5>
+                                <h5><b>Time:</b> {item.mDisplayTime}</h5>
+                                <h5><b>Reason for Visit:</b> {item.reason}</h5>
                                 <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                   <Button color="primary">
                                     View Doctor
@@ -304,6 +310,7 @@ export default function ProfilePage(props) {
                                 <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
                                     <Button color="primary" style={style.viewBtn}>Chat with me</Button>
                                 </Link>
+                                </div>
                               </CardBody>
                             </Card>))}
                           </GridItem>
