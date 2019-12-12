@@ -57,11 +57,10 @@ export default function SurveyResults(props) {
         },
         viewBtn: {
             color: 'white',
-            textTransform: 'initial',
             fontSize: 'small',
             marginTop: '20px',
-            marginLeft: '-38px',
-            width: '190px'
+            marginLeft: '0px',
+            width: '160px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -118,23 +117,26 @@ export default function SurveyResults(props) {
                                         <Card style={{ width: "40rem", borderColor: "primary" }}>
                                             <CardBody>
                                                 <GridContainer>
-                                                <GridItem xs={12} sm={12} md={6}>
+                                                <GridItem xs={12} sm={12} md={8}>
                                                 <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
                                                 </GridItem>
-                                                <GridItem align="right" xs={5} sm={5} md={1}>
-                                                <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}> 
-                                                    <Button color="primary" align="right">
-                                                        View Doctor
-                                                    </Button>
-                                                </Link>
+                                                    <GridItem xs={12} sm={12} md={4}>
+                                                        <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
+                                                            <Button color="primary" style={style.viewBtn}>
+                                                                View Doctor
+                                                            </Button>
+                                                        </Link>
+                                                    </GridItem>
+                                                <GridItem xs={12} sm={12} md={6}>
+                                                    <h4><b>Date: </b>{item.displayDate}</h4>
                                                 </GridItem>
-                                                <GridItem xs={12} sm={12} md={6} align="left">
-                                                    <h4><b>Appointment Date: </b>{item.displayDate}</h4>
+                                                    <GridItem xs={12} sm={12} md={6}>
+                                                        <h4><b>Amount for visit: </b>${item.amountToBePaid}.00</h4>
+                                                    </GridItem>
+                                                    <GridItem xs={12} sm={12} md={12}>
+
                                                     <h4><b>Reason for visit: </b>{item.reason}</h4>
                                                     
-                                                </GridItem>
-                                                <GridItem xs={12} sm={12} md={6} align="right">
-                                                    <h4><b>Amount for visit: </b>{item.amountToBePaid}</h4>
                                                 </GridItem>
                                                 </GridContainer>
                                             </CardBody>

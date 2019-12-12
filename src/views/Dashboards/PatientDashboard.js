@@ -160,29 +160,55 @@ export default function ProfilePage(props) {
     const handleCVV = event => { setCVV(event.target.value); };
 
 
-  const style = {
-    bg: {
-      background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
-      color: 'black',
-      borderRadius: 5
-    },
-    cancelBtn: {
-    },
-    viewBtn: {
-      marginRight: '10px',
-      paddingLeft: '35px',
-      paddingRight: '35px'
-    },
-    chatBtn: {
-      paddingLeft: '35px',
-      paddingRight: '35px'
-    },
-    img: {
-      paddingRight: "20px"
-    }
-  };
 
-  return (
+    const style = {
+        bg: {
+            background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
+            color: 'black',
+            borderRadius: 5
+        },
+        cancelBtn: {
+        },
+        payBtn: {
+            paddingLeft: '35px',
+            paddingRight: '35px',
+            marginTop: '0px'
+        },
+        viewBtn: {
+            marginLeft: '180px',
+            marginRight: '10px',
+            paddingLeft: '35px',
+            paddingRight: '35px'
+        },viewBtn2: {
+            marginLeft: '170px',
+            marginRight: '-2px',
+            paddingLeft: '35px',
+            paddingRight: '35px'
+        },
+        chatBtn: {
+            marginRight: '10px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
+        },
+        img: {
+            marginTop: '15px',
+            marginRight: '10px',
+            paddingRight: "20px"
+        },
+        altTextColor:{
+            color: '#904199',
+            fontWeight: '600',
+            marginTop: '-5px'
+        },
+        altTextColor2:{
+            color: '#904199',
+            fontWeight: '600',
+            marginTop: '-70px'
+        },
+    };
+
+
+    return (
     <div>
       <Header
         color="white"
@@ -214,12 +240,12 @@ export default function ProfilePage(props) {
                             {appointments.map((item, index) => (
                               <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                                 <CardBody>
-                                  <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
+                                  <img align="left" width="170" height="150" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                   <div>
                                   <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
-                                  <h5><b>Date: </b>{item.mDisplayDate}</h5>
-                                  <h5><b>Time:</b> {item.mDisplayTime}</h5>
-                                  <h5><b>Reason for Visit:</b> {item.reason}</h5>
+                                  <h5><span style={style.altTextColor}>Date: </span>{item.mDisplayDate}</h5>
+                                  <h5><span style={style.altTextColor}>Time:</span> {item.mDisplayTime}</h5>
+                                  <h5><span style={style.altTextColor}>Reason for Visit:</span> {item.reason}</h5>
                                   <div>
                                   <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                     <Button color="primary" style={style.viewBtn}>
@@ -227,7 +253,7 @@ export default function ProfilePage(props) {
                                     </Button>
                                   </Link>
                                   <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                                    <Button color="primary" style={style.viewBtn}>Chat with me</Button>
+                                    <Button color="primary" style={style.chatBtn}>Chat with me</Button>
                                   </Link>
                                     <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({ id: item.id }); }} style={style.cancelBtn}>
                                       Cancel Appointment
@@ -296,19 +322,19 @@ export default function ProfilePage(props) {
                             {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
                             {pastAppointments.map((item, index) => (<Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                               <CardBody>
-                                <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1"/>
+                                <img align="left" width="170" height="150" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                 <div style={{ marginLeft: "10px" }}>
                                 <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
-                                <h5><b>Date:</b> {item.mDisplayDate}</h5>
-                                <h5><b>Time:</b> {item.mDisplayTime}</h5>
-                                <h5><b>Reason for Visit:</b> {item.reason}</h5>
+                                <h5><span style={style.altTextColor}>Date:</span> {item.mDisplayDate}</h5>
+                                <h5><span style={style.altTextColor}>Time:</span> {item.mDisplayTime}</h5>
+                                <h5><span style={style.altTextColor}>Reason for Visit:</span> {item.reason}</h5>
                                 <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
-                                  <Button color="primary">
+                                  <Button color="primary" style={style.viewBtn2}>
                                     View Doctor
                                   </Button>
                                 </Link> &nbsp;&nbsp;
                                 <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mDoctorName.split(' ')[0].toLowerCase() + item.mDoctorName.split(' ')[1].toLowerCase()}>
-                                    <Button color="primary" style={style.viewBtn}>Chat with me</Button>
+                                    <Button color="primary" style={style.chatBtn}>Chat with me</Button>
                                 </Link>
                                 </div>
                               </CardBody>
@@ -335,14 +361,26 @@ export default function ProfilePage(props) {
                               </GridItem> */}
                             </GridContainer>
                             {billsToBePaid.map((item, index) => (
-                              <Card style={{ background: "#F8F8F8", width: "25rem", borderColor: "primary", align: "center" }}>
+                              <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary", align: "center" }}>
                                 <CardBody>
-                                  <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
-                                  <h5 style={style.altTextColor}>Reason for visit: {item.reason}</h5>
-                                  <h5>Date: {item.displayDate}</h5>
-                                  <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                    <h5>Co-pay: ${item.amountToBePaid}</h5>
-                                    <Button color="primary" style={style.btn} value={item.appointmentId} onClick={(event) => { setModal(true);}}>
+                                    <GridContainer>
+                                    <GridItem xs={12} sm={12} md={12}>
+                                    <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
+                                    </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+
+                                            <h5> <span style={style.altTextColor2}>Reason for Visit:</span> {item.reason}</h5>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={6}>
+                                            <h5><span style={style.altTextColor2}>Appointment Date:</span> {item.displayDate}</h5>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={4}>
+
+                                            <h5><span style={style.altTextColor2}>Co-Payment:</span> ${item.amountToBePaid}</h5>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={2}>
+
+                                    <Button color="primary" style={style.payBtn} value={item.appointmentId} onClick={(event) => { setModal(true);}}>
                                       Pay
                                     </Button>
                                       <Dialog
@@ -454,7 +492,9 @@ export default function ProfilePage(props) {
                                               </GridContainer>
                                           </DialogContent>
                                       </Dialog>
-                                  </div>
+                                        </GridItem>
+                                    </GridContainer>
+
                                 </CardBody>
                               </Card>
                             ))}
