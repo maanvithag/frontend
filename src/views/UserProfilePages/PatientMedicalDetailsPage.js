@@ -154,11 +154,10 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={7}>
+                            <GridItem xs={12} sm={12} md={7} align="center">
                                 <Link to={"/patient/dashboard"}>
                                     <Button 
                                     onClick = {saveUserInfoOnServer}
-                                    fullWidth 
                                     color="primary" 
                                     style={style.btn}
                                     ><b>My Dashboard</b></Button>

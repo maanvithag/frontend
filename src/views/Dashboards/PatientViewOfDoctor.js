@@ -196,7 +196,6 @@ export default function ProfilePage(props) {
                                     Book Appointment
                                 </Button>
                             </Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            {/* <AddDoctorReview/> */}
                             <div>
                                 <Button color="primary" onClick={() => setModal(true)}>
                                     Leave a Review

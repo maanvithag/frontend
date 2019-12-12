@@ -82,9 +82,9 @@ export default function ProfilePage(props) {
                 <div style={style.bg}>
                     <div className={classes.container}> <br/>
                         <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={7}>
+                            <GridItem xs={12} sm={12} md={7} align="center">
                                 <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                    <Button fullWidth color="primary" style={style.btn}><b>My Dashboard</b></Button>
+                                    <Button color="primary" style={style.btn}><b>My Dashboard</b></Button>
                                 </Link>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6}>

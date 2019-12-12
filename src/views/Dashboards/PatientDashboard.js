@@ -36,8 +36,8 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { LineChart, PieChart } from 'react-chartkick'
-import 'chart.js'
+// import { LineChart, PieChart } from 'react-chartkick'
+// import 'chart.js'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -462,20 +462,20 @@ export default function ProfilePage(props) {
                         )
                       )
                     },
-                    {
-                      tabName: "Statistics",
-                      tabIcon: PieChartIcon,
-                      tabContent: (
-                        <GridContainer>
-                          <GridItem xs={12} sm={12} md={5} align="left">
-                          <PieChart colors={["#9C27B0", "#333333"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={5} align="right">
-                          <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
-                          </GridItem>
-                        </GridContainer>
-                      )
-                    }
+                    // {
+                    //   tabName: "Statistics",
+                    //   tabIcon: PieChartIcon,
+                    //   tabContent: (
+                    //     <GridContainer>
+                    //       <GridItem xs={12} sm={12} md={5} align="left">
+                    //       <PieChart colors={["#9C27B0", "#333333"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
+                    //       </GridItem>
+                    //       <GridItem xs={12} sm={12} md={5} align="right">
+                    //       <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
+                    //       </GridItem>
+                    //     </GridContainer>
+                    //   )
+                    // }
                   ]}
                 />
               </GridItem>

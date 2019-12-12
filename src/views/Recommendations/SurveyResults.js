@@ -143,10 +143,9 @@ export default function SurveyResults(props) {
                                     <GridItem xs={15} sm={15} md={15}>
                                         <br />
                                         <GridContainer justify="center">
-                                        <GridItem xs={12} sm={12} md={8}>
+                                        <GridItem xs={12} sm={12} md={8} align="center">
                                             <Link to={"/patient/dashboard"}>
                                                 <Button 
-                                                fullWidth 
                                                 color="primary" 
                                                 style={style.btn}
                                                 ><b>My Dashboard</b></Button>
