@@ -89,6 +89,7 @@ export default function ProfilePage(props) {
       .then(data => {
           console.log(data);
           setBillsToBePaid(data.billsToBePaid);
+          setNumberOfClaimsApproved(data.bills)
           // setApprovedBills(data.approvedBills);
           // setDeniedBills(data.deniedBills);
       })
