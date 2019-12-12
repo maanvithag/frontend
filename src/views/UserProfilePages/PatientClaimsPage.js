@@ -105,6 +105,9 @@ export default function SurveyResults(props) {
         },
         card:{
             marginBottom: '-5px',
+            width: "50rem",
+            borderColor: "primary",
+            background: "#F8F8F8"
         },
         img:{
             marginRight: '0px',
@@ -165,8 +168,7 @@ export default function SurveyResults(props) {
                                                                     {approvedBills.map((item, index) => (
                                                                         <GridContainer justify="center">
                                                                             <GridContainer justify="center">
-                                                                                <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
-                                                                                    <div style={{ width: "50rem", borderColor: "primary" }}>
+                                                                                <Card style={style.card}>
                                                                                         <CardBody>
                                                                                             <GridContainer>
                                                                                                 <GridItem xs={12} sm={12} md={10}>
@@ -186,7 +188,6 @@ export default function SurveyResults(props) {
                                                                                                 </GridItem>
                                                                                             </GridContainer>
                                                                                         </CardBody>
-                                                                                    </div>
                                                                                 </Card>
                                                                             </GridContainer>
                                                                         </GridContainer>
@@ -204,7 +205,6 @@ export default function SurveyResults(props) {
                                                                     <GridContainer justify="center">
                                                                         <GridContainer justify="center">
                                                                             <Card style={style.card}>
-                                                                                <div style={{ width: "50rem", borderColor: "primary" }}>
                                                                                     <CardBody>
                                                                                         <GridContainer>
                                                                                             <GridItem xs={12} sm={12} md={10}>
@@ -225,7 +225,6 @@ export default function SurveyResults(props) {
                                                                                             </GridItem>
                                                                                         </GridContainer>
                                                                                     </CardBody>
-                                                                                </div>
                                                                             </Card>
                                                                         </GridContainer>
                                                                     </GridContainer>
@@ -242,7 +241,7 @@ export default function SurveyResults(props) {
                                                                     <GridContainer justify="center">
                                                                         <GridContainer justify="center">
                                                                             <Card style={style.card}>
-                                                                                <div style={{ width: "50rem", borderColor: "primary" }}>
+                                                                                <div>
                                                                                     <CardBody>
                                                                                         <GridContainer>
                                                                                             <GridItem xs={12} sm={12} md={10}>
