@@ -210,12 +210,58 @@ export default function ProfilePage(props) {
       fontSize: '90%',
       marginTop: '15px',
       marginBottom: '5px'
-    }, 
+    },
     altTextColor: {
       color: '#904199',
       marginTop: '-5px',
       marginBottom: '15px',
       fontWeight: '500'
+    },
+    viewPatBtn:{
+      width: '150px',
+      marginLeft:'-50px',
+      marginTop:'20px'
+    },
+    approveBtn:{
+      width: '150px',
+      background: '#489961',
+      marginLeft:'-50px'
+    },
+    denyBtn:{
+      width: '150px',
+      background: '#c32f2e',
+      marginLeft:'-50px'
+    },
+    btnA:{
+      width: '170px',
+      marginLeft: '-70px'
+    },
+    btnB:{
+      width: '170px',
+      marginTop: '10px',
+      marginLeft: '-70px'
+
+    },
+    biggerText:{
+      fontSize: "30px",
+      marginBottom: "-5px"
+    },
+    card:{
+      marginBottom: '-5px',
+      width: "50rem",
+      borderColor: "primary",
+      background: "#F8F8F8"
+    },
+    delete:{
+      width: '150px',
+      marginLeft:'15px',
+      marginTop:'20px'
+    },
+    space:{
+      marginBottom:'20px'
+    },
+    lessSpace:{
+      marginBottom:'-20px'
     }
   };
 
@@ -242,83 +288,85 @@ export default function ProfilePage(props) {
                 headerColor="primary"
                 tabs={[
                   {
-                    tabName: "IP plans",
+                    tabName: "Insurance plans",
                     tabIcon: Dashboard,
                     tabContent: (
-                      <GridContainer justify="center">
-                        <GridItem xs={12} sm={12} md={12}>
-                          <div>
-                            <Button color="primary" onClick={() => setAddModal(true)}>
-                              Add new plan
-                            </Button>
-                            <Dialog
-                              modalClasses={{
-                                root: modalClasses.center,
-                                paper: modalClasses.modal}}
-                              open={addmodal}
-                              TransitionComponent={Transition}
-                              keepMounted
-                              onClose={() => setAddModal(false)}
-                              aria-labelledby="modal-slide-title"
-                              aria-describedby="modal-slide-description">
-                              <DialogTitle
-                                id="classic-modal-slide-title"
-                                disableTypography
-                                className={modalClasses.modalHeader}>
-                                <IconButton
-                                  className={modalClasses.modalCloseButton}
-                                  key="close"
-                                  aria-label="Close"
-                                  color="inherit"
-                                  onClick={() => setAddModal(false)}>
-                                  <Close className={modalClasses.modalClose} />
-                                </IconButton>
-                                <h3 className={modalClasses.modalTitle}>Add Insurance Plan</h3>
-                              </DialogTitle>
-                              <DialogContent
-                                id="modal-slide-description"
-                                className={modalClasses.modalBody}>
-                                <GridContainer alignItems={"center"}>
-                                  <GridItem xs={12} sm={12} md={12}>
+                  <GridContainer justify="center">
+                    <GridItem xs={12} sm={12} md={12}>
+                      <div>
+                        <GridContainer justify={"center"}>
+                          <Button color="primary" onClick={() => setAddModal(true)}>
+                            Add new plan
+                          </Button>
+                        </GridContainer>
+                        <Dialog
+                            modalClasses={{
+                              root: modalClasses.center,
+                              paper: modalClasses.modal}}
+                            open={addmodal}
+                            TransitionComponent={Transition}
+                            keepMounted
+                            onClose={() => setAddModal(false)}
+                            aria-labelledby="modal-slide-title"
+                            aria-describedby="modal-slide-description">
+                          <DialogTitle
+                              id="classic-modal-slide-title"
+                              disableTypography
+                              className={modalClasses.modalHeader}>
+                            <IconButton
+                                className={modalClasses.modalCloseButton}
+                                key="close"
+                                aria-label="Close"
+                                color="inherit"
+                                onClick={() => setAddModal(false)}>
+                              <Close className={modalClasses.modalClose} />
+                            </IconButton>
+                            <h3 className={modalClasses.modalTitle}>Add Insurance Plan</h3>
+                          </DialogTitle>
+                          <DialogContent
+                              id="modal-slide-description"
+                              className={modalClasses.modalBody}>
+                            <GridContainer alignItems={"center"}>
+                              <GridItem xs={12} sm={12} md={12}>
 
-                                        <CustomInput
-                                      labelText="Plan Name"
-                                      id="name"
-                                      formControlProps={{
-                                          fullWidth: true}}
-                                      inputProps={{
-                                        onChange: handleAddPlanName
-                                      }}/>
-                                  </GridItem>
-                                  <GridItem xs={12} sm={12} md={6}>
-                                    <InputLabel style={style.drop}>Insurance Plan Type</InputLabel>
-                                    <Select
-                                        labelId="level"
-                                        id="level"
-                                        value={addPlanLevel}
-                                        onChange={handleAddPlanLevel}
-                                        defaultValue={"bronze"}
-
-                                        // might have to change this approach for showing default value
-
-                                    >
-                                      <MenuItem value={"bronze"}>Bronze</MenuItem>
-                                      <MenuItem value={"silver"}>Silver</MenuItem>
-                                      <MenuItem value={"gold"}>Gold</MenuItem>
-                                      <MenuItem value={"platinum"}>Platinum</MenuItem>
-                                    </Select>
-                                  </GridItem>
-                                <GridItem xs={12} sm={12} md={6}>
                                 <CustomInput
-                                labelText="Monthly Premium"
-                                id="premium"
-                                formControlProps={{
-                                    fullWidth: true}}
-                                inputProps={{
-                                  onChange: handleAddPlanPremium
-                                }}/>
-                                </GridItem>
-                                <GridItem xs={12} sm={12} md={6}>
+                                    labelText="Plan Name"
+                                    id="name"
+                                    formControlProps={{
+                                      fullWidth: true}}
+                                    inputProps={{
+                                      onChange: handleAddPlanName
+                                    }}/>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
+                                <InputLabel style={style.drop}>Insurance Plan Type</InputLabel>
+                                <Select
+                                    labelId="level"
+                                    id="level"
+                                    value={addPlanLevel}
+                                    onChange={handleAddPlanLevel}
+                                    defaultValue={"bronze"}
+
+                                    // might have to change this approach for showing default value
+
+                                >
+                                  <MenuItem value={"bronze"}>Bronze</MenuItem>
+                                  <MenuItem value={"silver"}>Silver</MenuItem>
+                                  <MenuItem value={"gold"}>Gold</MenuItem>
+                                  <MenuItem value={"platinum"}>Platinum</MenuItem>
+                                </Select>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    labelText="Monthly Premium"
+                                    id="premium"
+                                    formControlProps={{
+                                      fullWidth: true}}
+                                    inputProps={{
+                                      onChange: handleAddPlanPremium
+                                    }}/>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
                                 <CustomInput
                                     labelText="Deductible"
                                     id="deductible"
@@ -327,10 +375,10 @@ export default function ProfilePage(props) {
                                     inputProps={{
                                       onChange: handleAddPlanDeductible
                                     }}/>
-                                </GridItem>
-                                  <GridItem xs={12} sm={12} md={6}>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
 
-                                  <CustomInput
+                                <CustomInput
                                     labelText="Co-Payment"
                                     id="copayment"
                                     formControlProps={{
@@ -338,10 +386,10 @@ export default function ProfilePage(props) {
                                     inputProps={{
                                       onChange: handleAddPlanCopayment
                                     }}/>
-                                  </GridItem>
-                                  <GridItem xs={12} sm={12} md={6}>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
 
-                                  <CustomInput
+                                <CustomInput
                                     labelText="Annual Out-of-Pocket Limit"
                                     id="outofpocketlimit"
                                     formControlProps={{
@@ -349,160 +397,171 @@ export default function ProfilePage(props) {
                                     inputProps={{
                                       onChange: handleAddPlanOutOfPocketLimit
                                     }}/>
-                                  </GridItem>
-                                </GridContainer>
-                                  <br/>
-                                <GridContainer justify="center">
-                              <Link to="/insurance/dashboard"> 
-                                  <Button color="primary" onClick={(event) => {setAddModal(false); 
-                                    handleAddPlan({name: addPlanName, premium: addPlanPremium, outofpocketlimit: addPlanOutOfPocketLimit, deductible: addPlanDeductible, copayment: addPlanCopayment, level: addPlanLevel});}}>
-                                    Add Insurance Plan
-                                  </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              </GridItem>
+                            </GridContainer>
+                            <br/>
+                            <GridContainer justify="center">
+                              <Link to="/insurance/dashboard">
+                                <Button color="primary" onClick={(event) => {setAddModal(false);
+                                  handleAddPlan({name: addPlanName, premium: addPlanPremium, outofpocketlimit: addPlanOutOfPocketLimit, deductible: addPlanDeductible, copayment: addPlanCopayment, level: addPlanLevel});}}>
+                                  Add Insurance Plan
+                                </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               </Link>
-                                </GridContainer>
-                              </DialogContent>
-                            </Dialog>
-                          </div>
-                          { iplans.map((item, index) => (<Card style={{width: "47rem", borderColor: "primary"}}>
+                            </GridContainer>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                      <GridContainer justify={"center"}>
+                        { iplans.map((item, index) => (<Card style={style.card}>
                           <CardBody>
-                            <h3 className={classes.cardTitle}><b>{item.mName}</b></h3>
-                            <h5><span style={style.altTextColor}>Monthly Premium:</span> {item.premium}/month</h5>
-                            <h5><span style={style.altTextColor}>Deductible:</span> {item.deductible}</h5>
-                            <h5><span style={style.altTextColor}>Co-Payment:</span> {item.coPayment}</h5>
-                            <h5><span style={style.altTextColor}>Annual Out-of-Pocket Limit:</span> {item.annualOutOfPocketLimit}</h5>
-                            <div>
-                            <Button color="primary" onClick={(event) => {setDeleteModal(true); 
-                              setDeletePlan({name: item.mName, premium: item.mPremium, company: item.mCompany, level: item.mLevel, outofpocketlimit: item.mOutOfPocketLimit, deductible: item.mDeductible, copayment: item.mCopayment});}}>
-                              Delete
-                            </Button>
+                            <GridContainer>
+                              <GridItem xs={12} sm={12} md={9}>
+                                <h3 className={classes.cardTitle}><b>{item.mName}</b></h3>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={3}>
+                                <Button color="primary" style={style.delete} onClick={(event) => {setDeleteModal(true);
+                                  setDeletePlan({name: item.mName, premium: item.mPremium, company: item.mCompany, level: item.mLevel, outofpocketlimit: item.mOutOfPocketLimit, deductible: item.mDeductible, copayment: item.mCopayment});}}>
+                                  Delete
+                                </Button>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
+
+                                <h5><span style={style.altTextColor}>Monthly Premium:</span> ${item.premium}.00/month</h5>
+                                <h5><span style={style.altTextColor}>Deductible:</span> ${item.deductible}.00</h5>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
+
+                                <h5><span style={style.altTextColor}>Co-Payment:</span> ${item.coPayment}.00</h5>
+                                <h5><span style={style.altTextColor}>Annual Out-of-Pocket Limit:</span> ${item.annualOutOfPocketLimit}.00</h5>
+                              </GridItem>
+                            </GridContainer>
                             <Dialog
-                              modalClasses={{
-                                root: modalClasses.center,
-                                paper: modalClasses.modal
-                              }}
-                              open={deletemodal}
-                              TransitionComponent={Transition}
-                              keepMounted
-                              onClose={() => setDeleteModal(false)}
-                              aria-labelledby="modal-slide-title"
-                              aria-describedby="modal-slide-description"
+                                modalClasses={{
+                                  root: modalClasses.center,
+                                  paper: modalClasses.modal
+                                }}
+                                open={deletemodal}
+                                TransitionComponent={Transition}
+                                keepMounted
+                                onClose={() => setDeleteModal(false)}
+                                aria-labelledby="modal-slide-title"
+                                aria-describedby="modal-slide-description"
                             >
                               <DialogTitle
-                                id="classic-modal-slide-title"
-                                disableTypography
-                                className={modalClasses.modalHeader}
+                                  id="classic-modal-slide-title"
+                                  disableTypography
+                                  className={modalClasses.modalHeader}
                               >
                                 <IconButton
-                                  className={modalClasses.modalCloseButton}
-                                  key="close"
-                                  aria-label="Close"
-                                  color="inherit"
-                                  onClick={() => setDeleteModal(false)}
+                                    className={modalClasses.modalCloseButton}
+                                    key="close"
+                                    aria-label="Close"
+                                    color="inherit"
+                                    onClick={() => setDeleteModal(false)}
                                 >
                                   <Close className={modalClasses.modalClose} />
                                 </IconButton>
                                 <h3 className={modalClasses.modalTitle}>Delete Plan</h3>
                               </DialogTitle>
                               <DialogContent
-                                id="modal-slide-description"
-                                className={modalClasses.modalBody}
+                                  id="modal-slide-description"
+                                  className={modalClasses.modalBody}
                               >
-                              <div className={productClasses.section} style={{padding: 0}}>
-                                Are you sure you want to delete this plan?
-                              </div> <br/>
-                              <Link to="/insurance/dashboard"> 
+                                <div className={productClasses.section} style={{padding: 0}}>
+                                  Are you sure you want to delete this plan?
+                                </div> <br/>
+                                <Link to="/insurance/dashboard">
                                   <Button color="primary" onClick={(event) => {setDeleteModal(false); handleDeletePlan(); handleLoad(); handleClaims();}}>
                                     Yes
                                   </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                   <Button color="primary" onClick={(event) => {setDeleteModal(false);}}>
                                     No
                                   </Button>
-                              </Link>
+                                </Link>
                               </DialogContent>
                             </Dialog>
-                            </div>
-                          </CardBody> 
+                          </CardBody>
                         </Card>))}
-                        </GridItem>
                       </GridContainer>
-                    )
-                  },
+                    </GridItem>
+                    <GridItem>&nbsp;</GridItem>
+                  </GridContainer>
+                  )
+                },
                   {
                     tabName: "Patients",
                     tabIcon: List,
                     tabContent: (
-                      <GridContainer>
-                        <GridItem xs={12} sm={12} md={12}>
-                          {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { patients.map((item, index) => (<Card style={{width: "47rem", borderColor: "primary"}}>
-                          <CardBody>
-                            <GridContainer>
-                            <GridItem xs={20} sm={20} md={6}>
-                              <h3 className={classes.cardTitle}><b> {item.mFirstName} {item.mLastName} </b></h3> 
-                            </GridItem>
-                            <GridItem xs={0} sm={1} md={1}>
-                              <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
-                                <Button color="primary">
-                                  View Patient
-                                </Button>
-                              </Link> 
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={6} align="left">
-                              <h5>Current Plan: {item.mInsurancePlan}</h5>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={6}>
-                              <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
-                                <Button color="primary">Send a Text</Button>
-                              </Link>
-                            </GridItem>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <GridContainer justify={"center"}>
+                              {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
+                              { patients.map((item, index) => (<Card style={style.card}>
+                                <CardBody>
+                                  <GridContainer>
+                                    <GridItem xs={12} sm={12} md={10}>
+                                      <h3 className={classes.cardTitle} style={style.biggerText}><b> {item.mFirstName} {item.mLastName} </b></h3>
+                                      <h5><span style={style.altTextColor}>Current Plan:</span> {item.mInsurancePlan}</h5>
+                                    </GridItem>
+                                    <GridItem xs={12} sm={12} md={2}>
+                                      <Link to= {"/insurance/patient/" + btoa(item.mUserName)}>
+                                        <Button color="primary" style={style.btnB}>
+                                          View Patient
+                                        </Button>
+                                      </Link>
+                                      <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
+                                        <Button color="primary" style={style.btnA}>Send a Text</Button>
+                                      </Link>
+                                    </GridItem>
+                                  </GridContainer>
+                                </CardBody>
+                              </Card>))}
                             </GridContainer>
-                          </CardBody>
-                        </Card>))}
-                        </GridItem>
-                      </GridContainer>
+                          </GridItem>
+                          <GridItem>&nbsp;</GridItem>
+                        </GridContainer>
                     )
                   },
                   {
                     tabName: "Claims",
                     tabIcon: List,
                     tabContent: (
-                      <div>
-                        <h3 align="center"><b>Total of claims that needs approval: {billsToBePaid.length}</b></h3>
-                        {billsToBePaid.map((item, index) => (
-                          <GridContainer justify="center">
-                            <GridContainer justify="center">
-                              <Card style={style.card}>
-                                <div style={{ width: "50rem", borderColor: "primary" }}>
-                                  <CardBody>
-                                    <GridContainer>
-                                      <GridItem xs={12} sm={12} md={10}>
-                                        <h3 className={classes.cardTitle} style={style.name}><b>{item.patientName}</b></h3>
-                                        <h5> <span style={style.altTextColor}>Doctor: </span>{item.doctorName}</h5>
-                                        <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
-                                        <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
-                                        <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
-                                      </GridItem>
-                                      <GridItem xs={12} sm={12} md={2}>
-                                        <Link to= {"/insurance/patient/" + btoa(item.patientUsername)}>
-                                        <Button color="primary" style={style.viewBtn}>
-                                            View Patient
-                                        </Button>
-                                        </Link>
-                                        <Button color="primary" style={style.viewBtn} onClick={() => {handleEditClaims({id: item.appointmentId, billStatus: "approved"});}}>
+                        <div>
+                          <h3 align="center"><b>Total of claims that needs approval: {billsToBePaid.length}</b></h3>
+                          {billsToBePaid.map((item, index) => (
+                              <GridContainer justify="center">
+                                <GridContainer justify="center">
+                                  <Card style={style.card}>
+                                    <CardBody>
+                                      <GridContainer>
+                                        <GridItem xs={12} sm={12} md={10}>
+                                          <h3 className={classes.cardTitle} style={style.name}><b>{item.patientName}</b></h3>
+                                          <h5> <span style={style.altTextColor}>Doctor: </span>{item.doctorName}</h5>
+                                          <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                          <h5> <span style={style.altTextColor}>Claim Amount: $</span>{item.amountToBePaid}.00</h5>
+                                          <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={2}>
+                                          <Link to= {"/insurance/patient/" + btoa(item.patientUsername)}>
+                                            <Button color="primary" style={style.viewPatBtn}>
+                                              View Patient
+                                            </Button>
+                                          </Link>
+                                          <Button color="primary" style={style.approveBtn} onClick={() => {handleEditClaims({id: item.appointmentId, billStatus: "approved"});}}>
                                             Approve
-                                        </Button>
-                                        <Button color="primary" style={style.viewBtn}>
+                                          </Button>
+                                          <Button color="primary" style={style.denyBtn}>
                                             Deny
-                                        </Button>
-                                      </GridItem>
-                                    </GridContainer>
-                                  </CardBody>
-                                </div>
-                              </Card>
-                            </GridContainer>
-                          </GridContainer>
-                      ))}
-                    </div>
+                                          </Button>
+                                        </GridItem>
+                                      </GridContainer>
+                                    </CardBody>
+                                  </Card>
+                                </GridContainer>
+                                <GridItem>&nbsp;</GridItem>
+                              </GridContainer>
+                          ))}
+                        </div>
                     )
                   },
                   {
