@@ -169,19 +169,11 @@ export default function SurveyResults(props) {
                                                                                     <div style={{ width: "50rem", borderColor: "primary" }}>
                                                                                         <CardBody>
                                                                                             <GridContainer>
-<<<<<<< HEAD
                                                                                                 <GridItem xs={12} sm={12} md={10}>
                                                                                                     <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.doctorName}</b></h3>
                                                                                                     <h5> <span style={style.altTextColor}>Date: </span>{item.displayDate}</h5>
                                                                                                     <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
                                                                                                     <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
-=======
-                                                                                                <GridItem xs={12} sm={12} md={8} align="left">
-                                                                                                    <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.mDoctorName}</b></h3>
-                                                                                                    <h5> <span style={style.altTextColor}>Date: </span>{item.mDate}</h5>
-                                                                                                    <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
-                                                                                                    <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
->>>>>>> 1527c14383be0b8b21f1ae077234b9af263b22e4
                                                                                                     <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
                                                                                                 </GridItem>
                                                                                                 <GridItem xs={12} sm={12} md={2}>
