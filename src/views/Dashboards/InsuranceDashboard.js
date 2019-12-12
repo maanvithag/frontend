@@ -578,7 +578,7 @@ export default function ProfilePage(props) {
                         {/* <h5 align="center"><span style={style.altTextColor}>Total amount denied by insurance: </span><b>${totalAmountDeniedByInsurance}</b></h5> */}
                         </GridItem>
                         <GridItem xs={12} sm={12} md={6} align="left">
-                        <PieChart colors={["#9C27B0", "#333333", "#00a0a0"]} data={[["Number of Claims Approved", numberOfClaimsApproved], ["Number of Claims Denied", numberOfClaimsDenied], ["Number of Claims In Process", numberOfClaimsInProcess]]}/>
+                        <PieChart colors={["#F77114", "#333333", "#00a0a0"]} data={[["Number of Claims Approved", numberOfClaimsApproved], ["Number of Claims Denied", numberOfClaimsDenied], ["Number of Claims In Process", numberOfClaimsInProcess]]}/>
                         </GridItem>
                         {/* <GridItem xs={12} sm={12} md={6} align="right">
                         <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>

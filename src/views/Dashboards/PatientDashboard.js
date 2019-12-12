@@ -517,18 +517,18 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <GridContainer align="left">
                           <GridItem xs={12} sm={12} md={6} align="left">
-                            <h5 align="center">Total amount spent from out-of-pocket: <b>${outOfPocketAmountSpent}</b></h5>
-                            <h5 align="center">Total amount remainaing in out-of-pocket: <b>${outOfPocketLimitRemaining}</b></h5>
+                            <h5 align="center"><span style={style.altTextColor}>Total amount spent from out-of-pocket: </span><b>${outOfPocketAmountSpent}</b></h5>
+                            <h5 align="center"><span style={style.altTextColor}>Total amount remainaing in out-of-pocket: </span><b>${outOfPocketLimitRemaining}</b></h5>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6}>
-                            <h5 align="center">Total amount covered by insurance: <b>${totalAmountCoveredByInsurance}</b></h5>
-                            <h5 align="center">Total amount paid by you: <b>${totalAmountCoveredByPatient}</b></h5>
+                            <h5 align="center"><span style={style.altTextColor}>Total amount covered by insurance: </span><b>${totalAmountCoveredByInsurance}</b></h5>
+                            <h5 align="center"><span style={style.altTextColor}>Total amount paid by you: </span><b>${totalAmountCoveredByPatient}</b></h5>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6} align="left">
-                          <PieChart colors={["#9C27B0", "#333333"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
+                          <PieChart colors={["#F77114", "#00a0a0"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6} align="right">
-                          <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
+                          <PieChart colors={["#F77114", "#00a0a0"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
                           </GridItem>
                         </GridContainer>
                       )
