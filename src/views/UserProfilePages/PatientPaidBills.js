@@ -57,6 +57,13 @@ export default function SurveyResults(props) {
     useEffect(() => { handleLoad() }, [isBillPaid])
 
     const style = {
+        selectBtn: {
+            color: 'white',
+            textTransform: 'initial',
+            fontSize: 'small',
+            marginTop: '20px',
+            width: '190px'
+        },
         chatBtn: {
             color: 'white',
             textTransform: 'initial',
@@ -65,19 +72,14 @@ export default function SurveyResults(props) {
             marginLeft: '-40px',
             width: '220px'
         },
-        selectBtn: {
-            color: 'white',
-            textTransform: 'initial',
-            fontSize: 'small',
-            marginTop: '20px',
-            width: '190px'
+        subtitle:{
+            marginTop: '0px',
+            marginBottom: '30px',
+            fontSize: '18px'
         },
         viewBtn: {
-            color: 'white',
-            fontSize: 'small',
             marginTop: '20px',
-            marginLeft: '0px',
-            width: '160px'
+            marginLeft: '-80px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -87,7 +89,8 @@ export default function SurveyResults(props) {
         altTextColor: {
             color: '#904199',
             marginTop: '-5px',
-            marginBottom: '15px'
+            marginBottom: '15px',
+            fontWeight: '500'
         },
         suggestedPlan: {
             background: '#f9dbff',
@@ -95,6 +98,17 @@ export default function SurveyResults(props) {
         },
         bold: {
             fontWeight: 'bolder'
+        },
+        name:{
+            fontWeight: 'bolder',
+            fontSize: '25px'
+        },
+        card:{
+            marginBottom: '-5px',
+        },
+        img:{
+            marginRight: '0px',
+            marginTop: '10px'
         }
     };
 
@@ -129,36 +143,39 @@ export default function SurveyResults(props) {
                                         <GridContainer justify="center">
                                         <h2><b>Payment History</b></h2><br/>
                                         </GridContainer>
-                                        <GridContainer justify="center">
-                                        {billsPaid.map((item, index) => (
-                                        <Card style={{ width: "40rem", borderColor: "primary" }}>
-                                            <CardBody>
-                                                <GridContainer>
-                                                <GridItem xs={12} sm={12} md={8}>
-                                                <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
-                                                </GridItem>
-                                                    <GridItem xs={12} sm={12} md={4}>
-                                                        <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
-                                                        <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
-                                                            <Button color="primary" style={style.viewBtn}>
-                                                                View Doctor
-                                                            </Button>
-                                                        </Link>
-                                                    </GridItem>
-                                                <GridItem xs={12} sm={12} md={6}>
-                                                    <h4><b>Date: </b>{item.displayDate}</h4>
-                                                </GridItem>
-                                                    <GridItem xs={12} sm={12} md={6}>
-                                                        <h4><b>Amount for visit: </b>${item.amountToBePaid}.00</h4>
-                                                    </GridItem>
-                                                    <GridItem xs={12} sm={12} md={12}>
-
-                                                    <h4><b>Reason for visit: </b>{item.reason}</h4>
-                                                    
-                                                </GridItem>
-                                                </GridContainer>
-                                            </CardBody>
-                                        </Card>))}
+                                        <GridContainer>
+                                            <GridContainer justify="center">
+                                                {billsPaid.map((item, index) => (
+                                                    <GridContainer justify="center">
+                                                        <GridContainer justify="center">
+                                                            <Card style={style.card}>
+                                                                <div style={{ width: "50rem", borderColor: "primary" }}>
+                                                                    <CardBody>
+                                                                        <GridContainer>
+                                                                            <GridItem xs={12} sm={12} md={10}>
+                                                                                <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.doctorName}</b></h3>
+                                                                                <h5> <span style={style.altTextColor}>Date: </span>{item.displayDate}</h5>
+                                                                                <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                                                                <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
+                                                                                <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
+                                                                            </GridItem>
+                                                                            <GridItem xs={12} sm={12} md={2}>
+                                                                                <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
+                                                                                <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
+                                                                                    <Button color="primary" style={style.viewBtn}>
+                                                                                        View Doctor Profile
+                                                                                    </Button>
+                                                                                </Link>
+                                                                            </GridItem>
+                                                                        </GridContainer>
+                                                                    </CardBody>
+                                                                </div>
+                                                            </Card>
+                                                        </GridContainer>
+                                                    </GridContainer>
+                                                ))}
+                                                <GridItem>&nbsp;</GridItem>
+                                            </GridContainer>
                                         </GridContainer>
                                     </GridItem>
                                 </GridContainer>
