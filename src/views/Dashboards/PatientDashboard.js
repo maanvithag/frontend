@@ -58,6 +58,7 @@ export default function ProfilePage(props) {
   const [chatUserName, setChatUserName] = useState("")
   const [billsToBePaid, setBillsToBePaid] = useState([]);
   const [isBillPaid, setIsBillPaid] = useState("");
+  const [appointmentIdentifier, setAppointmentIdentifier] = useState("")
   const [outOfPocketAmountSpent, setOutOfPocketAmountSpent] = useState("");
   const [outOfPocketLimit, setOutOfPocketLimit] = useState("");
   const [outOfPocketLimitRemaining, setOutOfPocketLimitRemaining] = useState("");
@@ -128,18 +129,22 @@ export default function ProfilePage(props) {
       })
   };
 
-  function handleBillPayment(appointmentId) {
+  function handleBillPayment() {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/bills/pay', {
       method: 'post',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        id: appointmentId
+        id: appointmentIdentifier
       })
     }).then(response => {
       // UPDATE to the below parameter makes the whole component reload. Handle with care during refactoring
       setIsBillPaid(response)
     })
+  }
+
+  function handleAppointmentIdChange(appointmentId) {
+    setAppointmentIdentifier(appointmentId)
   }
 
   function hide(plan){
@@ -380,7 +385,7 @@ export default function ProfilePage(props) {
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={2}>
 
-                                    <Button color="primary" style={style.payBtn} value={item.appointmentId} onClick={(event) => { setModal(true);}}>
+                                    <Button color="primary" style={style.payBtn} value={item.appointmentId} onClick={(event) => {handleAppointmentIdChange(item.appointmentId); setModal(true);}}>
                                       Pay
                                     </Button>
                                       <Dialog
@@ -477,7 +482,7 @@ export default function ProfilePage(props) {
                                                       <GridItem xs={12} sm={12} md={3}/>
                                                       <GridItem xs={12} sm={12} md={3}>
                                                       <Link to="/patient/dashboard">
-                                                          <Button color="primary" onClick={() => handleBillPayment(item.appointmentId)}>
+                                                          <Button color="primary" onClick={() => handleBillPayment()}>
                                                               Pay
                                                           </Button>
                                                       </Link>
