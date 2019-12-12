@@ -79,7 +79,7 @@ export default function SurveyResults(props) {
         },
         viewBtn: {
             marginTop: '20px',
-            marginLeft: '40px'
+            marginLeft: '-80px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -107,7 +107,7 @@ export default function SurveyResults(props) {
             marginBottom: '-5px',
         },
         img:{
-            marginRight: '-120px',
+            marginRight: '0px',
             marginTop: '10px'
         }
     };
@@ -177,7 +177,7 @@ export default function SurveyResults(props) {
                                                                                                     <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
                                                                                                 </GridItem>
                                                                                                 <GridItem xs={12} sm={12} md={2}>
-                                                                                                    <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
+                                                                                                    <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
                                                                                                     <Link to= {"/insurance/patient/" + btoa(item.mDoctorUsername)}>
                                                                                                         <Button color="primary" style={style.viewBtn}>
                                                                                                             View Doctor Profile
