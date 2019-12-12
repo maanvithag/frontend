@@ -25,7 +25,24 @@ export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
     const [billsPaid, setBillsPaid] = useState([]);
-    const [isBillPaid, setIsBillPaid] = useState("")
+    const [isBillPaid, setIsBillPaid] = useState("");
+
+    // Profile pictures
+    const MassimoRossi = require('../../assets/img/profilepic-02.png');
+    const SamanthaJoson = require('../../assets/img/profilepic-06.png');
+    const PrestonLannister = require('../../assets/img/profilepic-05.png');
+    const JaimeMoore = require('../../assets/img/profilepic-03.png');
+    const VivekBandaru = require('../../assets/img/profilepic-17.png');
+    const KristenNash = require('../../assets/img/profilepic-01.png');
+
+    const profiles = {
+    'Massimo Rossi': MassimoRossi,
+    'Samantha Joson': SamanthaJoson,
+    'Preston Lannister': PrestonLannister,
+    'Jaime Moore': JaimeMoore,
+    'Vivek Bandaru': VivekBandaru,
+    'Kristen Nash': KristenNash
+    }
 
     const handleLoad = (event) => {
         fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/bills/history', {
@@ -121,6 +138,7 @@ export default function SurveyResults(props) {
                                                 <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
                                                 </GridItem>
                                                     <GridItem xs={12} sm={12} md={4}>
+                                                        <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
                                                         <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
                                                             <Button color="primary" style={style.viewBtn}>
                                                                 View Doctor

@@ -79,6 +79,7 @@ export default function ProfilePage(props) {
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
             .then(data => {
+                console.log(data)
                 address.push(data.address)
                 setAddress(address)
                 setProfile(data)
@@ -179,9 +180,9 @@ export default function ProfilePage(props) {
                     <div className={classes.container}>
                         <br></br>
                         <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={7}>
+                            <GridItem xs={12} sm={12} md={7} align="center">
                             <Link to={"/" + window.localStorage.getItem("userType") + "/dashboard"}>
-                                <Button fullWidth color="primary" style={style.btn}><b>My Dashboard</b></Button>
+                                <Button color="primary" style={style.btn}><b>My Dashboard</b></Button>
                             </Link>
                             </GridItem>
                             <GridItem xs={5} sm={5} md={8}>

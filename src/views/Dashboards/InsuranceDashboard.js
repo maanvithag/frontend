@@ -21,12 +21,9 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 // core components
 import Header from "components/Header/Header.js";
-import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import AddIpPlan from "views/Dashboards/AddIpPlan.js";
-import DeleteIpPlan from "views/Dashboards/DeleteIpPlan.js";
 import SignedInHeaders from "views/SignedInHeader.js";
 import modalStyles from "assets/jss/material-kit-react/modalStyle.js";
 import productStyles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
@@ -36,6 +33,9 @@ import {primaryColor} from "../../assets/jss/material-kit-react";
 import InputLabel from "@material-ui/core/InputLabel";
 import Logo2 from "../../assets/img/logo2.png";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import { LineChart, PieChart } from 'react-chartkick'
+import 'chart.js'
+import PieChartIcon from '@material-ui/icons/PieChart';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -89,9 +89,9 @@ export default function ProfilePage(props) {
       .then(data => {
           console.log(data);
           setBillsToBePaid(data.billsToBePaid);
-          setNumberOfClaimsApproved(data.bills)
-          // setApprovedBills(data.approvedBills);
-          // setDeniedBills(data.deniedBills);
+          setNumberOfClaimsApproved(data.approvedBills.length);
+          setNumberOfClaimsDenied(data.deniedBills.length);
+          setNumberOfClaimsInProcess(data.billsToBePaid.length);
       })
   }
 
@@ -247,7 +247,6 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer justify="center">
                         <GridItem xs={12} sm={12} md={12}>
-                        {/* <AddIpPlan/> */}
                           <div>
                             <Button color="primary" onClick={() => setAddModal(true)}>
                               Add new plan
@@ -371,7 +370,6 @@ export default function ProfilePage(props) {
                             <h5><span style={style.altTextColor}>Deductible:</span> {item.deductible}</h5>
                             <h5><span style={style.altTextColor}>Co-Payment:</span> {item.coPayment}</h5>
                             <h5><span style={style.altTextColor}>Annual Out-of-Pocket Limit:</span> {item.annualOutOfPocketLimit}</h5>
-                            {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/> */}
                             <div>
                             <Button color="primary" onClick={(event) => {setDeleteModal(true); 
                               setDeletePlan({name: item.mName, premium: item.mPremium, company: item.mCompany, level: item.mLevel, outofpocketlimit: item.mOutOfPocketLimit, deductible: item.mDeductible, copayment: item.mCopayment});}}>
@@ -485,7 +483,7 @@ export default function ProfilePage(props) {
                                         <h5> <span style={style.altTextColor}>Claim Status: </span><b>In Progress</b></h5>
                                       </GridItem>
                                       <GridItem xs={12} sm={12} md={2}>
-                                        <Link to= {"/insurance/patient/" + btoa(item.mPatientUsername)}>
+                                        <Link to= {"/insurance/patient/" + btoa(item.patientUsername)}>
                                         <Button color="primary" style={style.viewBtn}>
                                             View Patient
                                         </Button>
@@ -507,20 +505,28 @@ export default function ProfilePage(props) {
                     </div>
                     )
                   },
-                  // {
-                  //   tabName: "Statistics",
-                  //   tabIcon: PieChartIcon,
-                  //   tabContent: (
-                  //     <GridContainer>
-                  //       <GridItem xs={12} sm={12} md={5} align="left">
-                  //       <PieChart colors={["#9C27B0", "#333333"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
-                  //       </GridItem>
-                  //       <GridItem xs={12} sm={12} md={5} align="right">
-                  //       <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
-                  //       </GridItem>
-                  //     </GridContainer>
-                  //   )
-                  // }
+                  {
+                    tabName: "Statistics",
+                    tabIcon: PieChartIcon,
+                    tabContent: (
+                      <GridContainer align="left">
+                        <GridItem xs={12} sm={12} md={6} align="left">
+                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims Approved: </span><b>{numberOfClaimsApproved}</b></h5>
+                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims Denied: </span><b>{numberOfClaimsDenied}</b></h5>
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims In Process: </span><b>{numberOfClaimsInProcess}</b></h5>
+                        {/* <h5 align="center"><span style={style.altTextColor}>Total amount denied by insurance: </span><b>${totalAmountDeniedByInsurance}</b></h5> */}
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6} align="left">
+                        <PieChart colors={["#9C27B0", "#333333", "#00a0a0"]} data={[["Number of Claims Approved", numberOfClaimsApproved], ["Number of Claims Denied", numberOfClaimsDenied], ["Number of Claims In Process", numberOfClaimsInProcess]]}/>
+                        </GridItem>
+                        {/* <GridItem xs={12} sm={12} md={6} align="right">
+                        <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
+                        </GridItem> */}
+                      </GridContainer>
+                    )
+                  }
                 ]}
               />
             </GridItem>
