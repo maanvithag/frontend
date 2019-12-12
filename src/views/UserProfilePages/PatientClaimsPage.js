@@ -178,7 +178,7 @@ export default function SurveyResults(props) {
                                                                                                 </GridItem>
                                                                                                 <GridItem xs={12} sm={12} md={2}>
                                                                                                     <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
-                                                                                                    <Link to= {"/insurance/patient/" + btoa(item.mDoctorUsername)}>
+                                                                                                    <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
                                                                                                         <Button color="primary" style={style.viewBtn}>
                                                                                                             View Doctor Profile
                                                                                                         </Button>

@@ -1,11 +1,11 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import { format } from 'date-fns';
 
+var moment = require('moment');
 const ChatSession = props => {
   const { messages } = props;
   return messages.map(message => {
-    const time = format(new Date(`${message.updatedAt}`), 'dd-MM-yyyy HH:mm');
+    const time = moment(message.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
     return (
       <li className="message" key={message.id}>
         <div>
