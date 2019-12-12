@@ -210,7 +210,7 @@ export default function ProfilePage(props) {
                                     <div className={productClasses.section} style={{padding: 0}}>
                                       Are you sure you want to cancel this appointment?
                                     </div> <br/>
-                                    <Link to="/patient/dashboard"> 
+                                    <Link to="/doctor/dashboard"> 
                                         <Button color="primary" onClick={(event) => {setModal(false); handleCancelAppointments(); handleLoad();}}>
                                           Yes
                                         </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
