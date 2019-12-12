@@ -86,6 +86,39 @@ export default function ProfilePage(props) {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
             color: 'black',
             borderRadius: 5
+        },
+        altTextColor: {
+            color: '#904199',
+            marginTop: '-5px',
+            marginBottom: '15px',
+            fontWeight: '500'
+        },
+        card:{
+            marginBottom: '-5px',
+            width: "50rem",
+            borderColor: "primary",
+            background: "#F8F8F8"
+        },
+        btn:{
+            marginLeft:"-30px",
+            width: "200px"
+        },
+        topBtn:{
+            marginLeft:"-30px",
+            width: "200px"
+
+
+        },
+        cancel:{
+            marginLeft:"-30px",
+            width: "200px",
+            background: '#c32f2e'
+
+
+        },    biggerText:{
+            fontSize: "30px",
+            marginTop:'5px',
+            marginBottom: "10px"
         }
     };
   
@@ -118,24 +151,30 @@ export default function ProfilePage(props) {
                       <GridContainer>
                         <GridItem xs={20} sm={20} md={30}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { appointments.map((item, index) => (<Card style={{width: "47rem", borderColor: "primary"}}>
+                          { appointments.map((item, index) => (<Card style={style.card}>
                             <CardBody>
-                            <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
-                            <h5>Date: {item.mDisplayDate}</h5>
-                            <h5>Time: {item.mDisplayTime}</h5>
+                                <GridContainer>
+                                    <GridItem xs={12} sm={12} md={9}>
+                                        <h3 className={classes.cardTitle} style={style.biggerText}><b>{item.mPatientName}</b></h3>
+                                    <h5><span style={style.altTextColor}>Date:</span> {item.mDisplayDate}</h5>
+                                    <h5><span style={style.altTextColor}>Time: </span>{item.mDisplayTime}</h5>
+                                    </GridItem>
+                                    <GridItem xs={12} sm={12} md={3}>
                               {/* <CancelAppointment/> */}
-                            <div>
                             <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
-                              <Button color="primary">
+                              <Button color="primary" style={style.topBtn}>
                                 View Patient's Profile
                               </Button>
                             </Link>
                             <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
-                              <Button color="primary">Send me a text</Button>
+                              <Button color="primary" style={style.btn}>Send me a text</Button>
                             </Link>
-                              <Button color="primary" onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
+                              <Button color="primary" style={style.cancel} onClick={(event) => { setModal(true); setCancelAppointment({id: item.id});}}>
                                 Cancel Appointment
                               </Button>
+                                    </GridItem>
+                                </GridContainer>
+
                               <Dialog
                                 modalClasses={{
                                   root: modalClasses.center,
@@ -181,9 +220,9 @@ export default function ProfilePage(props) {
                                     </Link>
                                 </DialogContent>
                               </Dialog>
-                            </div>
                           </CardBody>
                           </Card>))}
+                          <GridItem>&nbsp;</GridItem>
                         </GridItem>
                       </GridContainer>
                     )
@@ -195,21 +234,26 @@ export default function ProfilePage(props) {
                       <GridContainer>
                         <GridItem GridItem xs={20} sm={20} md={30}>
                           {/* <ul><li>Quote: {JSON.stringify(appointments)}</li></ul> */}
-                          { pastAppointments.map((item, index) => (<Card style={{width: "47rem", borderColor: "primary"}}>
-                            <CardBody>
-                            <h3 className={classes.cardTitle}><b>{item.mPatientName}</b></h3>
-                            <h5>Date: {item.mDisplayDate}</h5>
-                            <h5>Time: {item.mDisplayTime}</h5>
-                            <div>
-                            <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
-                            <Button color="primary">
-                              View Patient's Profile
-                            </Button>
-                            </Link>
-                            <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
-                              <Button color="primary">Send me a text</Button>
-                            </Link>
-                            </div>
+                          { pastAppointments.map((item, index) => (<Card style={style.card}>
+                              <CardBody>
+                              <GridContainer>
+                                  <GridItem xs={12} sm={12} md={9}>
+                                      <h3 className={classes.cardTitle} style={style.biggerText}><b>{item.mPatientName}</b></h3>
+                                      <h5><span style={style.altTextColor}>Date:</span> {item.mDisplayDate}</h5>
+                                      <h5><span style={style.altTextColor}>Time: </span>{item.mDisplayTime}</h5>
+                                  </GridItem>
+                                  <GridItem xs={12} sm={12} md={3}>
+                                      {/* <CancelAppointment/> */}
+                                      <Link to= {"/doctor/patient/" + btoa(item.mPatientUsername)}>
+                                          <Button color="primary" style={style.topBtn}>
+                                              View Patient's Profile
+                                          </Button>
+                                      </Link>
+                                      <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mPatientName.split(' ')[0].toLowerCase() + item.mPatientName.split(' ')[1].toLowerCase()}>
+                                          <Button color="primary" style={style.btn}>Send me a text</Button>
+                                      </Link>
+                                  </GridItem>
+                              </GridContainer>
                             </CardBody>
                           </Card>))}
                         </GridItem>
@@ -219,6 +263,7 @@ export default function ProfilePage(props) {
                 ]}
               />
             </GridItem>
+                <GridItem>&nbsp;</GridItem>
             </GridContainer>
           </div>
         </div>
