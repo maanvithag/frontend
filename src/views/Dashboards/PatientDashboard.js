@@ -177,7 +177,8 @@ export default function ProfilePage(props) {
         payBtn: {
             paddingLeft: '35px',
             paddingRight: '35px',
-            marginTop: '0px'
+            marginLeft:'-80px',
+            marginTop: '20px'
         },
         viewBtn: {
             marginLeft: '180px',
@@ -198,6 +199,11 @@ export default function ProfilePage(props) {
         img: {
             marginTop: '15px',
             marginRight: '10px',
+            paddingRight: "20px"
+        },
+        img2: {
+            marginTop: '10px',
+            marginRight: '-20px',
             paddingRight: "20px"
         },
         altTextColor:{
@@ -355,28 +361,35 @@ export default function ProfilePage(props) {
                       tabContent: (
                         (
                           <div>
+                              <GridContainer justify={"center"}>
                             {billsToBePaid.map((item, index) => (
                               <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary", align: "center" }}>
                                 <CardBody>
                                     <GridContainer>
-                                    <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
-                                    <GridItem xs={12} sm={12} md={12}>
-                                    <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
+                                        <GridItem xs={12} sm={12} md={3}>
+                                        <img align="right" width="170" height="150" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img2}/>
                                     </GridItem>
-                                        <GridItem xs={12} sm={12} md={12}>
+                                        <GridItem xs={12} sm={12} md={7}>
 
-                                            <h5> <span style={style.altTextColor2}>Reason for Visit:</span> {item.reason}</h5>
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={6}>
-                                            <h5><span style={style.altTextColor2}>Appointment Date:</span> {item.displayDate}</h5>
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={4}>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
+                                                </GridItem>
 
-                                            <h5><span style={style.altTextColor2}>Co-Payment:</span> ${item.amountToBePaid}</h5>
+                                                <GridItem xs={12} sm={12} md={12}>
+                                                    <h5><span style={style.altTextColor2}>Appointment Date:</span> {item.displayDate}</h5>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={12}>
+
+                                                    <h5><span style={style.altTextColor2}>Co-Payment:</span> ${item.amountToBePaid}</h5>
+                                                </GridItem>
+                                            <GridItem xs={12} sm={12} md={12}>
+
+                                                <h5> <span style={style.altTextColor2}>Reason for Visit:</span> {item.reason}</h5>
+                                            </GridItem>
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={2}>
                                     <Button color="primary" style={style.payBtn} value={item.appointmentId} onClick={(event) => {handleAppointmentIdChange(item.appointmentId); setModal(true);}}>
-                                      Pay
+                                      Make Payment
                                     </Button>
                                       <Dialog
                                           modalClasses={{
@@ -493,6 +506,7 @@ export default function ProfilePage(props) {
                                 </CardBody>
                               </Card>
                             ))}
+                              </GridContainer>
                           </div>
                         )
                       )
