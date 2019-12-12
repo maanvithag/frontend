@@ -24,37 +24,17 @@ const useStyles = makeStyles(styles);
 export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [billsPaid, setBillsPaid] = useState([
-        {mDoctorName: "doctor 1", mReason: "reason 1", mDisplayDate: "date 1", mAmountToBePaid: "amount 1", mDoctorUsername: "link 1"},
-        {mDoctorName: "doctor 2", mReason: "reason 2", mDisplayDate: "date 2", mAmountToBePaid: "amount 2", mDoctorUsername: "link 2"},
-        {mDoctorName: "doctor 3", mReason: "reason 3", mDisplayDate: "date 3", mAmountToBePaid: "amount 3", mDoctorUsername: "link 3"},
-        {mDoctorName: "doctor 4", mReason: "reason 4", mDisplayDate: "date 4", mAmountToBePaid: "amount 4", mDoctorUsername: "link 4"},
-        {mDoctorName: "doctor 5", mReason: "reason 5", mDisplayDate: "date 5", mAmountToBePaid: "amount 5", mDoctorUsername: "link 5"}
-    ]);
-    const [appointments, setAppointments] = useState([]);
-    const [pastAppointments, setPastAppointments] = useState([]);
-    const [billsToBePaid, setBillsToBePaid] = useState([])
+    const [billsPaid, setBillsPaid] = useState([]);
     const [isBillPaid, setIsBillPaid] = useState("")
-    const [totalOutOfPocketAmount, setTotalOutOfPocketAmount] = useState("")
-    const [totalAmountCoveredByInsurance, setTotalAmountCoveredByInsurance] = useState("")
-    const [totalInProcessAmountByInsurance, setTotalInProcessAmountByInsurance] = useState("")
-    const [totalAmountDeniedByInsurance, setTotalAmountDeniedByInsurance] = useState("")
 
     const handleLoad = (event) => {
-        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/getappointments', {
+        fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/bills/history', {
           method: 'post',
           credentials: 'include',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
           .then(data => {
-            // setAppointments(data.CurrentAppointments)
-            // setPastAppointments(data.PastAppointments)
-            // setBillsToBePaid(data.billsToBePaid)
-            // setTotalOutOfPocketAmount(data.totalOutOfPocketAmount)
-            // setTotalAmountCoveredByInsurance(data.totalAmountCoveredByInsurance)
-            // setTotalInProcessAmountByInsurance(data.totalInProcessAmountByInsurance)
-            // setTotalAmountDeniedByInsurance(data.totalAmountDeniedByInsurance)
-            // setBillsPaid(data.billsPaid)
+            setBillsPaid(data)
           })
       }
     useEffect(() => { handleLoad() }, [isBillPaid])
@@ -139,22 +119,22 @@ export default function SurveyResults(props) {
                                             <CardBody>
                                                 <GridContainer>
                                                 <GridItem xs={12} sm={12} md={6}>
-                                                <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
+                                                <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
                                                 </GridItem>
                                                 <GridItem align="right" xs={5} sm={5} md={1}>
-                                                <Link to= {"/patient/doctor/" + btoa(item.mDoctorUsername)}> 
+                                                <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}> 
                                                     <Button color="primary" align="right">
                                                         View Doctor
                                                     </Button>
                                                 </Link>
                                                 </GridItem>
                                                 <GridItem xs={12} sm={12} md={6} align="left">
-                                                    <h4><b>Appointment Date: </b>{item.mDisplayDate}</h4>
-                                                    <h4><b>Reason for visit: </b>{item.mReason}</h4>
+                                                    <h4><b>Appointment Date: </b>{item.displayDate}</h4>
+                                                    <h4><b>Reason for visit: </b>{item.reason}</h4>
                                                     
                                                 </GridItem>
                                                 <GridItem xs={12} sm={12} md={6} align="right">
-                                                    <h4><b>Amount for visit: </b>{item.mAmountToBePaid}</h4>
+                                                    <h4><b>Amount for visit: </b>{item.amountToBePaid}</h4>
                                                 </GridItem>
                                                 </GridContainer>
                                             </CardBody>
