@@ -216,6 +216,7 @@ export default function SurveyResults(props) {
                                                                                             </GridItem>
 
                                                                                             <GridItem xs={12} sm={12} md={2}>
+                                                                                                <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
                                                                                                 <Link to= {"/patient/doctor/" + btoa(item.doctorUsername)}>
                                                                                                     <Button color="primary" style={style.viewBtn}>
                                                                                                         View Doctor Profile
@@ -251,8 +252,8 @@ export default function SurveyResults(props) {
                                                                                                 <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
                                                                                                 <h5> <span style={style.altTextColor}>Claim Status: </span><b>Denied</b></h5>
                                                                                             </GridItem>
-
                                                                                             <GridItem xs={12} sm={12} md={2}>
+                                                                                                <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
                                                                                                 <Link to= {"/insurance/patient/" + btoa(item.mDoctorUsername)}>
                                                                                                     <Button color="primary" style={style.viewBtn}>
                                                                                                         View Doctor Profile

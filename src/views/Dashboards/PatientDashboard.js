@@ -350,20 +350,11 @@ export default function ProfilePage(props) {
                       tabContent: (
                         (
                           <div>
-                            <GridContainer align="left">
-                              {/* <GridItem xs={12} sm={12} md={6} align="left">
-                              <h5 align="center">Total amount to be paid out of pocket: <b>${totalOutOfPocketAmount}</b></h5>
-                              <h5 align="center">Total amount covered by insurance: <b>${totalAmountCoveredByInsurance}</b></h5>
-                              </GridItem>
-                              <GridItem xs={12} sm={12} md={6}>
-                              <h5 align="center">Total amount yet to be covered by insurance: <b>${totalInProcessAmountByInsurance}</b></h5>
-                              <h5 align="center">Total amount denied by insurance: <b>${totalAmountDeniedByInsurance}</b></h5>
-                              </GridItem> */}
-                            </GridContainer>
                             {billsToBePaid.map((item, index) => (
                               <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary", align: "center" }}>
                                 <CardBody>
                                     <GridContainer>
+                                    <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.doctorName]} alt="Profile1" style={style.img}/>
                                     <GridItem xs={12} sm={12} md={12}>
                                     <h3 className={classes.cardTitle}><b>{item.doctorName}</b></h3>
                                     </GridItem>
@@ -379,7 +370,6 @@ export default function ProfilePage(props) {
                                             <h5><span style={style.altTextColor2}>Co-Payment:</span> ${item.amountToBePaid}</h5>
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={2}>
-
                                     <Button color="primary" style={style.payBtn} value={item.appointmentId} onClick={(event) => { setModal(true);}}>
                                       Pay
                                     </Button>
@@ -506,11 +496,19 @@ export default function ProfilePage(props) {
                       tabName: "Statistics",
                       tabIcon: PieChartIcon,
                       tabContent: (
-                        <GridContainer>
-                          <GridItem xs={12} sm={12} md={5} align="left">
+                        <GridContainer align="left">
+                          <GridItem xs={12} sm={12} md={6} align="left">
+                            <h5 align="center">Total amount spent from out-of-pocket: <b>${outOfPocketAmountSpent}</b></h5>
+                            <h5 align="center">Total amount remainaing in out-of-pocket: <b>${outOfPocketLimitRemaining}</b></h5>
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={6}>
+                            <h5 align="center">Total amount covered by insurance: <b>${totalAmountCoveredByInsurance}</b></h5>
+                            <h5 align="center">Total amount paid by you: <b>${totalAmountCoveredByPatient}</b></h5>
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={6} align="left">
                           <PieChart colors={["#9C27B0", "#333333"]} data={[["Out-of-Pocket Spent", outOfPocketAmountSpent], ["Out-of-Pocket Remaining", outOfPocketLimitRemaining]]}/>
                           </GridItem>
-                          <GridItem xs={12} sm={12} md={5} align="right">
+                          <GridItem xs={12} sm={12} md={6} align="right">
                           <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
                           </GridItem>
                         </GridContainer>
