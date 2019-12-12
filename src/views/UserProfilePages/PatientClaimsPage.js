@@ -32,6 +32,23 @@ export default function SurveyResults(props) {
     const [inProgressBills, setInProgressBills] = useState([]);
     const [deniedBills, setDeniedBills] = useState([]);
 
+    // Profile pictures
+    const MassimoRossi = require('../../assets/img/profilepic-02.png');
+    const SamanthaJoson = require('../../assets/img/profilepic-06.png');
+    const PrestonLannister = require('../../assets/img/profilepic-05.png');
+    const JaimeMoore = require('../../assets/img/profilepic-03.png');
+    const VivekBandaru = require('../../assets/img/profilepic-17.png');
+    const KristenNash = require('../../assets/img/profilepic-01.png');
+
+    const profiles = {
+    'Massimo Rossi': MassimoRossi,
+    'Samantha Joson': SamanthaJoson,
+    'Preston Lannister': PrestonLannister,
+    'Jaime Moore': JaimeMoore,
+    'Vivek Bandaru': VivekBandaru,
+    'Kristen Nash': KristenNash
+    }
+
     const handleLoad = () => {
         fetch(window.localStorage.getItem("baseURL") + 'patient/claims', {
             method: 'post',
@@ -62,7 +79,7 @@ export default function SurveyResults(props) {
         },
         viewBtn: {
             marginTop: '20px',
-            marginLeft: '-90px'
+            marginLeft: '40px'
         },
         bg: {
             background: 'linear-gradient(0deg, #e0e0e0 30%, #f5f5f5 90%)',
@@ -88,6 +105,10 @@ export default function SurveyResults(props) {
         },
         card:{
             marginBottom: '-5px',
+        },
+        img:{
+            marginRight: '-120px',
+            marginTop: '10px'
         }
     };
 
@@ -148,15 +169,23 @@ export default function SurveyResults(props) {
                                                                                     <div style={{ width: "50rem", borderColor: "primary" }}>
                                                                                         <CardBody>
                                                                                             <GridContainer>
+<<<<<<< HEAD
                                                                                                 <GridItem xs={12} sm={12} md={10}>
                                                                                                     <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.doctorName}</b></h3>
                                                                                                     <h5> <span style={style.altTextColor}>Date: </span>{item.displayDate}</h5>
                                                                                                     <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
                                                                                                     <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
+=======
+                                                                                                <GridItem xs={12} sm={12} md={8} align="left">
+                                                                                                    <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.mDoctorName}</b></h3>
+                                                                                                    <h5> <span style={style.altTextColor}>Date: </span>{item.mDate}</h5>
+                                                                                                    <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
+                                                                                                    <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+>>>>>>> 1527c14383be0b8b21f1ae077234b9af263b22e4
                                                                                                     <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
                                                                                                 </GridItem>
-
                                                                                                 <GridItem xs={12} sm={12} md={2}>
+                                                                                                    <img align="right" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                                                                                     <Link to= {"/insurance/patient/" + btoa(item.mDoctorUsername)}>
                                                                                                         <Button color="primary" style={style.viewBtn}>
                                                                                                             View Doctor Profile
