@@ -56,9 +56,7 @@ export default function ProfilePage(props) {
     const modalClasses = useModalStyles();
     const productClasses = useProductStyles();
     const [value, setValue] = React.useState('1');
-    const [addreview, setAddReview] = useState({
-        isReviewAdded: false
-    })
+    const [addreview, setAddReview] = useState("")
     const [addreviewRating, setAddReviewRating] = useState();
     const [addreviewReview, setAddReviewReview] = useState();
     const [address, setAddress] = useState([]);
@@ -121,7 +119,7 @@ export default function ProfilePage(props) {
                 setAddReview(data.isReviewAdded)
             })
     }
-    useEffect(() => { handleLoad() }, {})
+    useEffect(() => { handleLoad() }, {addreview})
 
     const handleAddReviewRating = (event) => {
         setAddReviewRating(event.target.value)
@@ -375,7 +373,7 @@ export default function ProfilePage(props) {
                                                     starRatedColor="orange"
                                                 /></h4>
                                             </CardHeader>
-                                            <CardBody>
+                                            <CardBody style={{ background: "#F8F8F8", width: "45.5rem", borderColor: "primary" }}>
                                                 {reviews.map((item, index) => (<Card style={{ borderColor: "primary" }}>
                                                     <CardBody>
                                                         <StarRatings
@@ -384,8 +382,7 @@ export default function ProfilePage(props) {
                                                             starSpacing="5px"
                                                             starRatedColor="orange"
                                                         />
-                                                        <p>Rating: {item.rating}</p>
-                                                        <p>Review: {item.review}</p>
+                                                        <p>{item.review}</p>
                                                     </CardBody>
                                                 </Card>))}
                                             </CardBody>

@@ -165,7 +165,7 @@ export default function SurveyResults(props) {
                                                                     {approvedBills.map((item, index) => (
                                                                         <GridContainer justify="center">
                                                                             <GridContainer justify="center">
-                                                                                <Card style={style.card}>
+                                                                                <Card style={{ background: "#F8F8F8", width: "47rem", borderColor: "primary" }}>
                                                                                     <div style={{ width: "50rem", borderColor: "primary" }}>
                                                                                         <CardBody>
                                                                                             <GridContainer>
