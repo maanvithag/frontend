@@ -28,22 +28,9 @@ const useStyles = makeStyles(styles);
 export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [approvedBills, setApprovedBills] = useState([
-        {mDoctorName: "Massimo Rossi", mReason: "reason 1", mAmountToBePaid: "amount 1", mDoctorUsername: "link 1", mDate:"11/27/2019"},
-        {mDoctorName: "Kristen Nash", mReason: "reason 2", mAmountToBePaid: "amount 2", mDoctorUsername: "link 2",mDate:"11/27/2019"},
-        {mDoctorName: "Samantha Joson", mReason: "reason 3", mAmountToBePaid: "amount 3", mDoctorUsername: "link 3",mDate:"11/27/2019"},
-        {mDoctorName: "Tye Albarn", mReason: "reason 4", mAmountToBePaid: "amount 4", mDoctorUsername: "link 4",mDate:"11/27/2019"}
-    ]);
-
-    const [inProgressBills, setInProgressBills] = useState([
-        {mDoctorName: "John", mReason: "reason 1", mAmountToBePaid: "amount 1", mDoctorUsername: "link 1",mDate:"11/27/2019"},
-        {mDoctorName: "Adeel", mReason: "reason 2", mAmountToBePaid: "amount 2", mDoctorUsername: "link 2",mDate:"11/27/2019"}
-    ]);
-    const [deniedBills, setDeniedBills] = useState([
-        {mDoctorName: "Max", mReason: "reason 1", mAmountToBePaid: "amount 1", mDoctorUsername: "link 1",mDate:"11/27/2019"},
-        {mDoctorName: "Alice", mReason: "reason 2", mAmountToBePaid: "amount 2", mDoctorUsername: "link 2",mDate:"11/27/2019"},
-        {mDoctorName: "Sydney", mReason: "reason 3", mAmountToBePaid: "amount 3", mDoctorUsername: "link 3",mDate:"11/27/2019"}
-    ]);
+    const [approvedBills, setApprovedBills] = useState([]);
+    const [inProgressBills, setInProgressBills] = useState([]);
+    const [deniedBills, setDeniedBills] = useState([]);
 
     const handleLoad = () => {
         fetch(window.localStorage.getItem("baseURL") + 'patient/claims', {
@@ -52,9 +39,8 @@ export default function SurveyResults(props) {
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
             .then(data => {
-                console.log(data);
-                // setApprovedBills(data.approvedBills);
-                // setDeniedBills(data.deniedBills);
+                setApprovedBills(data.approvedClaims);
+                setDeniedBills(data.deniedClaims);
                 setInProgressBills(data.inProcessClaims);
             })
     }
@@ -163,10 +149,10 @@ export default function SurveyResults(props) {
                                                                                         <CardBody>
                                                                                             <GridContainer>
                                                                                                 <GridItem xs={12} sm={12} md={10}>
-                                                                                                    <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.mDoctorName}</b></h3>
-                                                                                                    <h5> <span style={style.altTextColor}>Date: </span>{item.mDate}</h5>
-                                                                                                    <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
-                                                                                                    <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                                    <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.doctorName}</b></h3>
+                                                                                                    <h5> <span style={style.altTextColor}>Date: </span>{item.displayDate}</h5>
+                                                                                                    <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                                                                                    <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
                                                                                                     <h5> <span style={style.altTextColor}>Claim Status: </span><b>Approved</b></h5>
                                                                                                 </GridItem>
 
@@ -238,10 +224,10 @@ export default function SurveyResults(props) {
                                                                                     <CardBody>
                                                                                         <GridContainer>
                                                                                             <GridItem xs={12} sm={12} md={10}>
-                                                                                                <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.mDoctorName}</b></h3>
-                                                                                                <h5> <span style={style.altTextColor}>Date: </span>{item.mDate}</h5>
-                                                                                                <h5> <span style={style.altTextColor}>Reason: </span>{item.mReason}</h5>
-                                                                                                <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.mAmountToBePaid}</h5>
+                                                                                                <h3 className={classes.cardTitle} style={style.name}><b>Appointment with {item.doctorName}</b></h3>
+                                                                                                <h5> <span style={style.altTextColor}>Date: </span>{item.displayDate}</h5>
+                                                                                                <h5> <span style={style.altTextColor}>Reason: </span>{item.reason}</h5>
+                                                                                                <h5> <span style={style.altTextColor}>Claim Amount: </span>{item.amountToBePaid}</h5>
                                                                                                 <h5> <span style={style.altTextColor}>Claim Status: </span><b>Denied</b></h5>
                                                                                             </GridItem>
 

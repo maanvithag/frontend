@@ -210,6 +210,12 @@ export default function ProfilePage(props) {
       fontSize: '90%',
       marginTop: '15px',
       marginBottom: '5px'
+    }, 
+    altTextColor: {
+      color: '#904199',
+      marginTop: '-5px',
+      marginBottom: '15px',
+      fontWeight: '500'
     }
   };
 
@@ -360,11 +366,11 @@ export default function ProfilePage(props) {
                           </div>
                           { iplans.map((item, index) => (<Card style={{width: "47rem", borderColor: "primary"}}>
                           <CardBody>
-                            <h3 className={classes.cardTitle}>{item.mName}</h3>
-                            <h5>Monthly Premium: {item.premium}/month</h5>
-                            <h5>Deductible: {item.deductible}</h5>
-                            <h5>Co-Payment: {item.coPayment}</h5>
-                            <h5>Annual Out-of-Pocket Limit: {item.annualOutOfPocketLimit}</h5>
+                            <h3 className={classes.cardTitle}><b>{item.mName}</b></h3>
+                            <h5><span style={style.altTextColor}>Monthly Premium:</span> {item.premium}/month</h5>
+                            <h5><span style={style.altTextColor}>Deductible:</span> {item.deductible}</h5>
+                            <h5><span style={style.altTextColor}>Co-Payment:</span> {item.coPayment}</h5>
+                            <h5><span style={style.altTextColor}>Annual Out-of-Pocket Limit:</span> {item.annualOutOfPocketLimit}</h5>
                             {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <DeleteIpPlan/> */}
                             <div>
                             <Button color="primary" onClick={(event) => {setDeleteModal(true); 
@@ -444,7 +450,7 @@ export default function ProfilePage(props) {
                               </Link> 
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6} align="left">
-                              <h6>Current Plan: {item.mInsurancePlan}</h6>
+                              <h5>Current Plan: {item.mInsurancePlan}</h5>
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6}>
                               <Link to={"/chat/" + window.localStorage.getItem("chatusername") + "/" + item.mFirstName.toLowerCase() + item.mLastName.toLowerCase()}>
