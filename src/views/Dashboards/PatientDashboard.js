@@ -485,7 +485,7 @@ export default function ProfilePage(props) {
                                                       <GridItem xs={12} sm={12} md={3}/>
                                                       <GridItem xs={12} sm={12} md={3}>
                                                       <Link to="/patient/dashboard">
-                                                          <Button color="primary" onClick={() => handleBillPayment()}>
+                                                          <Button color="primary" onClick={() => {handleBillPayment(); setModal(false)}}>
                                                               Pay
                                                           </Button>
                                                       </Link>

@@ -68,6 +68,7 @@ export default function ProfilePage(props) {
   const [numberOfClaimsDenied, setNumberOfClaimsDenied] = useState("");
   const [numberOfClaimsApproved, setNumberOfClaimsApproved] = useState("");
   const [numberOfClaimsInProcess, setNumberOfClaimsInProcess] = useState("");
+  const [isClaimPaid, setIsClaimPaid] = useState("")
 
   const [deleteplan, setDeletePlan] = useState({
     name: "",
@@ -103,10 +104,9 @@ export default function ProfilePage(props) {
       body: JSON.stringify({
         id: event.id
       })
-    }).then(response => response.json())
-      .then(data => {
-          console.log(data);
-      })
+    }).then(data => {
+        setIsClaimPaid(data)
+    })
   }
 
   const handleUsername = (event) => {
@@ -134,7 +134,7 @@ export default function ProfilePage(props) {
       setPatients(data.Patients)
     })
   };
-  useEffect(() => {handleLoad(); handleUsername(); handleClaims();},[updatedPlanName, chatUserName]);
+  useEffect(() => {handleLoad(); handleUsername(); handleClaims();},[updatedPlanName, chatUserName, isClaimPaid]);
 
   const handleDeletePlan = (event) => {
     fetch(window.localStorage.getItem("baseURL") + window.localStorage.getItem("userType") + '/editiplans/delete', {
@@ -550,7 +550,7 @@ export default function ProfilePage(props) {
                                           <Button color="primary" style={style.approveBtn} onClick={() => {handleEditClaims({id: item.appointmentId, billStatus: "approved"});}}>
                                             Approve
                                           </Button>
-                                          <Button color="primary" style={style.denyBtn}>
+                                          <Button color="primary" style={style.denyBtn} onClick={() => {handleEditClaims({id: item.appointmentId, billStatus: "denied"})}}>
                                             Deny
                                           </Button>
                                         </GridItem>
