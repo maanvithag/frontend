@@ -68,6 +68,9 @@ export default function ProfilePage(props) {
   const [numberOfClaimsDenied, setNumberOfClaimsDenied] = useState("");
   const [numberOfClaimsApproved, setNumberOfClaimsApproved] = useState("");
   const [numberOfClaimsInProcess, setNumberOfClaimsInProcess] = useState("");
+  const [totalAmountCoveredByInsuranceForAllPatients, setTotalAmountCoveredByInsuranceForAllPatients] = useState("");
+  const [totalAmountCoveredByAllPatients, setTotalAmountCoveredByAllPatients] = useState("");
+  const totalNumberOfClaims = numberOfClaimsApproved + numberOfClaimsDenied + numberOfClaimsInProcess;
 
   const [deleteplan, setDeletePlan] = useState({
     name: "",
@@ -92,6 +95,8 @@ export default function ProfilePage(props) {
           setNumberOfClaimsApproved(data.approvedBills.length);
           setNumberOfClaimsDenied(data.deniedBills.length);
           setNumberOfClaimsInProcess(data.billsToBePaid.length);
+          setTotalAmountCoveredByInsuranceForAllPatients(data.amountPaidByInsuranceProvider);
+          setTotalAmountCoveredByAllPatients(data.amountPaidByPatientsOfTheInsuranceProvider);
       })
   }
 
@@ -570,19 +575,17 @@ export default function ProfilePage(props) {
                     tabContent: (
                       <GridContainer align="left">
                         <GridItem xs={12} sm={12} md={6} align="left">
-                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims Approved: </span><b>{numberOfClaimsApproved}</b></h5>
-                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims Denied: </span><b>{numberOfClaimsDenied}</b></h5>
+                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims: </span><b>{totalNumberOfClaims}</b></h5>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={6}>
-                        <h5 align="center"><span style={style.altTextColor}>Total Number of Claims In Process: </span><b>{numberOfClaimsInProcess}</b></h5>
-                        {/* <h5 align="center"><span style={style.altTextColor}>Total amount denied by insurance: </span><b>${totalAmountDeniedByInsurance}</b></h5> */}
+                        <h5 align="center"><span style={style.altTextColor}>Total Amount Paid By Your Company: </span><b>${totalAmountCoveredByInsuranceForAllPatients}</b></h5>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={6} align="left">
                         <PieChart colors={["#F77114", "#333333", "#00a0a0"]} data={[["Number of Claims Approved", numberOfClaimsApproved], ["Number of Claims Denied", numberOfClaimsDenied], ["Number of Claims In Process", numberOfClaimsInProcess]]}/>
                         </GridItem>
-                        {/* <GridItem xs={12} sm={12} md={6} align="right">
-                        <PieChart colors={["#9C27B0", "#333333"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsurance], ["Amount covered by you", totalAmountCoveredByPatient]]}/>
-                        </GridItem> */}
+                        <GridItem xs={12} sm={12} md={6} align="right">
+                        <PieChart colors={["#F77114", "#00a0a0"]} data={[["Amount Covered by your Insurance", totalAmountCoveredByInsuranceForAllPatients], ["Amount covered by you", totalAmountCoveredByAllPatients]]}/>
+                        </GridItem>
                       </GridContainer>
                     )
                   }

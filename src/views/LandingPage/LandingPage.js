@@ -47,9 +47,9 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>From Infinity to Beyond</h1>
+              <h1 className={classes.title}>Health care at your fingertips</h1>
               <h4>
-                Health care at your fingertips. Connect with your doctors and insurance, hassle-free.
+                 Connect with your doctors and insurance providers, hassle-free.
               </h4>
               <br />
               <TypeSelect />

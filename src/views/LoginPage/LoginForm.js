@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
       })
     }).then(response => response.json())
       .then(data => {
-        if (data.isNewUser) {
+        if (data.isNewUser && this.state.captchavalue) {
           this.props.history.push("mfa");
         } else {
           this.fireAndGetResponseInJSON()
@@ -110,7 +110,7 @@ class LoginForm extends React.Component {
       })
     }).then(response => response.json())
       .then(data => {
-        if (data.isCredentialsAccurate) {
+        if (data.isCredentialsAccurate && this.state.captchavalue) {
           this.props.history.push("mfa");
         } else {
           alert("The entered credentials are wrong or you've not verified that you're not a robot. Please check");
