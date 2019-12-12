@@ -36,6 +36,7 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
+//import { LineChart, PieChart } from 'react-chartkick'
 // import { LineChart, PieChart } from 'react-chartkick'
 // import 'chart.js'
 
@@ -217,9 +218,9 @@ export default function ProfilePage(props) {
                                   <img align="left" width="170" height="170" resizeMode="contain" src={profiles[item.mDoctorName]} alt="Profile1" style={style.img}/>
                                   <div>
                                   <h3 className={classes.cardTitle}><b>{item.mDoctorName}</b></h3>
-                                  <h6><b>Date:</b>{item.mDisplayDate}</h6>
-                                  <h6><b>Time:</b> {item.mDisplayTime}</h6>
-                                  <h6><b>Reason for Visit:</b> {item.reason}</h6>
+                                  <h5><b>Date: </b>{item.mDisplayDate}</h5>
+                                  <h5><b>Time:</b> {item.mDisplayTime}</h5>
+                                  <h5><b>Reason for Visit:</b> {item.reason}</h5>
                                   <div>
                                   <Link to={"/patient/doctor/" + item.mEncodedDoctorUserName}>
                                     <Button color="primary" style={style.viewBtn}>

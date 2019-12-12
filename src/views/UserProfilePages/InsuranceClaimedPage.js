@@ -28,22 +28,9 @@ const useStyles = makeStyles(styles);
 export default function SurveyResults(props) {
     const classes = useStyles();
     const { ...rest } = props;
-    const [approvedBills, setApprovedBills] = useState([
-        {mPatientName: "Jack", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
-        {mPatientName: "Vivek", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
-        {mPatientName: "Maanvitha", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"},
-        {mPatientName: "Zijin", mReason: "reason 4", mAmountToBePaid: "amount 4", mPatientUsername: "link 4", mDoctorName: "doctor 4"}
-    ]);
-
-    const [inProgressBills, setInProgressBills] = useState([
-        {mPatientName: "John", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
-        {mPatientName: "Adeel", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"}
-    ]);
-    const [deniedBills, setDeniedBills] = useState([
-        {mPatientName: "Max", mReason: "reason 1", mAmountToBePaid: "amount 1", mPatientUsername: "link 1", mDoctorName: "doctor 1"},
-        {mPatientName: "Alice", mReason: "reason 2", mAmountToBePaid: "amount 2", mPatientUsername: "link 2", mDoctorName: "doctor 2"},
-        {mPatientName: "Sydney", mReason: "reason 3", mAmountToBePaid: "amount 3", mPatientUsername: "link 3", mDoctorName: "doctor 3"}
-    ]);
+    const [approvedBills, setApprovedBills] = useState([]);
+    const [inProgressBills, setInProgressBills] = useState([]);
+    const [deniedBills, setDeniedBills] = useState([]);
 
     const handleLoad = () => {
         fetch(window.localStorage.getItem("baseURL") + 'insurance/claims', {
@@ -52,9 +39,9 @@ export default function SurveyResults(props) {
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         }).then(response => response.json())
             .then(data => {
-                console.log(data);
                 setApprovedBills(data.approvedBills);
-                // setDeniedBills(data.deniedBills);
+                setInProgressBills(data.billsToBePaid)
+                setDeniedBills(data.deniedBills)
             })
     }
     useEffect(() => { handleLoad() }, {})
